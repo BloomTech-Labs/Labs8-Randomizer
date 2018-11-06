@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-
+import Gearicon from '@material-ui/icons/Settings';
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
 background-color: grey;
 display: flex;
 justify-content: center;
+flex-wrap: wrap;
 border-radius: 4px;
-border: 1px solid skyblue;
+border: 3px solid skyblue;
 
 
 `
@@ -21,9 +22,10 @@ cursor: pointer;
 border: none;
 border-radius: 3px;
 
-margin-top: 300px;
+margin-right: 5px;
 transition: .5s;
 text-decoration: none;
+
 :hover {
     background-color: cyan;
     opacity: .9;
@@ -37,17 +39,21 @@ cursor: pointer;
 border: none;
 border-radius: 3px;
 text-decoration: none;
-margin-top: 235px;
+
+
 transition: .5s;
+
 :hover {
     background-color: cyan;
     opacity: .9;
 }
 `
 const Welcomer = styled.h1`
-
 `
-
+const Setter = styled.div`
+position: absolute;
+margin-top: 470px;
+margin-left: 235px;`
 
 class Home extends Component {
     render() {
@@ -56,14 +62,22 @@ class Home extends Component {
                 
                 <Welcomer >Welcome to Randomizer</Welcomer>
               
-                <Link style={{textDecoration: 'none', display: 'flex',position: 'absolute'}} to='/Signup'>
-                <Signup>Sign Up</Signup>
+               <Link to='/Signup'>
+                <Signup>Sign Up
+                    
+                </Signup>
                 </Link>
 
-                <Link style={{textDecoration: 'none', display: 'flex',position: 'absolute'}} to='/Login'>
-                <Signin>Login</Signin>
+                <Link to='/Login'>
+                <Signin>Login
+                    
+                </Signin>
                 </Link>
-
+    <Setter>
+                <Link to="/Settings" style={{color: 'Black'}}>
+    <Gearicon/>
+    </Link>
+    </Setter>
             </Homediv>
         )
     }
