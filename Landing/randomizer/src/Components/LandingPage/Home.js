@@ -1,7 +1,15 @@
+//Libraries
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import styled from 'styled-components';
+import styled, {keyframes}from 'styled-components';
+
+// Icons
 import Gearicon from '@material-ui/icons/Settings';
+
+// Imports
+import Login from '../Login/Login';
+
+// Stylings
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
@@ -11,8 +19,6 @@ justify-content: center;
 flex-wrap: wrap;
 border-radius: 4px;
 border: 3px solid skyblue;
-
-
 `
 const Signup = styled.button`
 width: 200px;
@@ -21,7 +27,6 @@ background-color: white;
 cursor: pointer;
 border: none;
 border-radius: 3px;
-
 margin-right: 5px;
 transition: .5s;
 text-decoration: none;
@@ -39,8 +44,6 @@ cursor: pointer;
 border: none;
 border-radius: 3px;
 text-decoration: none;
-
-
 transition: .5s;
 
 :hover {
@@ -55,8 +58,24 @@ position: absolute;
 margin-top: 470px;
 margin-left: 235px;`
 
+const Sidebar = styled.div`
+width: 250px;
+height: 100%;
+background-color: teal;
+display: flex;
+`
+
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {isCool: false}
+      }
+      toggleCoolness = () => {
+        this.setState({ isCool: !this.state.isCool })
+      }
+
     render() {
+        const {isCool} = this.state;
         return (
             <Homediv>
                 
@@ -69,8 +88,12 @@ class Home extends Component {
                 </Link>
 
                 <Link to='/Login'>
-                <Signin>Login
-                    
+                <Signin onClick={this.toggleCoolness}>Login
+                    {isCool ? (
+                        <Login/>
+                    ) : (
+                        <div></div>
+                    )}
                 </Signin>
                 </Link>
     <Setter>

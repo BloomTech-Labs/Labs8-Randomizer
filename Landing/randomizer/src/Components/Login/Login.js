@@ -31,13 +31,7 @@ position: absolute;
 margin-top: 300px;`
 
 
-const Former = styled.form`
 
-
-display: flex;
-justify-content: center;
-
-`
 const Signin = styled.button`
 width: 200px;
 height: 60px;
