@@ -9,6 +9,7 @@ import styled,  {keyframes} from 'styled-components';
 import Home from './Components/LandingPage/Home';
 import SignUp from './Components/SignUp/SignUp';
 import Login from './Components/Login/Login';
+import Edit from './Components/Edit/Edit';
 import Settings from './Components/Settings/Settings';
 
 // Icons
@@ -106,7 +107,7 @@ class App extends Component {
     const {isCool} = this.state;
     return (
       <Appmain>
-       
+
 
         <Sidebar> 
 
@@ -130,13 +131,18 @@ class App extends Component {
           </Sidebar>
 
 
-      <Route exact path='/' component={Home}/>
+
+       <Route exact path='/' component={Home}/>
        <Route exact path='/Signup' component={SignUp}/>
        <Route exact path ='/Login' component={Login}/>
        <Route exact path='/About'/>
+       <Route exact path='/Settings'/>
+       <Route exact path ='/Billing' />
+       <Route exact path = '/Edit' component={Edit} />
        <Route exact path='/Settings' component={Settings}/>
        <Route exact path ='/Billing' />
        <Route exact path = '/Invoices'/>              
+
       </Appmain>
     );
   }
