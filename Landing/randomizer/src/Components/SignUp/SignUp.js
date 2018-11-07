@@ -8,6 +8,12 @@ display: block;
 `
 const InputStyling = styled.input`
 display: block;
+margin-bottom: 10px;
+text-decoration: none;
+background-color: none;
+border: none;
+width: 175px;
+height: 25px;
 `
 const LabelStyling = styled.label`
     display: block;
@@ -15,20 +21,21 @@ const LabelStyling = styled.label`
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
-background-color: grey;
+flex-direction: column;
 display: flex;
 justify-content: center;
-border-radius: 4px;
-border: 1px solid skyblue;
+align-items: center;
+`
+const Welcomer = styled.h1`
+font-size: 48px;
+margin-bottom: 125px;
 `
 // const StyledHomeIcon
 
 const SignUp = () => {
     return(
         <Homediv>
-            <Link to="/" style={{color: 'black'}}>
-            <Homeicon />
-            </Link>
+            <Welcomer> Sign Up</Welcomer>
             <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
 
                 <LabelStyling htmlFor='username'> Email </LabelStyling>
@@ -40,7 +47,7 @@ const SignUp = () => {
                 <LabelStyling htmlFor='password-confirm'> Confirm Password </LabelStyling>
                 <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
 
-                <InputStyling type="submit" value="Submit"/>
+                <InputStyling type="submit" value="Submit"  />
 
             </FormStyling>    
         </Homediv>

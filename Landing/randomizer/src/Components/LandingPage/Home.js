@@ -13,57 +13,60 @@ import Login from '../Login/Login';
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
-background-color: grey;
+background-color: none;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
 border-radius: 4px;
-border: 3px solid skyblue;
+
 `
 const Signup = styled.button`
+color: #E6EBE0;
 width: 200px;
 height: 60px;
-background-color: white;
+background-color: #232323;
 cursor: pointer;
 border: none;
 border-radius: 3px;
 margin-right: 5px;
 transition: .5s;
 text-decoration: none;
+font-size: 24px;
 
 :hover {
-    background-color: cyan;
+    background-color: #B8BACF;
     opacity: .9;
+    color: black;
 }
 `
 const Signin = styled.button`
+color: #E6EBE0;
 width: 200px;
 height: 60px;
-background-color: white;
+background-color: #232323;
 cursor: pointer;
 border: none;
 border-radius: 3px;
 text-decoration: none;
 transition: .5s;
+font-size: 24px;
 
 :hover {
-    background-color: cyan;
+    background-color: #B8BACF;
     opacity: .9;
+    color: black;
 }
 `
 const Welcomer = styled.h1`
+font-size: 50px;
+margin-left: 100px;
 `
 const Setter = styled.div`
 position: absolute;
 margin-top: 470px;
 margin-left: 235px;`
 
-const Sidebar = styled.div`
-width: 250px;
-height: 100%;
-background-color: teal;
-display: flex;
-`
+
 
 class Home extends Component {
     constructor(props) {
@@ -96,11 +99,7 @@ class Home extends Component {
                     )}
                 </Signin>
                 </Link>
-    <Setter>
-                <Link to="/Settings" style={{color: 'Black'}}>
-    <Gearicon/>
-    </Link>
-    </Setter>
+    
             </Homediv>
         )
     }

@@ -9,6 +9,12 @@ display: block;
 `
 const InputStyling = styled.input`
 display: block;
+margin-bottom: 10px;
+text-decoration: none;
+background-color: none;
+border: none;
+width: 175px;
+height: 25px;
 `
 const LabelStyling = styled.label`
     display: block;
@@ -16,11 +22,11 @@ const LabelStyling = styled.label`
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
-background-color: grey;
+
 display: flex;
 justify-content: center;
-border-radius: 4px;
-border: 1px solid skyblue;
+align-items: center;
+flex-direction: column;
 `
 const Sidebar = styled.div`
 ul {
@@ -30,33 +36,17 @@ ul {
     }
 }
 `
+const Welcomer = styled.h1`
+margin-bottom: 125px;
+`
+
 
 const Settings = () => {
     return(
         <Homediv>
-            <Link to="/">
-                <Homeicon />
-            </Link>
+            <Welcomer>Enter new Email/Password</Welcomer>
 
-            <Sidebar id="sidebar">
-                <ul>
-                    <li>
-                        <Link to="/invoices">
-                            Invoices
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/Billing">
-                             Billing
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/Settings">
-                            Settings
-                        </Link>
-                    </li>
-                </ul>
-            </Sidebar>
+            
 
             <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
 
