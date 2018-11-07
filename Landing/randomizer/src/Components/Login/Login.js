@@ -1,9 +1,9 @@
 
 import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import Homeicon from '@material-ui/icons/Home';
-import Home from '../LandingPage/Home';
+
 
 const Homediv = styled.div`
 width: 500px;
@@ -14,7 +14,8 @@ justify-content: center;
 border-radius: 4px;
 border: 1px solid skyblue;
 `
-const Welcomer = styled.h1``
+const Welcomer = styled.h1`
+position: absolute`
 const Userenter = styled.input`
 text-decoration: none;
 width: 125px;
@@ -30,13 +31,7 @@ position: absolute;
 margin-top: 300px;`
 
 
-const Former = styled.form`
 
-
-display: flex;
-justify-content: center;
-
-`
 const Signin = styled.button`
 width: 200px;
 height: 60px;
@@ -46,6 +41,8 @@ border: none;
 border-radius: 3px;
 text-decoration: none;
 margin-top: 350px;
+position: absolute;
+
 transition: .5s;
 :hover {
     background-color: cyan;
@@ -53,32 +50,40 @@ transition: .5s;
 }
 `
 const Returner = styled.button`
-width: 50px;
-height: 50px;
+width: 20px;
+height: 20px;
 cursor: pointer;
-position: absolute;
-margin-right: 300px;
+background: none;
+border: none;
+text-decoration: none;
+margin-right:480px;
+
+
+
 `
 
 class Login extends Component {
     render() {
         return (
+            
             <Homediv>
-                
+                 <Link to="/" style={{width: '20px', height: '20px'}}>
+                 <Returner> <Homeicon/></Returner>
+                 </Link>
                 
                 
                  
-                 
+                
                 <Welcomer>Sign In</Welcomer>
-                <Returner></Returner>
+               
                
 
-                <Former>
+                
                <Userenter name="username" placeholder="Username"></Userenter>
                <Passenter name="password" placeholder="Password" type="password"></Passenter>
                <Signin> Login</Signin>
                
-                </Former>
+                
 
             </Homediv>
         )
