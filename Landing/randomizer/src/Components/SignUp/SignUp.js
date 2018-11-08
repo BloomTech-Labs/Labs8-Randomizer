@@ -25,7 +25,7 @@ border: 1px solid skyblue;
 const SignUpSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
-  console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
+  // console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
   axios.post('http://localhost:3000', {
     'username': data.get('username'),
     'password': data.get('password'),
