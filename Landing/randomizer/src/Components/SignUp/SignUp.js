@@ -41,8 +41,11 @@ const SignUpSubmit = (event) => {
     'password': data.get('password'),
     'password-confirm': data.get('password-confirm'),
   })
-  .then(response => {
-    console.log(response)
+  .then(res => {
+    const token = res.data.key;
+
+    localStorage.setItem('jwt', token);
+    this.props.history.push('/');
   })
   .catch(error => {
     console.log(error)
@@ -53,12 +56,10 @@ const SignUp = () => {
     return(
         <Homediv>
             <Welcomer> Sign Up</Welcomer>
-            <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
             <Link to="/" style={{color: 'black'}}>
             <Homeicon />
             </Link>
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
-
                 <LabelStyling htmlFor='username'> Email </LabelStyling>
                 <InputStyling type='email' name='username' id='username' required='true'/>
 
@@ -72,7 +73,7 @@ const SignUp = () => {
 
             </FormStyling>
         </Homediv>
-    )
+)
 }
 
 export default SignUp;
