@@ -1,1 +1,1 @@
-web: gunicorn backend.wsgi:application --log-file -
+web: gunicorn randomizer.wsgi:application --log-file -
