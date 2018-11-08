@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/usr/local/bin/python3"
+    "python.pythonPath": "/Users/susanna/.local/share/virtualenvs/backend-rVRPvcdh",
+    "python.linting.pylintEnabled": false
 }
