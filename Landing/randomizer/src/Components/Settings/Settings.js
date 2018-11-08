@@ -1,7 +1,8 @@
+// Libraries
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-
+// Icons
 import Homeicon from '@material-ui/icons/Home';
 
 const FormStyling = styled.form`

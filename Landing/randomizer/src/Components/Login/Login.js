@@ -1,8 +1,8 @@
-
+// Libraries
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-
+import axios from 'axios';
 
 
 const Homediv = styled.div`
@@ -29,10 +29,7 @@ width: 175px;
 height: 25px;
 position: absolute;
 margin-top: 300px;
-
 `
-
-
 
 const Signin = styled.button`
 width: 200px;
@@ -61,12 +58,46 @@ background: none;
 border: none;
 text-decoration: none;
 margin-right:480px;
-
-
-
 `
 
+const Former = styled.form`
+display: flex;
+flex-direction: column;
+
+align-items: center;
+`
 class Login extends Component {
+    constructor() {
+        super();
+        this.state={
+            username:"",
+            password: ""
+        }
+    }
+    
+ handleSubmit = e => {
+    e.preventDefault();
+    
+    axios
+      .post('https://adv-project.herokuapp.com/api/login', this.state)
+      .then(res => {
+        
+        const token = res.data.key;
+       
+        localStorage.setItem('jwt', token);
+        this.props.history.push('/');
+      })
+      .catch(err => {
+       
+      });
+    this.setState({ username: '', password: '' });
+  };
+
+  handleInput = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
     render() {
         return (
             
@@ -80,11 +111,14 @@ class Login extends Component {
                
                
 
-                
-               <Userenter name="username" placeholder="Username"></Userenter>
-               <Passenter name="password" placeholder="Password" type="password"></Passenter>
-               <Signin> Login</Signin>
-               
+                <Former onSubmit={this.handleSubmit}>
+               <Userenter name="username" placeholder="Username"
+               value={this.state.username} onChange={this.handleInput}></Userenter>
+
+               <Passenter name="password" placeholder="Password" type="password"
+               value={this.state.password} onChange={this.handleInput}></Passenter>
+               <Signin onSubmit={this.handleSubmit}> Login </Signin>
+               </Former>
                 
 
             </Homediv>
