@@ -1,1 +1,1 @@
-web: gunicorn randomizer.wsgi --log-file -
+web: gunicorn randomizer.wsgi:application --log-file -
