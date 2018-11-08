@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 // Icons
 import Homeicon from '@material-ui/icons/Home';
-
+import axios from  'axios';
 const FormStyling = styled.form`
 display: block;
 `
@@ -32,13 +32,32 @@ const Welcomer = styled.h1`
 font-size: 48px;
 margin-bottom: 125px;
 `
-// const StyledHomeIcon
+const SignUpSubmit = (event) => {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
+  axios.post('http://localhost:3000', {
+    'username': data.get('username'),
+    'password': data.get('password'),
+    'password-confirm': data.get('password-confirm'),
+  })
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
 
 const SignUp = () => {
     return(
         <Homediv>
             <Welcomer> Sign Up</Welcomer>
             <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
+            <Link to="/" style={{color: 'black'}}>
+            <Homeicon />
+            </Link>
+            <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
 
                 <LabelStyling htmlFor='username'> Email </LabelStyling>
                 <InputStyling type='email' name='username' id='username' required='true'/>
@@ -51,7 +70,7 @@ const SignUp = () => {
 
                 <InputStyling type="submit" value="Submit"  />
 
-            </FormStyling>    
+            </FormStyling>
         </Homediv>
     )
 }

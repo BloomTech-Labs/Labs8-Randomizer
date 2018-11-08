@@ -1,3 +1,4 @@
+
 // Libraries
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
@@ -31,7 +32,6 @@ display: flex;
 justify-content: center;
 justify-content: space-between;
 width: 1000px;
-
 height: 1000px;
  `
 const Sidebar = styled.div`
@@ -41,7 +41,6 @@ background-color: none;
 display: flex;
 color: white;
 border-radius: 10px;
-
 align-items: flex-start;
 flex-direction: column;
 justify-content: flex-start;
@@ -104,7 +103,6 @@ transition: .3s;
 //   animation-play-state: running;
 // `
 const Spinny = styled.div`
-
 `
 class App extends Component {
   constructor(props) {
