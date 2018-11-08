@@ -1,6 +1,8 @@
+// Libraries
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+// Icons
 import Homeicon from '@material-ui/icons/Home';
 import axios from  'axios';
 const FormStyling = styled.form`
@@ -8,6 +10,12 @@ display: block;
 `
 const InputStyling = styled.input`
 display: block;
+margin-bottom: 10px;
+text-decoration: none;
+background-color: none;
+border: none;
+width: 175px;
+height: 25px;
 `
 const LabelStyling = styled.label`
     display: block;
@@ -15,11 +23,14 @@ const LabelStyling = styled.label`
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
-background-color: grey;
+flex-direction: column;
 display: flex;
 justify-content: center;
-border-radius: 4px;
-border: 1px solid skyblue;
+align-items: center;
+`
+const Welcomer = styled.h1`
+font-size: 48px;
+margin-bottom: 125px;
 `
 const SignUpSubmit = (event) => {
   event.preventDefault();
@@ -41,6 +52,8 @@ const SignUpSubmit = (event) => {
 const SignUp = () => {
     return(
         <Homediv>
+            <Welcomer> Sign Up</Welcomer>
+            <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
             <Link to="/" style={{color: 'black'}}>
             <Homeicon />
             </Link>
@@ -55,7 +68,7 @@ const SignUp = () => {
                 <LabelStyling htmlFor='password-confirm'> Confirm Password </LabelStyling>
                 <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
 
-                <InputStyling type="submit" value="Submit"/>
+                <InputStyling type="submit" value="Submit"  />
 
             </FormStyling>
         </Homediv>

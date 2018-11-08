@@ -44,6 +44,7 @@ border-radius: 10px;
 align-items: flex-start;
 flex-direction: column;
 justify-content: flex-start;
+
 `
 
 const Sider = styled.button`
