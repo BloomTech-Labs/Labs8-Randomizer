@@ -12,6 +12,7 @@ whitenoise = "*"
 django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+django-heroku = "*"
 
 [dev-packages]
 
