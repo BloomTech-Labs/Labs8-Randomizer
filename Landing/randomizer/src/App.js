@@ -1,4 +1,3 @@
-
 // Libraries
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
@@ -11,6 +10,7 @@ import Home from './Components/LandingPage/Home';
 import SignUp from './Components/SignUp/SignUp';
 import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
+import Billing from './Components/Billing/billing';
 
 // Icons
 import Vert from '@material-ui/icons/Reorder';
@@ -44,7 +44,6 @@ border-radius: 10px;
 align-items: flex-start;
 flex-direction: column;
 justify-content: flex-start;
-
 `
 
 const Sider = styled.button`
@@ -142,10 +141,11 @@ class App extends Component {
           </Sider>
           </Link>
 
+            <Link to="/Billing">
            <Sider>
           <Money style={{fontSize: '48px'}}/>
           </Sider>
-
+          </Link>
           </Sidebar>
 
 
@@ -154,7 +154,7 @@ class App extends Component {
        <Route exact path ='/Login' component={Login}/>
        <Route exact path='/About'/>
        <Route exact path='/Settings' component={Settings}/>
-       <Route exact path ='/Billing' />
+       <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>              
       </Appmain>
       </Background>
