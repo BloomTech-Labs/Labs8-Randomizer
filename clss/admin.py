@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Clss
+from .models import Clss, Calendar
 # Register your models here.
 
 
@@ -9,3 +9,4 @@ class ClssAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Clss, ClssAdmin)
+admin.site.register(Calendar)
