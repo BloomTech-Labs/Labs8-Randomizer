@@ -11,12 +11,14 @@ import Home from './Components/LandingPage/Home';
 import SignUp from './Components/SignUp/SignUp';
 import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
+import Magic from './Components/Magic/Random';
 
 // Icons
 import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
 import Money from '@material-ui/icons/AttachMoney';
 import Homeicon from '@material-ui/icons/Home';
+import Swap from '@material-ui/icons/Shuffle';
 // Stylings
 
 const Background = styled.div`
@@ -142,6 +144,12 @@ class App extends Component {
           </Sider>
           </Link>
 
+          <Link to="/Random">
+          <Sider>
+          <Swap style={{fontSize: '48px'}}/>
+          </Sider>
+          </Link>
+
            <Sider>
           <Money style={{fontSize: '48px'}}/>
           </Sider>
@@ -155,7 +163,8 @@ class App extends Component {
        <Route exact path='/About'/>
        <Route exact path='/Settings' component={Settings}/>
        <Route exact path ='/Billing' />
-       <Route exact path = '/Invoices'/>              
+       <Route exact path = '/Invoices'/>   
+       <Route exact path = '/Random' component={Magic}/>            
       </Appmain>
       </Background>
     );
