@@ -26,6 +26,6 @@ router.register(r'clss', ClssViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include('api.urls')),
     re_path(r'^api-token-auth/', views.obtain_auth_token)
 ]
