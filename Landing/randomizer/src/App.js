@@ -12,6 +12,7 @@ import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
 import Billing from './Components/Billing/Billing';
 
+
 // Icons
 import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
@@ -32,7 +33,6 @@ display: flex;
 justify-content: center;
 justify-content: space-between;
 width: 1000px;
-
 height: 1000px;
  `
 const Sidebar = styled.div`
@@ -42,11 +42,9 @@ background-color: none;
 display: flex;
 color: white;
 border-radius: 10px;
-
 align-items: flex-start;
 flex-direction: column;
 justify-content: flex-start;
-
 `
 
 const Sider = styled.button`
@@ -105,7 +103,6 @@ transition: .3s;
 //   animation-play-state: running;
 // `
 const Spinny = styled.div`
-
 `
 class App extends Component {
   constructor(props) {
