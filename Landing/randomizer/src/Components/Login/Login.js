@@ -22,6 +22,19 @@ width: 175px;
 height: 25px;
 position: absolute;
 margin-top: 250px;
+background-color: #FFCAD4;
+border: 1px solid grey;
+transition: .4s;
+color: black;
+:hover {
+    background-color: #bf4068;
+    :: placeholder {
+        color: white;
+    }
+}
+:: placeholder {
+    color: black;
+}
 `
 const Passenter = styled.input`
 text-decoration: none;
@@ -29,23 +42,35 @@ width: 175px;
 height: 25px;
 position: absolute;
 margin-top: 300px;
+background-color: #FFCAD4;
+border: 1px solid grey;
+transition: .4s;
+:hover {
+    background-color: #bf4068;
+    :: placeholder {
+        color: white;
+    }
+}
+:: placeholder {
+    color: black;
+}
 `
 
 const Signin = styled.button`
 width: 200px;
 height: 60px;
-background-color: #232323;
+background-color: #C08497;
 cursor: pointer;
 border: none;
 border-radius: 15px 5px;
 text-decoration: none;
 margin-top: 350px;
 position: absolute;
-color: #E6EBE0;
+color: black;
 transition: .5s;
 
 :hover {
-    background-color: #B8BACF;
+    background-color: #bf4068;
     opacity: .9;
     color: black;
 }
@@ -79,13 +104,13 @@ class Login extends Component {
     e.preventDefault();
     
     axios
-      .post('https://adv-project.herokuapp.com/api/login', this.state)
+      .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
       .then(res => {
         
         const token = res.data.key;
        
         localStorage.setItem('jwt', token);
-        this.props.history.push('/');
+        this.props.history.push('/Random');
       })
       .catch(err => {
        

@@ -23,7 +23,7 @@ import Swap from '@material-ui/icons/Shuffle';
 // Stylings
 
 const Background = styled.div`
-background-color: #E6EBE0;
+background-color: #ffffff;
 font-family:'Raleway', sans-serif;
 display: flex;
 width: 1920px;
@@ -52,6 +52,7 @@ justify-content: flex-start;
 const Sider = styled.button`
 text-decoration: none;
 background-color: none;
+color: #72CBD3;
 border: none;
 cursor: pointer;
 height: 25px;
@@ -59,7 +60,7 @@ background: none;
 margin-bottom: 25px;
 transition: .3s;
 :hover {
-  color: white;
+  color: #F7AF9D;
 }`
 
 //  const Box = styled.div`

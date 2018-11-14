@@ -36,10 +36,10 @@ const SignUpSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
-  axios.post('http://localhost:3000', {
+  axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
     'username': data.get('username'),
-    'password': data.get('password'),
-    'password-confirm': data.get('password-confirm'),
+    'password1': data.get('password'),
+    'password2': data.get('password-confirm'),
   })
   .then(res => {
     const token = res.data.key;
@@ -61,7 +61,7 @@ const SignUp = () => {
             </Link>
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
                 <LabelStyling htmlFor='username'> Email </LabelStyling>
-                <InputStyling type='email' name='username' id='username' required='true'/>
+                <InputStyling type='text' name='username' id='username' required='true'/>
 
                 <LabelStyling htmlFor='password'> Password </LabelStyling>
                 <InputStyling type='password' name='password' id='password' required='true'/>

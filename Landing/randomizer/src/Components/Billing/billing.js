@@ -14,6 +14,7 @@ font-size: 26px;
 `
 const Welcomer = styled.h1`
 position: absolute;
+color: #72CBD3;
 `
 
 const Checker = styled.div`

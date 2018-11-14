@@ -14,7 +14,7 @@ border: 1px solid red;
 height: 500px;
 border: 10px solid #E2E4F6;
 border-radius: 5px;
-background-color: #F7AF9D;
+background-color: white;
 padding-top: 15px;
 justify-content: start;
 
@@ -48,23 +48,25 @@ width: 900px;
 height: 300px;
 `
 const Part = styled.button`
+font-size: 20px;
 width: 150px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
 border-radius: 15px 5px;
 color: #E6EBE0;
-background-color: #4F6D7A;
+background-color: #4caf50;
 border: none;
 transition: .5s;
 :hover {
-    background-color: #B8BACF;
-    opacity: .9;
-    color: black;
+    background-color: #2d8630;
+    
+    
 }
 `
 
 const Dec = styled.button`
+font-size: 20px;
 border: none;
 width: 150px;
 height: 40px;
@@ -72,12 +74,12 @@ text-decoration: none;
 cursor: pointer;
 border-radius: 5px 15px;
 color: #E6EBE0;
-background-color: #4F6D7A;
+background-color: #E91E63;
 transition: .5s;
 :hover {
-    background-color: #B8BACF;
-    opacity: .9;
-    color: black;
+    background-color: #d1084c;
+    
+    
 }
 `
 const Misc = styled.p`
@@ -93,13 +95,13 @@ text-decoration: none;
 cursor: pointer;
 border-radius: 15px 5px;
 color: #E6EBE0;
-background-color: #232323;
+background-color: #F7947B;
 transition: .5s;
 :hover {
-    background-color: #B8BACF;
-    opacity: .9;
-    color: black;
+    background-color: #f0623e;
+    
 }
+font-size: 16px;
 `
 
 const Reset = styled.button`
@@ -110,15 +112,15 @@ text-decoration: none;
 cursor: pointer;
 border-radius: 15px 5px;
 color: #E6EBE0;
-background-color: #232323;
+background-color: #F7947B;
 transition: .5s;
 position: absolute;
 margin-left: 380px;
+font-size: 16px;
 
 :hover {
-    background-color: #B8BACF;
-    opacity: .9;
-    color: black;
+    background-color: #f0623e;
+    
 }
 `
 const Bigbutton = styled.button`
@@ -127,9 +129,9 @@ height: 150px;
 text-decoration: none;
 cursor: pointer;
 border-radius: 5px;
-background-color: #232323;
+background-color:#2fd1df;
 color: white;
-font-size: 24px;
+font-size: 36px;
 border: none;
 `
 class Magic extends Component {
