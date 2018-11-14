@@ -10,13 +10,16 @@ import Home from './Components/LandingPage/Home';
 import SignUp from './Components/SignUp/SignUp';
 import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
+import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
+
 
 // Icons
 import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
 import Money from '@material-ui/icons/AttachMoney';
 import Homeicon from '@material-ui/icons/Home';
+import Swap from '@material-ui/icons/Shuffle';
 // Stylings
 
 const Background = styled.div`
@@ -141,7 +144,15 @@ class App extends Component {
           </Sider>
           </Link>
 
-            <Link to="/Billing">
+
+          <Link to="/Random">
+          <Sider>
+          <Swap style={{fontSize: '48px'}}/>
+          </Sider>
+          </Link>
+
+
+          <Link to="/Billing">
            <Sider>
           <Money style={{fontSize: '48px'}}/>
           </Sider>
@@ -154,8 +165,10 @@ class App extends Component {
        <Route exact path ='/Login' component={Login}/>
        <Route exact path='/About'/>
        <Route exact path='/Settings' component={Settings}/>
+       <Route exact path = '/Random' component={Magic}/>            
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>              
+
       </Appmain>
       </Background>
     );

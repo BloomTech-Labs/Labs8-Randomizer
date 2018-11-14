@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-
+// Stylings
 const Homediv = styled.div`
 width: 500px;
 height: 500px;
