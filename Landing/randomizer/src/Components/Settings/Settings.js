@@ -12,10 +12,15 @@ const InputStyling = styled.input`
 display: block;
 margin-bottom: 10px;
 text-decoration: none;
-background-color: none;
+background-color: #FFCAD4;
 border: none;
 width: 175px;
 height: 25px;
+transition: .4s;
+:hover {
+    background-color: #bf4068;
+    color: white;
+}
 `
 const LabelStyling = styled.label`
     display: block;
@@ -39,6 +44,7 @@ ul {
 `
 const Welcomer = styled.h1`
 margin-bottom: 125px;
+color: #72CBD3;
 `
 
 

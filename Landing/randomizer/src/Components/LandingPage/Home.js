@@ -21,10 +21,10 @@ border-radius: 4px;
 
 `
 const Signup = styled.button`
-color: #E6EBE0;
+color: black;
 width: 200px;
 height: 60px;
-background-color: #232323;
+background-color: #FFA5B6;
 cursor: pointer;
 border: none;
 border-radius: 3px;
@@ -34,16 +34,16 @@ text-decoration: none;
 font-size: 24px;
 
 :hover {
-    background-color: #B8BACF;
+    background-color: #bf4068;
     opacity: .9;
     color: black;
 }
 `
 const Signin = styled.button`
-color: #E6EBE0;
+color: black;
 width: 200px;
 height: 60px;
-background-color: #232323;
+background-color: #FFA5B6;
 cursor: pointer;
 border: none;
 border-radius: 3px;
@@ -52,7 +52,7 @@ transition: .5s;
 font-size: 24px;
 
 :hover {
-    background-color: #B8BACF;
+    background-color: #bf4068;
     opacity: .9;
     color: black;
 }
@@ -60,6 +60,7 @@ font-size: 24px;
 const Welcomer = styled.h1`
 font-size: 50px;
 margin-left: 100px;
+color: #72CBD3;
 `
 const Setter = styled.div`
 position: absolute;
