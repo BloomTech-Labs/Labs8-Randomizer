@@ -13,7 +13,7 @@ import Settings from './Components/Settings/Settings';
 import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
 import GoogleApi from './Components/GoogleApi/GoogleApi';
-
+import Newuser from './Components/Randomuser/Newuser';
 
 // Icons
 import Vert from '@material-ui/icons/Reorder';
@@ -171,7 +171,7 @@ class App extends Component {
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>
        <Route path = '/Google-class' component={GoogleApi} />
-
+        <Route exact path = '/Newuser' component={Newuser}/>
       </Appmain>
       </Background>
     );
