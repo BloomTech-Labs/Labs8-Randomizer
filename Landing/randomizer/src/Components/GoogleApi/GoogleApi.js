@@ -1,5 +1,6 @@
 import React from 'react';
 import config from './config';
+import GoogleLogin from 'react-google-login';
 const API_KEY = 'iVDX47CeAHhcH0bhgbXIQBCw';
 
 class GoogleApi extends React.Component {
@@ -10,33 +11,19 @@ class GoogleApi extends React.Component {
       gapiReady: true
     }
   }
-
-    loadYoutubeApi() {
-      const script = document.createElement("script");
-      script.src = "https://apis.google.com/js/client.js";
-
-      script.onload = () => {
-        window.gapi.load('client', () => {
-          window.gapi.client.setApiKey(API_KEY);
-          window.gapi.client.load('youtube', 'v3', () => {
-            this.setState({ gapiReady: true });
-          });
-        });
-      };
-
-      document.body.appendChild(script);
-    }
-
-    componentDidMount() {
-      this.loadYoutubeApi();
-    }
+responseGoogle = (response) => {
+  console.log(response);
+}
 
     render() {
-      if (this.state.gapiReady) {
        return (
-         <h1>GAPI is loaded and ready to use.</h1>
+         <GoogleLogin
+           clientId="559144659158-uck7lvea9deivqvp99bo3bfifsdips4a.apps.googleusercontent.com"
+           buttonText="Login"
+           onSuccess={this.responseGoogle}
+           onFailure={this.responseGoogle}
+         />
        );
-    };
   }
 }
 
