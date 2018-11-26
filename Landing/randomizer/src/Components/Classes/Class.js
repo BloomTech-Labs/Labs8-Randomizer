@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+const PapaParse = require('papaparse/papaparse.min.js');
 
 const Editmain = styled.div`
 font-family:'Raleway', sans-serif;
@@ -72,8 +73,8 @@ border: none;
 transition: .5s;
 :hover {
     background-color: #2d8630;
-    
-    
+
+
 }
 `
 const Firstlevel = styled.div`
@@ -106,8 +107,8 @@ margin-right: 15px;
 transition: .5s;
 :hover {
     background-color: #d1084c;
-    
-    
+
+
 }
 `
 const Add = styled.button`
@@ -125,7 +126,9 @@ transition: .5s;
 }
 margin-right: 10px;
 `
-const Import = styled.button`
+const Import = styled.label`
+align-items: flex-start
+display: inline-block;
 border: none;
 width: 150px;
 height: 40px;
@@ -135,20 +138,40 @@ border-radius: 10px 5px;
 color: white;
 background-color: black;
 transition: .5s;
+margin-bottom: 75px;
 :hover {
     background-color: grey;
 }
-
-
 `
+const CsvStyling = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  `
+
 class Class extends Component {
     constructor() {
         super();
         this.state={
-           
+
         }
     }
-    
+
+handleChangeFile = event => {
+      let reader = new FileReader();
+      const filename = event.target.files[0];
+
+    PapaParse.parse(filename,
+          {header: false, complete: function(results)
+             {
+                 console.log("Parse results:", results.data);
+             }
+             });
+    };
+
     render() {
         return (
             <Editmain>
@@ -162,16 +185,17 @@ class Class extends Component {
             <Editname type="text" placeholder="Class Name"></Editname>
             <Dec>Track Participation</Dec>
             <Part> Reset Participation</Part>
-            
+
 
             </Firstlevel>
 
             <Secondlevel>
-                
+
             <Editname type="text" placeholder="First Name"></Editname>
             <Editname type="text" placeholder="Last Name"></Editname>
             <Add> Add Student</Add>
-            <Import>Import CSV</Import>
+            <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
+            <Import htmlFor="file">Import CSV</Import>
 
             </Secondlevel>
             </Editmain>

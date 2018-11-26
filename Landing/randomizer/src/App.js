@@ -13,7 +13,6 @@ import Settings from './Components/Settings/Settings';
 import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
 import GoogleApi from './Components/GoogleApi/GoogleApi';
-import Edit from './Components/Edit/Edit';
 import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
 
@@ -175,15 +174,14 @@ class App extends Component {
       <Route exact path='/' component={Home}/>
        <Route exact path='/Signup' component={SignUp}/>
        <Route exact path ='/Login' component={Login}/>
-       <Route exact path ='/Edit' component={Edit}/>
        <Route exact path='/About'/>
        <Route exact path='/Settings' component={Settings}/>
        <Route exact path = '/Random' component={Magic}/>
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>
        <Route path = '/Google-class' component={GoogleApi} />
-        <Route exact path = '/Newuser' component={Newuser}/>
-        <Route exact path = '/Classes' component={Class}/>
+       <Route exact path = '/Newuser' component={Newuser}/>
+       <Route exact path = '/Classes' component={Class}/>
       </Appmain>
       </Background>
     );
