@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
+// Components
+import Chart from '../Rechart/Charts';
 
 const Outmostbox = styled.div`
 font-family:'Raleway', sans-serif;
@@ -11,7 +13,7 @@ display: flex;
 justify-content: center;
 width: 900px;
 border: 1px solid red;
-height: 500px;
+height: 750px;
 border: 10px solid #E2E4F6;
 border-radius: 5px;
 background-color: white;
@@ -42,10 +44,12 @@ margin-top: 10px;
 
 const Graphbox = styled.div`
 display: flex;
+text-align: center;
 justify-content: center;
+align-items: center;
 width: 900px;
 
-height: 300px;
+height: 400px;
 `
 const Part = styled.button`
 font-size: 20px;
@@ -183,8 +187,10 @@ class Magic extends Component {
         </Mainbox>
 
         <Graphbox>
-        <Misc>Participation Rate Graph</Misc>
+        
+        <Chart > </Chart>
         </Graphbox>
+        
             
      </Outmostbox>
             

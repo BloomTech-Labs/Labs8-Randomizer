@@ -15,7 +15,7 @@ import Billing from './Components/Billing/billing';
 import GoogleApi from './Components/GoogleApi/GoogleApi';
 import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
-
+import Chart from './Components/Rechart/Charts';
 // Icons
 import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
@@ -180,8 +180,12 @@ class App extends Component {
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>
        <Route path = '/Google-class' component={GoogleApi} />
+        <Route exact path = '/Newuser' component={Newuser}/>
+        <Route exact path = '/Classes' component={Class}/>
+        <Route exact path = '/Chart' component={Chart}/>
        <Route exact path = '/Newuser' component={Newuser}/>
-       <Route exact path = '/Classes' component={Class}/>
+       
+
       </Appmain>
       </Background>
     );
