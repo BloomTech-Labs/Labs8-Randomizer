@@ -59,7 +59,16 @@ font-size: 24px;
 `
 const Welcomer = styled.h1`
 font-size: 50px;
-margin-left: 100px;
+
+color: #72CBD3;
+margin-bottom: 0px;
+text-align: center;
+`
+const Welcomer2 = styled.h1`
+display: flex;
+text-align: center;
+font-size: 24px;
+
 color: #72CBD3;
 `
 const Setter = styled.div`
@@ -83,7 +92,8 @@ class Home extends Component {
         return (
             <Homediv>
                 
-                <Welcomer >Welcome to Randomizer</Welcomer>
+                <Welcomer >Welcome to Randomizer </Welcomer>
+                <Welcomer2>The modern way to track classroom participation</Welcomer2>
               
                <Link to='/Signup'>
                 <Signup>Sign Up

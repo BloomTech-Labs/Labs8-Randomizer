@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
+
+
+
 const Person = styled.div`
 width: 200px;
 height: 200px;`
