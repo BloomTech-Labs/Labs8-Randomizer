@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from .models import ClssName, StudentName
+from .models import ClssName, StudentName, Participation
 from django.core.exceptions import ValidationError
 from django_currentuser.middleware import (
     get_current_user, get_current_authenticated_user)
@@ -29,3 +29,12 @@ def createStudent(request):
     response = JsonResponse({"key":str(newStudent.id)}, safe=True, status=201)
     return response
 
+@csrf_exempt
+def createParticipation(request):
+    data = json.loads(request.body)
+    boo = data['particpated'] #value of true or false
+    student = StudentName.objects.get(id='5742de86d6d24336820def7195f32ac8')
+    participating = Participation.manager.create_participation(student,boo)
+    participating.save()
+    response = JsonResponse({"key":str(participating.id)}, safe=True, status=201)
+    return response
