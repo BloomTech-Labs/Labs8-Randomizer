@@ -38,11 +38,21 @@ class StudentName(models.Model):
     def __str__(self):
        return self.student_name_first+self.student_name_last
 
+class ParticipationManager(models.Manager):
+    def create_participation(self, student, participate):
+        newParticipation = self.create(student=student, participate=participate)
+        return newParticipation
+
+
 class Participation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     student = models.ForeignKey(StudentName, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     participate = models.NullBooleanField()
+    manager = ParticipationManager()
+
+    def __str__(self):
+        return str(self.student)+':'+str(self.date)+':'+str(self.participate)
 
 @receiver(post_save, sender=User)
 def create_user(sender, instance, created, **kwargs):
