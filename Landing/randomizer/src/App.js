@@ -14,7 +14,8 @@ import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
 import GoogleApi from './Components/GoogleApi/GoogleApi';
 import Edit from './Components/Edit/Edit';
-
+import Newuser from './Components/Randomuser/Newuser';
+import Class from './Components/Classes/Class';
 
 // Icons
 import Vert from '@material-ui/icons/Reorder';
@@ -22,6 +23,7 @@ import Gearicon from '@material-ui/icons/Settings';
 import Money from '@material-ui/icons/AttachMoney';
 import Homeicon from '@material-ui/icons/Home';
 import Swap from '@material-ui/icons/Shuffle';
+import Book from '@material-ui/icons/Class';
 // Stylings
 
 const Background = styled.div`
@@ -160,6 +162,13 @@ class App extends Component {
           <Money style={{fontSize: '48px'}}/>
           </Sider>
           </Link>
+
+           <Link to="/Classes">
+           <Sider>
+          <Book style={{fontSize: '48px'}}/>
+          </Sider>
+          </Link>
+
           </Sidebar>
 
 
@@ -173,7 +182,8 @@ class App extends Component {
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>
        <Route path = '/Google-class' component={GoogleApi} />
-
+        <Route exact path = '/Newuser' component={Newuser}/>
+        <Route exact path = '/Classes' component={Class}/>
       </Appmain>
       </Background>
     );
