@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Deleteicon from '@material-ui/icons/Delete';
+const PapaParse = require('papaparse/papaparse.min.js');
+
 
 const FormStyling = styled.form`
 display: block;
@@ -10,6 +12,17 @@ const InputStyling = styled.input`
 `
 const LabelStyling = styled.label`
 `
+const CsvStyling = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  `
+  const CsvLabel = styled.label`
+border: solid red 1px;
+    `
 const Homediv = styled.div`
 display: flex;
 justify-content: space-between;
@@ -61,6 +74,18 @@ let fakeNames = [
   'Felicity'
 ];
 
+const handleChangeFile = event => {
+  let reader = new FileReader();
+  const filename = event.target.files[0];
+
+PapaParse.parse(filename,
+      {header: false, complete: function(results)
+         {
+             console.log("Parse results:", results.data);
+         }
+         });
+};
+
 const Edit = () => {
   let studentList = fakeNames.map(item => <NameItem> <Deleteicon /> {item} </NameItem>)
   return(
@@ -81,7 +106,8 @@ const Edit = () => {
           <InputStyling type='text' name='first-name' id='first-name' placeholder='First Name'/>
           <InputStyling type='text' name='last-name' id='last-name' placeholder='Last Name'/>
           <InputStyling type='button' value='Add'/>
-          <InputStyling type='button' value='Import CSV'/>
+          <CsvStyling type='file' id="file" accept="text/csv" onChange={e => handleChangeFile(e)}/>
+          <CsvLabel for="file">Import CSV</CsvLabel>
         </FormStyling>
         <NameGrid>
           {studentList}
