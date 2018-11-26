@@ -1,11 +1,11 @@
-from rest_framework import serializers, viewsets
-from .models import Clss
+# from rest_framework import serializers, viewsets
+# from .models import ClssName, StudentName, Participation
 
-class ClssSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Clss
-        fields = ('student_name_first', 'student_name_last')
+# class ClssNameSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = ClssName
+#         fields = ('class_name')
 
-class ClssViewSet(viewsets.ModelViewSet):
-    serializer_class = ClssSerializer
-    queryset = Clss.objects.all()
+# class ClssViewSet(viewsets.ModelViewSet):
+#     serializer_class = ClssNameSerializer
+#     queryset = ClssName.objects.all()
