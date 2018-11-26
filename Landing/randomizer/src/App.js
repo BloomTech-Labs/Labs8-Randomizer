@@ -183,6 +183,9 @@ class App extends Component {
         <Route exact path = '/Newuser' component={Newuser}/>
         <Route exact path = '/Classes' component={Class}/>
         <Route exact path = '/Chart' component={Chart}/>
+       <Route exact path = '/Newuser' component={Newuser}/>
+       
+
       </Appmain>
       </Background>
     );
