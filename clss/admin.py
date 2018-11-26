@@ -1,12 +1,13 @@
 from django.contrib import admin
 
-from .models import Clss, Calendar
+from .models import ClssName, StudentName, Participation
 # Register your models here.
 
 
-class ClssAdmin(admin.ModelAdmin):
+class ClssNameAdmin(admin.ModelAdmin):
     readonly_fields=('created_at','last_modified')
 
 
-admin.site.register(Clss, ClssAdmin)
-admin.site.register(Calendar)
+admin.site.register(ClssName, ClssNameAdmin)
+admin.site.register(StudentName)
+admin.site.register(Participation)
