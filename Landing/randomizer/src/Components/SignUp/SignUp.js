@@ -17,11 +17,6 @@ border: none;
 width: 175px;
 height: 25px;
 background-color: #FFCAD4;
-:hover {
-    background-color: #bf4068;
-    opacity: .9;
-    color: black;
-}
 `
 const Signin = styled.button`
 width: 200px;
