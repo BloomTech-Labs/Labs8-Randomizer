@@ -88,24 +88,24 @@ class Login extends Component {
         this.state={
             username:"",
             password: "",
-            
+
         }
     }
-    
+
  handleSubmit = e => {
     e.preventDefault();
-    
+
     axios
       .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
       .then(res => {
-        
+
         const token = res.data.key;
-       
+
         localStorage.setItem('jwt', token);
         this.props.history.push('/Random');
       })
       .catch(err => {
-       
+
       });
     this.setState({ username: '', password: '' });
   };
@@ -117,16 +117,16 @@ class Login extends Component {
 
     render() {
         return (
-            
+
             <Homediv>
-                
-                
-                
-                 
-                
+
+
+
+
+
                 <Welcomer>Sign In</Welcomer>
-               
-               
+
+
 
                 <Former onSubmit={this.handleSubmit}>
                <Userenter name="username" placeholder="Username"
@@ -135,8 +135,9 @@ class Login extends Component {
                <Passenter name="password" placeholder="Password" type="password"
                value={this.state.password} onChange={this.handleInput}></Passenter>
                <Signin onSubmit={this.handleSubmit}> Login </Signin>
+
                </Former>
-                
+
 
             </Homediv>
         )

@@ -74,7 +74,7 @@ const SignUp = () => {
     return(
         <Homediv>
             <Welcomer> Sign Up</Welcomer>
-            <Link to="/" style={{color: 'black'}}>
+            <Link to="/Classes" style={{color: 'black'}}>
             <Homeicon />
             </Link>
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
