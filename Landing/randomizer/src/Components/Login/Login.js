@@ -1,6 +1,6 @@
 // Libraries
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -74,15 +74,6 @@ transition: .5s;
     opacity: .9;
     color: black;
 }
-`
-const Returner = styled.button`
-width: 20px;
-height: 20px;
-cursor: pointer;
-background: none;
-border: none;
-text-decoration: none;
-margin-right:480px;
 `
 
 const Former = styled.form`

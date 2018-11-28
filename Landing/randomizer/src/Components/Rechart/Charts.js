@@ -1,18 +1,22 @@
 //Libraries
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import styled, {keyframes}from 'styled-components';
-import { LineChart, Line, YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, dataList} from 'recharts';
+import styled from 'styled-components';
+
+
+// Components
+import Chartprop from './ClassChart';
+import StudentChart from './StudentChart';
+
 
 const Homediv = styled.div`
 width: 500px;
-height: 500px;
+height: 300px;
 background-color: none;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
 border-radius: 4px;
-
+align-items: center;
 `
 
 
@@ -20,59 +24,60 @@ class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            mass: [],
+            height: [],
+            starwarsChars: [],
+            names: [],
+           
         }
     }
-     
     componentDidMount() {
-        this.getStudents('https://swapi.co/api/people/')
-    }
-    getStudents = URL => {
-     
+        this.getCharacters('https://swapi.co/api/people/');
+      }
+    
+      getCharacters = URL => {
+    
         fetch(URL)
           .then(res => {
             return res.json();
           })
           .then(data => {
-            this.setState({ data: data.results });
+            this.setState({ starwarsChars: data.results});
+           
+            this.setState({height: this.state.starwarsChars.map((char => {
+               return char.height
+            }))})
+            this.setState({mass: this.state.starwarsChars.map((char => {
+                return char.mass
+             }))})
+             this.setState({names: this.state.starwarsChars.map((char => {
+                return char
+             }))})
+         
+            console.log('names',this.state.names)
+            console.log('mass', this.state.mass)
           })
           .catch(err => {
             throw new Error(err);
           });
       };
-
+     
     render() {
-
-        const nameList = ['Nick', 'Ray', 'Susanna', 'Emmeline'];
-        const dataBox = [];
-        const dataList = () => {
-          nameList.map(name => {
-            let obj = {
-              name: `${name}`,
-              Participated: Math.floor(Math.random() * 2000),
-              Declined: Math.floor(Math.random() * 2000),
-              amt: Math.floor(Math.random() * 2000)
-            }
-            dataBox.push(obj)
-          })
-          return dataBox;
-        }
         
         return (
-            <div>
-                <BarChart width={600} height={300} data={dataList()} style={{margin: '3rem auto 2rem'}}
-          margin={{top: 5, right: 30, left: 20, bottom: 5}} >
-          <XAxis dataKey="name"/>
-          <YAxis/>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <Tooltip/>
-          <Legend />
-          <Bar dataKey="Participated" fill="#8884d8" />
-          <Bar dataKey="Declined" fill="#82ca9d" />
-        </BarChart>
-                
-            </div>
+            <Homediv>
+            {/* <Chartprop students={this.state.names}/> */}
+
+           
+            
+            <StudentChart numbers={this.state.mass}/>
+         
+            </Homediv>
+            
+
         )
+        
     }
 }
 export default Chart;
