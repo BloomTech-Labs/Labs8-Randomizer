@@ -83,8 +83,8 @@ const Settings = () => {
             </FormStyling>
             <FormStyling onSubmit={event => {
             AddNumber(event)}}>
-              <LabelStyling htmlFor='username'> Telephone </LabelStyling>
-              <InputStyling type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+              <LabelStyling htmlFor='telephone'> Telephone </LabelStyling>
+              <InputStyling id='telephone' type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
               <InputStyling type="submit" value="Save" />
             </FormStyling>
         </Homediv>
