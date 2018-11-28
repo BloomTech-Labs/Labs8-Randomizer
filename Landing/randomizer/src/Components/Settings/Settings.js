@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 // Icons
 import Homeicon from '@material-ui/icons/Home';
 
@@ -46,14 +47,25 @@ const Welcomer = styled.h1`
 margin-bottom: 125px;
 color: #72CBD3;
 `
-
+const AddNumber = (event) => {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  console.log(data.get('telephone'))
+  //Need eventual work around to this solution https://github.com/axios/axios/issues/853#issuecomment-412922608
+  axios.post(`${'https://cors-anywhere.herokuapp.com/'}https://api.authy.com/protected/json/phones/verification/start`, {
+    "api_key":"IkZeWLzSDR7fxTh3JYLX3xv7T62G51nN",
+    "via":"sms",
+    "phone_number": data.get('telephone'),
+    "country_code":"1"
+  })
+}
 
 const Settings = () => {
     return(
         <Homediv>
             <Welcomer>Enter new Email/Password</Welcomer>
 
-            
+
 
             <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
 
@@ -68,7 +80,13 @@ const Settings = () => {
 
                 <InputStyling type="submit" value="Save"/>
 
-            </FormStyling>    
+            </FormStyling>
+            <FormStyling onSubmit={event => {
+            AddNumber(event)}}>
+              <LabelStyling htmlFor='telephone'> Telephone </LabelStyling>
+              <InputStyling id='telephone' type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+              <InputStyling type="submit" value="Save" />
+            </FormStyling>
         </Homediv>
     )
 }
