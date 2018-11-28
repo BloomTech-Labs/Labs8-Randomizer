@@ -76,12 +76,13 @@ def createParticipation(request):
     return response
 
 @csrf_exempt
-@api_view(["GET"])
+@api_view(["POST"])
 @permission_classes((permissions.AllowAny,))
 def particpationTotal(request):
     data = json.loads(request.body)
     studentID = data['studentID']
-    allParticipations = Participation.manager.filter(student=studentID).order_by('date')
+    allParticipations = Participation.manager.filter(student=studentID)
+    print(allParticipations)
     participationDictionary = {}
     for x in allParticipations:
         splitDate = str(x.date).split()
@@ -89,10 +90,9 @@ def particpationTotal(request):
             participationDictionary[splitDate[0]] = {"P":0, "NP":0}
         if x.participate == True:
             dicT = participationDictionary[splitDate[0]]
-            print(dicT)
             dicT['P'] = dicT['P'] + 1
         else:
             dicT = participationDictionary[splitDate[0]]
             dicT['NP'] = dicT['NP']+ 1
-    response = JsonResponse({"key":str(participationDictionary)}, safe=True, status=201)
+    response = JsonResponse(json.dumps(participationDictionary), safe=False, status=201)
     return response
