@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
-import styled,  {keyframes} from 'styled-components';
+import styled from 'styled-components';
 
 
 
@@ -16,8 +16,9 @@ import GoogleApi from './Components/GoogleApi/GoogleApi';
 import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
 import Chart from './Components/Rechart/Charts';
+import StudentChart from './Components/Rechart/StudentChart';
 // Icons
-import Vert from '@material-ui/icons/Reorder';
+// import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
 import Money from '@material-ui/icons/AttachMoney';
 import Homeicon from '@material-ui/icons/Home';
@@ -66,61 +67,16 @@ transition: .3s;
   color: #F7AF9D;
 }`
 
-//  const Box = styled.div`
-//   display: inline-block;
-//   background: pink;
-//   width: 200px;
-//   height: 200px;
-//   transition: transform 300ms ease-in-out;
-//   pointer-events: none;
-// `
-// const Trigger = styled.div`
-//   width: 200px;
-//   height: 200px;
-//   border: 20px solid #999;
-//   background: #ddd;
-
-//   &:onClick ${Box} {
-//     transform: translate(200px, 150px) rotate(20deg);
-//   }
-// `
-// const coolBoxKeyframes = keyframes`
-// 0% {
-//   height: 0px;
-//   background: green;
-// }
-// 100% {
-//   height: 1000px;
-//   background: blue;
-// }
-// `
-//  const CoolBox = styled.div`
-//   display: inline-block;
-//   background: green;
-//   width: 1500px;
-//   position: relative;
-//   animation-name: ${coolBoxKeyframes};
-//   animation-duration: .5s;
-//   animation-timing-function: ease;
-//   animation-delay: 0s;
-//   animation-iteration-count: 1;
-//   animation-direction: normal;
-//   animation-fill-mode: backwards;
-//   animation-play-state: running;
-// `
-const Spinny = styled.div`
-`
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {isCool: false}
+    
   }
-  toggleCoolness = () => {
-    this.setState({ isCool: !this.state.isCool })
-  }
+  
+ 
 
   render() {
-    const {isCool} = this.state;
+    
     return (
       <Background>
       <Appmain>
@@ -133,14 +89,7 @@ class App extends Component {
           </Sider>
           </Link>
 
-          {/* <Sider onClick={this.toggleCoolness}>
-          {isCool ? (
-            <CoolBox/>
-          ) : (
-            <div></div>
-          )}
-          <Vert id="test" style={{fontSize: '48px'}}></Vert>
-          </Sider> */}
+        
 
           <Link to="/Settings">
           <Sider>
@@ -186,8 +135,13 @@ class App extends Component {
        <Route exact path = '/Newuser' component={Newuser}/>
        
 
+
       </Appmain>
+
+      
       </Background>
+    
+    
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
 import Checkout from '../Billing/Checkout';
 
 const Payer = styled.div`

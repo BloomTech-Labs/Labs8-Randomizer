@@ -1,8 +1,8 @@
 // Libraries
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+
 import styled from 'styled-components';
-import axios from 'axios';
+
 
 // Components
 import Chart from '../Rechart/Charts';
@@ -49,7 +49,7 @@ justify-content: center;
 align-items: center;
 width: 900px;
 
-height: 400px;
+height: 200px;
 `
 const Part = styled.button`
 font-size: 20px;

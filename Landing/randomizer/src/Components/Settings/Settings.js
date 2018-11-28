@@ -1,10 +1,13 @@
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
+
+
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 // Icons
 import Homeicon from '@material-ui/icons/Home';
+
 
 const FormStyling = styled.form`
 display: block;
@@ -35,14 +38,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 `
-const Sidebar = styled.div`
-ul {
-    list-style-type: none;
-    li {
-        text-decoration:none;
-    }
-}
-`
+
 const Welcomer = styled.h1`
 margin-bottom: 125px;
 color: #72CBD3;

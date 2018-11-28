@@ -1,10 +1,10 @@
 //Libraries
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import styled, {keyframes}from 'styled-components';
+import styled from 'styled-components';
 
 // Icons
-import Gearicon from '@material-ui/icons/Settings';
+// import Gearicon from '@material-ui/icons/Settings';
 
 // Imports
 import Login from '../Login/Login';
@@ -71,10 +71,7 @@ font-size: 24px;
 
 color: #72CBD3;
 `
-const Setter = styled.div`
-position: absolute;
-margin-top: 470px;
-margin-left: 235px;`
+
 
 
 
