@@ -38,13 +38,13 @@ class Newuser extends Component {
 
     render() {
         return (
-            
+
     <Person>
-        
+
         {this.state.pictures}
-        
+
     </Person>
-            
+
         )
     }
 }

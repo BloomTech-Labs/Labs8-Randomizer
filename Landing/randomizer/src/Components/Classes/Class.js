@@ -177,7 +177,6 @@ class Class extends Component {
     }
 
 handleChangeFile = event => {
-      let reader = new FileReader();
       const filename = event.target.files[0];
 PapaParse.parse(filename,
           {header: false, complete: (results) =>
