@@ -1,8 +1,5 @@
 import React from 'react';
-import config from './config';
 import {GoogleLogin} from 'react-google-login';
-import axios from 'axios';
-const API_KEY = 'iVDX47CeAHhcH0bhgbXIQBCw';
 
 // function onSignIn(googleUser) {
 //   var id_token = googleUser.getAuthResponse().id_token;
@@ -22,10 +19,6 @@ const API_KEY = 'iVDX47CeAHhcH0bhgbXIQBCw';
 
 
 class GoogleApi extends React.Component {
-
-  constructor(){
-    super()
-  }
     render() {
        return (
          <GoogleLogin

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 
 import styled from 'styled-components';
 import axios from 'axios';
+import Deleteicon from '@material-ui/icons/Delete';
 const PapaParse = require('papaparse/papaparse.min.js');
 
 
@@ -152,28 +153,44 @@ const CsvStyling = styled.input`
 	position: absolute;
 	z-index: -1;
   `
+const NameGrid = styled.div`
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+display: grid;
+grid-template-columns: repeat(4, auto);
+grid-template-rows: repeat(1, auto);
+`
+const NameItem = styled.div`
+display: flex;
+border: solid 1px pink;
+align-items: center;
+`
 
 class Class extends Component {
     constructor() {
         super();
         this.state={
-
+          clssName: '',
+          studentList: ['']
         }
     }
 
 handleChangeFile = event => {
-      let reader = new FileReader();
       const filename = event.target.files[0];
-
-    PapaParse.parse(filename,
-          {header: false, complete: function(results)
+PapaParse.parse(filename,
+          {header: false, complete: (results) =>
              {
-                 console.log("Parse results:", results.data);
+                this.setState({studentList: results.data})
              }
-             });
+           })
     };
 
     render() {
+      let studentList = [];
+      for (let i = 1; i < this.state.studentList.length - 1; i++){
+        studentList.push(<NameItem key={i}> <Deleteicon /> {this.state.studentList[i]} </NameItem>)
+      }
         return (
             <Editmain>
 
@@ -199,6 +216,9 @@ handleChangeFile = event => {
             <Import htmlFor="file">Import CSV</Import>
 
             </Secondlevel>
+            <NameGrid>
+              {studentList}
+            </NameGrid>
             </Editmain>
         )
     }
