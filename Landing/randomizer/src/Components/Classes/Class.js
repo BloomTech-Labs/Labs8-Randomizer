@@ -211,13 +211,12 @@ class Class extends Component {
 handleChangeFile = event => {
       let reader = new FileReader();
       const filename = event.target.files[0];
-      // this.setState({studentList: })
-    console.log(PapaParse.parse(filename,
+PapaParse.parse(filename,
           {header: false, complete: (results) =>
              {
                 this.setState({studentList: results.data})
              }
-           }))
+           })
     };
 
     render() {
@@ -225,7 +224,6 @@ handleChangeFile = event => {
       for (let i = 1; i < this.state.studentList.length - 1; i++){
         studentList.push(<NameItem key={i}> <Deleteicon /> {this.state.studentList[i]} </NameItem>)
       }
-      console.log(this.state.studentList)
         return (
             <Editmain>
 
