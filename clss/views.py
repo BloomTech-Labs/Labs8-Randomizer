@@ -50,7 +50,7 @@ def createStudent(request):
     return response
 
 @csrf_exempt
-@api_view(["GET"])
+@api_view(["POST"])
 @permission_classes((permissions.AllowAny,))
 def studentList(request):
     data = json.loads(request.body)
@@ -58,8 +58,8 @@ def studentList(request):
     classlist = StudentName.objects.filter(enrolled=clssID) #returns a QuerySet
     studentNames = []
     for x in classlist:
-        studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":x.id})
-    response = JsonResponse({"studentList": str(studentNames)}, safe=True, status=201)
+        studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":str(x.id)})
+    response = JsonResponse( json.dumps(studentNames), safe=False, status=201)
     return response
 
 @csrf_exempt
