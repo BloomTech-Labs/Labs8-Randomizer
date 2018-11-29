@@ -70,6 +70,7 @@ const SignUpSubmit = (event) => {
   })
 }
 
+
 const SignUp = () => {
     return(
         <Homediv>
@@ -88,7 +89,6 @@ const SignUp = () => {
                 <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
 
                 <Signin>Submit</Signin>
-
             </FormStyling>
         </Homediv>
 )

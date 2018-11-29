@@ -26,6 +26,20 @@ transition: .4s;
     color: white;
 }
 `
+const VerifyStyling = styled.input`
+display: block;
+margin-bottom: 10px;
+text-decoration: none;
+background-color: #FFCAD4;
+border: none;
+width: 175px;
+height: 25px;
+transition: .4s;
+:hover {
+    background-color: #bf4068;
+    color: white;
+}
+`
 const LabelStyling = styled.label`
     display: block;
 `
@@ -79,9 +93,12 @@ const Settings = () => {
             </FormStyling>
             <FormStyling onSubmit={event => {
             AddNumber(event)}}>
-              <LabelStyling htmlFor='telephone'> Telephone </LabelStyling>
-              <InputStyling id='telephone' type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
-              <InputStyling type="submit" value="Save" />
+              <div className="telephoneNumber">
+                <LabelStyling htmlFor='telephone'> Telephone </LabelStyling>
+                <InputStyling id='telephone' type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+                <InputStyling type="submit" value="Save" />
+              </div>
+              <VerifyStyling id='verify'  name='verify' placeholder="Verify"/>
             </FormStyling>
         </Homediv>
     )
