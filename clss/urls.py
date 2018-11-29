@@ -8,5 +8,6 @@ urlpatterns = [
     url('add_student', views.createStudent),
     url('list_students', views.studentList),
     url('participate', views.createParticipation),
-    url('participation_list', views.particpationTotal)
+    url('participation_list', views.particpationTotal),
+    url('get_everything', views.getEverything)
 ]
