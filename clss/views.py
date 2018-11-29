@@ -31,9 +31,36 @@ def listClass(request):
     #now need to iterate through query set passing names into an array
     justnames = []
     for x in classlist:
-        justnames.append({"className":x.class_name,"classID":x.id})
-    response = JsonResponse({'list_of_classes':str(justnames)}, safe=True, status=201)
+        justnames.append({"className":x.class_name,"classID":str(x.id)})
+    response = JsonResponse(json.dumps(justnames), safe=False, status=201)
     return response
+
+@csrf_exempt
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny,))
+def getEverything(request):
+    user = request.user
+    classlist = ClssName.manager.filter(teacher=user) #returns a QuerySet
+    #now need to iterate through query set passing names into an array
+    clssSummary = []
+    for x in classlist:
+        studentlist = StudentName.objects.filter(enrolled=x.id)
+        students = []
+        for y in studentlist:
+            sParticipations = Participation.manager.filter(student=y.id)
+            pDicT = {"P":0, "NP":0}
+            for z in sParticipations:
+                if z.participate == True:
+                    pDicT['P'] = pDicT['P'] + 1
+                else:
+                    pDicT['NP'] = pDicT['NP'] + 1
+            studentInfo = {"studentName":y.student_name_first+' '+y.student_name_last, "participation": pDicT}
+            students.append(studentInfo)
+        clssSummary.append({"className":x.class_name,"classID":str(x.id), "studentsInfo": students})
+    response = JsonResponse(json.dumps(clssSummary), safe=False, status=201)
+    return response
+
+
 
 @csrf_exempt
 @api_view(["POST"])
@@ -59,7 +86,7 @@ def studentList(request):
     studentNames = []
     for x in classlist:
         studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":str(x.id)})
-    response = JsonResponse( json.dumps(studentNames), safe=False, status=201)
+    response = JsonResponse(json.dumps(studentNames), safe=False, status=201)
     return response
 
 @csrf_exempt
