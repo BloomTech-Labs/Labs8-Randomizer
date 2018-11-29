@@ -1,6 +1,6 @@
 import React from 'react';
 import config from './config';
-import GoogleLogin from 'react-google-login';
+import {GoogleLogin} from 'react-google-login';
 import axios from 'axios';
 const API_KEY = 'iVDX47CeAHhcH0bhgbXIQBCw';
 
@@ -25,35 +25,14 @@ class GoogleApi extends React.Component {
 
   constructor(){
     super()
-    this.state = {
-      gapiReady: true
-    }
   }
-
-responseGoogle = response => {
-  const username = response.profileObj.name
-  const email = response.profileObj.email
-  console.log('here', username, email)
-  axios.post('http://localhost:8000/api/tokenregister', {username:username, email:email})
-
-  .then (res => {
-    const token = res.data.key;
-
-        localStorage.setItem('jwt', token);
-        this.props.history.push('/Classes');
-      })
-  .catch(err => {
-        console.log('error')
-      })
-}
-
     render() {
        return (
          <GoogleLogin
            clientId="559144659158-uck7lvea9deivqvp99bo3bfifsdips4a.apps.googleusercontent.com"
-           buttonText="Login"
-           onSuccess={this.responseGoogle}
-           onFailure={this.responseGoogle}
+           onSuccess={this.props.responseGoogle}
+           onFailure={this.props.responseGoogle}
+           theme='dark'
          />
        );
   }

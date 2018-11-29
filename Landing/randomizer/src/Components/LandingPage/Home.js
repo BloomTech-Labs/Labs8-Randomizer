@@ -2,13 +2,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-
+import axios from 'axios';
 // Icons
 // import Gearicon from '@material-ui/icons/Settings';
 
 // Imports
 import Login from '../Login/Login';
-
+import GoogleApi from '../GoogleApi/GoogleApi';
 // Stylings
 const Homediv = styled.div`
 width: 500px;
@@ -83,18 +83,34 @@ class Home extends Component {
       toggleCoolness = () => {
         this.setState({ isCool: !this.state.isCool })
       }
+   responseGoogle = response => {
+       const username = response.profileObj.name
+       const email = response.profileObj.email
+       console.log('here', username, email)
+       axios.post('http://localhost:8000/api/tokenregister', {username:username, email:email})
+
+       .then (res => {
+         const token = res.data.key;
+
+             localStorage.setItem('jwt', token);
+             this.props.history.push('/Classes');
+           })
+       .catch(err => {
+             console.log('error')
+           })
+     }
 
     render() {
         const {isCool} = this.state;
         return (
             <Homediv>
-                
+
                 <Welcomer >Welcome to Randomizer </Welcomer>
                 <Welcomer2>The modern way to track classroom participation</Welcomer2>
-              
+
                <Link to='/Signup'>
                 <Signup>Sign Up
-                    
+
                 </Signup>
                 </Link>
 
@@ -107,7 +123,10 @@ class Home extends Component {
                     )}
                 </Signin>
                 </Link>
-    
+                <div>
+                  <GoogleApi responseGoogle={this.responseGoogle} theme='dark'/>
+                </div>
+
             </Homediv>
         )
     }
