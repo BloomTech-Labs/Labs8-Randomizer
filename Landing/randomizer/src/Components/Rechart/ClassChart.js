@@ -4,34 +4,38 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'rec
 
  const Chartprop = props => {
 
-    let nameList = props.students;
-    const dataBox = [];
     
+    const dataBox = [];
+    const Namearray= [];
     const dataList = () => {
-      nameList.map(name => {
+      props.Rates.map((stats, index) => {
+        
         let obj = {
-          name: `${name.name}`,
-          Participated: name.height,
-          Declined: name.mass,
-          amt: Math.floor(Math.random() * 2000)
+          
+          Participated: stats['P'],
+          name: `${props.Dates[index]}`,
+          Declined: stats['NP'],
         }
         dataBox.push(obj)
       })
       return dataBox;
     }
-
+  
+    
+   
      return  (
      
         <div>
-        <BarChart width={900} height={300} data={dataList()} style={{margin: '3rem auto 2rem'}}
+        <BarChart width={400} height={300} data={dataList()}  style={{margin: '3rem auto 2rem'}}
   margin={{top: 5, right: 30, left: 20, bottom: 5}} >
   <XAxis dataKey="name"/>
-  <YAxis/>
+    
+  <YAxis domain={10}/>
   <CartesianGrid />
   <Tooltip/>
   <Legend />
-  <Bar dataKey="Participated" fill="#8884d8" />
-  <Bar dataKey="Declined" fill="#82ca9d" />
+  <Bar dataKey="Participated" fill="Green" />
+  <Bar dataKey="Declined" fill="Red" />
 </BarChart>
         
     </div>

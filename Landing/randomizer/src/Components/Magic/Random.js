@@ -1,12 +1,12 @@
 // Libraries
 import React, {Component} from 'react';
-
+import axios from 'axios';
 import styled from 'styled-components';
 
 
 // Components
 import Chart from '../Rechart/Charts';
-
+import StudentChart from '../Rechart/StudentChart';
 const Outmostbox = styled.div`
 font-family:'Raleway', sans-serif;
 display: flex;
@@ -137,18 +137,104 @@ background-color:#2fd1df;
 color: white;
 font-size: 36px;
 border: none;
+z-index: +1;
 `
+
 class Magic extends Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
+      this.child = React.createRef();
       this.state={
-          studentname: "Student name",
-          classinfo: "Class info"
+          studentnamearray: [],
+          classinfo: "Class info",
+          Student: '',
+          PartRates: [],
+          Dates: [],
+          P: 0,
+          NP: 0
       }
     }
+
+    componentDidMount() {
+        this.handleClass()
+        localStorage.clear();
+    }
+
+    handleClass = e => {
+            
+        axios
+          .post('http://localhost:8000/clss/list_students', {classID:"bab9e1ac-90b8-48ce-b5b9-c08f73f62774"})
+
+          .then(res => {
+            
+            var students = JSON.parse(res.data)   
+            console.log('typetest', students[0]['fullName'])
+            students.map(name => {
+            this.state.studentnamearray.push(name)
+               console.log('studentarray',this.state.studentnamearray)
+            })
+            console.log('handleclass')
+            console.log('classP', this.state.P)
+          })
+          
+          .catch(err => {
+            
+          });
+          
+      };
+
+      handleParticipationGraph = e => {
+    
+        let valid = localStorage.getItem('studentID')
+        
+        axios
+          .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+
+          .then(res => {
+            
+            
+            var myobj2 = JSON.parse(res.data)
+            // console.log('myobj2',myobj2)
+            
+            // console.log('Dates', Object.keys(myobj2))
+            // console.log('Ps and NPs',Object.values(myobj2) )
+
+            this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+            
+           
+            // console.log('PartRates', this.state.PartRates)
+            let P = 0;
+            let NP = 0;
+            this.state.PartRates.map((pnp, index) => {
+              P += pnp['P']; 
+              NP +=pnp['NP'];
+              
+            })
+            
+            this.setState({P: P, NP: NP})
+            console.log('PARTICIPATION')
+            console.log('p', this.state.P)
+            
+          })
+          
+          
+          .catch(err => {
+            
+          });
+          
+          
+      };
+
  Shufflehandler =() => {
-    console.log('Shuffled')
+    this.setState({P:0, NP:0})
+    const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
+    this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
+    localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
+     this.handleParticipationGraph();
+     console.log('SHUFFLER')
+    
  }
+ 
  Participatehandler = () => {
     console.log('Participated')
  }
@@ -165,6 +251,7 @@ class Magic extends Component {
     console.log('Reset')
  }
     render() {
+        
         return (
             
     <Outmostbox>
@@ -173,7 +260,7 @@ class Magic extends Component {
                 <Misc>{this.state.classinfo}</Misc>
             <Part onClick={this.Participatehandler}>Participated</Part>
 
-            <Welcomer>{this.state.studentname}</Welcomer>
+            <Welcomer>{this.state.Student}</Welcomer>
 
             <Dec onClick={this.Declinehandler}>Declined</Dec>
 
@@ -187,12 +274,17 @@ class Magic extends Component {
         </Mainbox>
 
         <Graphbox>
-        
-        <Chart > </Chart>
+        {this.state.Dates.map((date, index) => {
+                return(
+                
+                  
+                  <StudentChart key={index} P={this.state.P}  NP={this.state.NP}/>
+                 )
+                
+              })}
+
         </Graphbox>
-        
-            
-     </Outmostbox>
+    </Outmostbox>
             
         )
     }
