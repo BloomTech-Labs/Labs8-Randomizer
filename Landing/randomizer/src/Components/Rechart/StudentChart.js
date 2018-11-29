@@ -5,13 +5,13 @@ import {  PieChart, Pie,  Cell} from 'recharts';
 
  const StudentChart= props => {
      
-const data = [{ value: parseInt(props.numbers[0])}, {name: 'Group B', value: parseInt(props.numbers[1])},];
+const data = [{ value: parseInt(props.P) }, { value: parseInt(props.NP)},];
 
-const COLORS = ['#ec1111', '#0ee77b', '#FFBB28', '#FF8042'];
+
+const COLORS = [ '#0ee77b','#ec1111', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
-console.log('props',props.numbers)
-console.log('1', props.numbers[0])
+
 
 const Homediv = styled.div`
 margin-right: 30px;
@@ -27,6 +27,7 @@ align-items: center;
          <Homediv>
         <PieChart width={215} height={400}>
         <Pie
+        dataKey={null}
           data={data} 
           cx={120} 
           cy={200} 
@@ -36,7 +37,7 @@ align-items: center;
           paddingAngle={5}
         >
         	{
-          	data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+          	data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
           }
         </Pie>
    

@@ -1,8 +1,8 @@
 //Libraries
 import React, {Component} from 'react';
 import styled from 'styled-components';
-
-
+import axios from 'axios'
+;
 // Components
 import Chartprop from './ClassChart';
 import StudentChart from './StudentChart';
@@ -10,13 +10,27 @@ import StudentChart from './StudentChart';
 
 const Homediv = styled.div`
 width: 500px;
-height: 300px;
+height: 250px;
 background-color: none;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
 border-radius: 4px;
 align-items: center;
+flex-direction: column;
+margin-top: 100px;
+`
+const Declined = styled.h1`
+color: #ec1111;
+position: absolute;
+
+z-index: +1;
+margin-bottom: 100px;
+`
+const Participated = styled.h1`
+color: #0ee77b;
+position: absolute;
+margin-top: 115px;
 `
 
 
@@ -24,55 +38,41 @@ class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            mass: [],
-            height: [],
-            starwarsChars: [],
-            names: [],
+            PartRates: [],
+            Dates: [],
+            P: 0,
+            NP: 0
            
         }
     }
-    componentDidMount() {
-        this.getCharacters('https://swapi.co/api/people/');
-      }
+    // componentDidMount() {
+    //     this.handleSubmitter()
+    //   }
+      // componentDidUpdate() {
+      //   this.handleSubmitter()
+      // }
+
+
+      
     
-      getCharacters = URL => {
-    
-        fetch(URL)
-          .then(res => {
-            return res.json();
-          })
-          .then(data => {
-            this.setState({ starwarsChars: data.results});
-           
-            this.setState({height: this.state.starwarsChars.map((char => {
-               return char.height
-            }))})
-            this.setState({mass: this.state.starwarsChars.map((char => {
-                return char.mass
-             }))})
-             this.setState({names: this.state.starwarsChars.map((char => {
-                return char
-             }))})
-         
-            console.log('names',this.state.names)
-            console.log('mass', this.state.mass)
-          })
-          .catch(err => {
-            throw new Error(err);
-          });
-      };
+      
      
     render() {
         
         return (
             <Homediv>
-            {/* <Chartprop students={this.state.names}/> */}
-
-           
+              
+             
+              {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}></Chartprop> */}
             
-            <StudentChart numbers={this.state.mass}/>
-         
+            
+           
+            {/* <Declined> % Declined </Declined>
+            <Participated> % Participated </Participated> */}
+
+            
+            
+            
             </Homediv>
             
 
