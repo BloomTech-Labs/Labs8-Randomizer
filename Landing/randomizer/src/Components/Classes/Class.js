@@ -203,24 +203,29 @@ class Class extends Component {
     constructor() {
         super();
         this.state={
-
+          clssName: '',
+          studentList: ['']
         }
     }
 
 handleChangeFile = event => {
       let reader = new FileReader();
       const filename = event.target.files[0];
-
-    PapaParse.parse(filename,
-          {header: false, complete: function(results)
+      // this.setState({studentList: })
+    console.log(PapaParse.parse(filename,
+          {header: false, complete: (results) =>
              {
-                 console.log("Parse results:", results.data);
+                this.setState({studentList: results.data})
              }
-             });
+           }))
     };
 
     render() {
-      let studentList = fakeNames.map(item => <NameItem> <Deleteicon /> {item} </NameItem>)
+      let studentList = [];
+      for (let i = 1; i < this.state.studentList.length - 1; i++){
+        studentList.push(<NameItem key={i}> <Deleteicon /> {this.state.studentList[i]} </NameItem>)
+      }
+      console.log(this.state.studentList)
         return (
             <Editmain>
 
