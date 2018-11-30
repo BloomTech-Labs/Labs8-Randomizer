@@ -12,12 +12,13 @@ import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
 import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
-import GoogleApi from './Components/GoogleApi/GoogleApi';
 import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
 import Chart from './Components/Rechart/Charts';
 import StudentChart from './Components/Rechart/StudentChart';
 import ViewClass from './Components/ViewClass/ViewClass';
+
+
 // Icons
 // import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
@@ -71,15 +72,8 @@ transition: .3s;
 }`
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    
-  }
-  
- 
-
   render() {
-    
+
     return (
       <Background>
       <Appmain>
@@ -92,7 +86,7 @@ class App extends Component {
           </Sider>
           </Link>
 
-        
+
 
           <Link to="/Settings">
           <Sider>
@@ -137,17 +131,21 @@ class App extends Component {
        <Route exact path = '/Random' component={Magic}/>
        <Route exact path ='/Billing' component={Billing} />
        <Route exact path = '/Invoices'/>
-       <Route path = '/Google-class' component={GoogleApi} />
         <Route exact path = '/Newuser' component={Newuser}/>
         <Route exact path = '/Class' component={Class}/>
         <Route exact path = '/Chart' component={Chart}/>
         <Route exact path = '/ViewClasses' component={ViewClass}/>
+       <Route exact path = '/Newuser' component={Newuser}/>
+
+
+
+
       </Appmain>
 
-      
+
       </Background>
-    
-    
+
+
     );
   }
 }

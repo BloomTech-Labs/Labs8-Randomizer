@@ -16,6 +16,24 @@ background-color: none;
 border: none;
 width: 175px;
 height: 25px;
+background-color: #FFCAD4;
+`
+const Signin = styled.button`
+width: 200px;
+height: 60px;
+background-color: #C08497;
+cursor: pointer;
+border: none;
+border-radius: 15px 5px;
+text-decoration: none;
+color: black;
+transition: .5s;
+
+:hover {
+    background-color: #bf4068;
+    opacity: .9;
+    color: black;
+}
 `
 const LabelStyling = styled.label`
     display: block;
@@ -52,11 +70,12 @@ const SignUpSubmit = (event) => {
   })
 }
 
+
 const SignUp = () => {
     return(
         <Homediv>
             <Welcomer> Sign Up</Welcomer>
-            <Link to="/" style={{color: 'black'}}>
+            <Link to="/Classes" style={{color: 'black'}}>
             <Homeicon />
             </Link>
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
@@ -69,8 +88,7 @@ const SignUp = () => {
                 <LabelStyling htmlFor='password-confirm'> Confirm Password </LabelStyling>
                 <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
 
-                <InputStyling type="submit" value="Submit"  />
-
+                <Signin>Submit</Signin>
             </FormStyling>
         </Homediv>
 )

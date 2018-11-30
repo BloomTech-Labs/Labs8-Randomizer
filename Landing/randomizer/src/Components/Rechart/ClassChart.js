@@ -67,3 +67,4 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'rec
      )
  }
  export default Chartprop;
+

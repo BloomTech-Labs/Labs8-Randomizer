@@ -2,6 +2,9 @@
 import React, {Component} from 'react';
 
 import styled from 'styled-components';
+import axios from 'axios';
+import Deleteicon from '@material-ui/icons/Delete';
+const PapaParse = require('papaparse/papaparse.min.js');
 
 
 const Editmain = styled.div`
@@ -72,8 +75,8 @@ border: none;
 transition: .5s;
 :hover {
     background-color: #2d8630;
-    
-    
+
+
 }
 `
 const Firstlevel = styled.div`
@@ -106,8 +109,8 @@ margin-right: 15px;
 transition: .5s;
 :hover {
     background-color: #d1084c;
-    
-    
+
+
 }
 `
 const Add = styled.button`
@@ -125,7 +128,9 @@ transition: .5s;
 }
 margin-right: 10px;
 `
-const Import = styled.button`
+const Import = styled.label`
+align-items: flex-start
+display: inline-block;
 border: none;
 width: 150px;
 height: 40px;
@@ -135,21 +140,57 @@ border-radius: 10px 5px;
 color: white;
 background-color: black;
 transition: .5s;
+margin-bottom: 75px;
 :hover {
     background-color: grey;
 }
-
-
 `
+const CsvStyling = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  `
+const NameGrid = styled.div`
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+display: grid;
+grid-template-columns: repeat(4, auto);
+grid-template-rows: repeat(1, auto);
+`
+const NameItem = styled.div`
+display: flex;
+border: solid 1px pink;
+align-items: center;
+`
+
 class Class extends Component {
     constructor() {
         super();
         this.state={
-           
+          clssName: '',
+          studentList: ['']
         }
     }
-    
+
+handleChangeFile = event => {
+      const filename = event.target.files[0];
+PapaParse.parse(filename,
+          {header: false, complete: (results) =>
+             {
+                this.setState({studentList: results.data})
+             }
+           })
+    };
+
     render() {
+      let studentList = [];
+      for (let i = 1; i < this.state.studentList.length - 1; i++){
+        studentList.push(<NameItem key={i}> <Deleteicon /> {this.state.studentList[i]} </NameItem>)
+      }
         return (
             <Editmain>
 
@@ -162,18 +203,22 @@ class Class extends Component {
             <Editname type="text" placeholder="Class Name"></Editname>
             <Dec>Track Participation</Dec>
             <Part> Reset Participation</Part>
-            
+
 
             </Firstlevel>
 
             <Secondlevel>
-                
+
             <Editname type="text" placeholder="First Name"></Editname>
             <Editname type="text" placeholder="Last Name"></Editname>
             <Add> Add Student</Add>
-            <Import>Import CSV</Import>
+            <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
+            <Import htmlFor="file">Import CSV</Import>
 
             </Secondlevel>
+            <NameGrid>
+              {studentList}
+            </NameGrid>
             </Editmain>
         )
     }

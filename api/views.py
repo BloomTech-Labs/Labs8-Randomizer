@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import json
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
+
+
 @csrf_exempt
 def register(request):
     data = json.loads(request.body)
@@ -43,5 +47,25 @@ def login(request):
             response = JsonResponse({"key":str(user.auth_token)}, safe=True, status=200)
         else:
             response = JsonResponse({"error":"Unable to log in with provided credentials."}, safe=True, status=500)
+    return response
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def tokenRegister(request):
+    data = json.loads(request.body)
+    username = data['username']
+    email = data['email']
+    DNE = False
+    try:
+        user = User.objects.get(username=username)
+        response = JsonResponse({"key":str(user.auth_token)}, safe=True, status=200)
+    except User.DoesNotExist:
+        # response = JsonResponse({"error": "User not here"}, safe=True, status=500)
+        DNE = True
+    if DNE == True:
+        user = User(username=username, email=email)
+        user.save()
+        response = JsonResponse({"key":str(user.auth_token)}, safe=True, status=200)
     return response
 
