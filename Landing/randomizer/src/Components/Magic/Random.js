@@ -65,8 +65,8 @@ border: none;
 transition: .5s;
 :hover {
     background-color: #2d8630;
-    
-    
+
+
 }
 `
 
@@ -83,8 +83,8 @@ background-color: #E91E63;
 transition: .5s;
 :hover {
     background-color: #d1084c;
-    
-    
+
+
 }
 `
 const Misc = styled.p`
@@ -104,7 +104,7 @@ background-color: #F7947B;
 transition: .5s;
 :hover {
     background-color: #f0623e;
-    
+
 }
 font-size: 16px;
 `
@@ -125,7 +125,7 @@ font-size: 16px;
 
 :hover {
     background-color: #f0623e;
-    
+
 }
 `
 const Bigbutton = styled.button`
@@ -162,13 +162,13 @@ class Magic extends Component {
     }
 
     handleClass = e => {
-            
+
         axios
           .post('http://localhost:8000/clss/list_students', {classID:"bab9e1ac-90b8-48ce-b5b9-c08f73f62774"})
 
           .then(res => {
-            
-            var students = JSON.parse(res.data)   
+
+            var students = JSON.parse(res.data)
             console.log('typetest', students[0]['fullName'])
             students.map(name => {
             this.state.studentnamearray.push(name)
@@ -177,71 +177,71 @@ class Magic extends Component {
             console.log('handleclass')
             console.log('classP', this.state.P)
           })
-          
+
           .catch(err => {
-            
+
           });
-          
+
       };
 
       handleParticipationGraph = e => {
-    
+
         let valid = localStorage.getItem('studentID')
-        
+
         axios
           .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
 
           .then(res => {
-            
-            
+
+
             var myobj2 = JSON.parse(res.data)
             // console.log('myobj2',myobj2)
-            
+
             // console.log('Dates', Object.keys(myobj2))
             // console.log('Ps and NPs',Object.values(myobj2) )
 
             this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-            
-           
+
+
             // console.log('PartRates', this.state.PartRates)
             let P = 0;
             let NP = 0;
             this.state.PartRates.map((pnp, index) => {
-              P += pnp['P']; 
+              P += pnp['P'];
               NP +=pnp['NP'];
-              
+
             })
-            
+
             this.setState({P: P, NP: NP})
             console.log('PARTICIPATION')
             console.log('p', this.state.P)
-            
+
           })
-          
-          
+
+
           .catch(err => {
-            
+
           });
-          
-          
+
+
       };
 
-      
+
       Participatehandler = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"), 
-          "particpated":'True', 
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'True',
           } )
-        
+
           .then(res => {
-            
+
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('participated')
       };
@@ -251,20 +251,20 @@ class Magic extends Component {
 
 
       Declinehandler = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"), 
-          "particpated":'False', 
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'False',
           } )
-        
+
           .then(res => {
-            
+
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('declined')
       };
@@ -276,10 +276,10 @@ class Magic extends Component {
     localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
      this.handleParticipationGraph();
      console.log('SHUFFLER')
-    
+
  }
- 
- 
+
+
 
  Edithandler = () => {
     console.log('Edited')
@@ -291,47 +291,26 @@ class Magic extends Component {
     window.location.reload()
  }
     render() {
-        
+
         return (
-            
     <Outmostbox>
-
         <Secondbox>
-                <Misc>{this.state.classinfo}</Misc>
+            <Misc>{this.state.classinfo}</Misc>
             <Part onClick={this.Participatehandler}>Participated</Part>
-
             <Welcomer>{this.state.Student}</Welcomer>
-
             <Dec onClick={this.Declinehandler}>Declined</Dec>
-
             <Edit onClick={this.Edithandler}>Edit Class</Edit>
         </Secondbox>
-
         <Mainbox>
                 <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
-
                 <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
         </Mainbox>
-
-
-
-        
-
         <Graphbox>
-        {this.state.Dates.map((date, index) => {
-                return(
-                
-                  
-                  <StudentChart key={index} P={this.state.P}  NP={this.state.NP}/>
-                 )
-                
-              })}
-
+              <StudentChart P={this.state.P}  NP={this.state.NP}/>
               {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}> </Chartprop> */}
-
         </Graphbox>
     </Outmostbox>
-            
+
         )
     }
 }
