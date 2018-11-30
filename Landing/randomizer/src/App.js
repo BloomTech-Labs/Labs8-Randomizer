@@ -17,6 +17,7 @@ import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
 import Chart from './Components/Rechart/Charts';
 import StudentChart from './Components/Rechart/StudentChart';
+import ViewClass from './Components/ViewClass/ViewClass';
 // Icons
 // import Vert from '@material-ui/icons/Reorder';
 import Gearicon from '@material-ui/icons/Settings';
@@ -24,6 +25,7 @@ import Money from '@material-ui/icons/AttachMoney';
 import Homeicon from '@material-ui/icons/Home';
 import Swap from '@material-ui/icons/Shuffle';
 import Book from '@material-ui/icons/Class';
+import People from '@material-ui/icons/People';
 // Stylings
 
 const Background = styled.div`
@@ -40,6 +42,7 @@ justify-content: center;
 justify-content: space-between;
 width: 1000px;
 height: 1000px;
+flex-direction: row;
  `
 const Sidebar = styled.div`
 width: 40px;
@@ -111,9 +114,15 @@ class App extends Component {
           </Sider>
           </Link>
 
-           <Link to="/Classes">
+           <Link to="/Class">
            <Sider>
           <Book style={{fontSize: '48px'}}/>
+          </Sider>
+          </Link>
+
+           <Link to="/ViewClasses">
+           <Sider>
+          <People style={{fontSize: '48px'}}/>
           </Sider>
           </Link>
 
@@ -130,9 +139,9 @@ class App extends Component {
        <Route exact path = '/Invoices'/>
        <Route path = '/Google-class' component={GoogleApi} />
         <Route exact path = '/Newuser' component={Newuser}/>
-        <Route exact path = '/Classes' component={Class}/>
+        <Route exact path = '/Class' component={Class}/>
         <Route exact path = '/Chart' component={Chart}/>
-        
+        <Route exact path = '/ViewClasses' component={ViewClass}/>
       </Appmain>
 
       

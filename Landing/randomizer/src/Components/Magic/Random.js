@@ -7,6 +7,7 @@ import styled from 'styled-components';
 // Components
 import Chart from '../Rechart/Charts';
 import StudentChart from '../Rechart/StudentChart';
+import Chartprop from '../Rechart/ClassChart';
 const Outmostbox = styled.div`
 font-family:'Raleway', sans-serif;
 display: flex;
@@ -282,6 +283,8 @@ class Magic extends Component {
                  )
                 
               })}
+
+              {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}> </Chartprop> */}
 
         </Graphbox>
     </Outmostbox>
