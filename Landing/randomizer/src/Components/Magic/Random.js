@@ -147,8 +147,8 @@ class Magic extends Component {
       this.child = React.createRef();
       this.state={
           studentnamearray: [],
-          classinfo: "Class info",
-          Student: '',
+          classinfo: "Class",
+          Student: 'Student',
           PartRates: [],
           Dates: [],
           P: 0,
@@ -168,14 +168,17 @@ class Magic extends Component {
 
           .then(res => {
             
-            var students = JSON.parse(res.data)   
-            console.log('typetest', students[0]['fullName'])
-            students.map(name => {
+            var students = JSON.parse(res.data)  
+            console.log('res', res.data) 
+            console.log('typetest', students)
+            var newarray = students['studentNames']
+            console.log('newarr', newarray)
+            newarray.map(name => {
             this.state.studentnamearray.push(name)
                console.log('studentarray',this.state.studentnamearray)
             })
-            console.log('handleclass')
-            console.log('classP', this.state.P)
+            this.setState({classinfo: students['class_name']})
+            
           })
           
           .catch(err => {
@@ -183,7 +186,6 @@ class Magic extends Component {
           });
           
       };
-
       handleParticipationGraph = e => {
     
         let valid = localStorage.getItem('studentID')
@@ -318,14 +320,11 @@ class Magic extends Component {
         
 
         <Graphbox>
-        {this.state.Dates.map((date, index) => {
-                return(
+        
                 
                   
-                  <StudentChart key={index} P={this.state.P}  NP={this.state.NP}/>
-                 )
-                
-              })}
+                  <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+             
 
               {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}> </Chartprop> */}
 
