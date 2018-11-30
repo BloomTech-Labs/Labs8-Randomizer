@@ -1,8 +1,10 @@
 // Libraries
 import React, {Component} from 'react';
-
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+//Icons
+import Backarrow from '@material-ui/icons/ArrowBack';
 
 // Stylings
 const Homediv = styled.div`
@@ -122,7 +124,9 @@ class Login extends Component {
 
 
 
-
+                <Link to='/'>
+                <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
+                </Link>
 
                 <Welcomer>Sign In</Welcomer>
 

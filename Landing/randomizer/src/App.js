@@ -43,7 +43,7 @@ justify-content: center;
 justify-content: space-between;
 width: 1000px;
 height: 1000px;
-flex-direction: row;
+
  `
 const Sidebar = styled.div`
 width: 40px;

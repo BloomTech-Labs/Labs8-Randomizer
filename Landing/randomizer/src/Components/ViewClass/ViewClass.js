@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
 // Icons
 import Add from '@material-ui/icons/LibraryAdd';
@@ -15,6 +16,11 @@ import Chartprop from '../Rechart/ClassChart';
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
+ width: 900px;
+ height: 600px;
+ justify-content: flex-start;
+border: 3px solid cyan;
+border-radius: 5px;
 
 
  `
@@ -27,13 +33,24 @@ import Chartprop from '../Rechart/ClassChart';
  transition: .5s;
  background-color: #032323;
  color: white
+ margin-top: 5px;
+ margin-left: 5px;
  :hover {
      background-color: black;
 
  }
  `
 const H1 = styled.h1`
-color: cyan;
+color: white;
+`
+const H2 = styled.h1`
+color: black;
+position: absolute;
+margin-left: 5px;
+`
+
+const Title = styled.div`
+display: flex;
 `
 class ViewClass extends Component {
     constructor(props) {
@@ -98,20 +115,23 @@ class ViewClass extends Component {
     render() {
         
         return (
+            
+            
            <Classdiv>
+               
         
             <Flexchart Dates={this.state.info}></Flexchart>
                
                
                {/* <Chartprop  Data={this.state.info}/> */}
                
-               
+               <Link to='/Class'>
               <Addclass>
                   <Add style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
-
+             </Link>
            </Classdiv>
-
+           
         )
         
     }

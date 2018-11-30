@@ -2,9 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import axios from  'axios';
 // Icons
 import Homeicon from '@material-ui/icons/Home';
-import axios from  'axios';
+import Backarrow from '@material-ui/icons/ArrowBack';
+
 const FormStyling = styled.form`
 display: block;
 `
@@ -74,6 +76,9 @@ const SignUpSubmit = (event) => {
 const SignUp = () => {
     return(
         <Homediv>
+            <Link to='/'>
+            <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
+            </Link>
             <Welcomer> Sign Up</Welcomer>
             <Link to="/Classes" style={{color: 'black'}}>
             <Homeicon />
