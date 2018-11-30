@@ -87,7 +87,7 @@ class Home extends Component {
        const username = response.profileObj.name
        const email = response.profileObj.email
        console.log('here', username, email)
-       axios.post('http://localhost:8000/api/tokenregister', {username:username, email:email})
+       axios.post('https://labs8randomizer.herokuapp.com/api/tokenregister', {username:username, email:email})
 
        .then (res => {
          const token = res.data.key;
