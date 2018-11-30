@@ -171,8 +171,10 @@ class Class extends Component {
     constructor() {
         super();
         this.state={
-          clssName: '',
-          studentList: ['']
+          class_name: '',
+          studentList: [''],
+          lastName: '',
+          firstName: ''
         }
     }
 
@@ -185,6 +187,66 @@ PapaParse.parse(filename,
              }
            })
     };
+
+    createClass = e => {
+        
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
+              
+              
+              
+              headers: { 
+            'Authorization': 'Token 6374f12dc312afc256d2c3f52249ef5211d38913'
+            
+        }})
+        
+          .then(res => {
+            localStorage.setItem('classID',res.data.id)
+            console.log(res.data)
+          })
+          
+          .catch(err => {
+            
+          });
+          console.log('Create')
+          console.log('class',)
+      };
+
+      addStudent = e => {
+        
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/add_student',  {
+            "classID": localStorage.getItem("classID"), 
+          "firstName":this.state.firstName, 
+          "lastName":this.state.lastName} )
+        
+          .then(res => {
+            
+            
+          })
+          
+          .catch(err => {
+            
+          });
+          console.log('Create')
+          console.log('class',)
+          this.setState({class_name:''})
+      };
+
+      handleInput = e => {
+        const {value} = e.target;
+        this.setState({ class_name: value });
+      };
+      studentInput= e => {
+          const {value} = e.target;
+          this.setState({firstName: value})
+      }
+      studentInput2 = e => {
+        const {value} =e.target;
+        this.setState({lastName: value})
+      }
 
     render() {
       let studentList = [];
@@ -200,7 +262,9 @@ PapaParse.parse(filename,
 
             <Firstlevel>
 
-            <Editname type="text" placeholder="Class Name"></Editname>
+            <Editname type="text" placeholder="Class Name" onChange={this.handleInput}
+            value={this.state.class_name}></Editname>
+            <Dec onClick={this.createClass}>Create a Class</Dec>
             <Dec>Track Participation</Dec>
             <Part> Reset Participation</Part>
 
@@ -209,9 +273,11 @@ PapaParse.parse(filename,
 
             <Secondlevel>
 
-            <Editname type="text" placeholder="First Name"></Editname>
-            <Editname type="text" placeholder="Last Name"></Editname>
-            <Add> Add Student</Add>
+            <Editname type="text" placeholder="First Name" onChange={this.studentInput}
+            value={this.state.firstName}></Editname>
+            <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}
+            value={this.state.lastName}></Editname>
+            <Add onClick={this.addStudent}> Add Student</Add>
             <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
             <Import htmlFor="file">Import CSV</Import>
 

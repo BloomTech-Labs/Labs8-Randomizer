@@ -226,6 +226,49 @@ class Magic extends Component {
           
       };
 
+      
+      Participatehandler = e => {
+        
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/participate',  {
+            "studentID": localStorage.getItem("studentID"), 
+          "particpated":'True', 
+          } )
+        
+          .then(res => {
+            
+          })
+          
+          .catch(err => {
+            
+          });
+          console.log('participated')
+      };
+
+
+
+
+
+      Declinehandler = e => {
+        
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/participate',  {
+            "studentID": localStorage.getItem("studentID"), 
+          "particpated":'False', 
+          } )
+        
+          .then(res => {
+            
+          })
+          
+          .catch(err => {
+            
+          });
+          console.log('declined')
+      };
+
  Shufflehandler =() => {
     this.setState({P:0, NP:0})
     const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
@@ -236,13 +279,7 @@ class Magic extends Component {
     
  }
  
- Participatehandler = () => {
-    console.log('Participated')
- }
-
- Declinehandler = () => {
-    console.log('Declined')
- }
+ 
 
  Edithandler = () => {
     console.log('Edited')
@@ -275,6 +312,10 @@ class Magic extends Component {
 
                 <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
         </Mainbox>
+
+
+
+        
 
         <Graphbox>
         {this.state.Dates.map((date, index) => {
