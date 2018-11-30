@@ -14,7 +14,7 @@ display: flex;
 justify-content: center;
 width: 900px;
 border: 1px solid red;
-height: 750px;
+height: 500px;
 border: 10px solid #E2E4F6;
 border-radius: 5px;
 background-color: white;
@@ -246,10 +246,12 @@ class Magic extends Component {
 
  Edithandler = () => {
     console.log('Edited')
+    this.props.history.push('/Class')
  }
 
  Resethandler = () => {
     console.log('Reset')
+    window.location.reload()
  }
     render() {
         
@@ -265,7 +267,7 @@ class Magic extends Component {
 
             <Dec onClick={this.Declinehandler}>Declined</Dec>
 
-            <Edit onClick={this.Edithandler}>Edit</Edit>
+            <Edit onClick={this.Edithandler}>Edit Class</Edit>
         </Secondbox>
 
         <Mainbox>
