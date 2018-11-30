@@ -172,7 +172,7 @@ class Class extends Component {
         super();
         this.state={
           class_name: '',
-          studentList: [''],
+          studentList: ['', 'Joe bob', 'Sally Mae', 'Jordan Michael', ''],
           lastName: '',
           firstName: ''
         }
@@ -189,46 +189,46 @@ PapaParse.parse(filename,
     };
 
     createClass = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
-              
-              
-              
-              headers: { 
+
+
+
+              headers: {
             'Authorization': 'Token 6374f12dc312afc256d2c3f52249ef5211d38913'
-            
+
         }})
-        
+
           .then(res => {
             localStorage.setItem('classID',res.data.id)
             console.log(res.data)
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('Create')
           console.log('class',)
       };
 
       addStudent = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/add_student',  {
-            "classID": localStorage.getItem("classID"), 
-          "firstName":this.state.firstName, 
+            "classID": localStorage.getItem("classID"),
+          "firstName":this.state.firstName,
           "lastName":this.state.lastName} )
-        
+
           .then(res => {
-            
-            
+
+
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('Create')
           console.log('class',)
