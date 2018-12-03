@@ -4,8 +4,10 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Deleteicon from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/Tooltip';
 import AlertDialog from './AlertDialog';
 import ResetDialog from './ResetDialog';
+
 const PapaParse = require('papaparse/papaparse.min.js');
 
 
@@ -82,11 +84,12 @@ const Firstlevel = styled.div`
   justify-content: right;
 `
 const Secondlevel = styled.div`
+  vertical-align: baseline;
   width: 1000px;
   height: 80px;
   justify-content: center;
   flex-direction: row;
-  justify-content: right;
+  align-items:center;
 `
 const Dec = styled.button`
   font-size: 16px;
@@ -120,29 +123,25 @@ const Add = styled.button`
   margin-right: 10px;
 `
 const Import = styled.label`
-  align-items: flex-start
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 10px;
   display: inline-block;
   border: none;
   width: 150px;
-  height: 40px;
+  height: 30px;
   text-decoration: none;
   cursor: pointer;
   border-radius: 10px 5px;
   color: white;
   background-color: black;
   transition: .5s;
-  margin-bottom: 75px;
   :hover {
       background-color: grey;
   }
 `
 const CsvStyling = styled.input`
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  display: none;
   `
 const NameGrid = styled.div`
   width: 100%;
@@ -162,7 +161,7 @@ class Class extends Component {
         super();
         this.state={
           class_name: '',
-          studentList: ['', 'Joe bob', 'Sally Mae', 'Jordan Michael', ''],
+          studentList: ['', 'Joe bob', 'Sally Mae', 'Jordan Michael'],
           lastName: '',
           firstName: '',
           alertOpen: false,
@@ -183,11 +182,12 @@ PapaParse.parse(filename,
                 })
                 .then(res => {console.log(res)})
                 .catch(err => {console.log(err)})
-             }
+             },
+             skipEmptyLines: true,
            })
          };
 
-    createClass = e => {
+createClass = e => {
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
@@ -248,7 +248,7 @@ handleClose = (dialog) => {
 };
     render() {
       let studentList = [];
-      for (let i = 1; i < this.state.studentList.length - 1; i++){
+      for (let i = 1; i < this.state.studentList.length; i++){
         studentList.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]}`)}/> {this.state.studentList[i]} </NameItem>)
       }
         return (
@@ -269,8 +269,10 @@ handleClose = (dialog) => {
                 <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}
                 value={this.state.lastName}></Editname>
                 <Add onClick={this.addStudent}> Add Student</Add>
+                <Tooltip title="Csv format: Class name on first row, one student per row" placement="top">
+                  <Import htmlFor="file">Import CSV</Import>
+                </Tooltip>
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
-                <Import htmlFor="file">Import CSV</Import>
               </Secondlevel>
               <NameGrid>
                 {studentList}
