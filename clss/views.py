@@ -123,3 +123,40 @@ def particpationTotal(request):
             dicT['NP'] = dicT['NP']+ 1
     response = JsonResponse(json.dumps(participationDictionary), safe=False, status=201)
     return response
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def updateStudent(request):
+    data = json.loads(request.body)
+    student_new_first = data['student_name_first']
+    student_new_last = data['student_name_last']
+    studentID = data['studentID']
+    student = StudentName.objects.get(id=studentID)
+    student.student_name_first = student_new_first
+    student.student_name_last = student_new_last
+    student.save()
+    response = JsonResponse({"key":student.id}, safe=False, status=201)
+    return response
+
+@csrf_exempt
+@api_view(["DELETE"])
+@permission_classes((permissions.AllowAny,))
+def deleteStudent(request):
+    data = json.loads(request.body)
+    studentID = data['studentID']
+    print(studentID)
+    Participation.manager.filter(student=studentID).delete()
+    student = StudentName.objects.get(id=studentID)
+    print("student", student)
+    student.delete()
+    response = JsonResponse({"key": "user has been remove"}, safe=False, status=200)
+    return response
+
+
+
+
+
+
+
+
