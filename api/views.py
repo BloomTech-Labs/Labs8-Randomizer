@@ -69,3 +69,28 @@ def tokenRegister(request):
         response = JsonResponse({"key":str(user.auth_token)}, safe=True, status=200)
     return response
 
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def updateUser(request):
+    data = json.loads(request.body)
+    user = request.user
+    # print(user)
+    email = data['email']
+    password1 = data['password1']
+    password2 = data['password2']
+    try:
+        user2 = User.objects.get(username=user.username)
+        # print("are you here",user2)
+        user2.email=email
+        user2.set_password(password2)
+        user2.save()
+        response = JsonResponse({"key":str(user2.email)}, safe=True, status=200)
+    except User.DoesNotExist:
+        response = JsonResponse({"error": "User not here"}, safe=True, status=500)
+    return response
+
+
+
+
