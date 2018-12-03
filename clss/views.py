@@ -36,6 +36,33 @@ def listClass(request):
     return response
 
 @csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def csv_post(request):
+    user = request.user
+    data=json.loads(request.body)
+    studentArray = data['studentArray']
+    print('studentArray', studentArray)
+    #if class name is first entry of array
+    if data['className'] == 'Class Name' or data['className'] == '':
+        newClass = ClssName.manager.create_class(user,studentArray[0][0]) #assuming first entry is class name
+        newClass.save()
+        for i, student in enumerate(studentArray, start=2):
+            s = student[0].split()
+            newStudent = StudentName.objects.create_student(newClass.id,s[0],s[1])
+            newStudent.save()
+    else:
+        newClass = ClssName.manager.create_class(user,data['class_name'])
+        newClass.save()
+        for i, student in enumerate(studentArray, start=1):
+            s = student.split()
+            newStudent = StudentName.objects.create_student(newClass.id,s[0],s[1])
+            newStudent.save()
+    response = JsonResponse({"id":str(newClass.id)}, safe=False, status=201)
+    return response
+
+
+@csrf_exempt
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny,))
 def getEverything(request):
@@ -73,7 +100,7 @@ def createStudent(request):
     course = ClssName.manager.get(id=clssID)
     newStudent = StudentName.objects.create_student(course,first,last)
     newStudent.save()
-    response = JsonResponse({"key":str(newStudent.id)}, safe=True, status=201)
+    response = JsonResponse({"studentID":str(newStudent.id)}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -82,11 +109,14 @@ def createStudent(request):
 def studentList(request):
     data = json.loads(request.body)
     clssID = data['classID']
+    course = ClssName.manager.get(id=clssID)
+    class_name = course.class_name
     classlist = StudentName.objects.filter(enrolled=clssID) #returns a QuerySet
     studentNames = []
     for x in classlist:
         studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":str(x.id)})
-    response = JsonResponse(json.dumps(studentNames), safe=False, status=201)
+    obj = {"class_name": class_name, "studentNames":studentNames}
+    response = JsonResponse(json.dumps(obj), safe=False, status=201)
     return response
 
 @csrf_exempt
