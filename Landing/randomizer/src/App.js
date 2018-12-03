@@ -76,78 +76,55 @@ class App extends Component {
 
     return (
       <Background>
-      <Appmain>
-
-
-        <Sidebar>
-          <Link to="/">
-          <Sider>
-          <Homeicon style={{fontSize: '48px'}} />
-          </Sider>
-          </Link>
-
-
-
-          <Link to="/Settings">
-          <Sider>
-          <Gearicon style={{fontSize: '48px'}}/>
-          </Sider>
-          </Link>
-
-
-          <Link to="/Random">
-          <Sider>
-          <Swap style={{fontSize: '48px'}}/>
-          </Sider>
-          </Link>
-
-
-          <Link to="/Billing">
-           <Sider>
-          <Money style={{fontSize: '48px'}}/>
-          </Sider>
-          </Link>
-
-           <Link to="/Class">
-           <Sider>
-          <Book style={{fontSize: '48px'}}/>
-          </Sider>
-          </Link>
-
-           <Link to="/ViewClasses">
-           <Sider>
-          <People style={{fontSize: '48px'}}/>
-          </Sider>
-          </Link>
-
+        <Appmain>
+          <Sidebar>
+            <Link to="/">
+            <Sider>
+              <Homeicon style={{fontSize: '48px'}} />
+            </Sider>
+            </Link>
+            <Link to="/Settings">
+              <Sider>
+                <Gearicon style={{fontSize: '48px'}}/>
+              </Sider>
+            </Link>
+            <Link to="/Random">
+              <Sider>
+                <Swap style={{fontSize: '48px'}}/>
+              </Sider>
+            </Link>
+            <Link to="/Billing">
+              <Sider>
+                <Money style={{fontSize: '48px'}}/>
+              </Sider>
+            </Link>
+            <Link to="/Class">
+              <Sider>
+                <Book style={{fontSize: '48px'}}/>
+              </Sider>
+            </Link>
+            <Link to="/ViewClasses">
+              <Sider>
+                <People style={{fontSize: '48px'}}/>
+              </Sider>
+            </Link>
           </Sidebar>
-
-
-      <Route exact path='/' component={Home}/>
-       <Route exact path='/Signup' component={SignUp}/>
-       <Route exact path ='/Login' component={Login}/>
-       <Route exact path='/About'/>
-       <Route exact path='/Settings' component={Settings}/>
-       <Route exact path = '/Random' component={Magic}/>
-       <Route exact path ='/Billing' component={Billing} />
-       <Route exact path = '/Invoices'/>
-        <Route exact path = '/Newuser' component={Newuser}/>
-        <Route exact path = '/Class' component={Class}/>
-        <Route exact path = '/Chart' component={Chart}/>
-        <Route exact path = '/ViewClasses' component={ViewClass}/>
-       <Route exact path = '/Newuser' component={Newuser}/>
-
-
-
-
-      </Appmain>
-
-
+          <Route exact path='/' component={Home}/>
+          <Route exact path='/Signup' component={SignUp}/>
+          <Route exact path ='/Login' component={Login}/>
+          <Route exact path='/About'/>
+          <Route exact path='/Settings' component={Settings}/>
+          <Route exact path = '/Random' component={Magic}/>
+          <Route exact path ='/Billing' component={Billing} />
+          <Route exact path = '/Invoices'/>
+          <Route exact path = '/Newuser' component={Newuser}/>
+          <Route exact path = '/Class' component={Class}/>
+          <Route exact path = '/Chart' component={Chart}/>
+          <Route exact path = '/ViewClasses' component={ViewClass}/>
+          <Route exact path = '/Newuser' component={Newuser}/>
+        </Appmain>
       </Background>
-
-
     );
   }
 }
-
 export default App;
