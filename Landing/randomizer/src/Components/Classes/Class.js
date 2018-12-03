@@ -162,14 +162,21 @@ class Class extends Component {
         super();
         this.state={
           class_name: '',
-          studentList: ['', 'Joe bob', 'Sally Mae', 'Jordan Michael', ''],
+          studentList: [],
           lastName: '',
           firstName: '',
           alertOpen: false,
           alertTitle: '',
-          resetOpen: false
+          resetOpen: false,
+          studentList2: [],
         }
     }
+
+    componentDidMount() {
+      this.loadStudents()
+      this.handleDisplay()
+    }
+  
 handleChangeFile = event => {
 const filename = event.target.files[0];
 PapaParse.parse(filename,
@@ -214,12 +221,20 @@ PapaParse.parse(filename,
             "lastName":this.state.lastName
           })
           .then(res => {
+            localStorage.setItem('studentID', res.data['studentID'].toString())
+            console.log('resdata', res.data['studentID'])
+            // this.state.studentList.push({'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']})
+            this.setState({studentList: [...this.state.studentList,{'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']} ]})
           })
           .catch(err => {
           });
           console.log('Create')
           console.log('class',)
           this.setState({class_name:''})
+
+          
+          this.secondDisplay()
+          
       };
       handleInput = e => {
         const {value} = e.target;
@@ -245,12 +260,53 @@ handleClickOpen = (dialog) => {
 };
 handleClose = (dialog) => {
   this.setState({ [dialog]: false });
+
 };
+handleDisplay = e => {
+  
+      
+
+  for (let i = 0; i < this.state.studentList.length +1; i++){
+console.log('test', i)
+let s = this.state.studentList[i]
+console.log('s')
+
+    // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
+  this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem> ] })
+  }
+  
+}
+
+secondDisplay = e => {
+  
+  let inc = this.state.studentList.length 
+
+for (let i = inc; i < this.state.studentList.length +1; i++){
+console.log('test', i)
+let s = this.state.studentList[i]
+console.log('s', s)
+
+// this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
+this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem> ] })
+}
+
+}
+
+loadStudents = e => {
+  axios
+  .post('http://localhost:8000/clss/list_students', {"classID": localStorage.getItem('classID')} )
+  .then(res => {
+    console.log('loadres', res.data)
+    let son = JSON.parse(res.data)
+    console.log('son', son)
+    son['studentNames'].map(name => {
+      this.state.studentList.push(name)
+    })
+    
+  })
+}
     render() {
-      let studentList = [];
-      for (let i = 1; i < this.state.studentList.length - 1; i++){
-        studentList.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]}`)}/> {this.state.studentList[i]} </NameItem>)
-      }
+     
         return (
             <Editmain>
               <Headtag>
@@ -273,7 +329,7 @@ handleClose = (dialog) => {
                 <Import htmlFor="file">Import CSV</Import>
               </Secondlevel>
               <NameGrid>
-                {studentList}
+                {this.state.studentList2}
               </NameGrid>
               <AlertDialog open={this.state.alertOpen} title={this.state.title} handleClose={() => this.handleClose('alertOpen')} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
