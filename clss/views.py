@@ -67,12 +67,13 @@ def csv_post(request):
     user = request.user
     data=json.loads(request.body)
     studentArray = data['studentArray']
+    print('studentArray', studentArray)
     #if class name is first entry of array
     if data['className'] == 'Class Name' or data['className'] == '':
-        newClass = ClssName.manager.create_class(user,studentArray[0]) #assuming first entry is class name
+        newClass = ClssName.manager.create_class(user,studentArray[0][0]) #assuming first entry is class name
         newClass.save()
-        for i, student in enumerate(studentArray, start=1):
-            s = student.split()
+        for i, student in enumerate(studentArray, start=2):
+            s = student[0].split()
             newStudent = StudentName.objects.create_student(newClass.id,s[0],s[1])
             newStudent.save()
     else:
@@ -82,8 +83,8 @@ def csv_post(request):
             s = student.split()
             newStudent = StudentName.objects.create_student(newClass.id,s[0],s[1])
             newStudent.save()
-    response = JsonResponse({"id":str(newClass2.id)}, safe=True, status=201)
-    pass 
+    response = JsonResponse({"id":str(newClass.id)}, safe=False, status=201)
+    return response
 
 @csrf_exempt
 @api_view(["POST"])
