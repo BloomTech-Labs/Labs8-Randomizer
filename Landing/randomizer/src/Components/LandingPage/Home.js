@@ -18,6 +18,10 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 border-radius: 4px;
+@media (max-width: 400px) {
+  height: 350px;
+    
+  }
 
 `
 const Signup = styled.button`
@@ -38,6 +42,10 @@ font-size: 24px;
     opacity: .9;
     color: black;
 }
+@media (max-width: 400px) {
+    font-size: 18px;
+    width: 100px;
+  }
 `
 const Signin = styled.button`
 color: black;
@@ -56,13 +64,20 @@ font-size: 24px;
     opacity: .9;
     color: black;
 }
+@media (max-width: 400px) {
+    font-size: 18px;
+    width: 100px;
+  }
 `
 const Welcomer = styled.h1`
 font-size: 50px;
 
 color: #72CBD3;
-margin-bottom: 0px;
+
 text-align: center;
+@media (max-width: 400px) {
+    font-size: 36px;
+  }
 `
 const Welcomer2 = styled.h1`
 display: flex;
@@ -70,6 +85,10 @@ text-align: center;
 font-size: 24px;
 
 color: #72CBD3;
+@media (max-width: 400px) {
+    font-size: 18px;
+    width: 270px;
+  }
 `
 
 

@@ -15,9 +15,19 @@ display: flex;
 justify-content: center;
 border-radius: 4px;
 font-size: 26px;
+@media (max-width: 400px) {
+    flex-direction: column;
+    width: 768px;
+    height: 20px;
+}
 `
 const Welcomer = styled.h1`
-position: absolute`
+position: absolute
+@media (max-width: 400px) {
+    font-size: 48px;
+    position: static;
+    margin-left: 95px;
+  }`
 const Userenter = styled.input`
 text-decoration: none;
 width: 175px;
@@ -34,6 +44,10 @@ color: black;
         color: white;
     }
 }
+@media (max-width: 400px) {
+   margin-top: 0px;
+    position: static;
+  }
 :: placeholder {
     color: black;
 }
@@ -53,6 +67,11 @@ transition: .4s;
         color: white;
     }
 }
+@media (max-width: 400px) {
+    position: static;
+    margin-top: 5px;
+    
+  }
 :: placeholder {
     color: black;
 }
@@ -76,6 +95,11 @@ transition: .5s;
     opacity: .9;
     color: black;
 }
+@media (max-width: 400px) {
+    margin-top: 50px;
+    width: 100px;
+    height: 40px;
+  }
 `
 
 const Former = styled.form`

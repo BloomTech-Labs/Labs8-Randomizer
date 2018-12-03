@@ -12,6 +12,8 @@ import Add from '@material-ui/icons/LibraryAdd';
 import Flexchart from '../Rechart/Flexchart';
 import Chartprop from '../Rechart/ClassChart';
 
+import '../ViewClass/Add.css'
+
  const Classdiv = styled.div`
  display: flex;
  flex-direction: row;
@@ -21,7 +23,13 @@ import Chartprop from '../Rechart/ClassChart';
  justify-content: flex-start;
 border: 3px solid cyan;
 border-radius: 5px;
-
+@media (max-width: 400px) {
+    width: 200px;
+    height: 200px;
+    justify-content: center;
+    position: absolute;
+    margin-left: 100px;
+  }
 
  `
  const Addclass = styled.button`
@@ -39,14 +47,24 @@ border-radius: 5px;
      background-color: black;
 
  }
+ @media (max-width: 400px) {
+    width: 110px;
+    height: 130px;
+    font-size: 12px;
+  }
  `
 const H1 = styled.h1`
 color: white;
+@media (max-width: 400px) {
+    
+    font-size: 14px;
+  }
 `
 const H2 = styled.h1`
 color: black;
 position: absolute;
 margin-left: 5px;
+
 `
 
 const Title = styled.div`
@@ -127,7 +145,7 @@ class ViewClass extends Component {
                
                <Link to='/Class'>
               <Addclass>
-                  <Add style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
+                  <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
              </Link>
            </Classdiv>
