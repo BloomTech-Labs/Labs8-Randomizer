@@ -11,10 +11,10 @@ import Chartprop from '../Rechart/ClassChart';
 const Outmostbox = styled.div`
 font-family:'Raleway', sans-serif;
 display: flex;
-justify-content: center;
+
 width: 900px;
 border: 1px solid red;
-height: 500px;
+height: 600px;
 border: 10px solid #E2E4F6;
 border-radius: 5px;
 background-color: white;
@@ -23,15 +23,28 @@ justify-content: start;
 
 flex-direction: column;
 margin-left: 150px;
+@media (max-width: 400px) {
+    width: 200px;
+    height: 225px;
+    margin-left: 75px;
+    position: absolute;
+    justify-content: start;
+  }
 
 `
 const Secondbox = styled.div`
 display: flex;
 justify-content: center;
-justify-content: space-around;
+justify-content: space-evenly;
 width: 900px;
 
 height: 70px;
+@media (max-width: 400px) {
+    flex-direction:row;
+    width: 150px;
+    margin-left: 25px;
+    
+  }
 
 `
 const Mainbox = styled.div`
@@ -41,16 +54,22 @@ width: 900px;
 
 height: 160px;
 margin-top: 10px;
+@media (max-width: 400px) {
+   width: 200px;
+  }
 `
 
 const Graphbox = styled.div`
 display: flex;
 text-align: center;
-justify-content: center;
+justify-content: space-around;
 align-items: center;
 width: 900px;
 
 height: 200px;
+@media (max-width: 400px) {
+    width: 200px;
+  }
 `
 const Part = styled.button`
 font-size: 20px;
@@ -66,8 +85,14 @@ transition: .5s;
 :hover {
     background-color: #2d8630;
     
-    
 }
+@media (max-width: 400px) {
+    width: 75px;
+    height: 20px;
+    font-size: 12px;
+   margin-right: 10px;
+   
+  }
 `
 
 const Dec = styled.button`
@@ -86,11 +111,26 @@ transition: .5s;
     
     
 }
+@media (max-width: 400px) {
+    width: 75px;
+    height: 20px;
+    font-size: 12px;
+    
+  }
 `
 const Misc = styled.p`
+margin-left: 425px;
+@media (max-width: 400px) {
+    margin-left: 80px;
+  }
 `
 const Welcomer = styled.h1`
+margin-left: 390px;
 color: #232323;
+@media (max-width: 400px) {
+    font-size: 24px;
+    margin-left: 55px;
+  }
 `
 const Edit = styled.button`
 border: none;
@@ -102,11 +142,18 @@ border-radius: 15px 5px;
 color: #E6EBE0;
 background-color: #F7947B;
 transition: .5s;
+
 :hover {
     background-color: #f0623e;
     
 }
 font-size: 16px;
+@media (max-width: 400px) {
+    width: 75px;
+    height: 30px;
+    font-size: 12px;
+    margin-left: 245px;
+  }
 `
 
 const Reset = styled.button`
@@ -127,6 +174,13 @@ font-size: 16px;
     background-color: #f0623e;
     
 }
+@media (max-width: 400px) {
+    width: 75px;
+    height: 30px;
+    font-size: 12px;
+    position: static;
+    margin-left: 50px;
+  }
 `
 const Bigbutton = styled.button`
 width: 300px;
@@ -139,6 +193,11 @@ color: white;
 font-size: 36px;
 border: none;
 z-index: +1;
+@media (max-width: 400px) {
+    width: 150px;
+    height: 40px;
+    font-size: 12px;
+  }
 `
 
 class Magic extends Component {
@@ -297,20 +356,21 @@ class Magic extends Component {
         return (
             
     <Outmostbox>
+<Misc>{this.state.classinfo}</Misc>
 
         <Secondbox>
-                <Misc>{this.state.classinfo}</Misc>
+                
             <Part onClick={this.Participatehandler}>Participated</Part>
 
-            <Welcomer>{this.state.Student}</Welcomer>
+            
 
             <Dec onClick={this.Declinehandler}>Declined</Dec>
 
-            <Edit onClick={this.Edithandler}>Edit Class</Edit>
+            
         </Secondbox>
-
+        <Welcomer>{this.state.Student}</Welcomer>
         <Mainbox>
-                <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
+       
 
                 <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
         </Mainbox>
@@ -320,7 +380,8 @@ class Magic extends Component {
         
 
         <Graphbox>
-        
+        <Edit onClick={this.Edithandler}>Edit Class</Edit>
+                <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
                 
                   
                   <StudentChart  P={this.state.P}  NP={this.state.NP}/>

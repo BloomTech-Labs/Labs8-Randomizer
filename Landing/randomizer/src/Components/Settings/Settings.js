@@ -54,11 +54,20 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+@media (max-width: 400px) {
+  height: 370px;
+  
+}
 `
 
 const Welcomer = styled.h1`
 margin-bottom: 125px;
 color: #72CBD3;
+@media (max-width: 400px) {
+  margin-bottom: 25px;
+  text-align: center;
+  
+}
 `
 
 class Settings extends React.Component {

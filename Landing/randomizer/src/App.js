@@ -35,6 +35,11 @@ font-family:'Raleway', sans-serif;
 display: flex;
 width: 1920px;
 height: 1080px;
+
+@media (max-width: 400px) {
+  flex-direction: column;
+  width: 768px;
+}
 `
 const Appmain = styled.div`
 font-family:'Raleway', sans-serif;
@@ -43,7 +48,10 @@ justify-content: center;
 justify-content: space-between;
 width: 1000px;
 height: 1000px;
-
+@media (max-width: 400px) {
+  
+  width: 400px;
+}
  `
 const Sidebar = styled.div`
 width: 40px;
@@ -69,6 +77,10 @@ margin-bottom: 25px;
 transition: .3s;
 :hover {
   color: #F7AF9D;
+  @media (max-width: 400px) {
+    font-size: 10px;
+    
+  }
 }`
 
 class App extends Component {

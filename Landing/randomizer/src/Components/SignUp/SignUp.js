@@ -36,6 +36,14 @@ transition: .5s;
     opacity: .9;
     color: black;
 }
+@media (max-width: 400px) {
+    width: 100px;
+    height: 40px;
+    margin-left: 35px;
+
+    
+  }
+
 `
 const LabelStyling = styled.label`
     display: block;
@@ -47,10 +55,23 @@ flex-direction: column;
 display: flex;
 justify-content: center;
 align-items: center;
+
+@media (max-width: 400px) {
+    height: 240px;
+    
+    
+  }
 `
 const Welcomer = styled.h1`
 font-size: 48px;
-margin-bottom: 125px;
+margin-bottom: 25px;
+margin-right: 20px;
+
+@media (max-width: 400px) {
+    margin-bottom: 0px;
+    margin-left: 20px;
+  }
+
 `
 const SignUpSubmit = (event) => {
   event.preventDefault();
