@@ -23,6 +23,10 @@ justify-content: start;
 
 flex-direction: column;
 margin-left: 150px;
+@media (max-width: 1024px) {
+  width: 600px;
+  
+}
 @media (max-width: 400px) {
     width: 200px;
     height: 225px;
@@ -39,6 +43,10 @@ justify-content: space-evenly;
 width: 900px;
 
 height: 70px;
+@media (max-width: 1024px) {
+  
+  width: 600px;
+}
 @media (max-width: 400px) {
     flex-direction:row;
     width: 150px;
@@ -54,6 +62,10 @@ width: 900px;
 
 height: 160px;
 margin-top: 10px;
+@media (max-width: 1024px) {
+  width: 600px;
+  
+}
 @media (max-width: 400px) {
    width: 200px;
   }
@@ -67,6 +79,12 @@ align-items: center;
 width: 900px;
 
 height: 200px;
+@media (max-width: 1024px) {
+  width: 375px;
+  justify-content: start;
+
+  
+}
 @media (max-width: 400px) {
     width: 200px;
   }
@@ -120,6 +138,10 @@ transition: .5s;
 `
 const Misc = styled.p`
 margin-left: 425px;
+@media (max-width: 1024px) {
+  margin-left: 280px;
+  
+}
 @media (max-width: 400px) {
     margin-left: 80px;
   }
@@ -127,6 +149,10 @@ margin-left: 425px;
 const Welcomer = styled.h1`
 margin-left: 390px;
 color: #232323;
+@media (max-width: 1024px) {
+  margin-left: 235px;
+  
+}
 @media (max-width: 400px) {
     font-size: 24px;
     margin-left: 55px;
@@ -148,6 +174,10 @@ transition: .5s;
     
 }
 font-size: 16px;
+@media (max-width: 1024px) {
+  margin-left: 135px;
+  
+}
 @media (max-width: 400px) {
     width: 75px;
     height: 30px;
@@ -173,6 +203,10 @@ font-size: 16px;
 :hover {
     background-color: #f0623e;
     
+}
+@media (max-width: 1024px) {
+  
+  
 }
 @media (max-width: 400px) {
     width: 75px;
@@ -218,6 +252,7 @@ class Magic extends Component {
     componentDidMount() {
         this.handleClass()
         localStorage.clear();
+        
     }
 
     handleClass = e => {
@@ -232,12 +267,13 @@ class Magic extends Component {
             console.log('typetest', students)
             var newarray = students['studentNames']
             console.log('newarr', newarray)
+
             newarray.map(name => {
             this.state.studentnamearray.push(name)
                console.log('studentarray',this.state.studentnamearray)
             })
             this.setState({classinfo: students['class_name']})
-            
+            console.log('stater', this.state.studentnamearray)
           })
           
           .catch(err => {

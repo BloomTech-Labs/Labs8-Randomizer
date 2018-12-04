@@ -15,6 +15,12 @@ font-size: 26px;
 const Welcomer = styled.h1`
 position: absolute;
 color: #72CBD3;
+@media (max-width: 1024px) {
+    font-size: 36px;
+    width: 400px;
+    margin-left: 75px;
+    text-align: left;
+  }
 @media (max-width: 400px) {
    
     font-size: 36px;
@@ -24,6 +30,10 @@ color: #72CBD3;
 const Checker = styled.div`
 position: absolute;
 margin-top: 100px;
+@media (max-width: 1024px) {
+   
+    margin-top: 200px;
+  }
 @media (max-width: 400px) {
    margin-top: 200px;
   }
