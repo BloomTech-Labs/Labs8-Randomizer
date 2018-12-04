@@ -181,13 +181,24 @@ const filename = event.target.files[0];
 PapaParse.parse(filename,
           {header: false, complete: (results) =>
              {
-                this.setState({studentList: results.data})
-                axios.post('http://localhost:8000/clss/csv_post', {"className" : this.state.class_name, "studentArray": this.state.studentList}, {
+               const unnested = []
+               results.data.map( s => {unnested.push(s[0])})
+                this.setState({studentList: unnested})
+                this.setState({class_name: unnested[0]})
+                console.log("state", this.state.studentList)
+                axios.post('http://localhost:8000/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
                     "Authorization": "Token 6374f12dc312afc256d2c3f52249ef5211d38913"
                   }
                 })
-                .then(res => {console.log(res)})
+                .then(res => { 
+                  let parsed = JSON.parse(res.data)
+                  this.setState({studentList: parsed['studentArray']}, () => {
+                    console.log("state in .then", this.state.studentList)
+                    this.handleDisplay()
+                  })
+                  localStorage.setItem('classID', parsed['classID'])
+                  })
                 .catch(err => {console.log(err)})
              }
            })
@@ -264,8 +275,9 @@ handleClose = (dialog, ind) => {
   })
   .then( res => {
     this.state.studentList.splice(ind,1)
-    this.state.studentList2.splice(ind,1)
-    this.setState({studentList: this.state.studentList, studentList2: this.state.studentList2})
+    this.setState({studentList: this.state.studentList, studentList2: [] },() => {
+      this.handleDisplay()
+    })
     
   }
   )
@@ -273,18 +285,13 @@ handleClose = (dialog, ind) => {
 
 };
 handleDisplay = e => {
-  
-      
-
-  for (let i = 0; i < this.state.studentList.length; i++){
-let s = this.state.studentList[i]
-let t = s['fullName']
-//let studentid = s['studentID']
+for (let i = 0; i < this.state.studentList.length; i++){
+  let s = this.state.studentList[i]
+  let t = s['fullName']
 console.log('t', t)
-
-    // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
-  this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t} </NameItem> ] })
-  }
+  this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t} </NameItem> )
+  this.setState({studentList2: this.state.studentList2})
+}
   console.log('sL2', this.state.studentList2)
 }
 
@@ -295,9 +302,9 @@ for (let i = inc; i < this.state.studentList.length; i++){
 console.log('test', i)
 let s = this.state.studentList[i]
 console.log('s', s)
-
 // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
 this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']} </NameItem> ] })
+console.log('loop state', this.state.studentList2)
 }
 
 }
