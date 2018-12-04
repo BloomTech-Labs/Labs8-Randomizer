@@ -12,5 +12,6 @@ urlpatterns = [
     url('get_everything', views.getEverything),
     url('updatestudent', views.updateStudent),
     url('deletestudent', views.deleteStudent),
+    url('csv_post', views.csv_post),
 
 ]
