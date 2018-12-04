@@ -15,7 +15,6 @@ import Billing from './Components/Billing/billing';
 import Newuser from './Components/Randomuser/Newuser';
 import Class from './Components/Classes/Class';
 import Chart from './Components/Rechart/Charts';
-import StudentChart from './Components/Rechart/StudentChart';
 import ViewClass from './Components/ViewClass/ViewClass';
 
 
@@ -49,7 +48,7 @@ justify-content: space-between;
 width: 1000px;
 height: 1000px;
 @media (max-width: 400px) {
-  
+
   width: 400px;
 }
  `
@@ -79,7 +78,7 @@ transition: .3s;
   color: #F7AF9D;
   @media (max-width: 400px) {
     font-size: 10px;
-    
+
   }
 }`
 

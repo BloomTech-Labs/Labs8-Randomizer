@@ -1,11 +1,7 @@
 //Libraries
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
-;
 // Components
-import Chartprop from './ClassChart';
-import StudentChart from './StudentChart';
 
 
 const Homediv = styled.div`
@@ -42,7 +38,7 @@ class Chart extends Component {
             Dates: [],
             P: 0,
             NP: 0
-           
+
         }
     }
     // componentDidMount() {
@@ -53,31 +49,31 @@ class Chart extends Component {
       // }
 
 
-      
-    
-      
-     
+
+
+
+
     render() {
-        
+
         return (
             <Homediv>
-              
-             
+
+
               {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}></Chartprop> */}
-            
-            
-           
+
+
+
             {/* <Declined> % Declined </Declined>
             <Participated> % Participated </Participated> */}
 
-            
-            
-            
+
+
+
             </Homediv>
-            
+
 
         )
-        
+
     }
 }
 export default Chart;

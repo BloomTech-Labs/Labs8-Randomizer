@@ -6,6 +6,9 @@ import axios from 'axios';
 import Deleteicon from '@material-ui/icons/Delete';
 import AlertDialog from './AlertDialog';
 import ResetDialog from './ResetDialog';
+import EditDialog from './EditDialog';
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
 const PapaParse = require('papaparse/papaparse.min.js');
 
 
@@ -82,11 +85,12 @@ const Firstlevel = styled.div`
   justify-content: right;
 `
 const Secondlevel = styled.div`
+  vertical-align: baseline;
   width: 1000px;
   height: 80px;
   justify-content: center;
   flex-direction: row;
-  justify-content: right;
+  align-items:center;
 `
 const Dec = styled.button`
   font-size: 16px;
@@ -120,29 +124,25 @@ const Add = styled.button`
   margin-right: 10px;
 `
 const Import = styled.label`
-  align-items: flex-start
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 10px;
   display: inline-block;
   border: none;
   width: 150px;
-  height: 40px;
+  height: 30px;
   text-decoration: none;
   cursor: pointer;
   border-radius: 10px 5px;
   color: white;
   background-color: black;
   transition: .5s;
-  margin-bottom: 75px;
   :hover {
       background-color: grey;
   }
 `
 const CsvStyling = styled.input`
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  display: none;
   `
 const NameGrid = styled.div`
   width: 100%;
@@ -156,26 +156,24 @@ const NameItem = styled.div`
   display: flex;
   border: solid 1px pink;
   align-items: center;
+  justify-content: space-between;
 `
 class Class extends Component {
     constructor() {
         super();
         this.state={
           class_name: '',
-          studentList: [],
+          studentList: ['', 'Joe bob', 'Sally Mae', 'Jordan Michael'],
           lastName: '',
           firstName: '',
           alertOpen: false,
           alertTitle: '',
           resetOpen: false,
-          studentList2: [],
+          editOpen: false,
+          newName: '',
+          newLastName: ''
         }
     }
-
-    componentDidMount() {
-      this.loadStudents()      
-    }
-  
 handleChangeFile = event => {
 const filename = event.target.files[0];
 PapaParse.parse(filename,
@@ -189,12 +187,12 @@ PapaParse.parse(filename,
                 })
                 .then(res => {console.log(res)})
                 .catch(err => {console.log(err)})
-             }
+             },
+             skipEmptyLines: true,
            })
          };
 
-    createClass = e => {
-        const mail = {"class_name": this.state.class_name}
+createClass = e => {
         axios
           .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
@@ -212,23 +210,19 @@ PapaParse.parse(filename,
       };
 
       addStudent = e => {
-        const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
             "firstName":this.state.firstName,
-            "lastName":this.state.lastName,
+            "lastName":this.state.lastName
           })
           .then(res => {
-            console.log('resdata', res.data['studentID'])
-            console.log('studentlist', this.state.studentList)
-            this.setState({studentList: [...this.state.studentList,{'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
-            ()=>{this.secondDisplay()})
           })
           .catch(err => {
           });
+          console.log('Create')
+          console.log('class',)
           this.setState({class_name:''})
-    
       };
       handleInput = e => {
         const {value} = e.target;
@@ -243,82 +237,35 @@ PapaParse.parse(filename,
         this.setState({lastName: value})
       }
 
-alertDialog = (dialog, title, key) => {
+alertDialog = (dialog, title) => {
   this.setState({
     [dialog]: true,
-    title: title,
-    ind: key
+    title: title
   })
 }
 handleClickOpen = (dialog) => {
   this.setState({ [dialog]: true });
 };
-handleClose = (dialog, ind) => {
-  console.log('YO I"M  RUNNING')
-  console.log('i want the key value', ind)
-  let student = this.state.studentList[ind]
-  let studentID = student['studentID']
-  axios
-  .delete('http://localhost:8000/clss/deletestudent',{
-  data: {"studentID": studentID.toString()}
-  })
-  .then( res => {
-    this.state.studentList.splice(ind,1)
-    this.state.studentList2.splice(ind,1)
-    this.setState({studentList: this.state.studentList, studentList2: this.state.studentList2})
+handleClose = (dialog) => {
+  if(this.state.newName || this.state.newLastName){
     
   }
-  )
-  this.setState({ [dialog]: false });
-
+  this.setState({ [dialog]: false, newName: '', newLastName: ''}, () => {this.state.newName ? console.log('yes') : console.log ('no')});
 };
-handleDisplay = e => {
-  
-      
-
-  for (let i = 0; i < this.state.studentList.length; i++){
-let s = this.state.studentList[i]
-let t = s['fullName']
-//let studentid = s['studentID']
-console.log('t', t)
-
-    // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
-  this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t} </NameItem> ] })
-  }
-  console.log('sL2', this.state.studentList2)
-}
-
-secondDisplay = e => {
-  
-  let inc = this.state.studentList.length -1 
-for (let i = inc; i < this.state.studentList.length; i++){
-console.log('test', i)
-let s = this.state.studentList[i]
-console.log('s', s)
-
-// this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
-this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']} </NameItem> ] })
-}
-
-}
-
-loadStudents = e => {
-  axios
-  .post('http://localhost:8000/clss/list_students', {"classID": localStorage.getItem('classID')} )
-  .then(res => {
-    console.log('loadres', res.data)
-    let son = JSON.parse(res.data)
-    console.log('son', son['studentNames'])
-    if (son['studentNames'].length > 0){
-    son['studentNames'].map(name => {
-      this.state.studentList.push(name)
-    })
-    console.log('sanity check', this.state.studentList)
-  this.handleDisplay()}   
-  })
+handleNewName = (e) => {
+  this.setState({[e.target.name]: e.target.value})
 }
     render() {
-     
+      let studentList = [];
+      for (let i = 1; i < this.state.studentList.length; i++){
+        studentList.push(
+          <NameItem key={i}>
+             <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]}`)}/> {this.state.studentList[i]}
+               <Button style={{marginTop: 'auto', width: '45%'}} color="primary" onClick={() => this.alertDialog('editOpen', `${this.state.studentList[i]}`)}>
+                 Edit Name
+               </Button>
+          </NameItem>)
+      }
         return (
             <Editmain>
               <Headtag>
@@ -337,14 +284,17 @@ loadStudents = e => {
                 <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}
                 value={this.state.lastName}></Editname>
                 <Add onClick={this.addStudent}> Add Student</Add>
+                <Tooltip title="Csv format: Class name on first row, one student per row" placement="top">
+                  <Import htmlFor="file">Import CSV</Import>
+                </Tooltip>
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
-                <Import htmlFor="file">Import CSV</Import>
               </Secondlevel>
               <NameGrid>
-                {this.state.studentList2}
+                {studentList}
               </NameGrid>
-              <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
+              <AlertDialog open={this.state.alertOpen} title={this.state.title} handleClose={() => this.handleClose('alertOpen')} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
+              <EditDialog newLastName={this.state.newLastName} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} handleClose={() => this.handleClose('editOpen')} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
             </Editmain>
         )
     }
