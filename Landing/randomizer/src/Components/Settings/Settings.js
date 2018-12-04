@@ -63,6 +63,11 @@ flex-direction: column;
 const Welcomer = styled.h1`
 margin-bottom: 125px;
 color: #72CBD3;
+@media (max-width: 1024px) {
+  width: 200px;
+  margin-bottom: 25px;
+  
+}
 @media (max-width: 400px) {
   margin-bottom: 25px;
   text-align: center;
