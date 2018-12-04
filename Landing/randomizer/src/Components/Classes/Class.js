@@ -173,9 +173,9 @@ class Class extends Component {
     }
 
     componentDidMount() {
-      this.loadStudents()      
+      this.loadStudents()
     }
-  
+
 handleChangeFile = event => {
 const filename = event.target.files[0];
 PapaParse.parse(filename,
@@ -228,7 +228,7 @@ PapaParse.parse(filename,
           .catch(err => {
           });
           this.setState({class_name:''})
-    
+
       };
       handleInput = e => {
         const {value} = e.target;
@@ -266,15 +266,15 @@ handleClose = (dialog, ind) => {
     this.state.studentList.splice(ind,1)
     this.state.studentList2.splice(ind,1)
     this.setState({studentList: this.state.studentList, studentList2: this.state.studentList2})
-    
+
   }
   )
   this.setState({ [dialog]: false });
 
 };
 handleDisplay = e => {
-  
-      
+
+
 
   for (let i = 0; i < this.state.studentList.length; i++){
 let s = this.state.studentList[i]
@@ -289,8 +289,8 @@ console.log('t', t)
 }
 
 secondDisplay = e => {
-  
-  let inc = this.state.studentList.length -1 
+
+  let inc = this.state.studentList.length -1
 for (let i = inc; i < this.state.studentList.length; i++){
 console.log('test', i)
 let s = this.state.studentList[i]
@@ -314,11 +314,11 @@ loadStudents = e => {
       this.state.studentList.push(name)
     })
     console.log('sanity check', this.state.studentList)
-  this.handleDisplay()}   
+  this.handleDisplay()}
   })
 }
     render() {
-     
+
         return (
             <Editmain>
               <Headtag>
