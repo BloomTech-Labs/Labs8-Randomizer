@@ -1,7 +1,18 @@
 import React from 'react';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
+import styled from 'styled-components';
+const Declined = styled.h1`
+color: #ec1111;
+position: absolute;
 
-
+z-index: +1;
+margin-bottom: 100px;
+`
+const Participated = styled.h1`
+color: #0ee77b;
+position: absolute;
+margin-top: 115px;
+`
  const Chartprop = props => {
 
     
@@ -51,6 +62,8 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'rec
      return  (
      
         <div>
+          <Declined>% Declined</Declined>
+
         <BarChart width={400} height={300} data={dataList()}  
   margin={{top: 5, right: 5, left: 5, bottom: 5}} >
   <XAxis dataKey="name"/>
@@ -62,6 +75,7 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'rec
   <Bar dataKey="Participated" fill="Green" />
   <Bar dataKey="Declined" fill="Red" />
 </BarChart>
+<Participated>% Participated</Participated>
         
     </div>
      )

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 // Components
@@ -17,6 +17,7 @@ import Class from './Components/Classes/Class';
 import Chart from './Components/Rechart/Charts';
 import StudentChart from './Components/Rechart/StudentChart';
 import ViewClass from './Components/ViewClass/ViewClass';
+import About from './Components/About/About';
 
 
 // Icons
@@ -27,7 +28,9 @@ import Homeicon from '@material-ui/icons/Home';
 import Swap from '@material-ui/icons/Shuffle';
 import Book from '@material-ui/icons/Class';
 import People from '@material-ui/icons/People';
+import Info from '@material-ui/icons/Info';
 // Stylings
+
 
 const Background = styled.div`
 background-color: #ffffff;
@@ -35,6 +38,7 @@ font-family:'Raleway', sans-serif;
 display: flex;
 width: 1920px;
 height: 1080px;
+
 
 @media (max-width: 400px) {
   flex-direction: column;
@@ -48,10 +52,16 @@ justify-content: center;
 justify-content: space-between;
 width: 1000px;
 height: 1000px;
+@media (max-width: 1024px) {
+  
+  width: 650px;
+  
+}
 @media (max-width: 400px) {
   
   width: 400px;
 }
+
  `
 const Sidebar = styled.div`
 width: 40px;
@@ -73,8 +83,9 @@ border: none;
 cursor: pointer;
 height: 25px;
 background: none;
-margin-bottom: 25px;
+margin-bottom: 50px;
 transition: .3s;
+width: 100px;
 :hover {
   color: #F7AF9D;
   @media (max-width: 400px) {
@@ -83,6 +94,16 @@ transition: .3s;
   }
 }`
 
+const Tool = styled.h1`
+text-decoration: none;
+font-family:'Raleway', sans-serif;
+color: #F7AF9D;
+border: none;
+font-size: 16px;
+
+
+`
+
 class App extends Component {
   render() {
 
@@ -90,36 +111,62 @@ class App extends Component {
       <Background>
         <Appmain>
           <Sidebar>
+
             <Link to="/">
-            <Sider>
-              <Homeicon style={{fontSize: '48px'}} />
+            <Sider  >
+            <Tooltip title="Home" placement="right">
+              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon> 
+              </Tooltip>
+              
+              
             </Sider>
+            
             </Link>
+
             <Link to="/Settings">
               <Sider>
-                <Gearicon style={{fontSize: '48px'}}/>
+                <Tooltip title="Settings" placement="right">
+                <Gearicon tag='Settings' style={{fontSize: '48px'}}/>
+                </Tooltip>
               </Sider>
             </Link>
             <Link to="/Random">
               <Sider>
+              <Tooltip title="Randomizer" placement="right">
                 <Swap style={{fontSize: '48px'}}/>
+               </Tooltip>
               </Sider>
             </Link>
             <Link to="/Billing">
               <Sider>
+              <Tooltip title="Settings" placement="right">
                 <Money style={{fontSize: '48px'}}/>
+                </Tooltip>
               </Sider>
             </Link>
             <Link to="/Class">
               <Sider>
+              <Tooltip title="Create or Edit a Class" placement="right">
                 <Book style={{fontSize: '48px'}}/>
+                </Tooltip>
               </Sider>
             </Link>
             <Link to="/ViewClasses">
               <Sider>
+              <Tooltip title="Classes" placement="right">
                 <People style={{fontSize: '48px'}}/>
+              </Tooltip>
               </Sider>
             </Link>
+            
+            <Link to="/About">
+              <Sider>
+              <Tooltip title="About" placement="right">
+                <Info style={{fontSize: '48px'}}/>
+              </Tooltip>
+              </Sider>
+            </Link>
+
           </Sidebar>
           <Route exact path='/' component={Home}/>
           <Route exact path='/Signup' component={SignUp}/>
@@ -134,6 +181,7 @@ class App extends Component {
           <Route exact path = '/Chart' component={Chart}/>
           <Route exact path = '/ViewClasses' component={ViewClass}/>
           <Route exact path = '/Newuser' component={Newuser}/>
+          <Route exact path = '/About' component={About}/>
         </Appmain>
       </Background>
     );

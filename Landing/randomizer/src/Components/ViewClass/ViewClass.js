@@ -23,6 +23,11 @@ import '../ViewClass/Add.css'
  justify-content: flex-start;
 border: 3px solid cyan;
 border-radius: 5px;
+@media (max-width: 1024px) {
+   
+    margin-left: 100px;
+    width: 700px;
+  }
 @media (max-width: 400px) {
     width: 200px;
     height: 200px;
