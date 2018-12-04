@@ -218,6 +218,7 @@ class Magic extends Component {
     componentDidMount() {
         this.handleClass()
         localStorage.clear();
+        
     }
 
     handleClass = e => {
@@ -232,12 +233,13 @@ class Magic extends Component {
             console.log('typetest', students)
             var newarray = students['studentNames']
             console.log('newarr', newarray)
+
             newarray.map(name => {
             this.state.studentnamearray.push(name)
                console.log('studentarray',this.state.studentnamearray)
             })
             this.setState({classinfo: students['class_name']})
-            
+            console.log('stater', this.state.studentnamearray)
           })
           
           .catch(err => {
