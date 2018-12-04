@@ -14,7 +14,8 @@ function Transition(props) {
 class AlertDialog extends React.Component {
   state = {
     open: false,
-    title: ''
+    title: '',
+
   };
 
   render() {
@@ -39,6 +40,7 @@ class AlertDialog extends React.Component {
           <DialogActions>
             <Button onClick={this.props.handleClose} color="primary">
               Nevermind
+              {this.props.key}
             </Button>
             <Button onClick={this.props.handleClose} color="secondary">
               Confirm
