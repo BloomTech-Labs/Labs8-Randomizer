@@ -86,6 +86,7 @@ background: none;
 margin-bottom: 50px;
 transition: .3s;
 width: 100px;
+outline: 0;
 :hover {
   color: #F7AF9D;
   @media (max-width: 400px) {

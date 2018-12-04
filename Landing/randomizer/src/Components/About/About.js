@@ -13,7 +13,7 @@ import Emme from '../Img/emme.PNG';
 import Ray from '../Img/ray.PNG';
 const Homediv = styled.div`
 margin-left: 100px;
-
+justify-content: center;
 display: flex;
 flex-wrap: wrap;
 
@@ -57,7 +57,8 @@ display: flex;
 flex-direction: column;
 `
 const H2 = styled.h1`
-margin-left: 100px;`
+margin-left: 355px;
+font-size: 36px;`
 
 const Title = styled.p`
 

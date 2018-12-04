@@ -58,6 +58,7 @@ const Editname = styled.input`
   }
 `
 const Part = styled.button`
+outline: 0;
   font-size: 16px;
   width: 150px;
   height: 40px;
@@ -89,6 +90,7 @@ const Secondlevel = styled.div`
   justify-content: right;
 `
 const Dec = styled.button`
+outline: 0;
   font-size: 16px;
   border: none;
   width: 150px;
@@ -105,6 +107,7 @@ const Dec = styled.button`
   }
 `
 const Add = styled.button`
+outline: 0;
   border: none;
   width: 100px;
   height: 40px;

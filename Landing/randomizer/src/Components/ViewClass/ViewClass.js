@@ -38,6 +38,7 @@ border-radius: 5px;
 
  `
  const Addclass = styled.button`
+ outline: 0;
  width: 200px;
  height: 200px;
  border: none;

@@ -90,6 +90,7 @@ height: 200px;
   }
 `
 const Part = styled.button`
+outline: 0;
 font-size: 20px;
 width: 150px;
 height: 40px;
@@ -114,6 +115,7 @@ transition: .5s;
 `
 
 const Dec = styled.button`
+outline: 0;
 font-size: 20px;
 border: none;
 width: 150px;
@@ -159,6 +161,7 @@ color: #232323;
   }
 `
 const Edit = styled.button`
+outline: 0;
 border: none;
 width: 100px;
 height: 40px;
@@ -187,6 +190,7 @@ font-size: 16px;
 `
 
 const Reset = styled.button`
+outline: 0;
 border: none;
 width: 100px;
 height: 40px;
@@ -217,6 +221,7 @@ font-size: 16px;
   }
 `
 const Bigbutton = styled.button`
+outline: 0;
 width: 300px;
 height: 150px;
 text-decoration: none;
