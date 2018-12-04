@@ -147,6 +147,19 @@ def particpationTotal(request):
     response = JsonResponse(json.dumps(participationDictionary), safe=False, status=201)
     return response
 
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def updateClass(request):
+    data = json.loads(request.body)
+    class_new = data['class_name']
+    classID = data['classID']
+    class_update = ClssName.manager.get(id=classID)
+    class_update.class_name = class_new
+    class_update.save()
+    response = JsonResponse({"key":class_update.id}, safe=False, status=201)
+    return response
+
 
 @csrf_exempt
 @api_view(["POST"])
