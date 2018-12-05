@@ -76,12 +76,14 @@ justify-content: flex-start;
 `
 
 const Sider = styled.button`
+outline: 0;
+width: 30px;
 text-decoration: none;
 background-color: none;
 color: #72CBD3;
 border: none;
 cursor: pointer;
-height: 25px;
+height: 20px;
 background: none;
 margin-bottom: 50px;
 transition: .3s;
@@ -100,8 +102,6 @@ font-family:'Raleway', sans-serif;
 color: #F7AF9D;
 border: none;
 font-size: 16px;
-
-
 `
 
 class App extends Component {

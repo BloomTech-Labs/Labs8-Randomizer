@@ -78,6 +78,7 @@ transition: .4s;
 `
 
 const Signin = styled.button`
+outline: 0;
 width: 200px;
 height: 60px;
 background-color: #C08497;

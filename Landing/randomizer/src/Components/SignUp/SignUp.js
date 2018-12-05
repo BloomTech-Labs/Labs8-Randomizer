@@ -21,6 +21,7 @@ height: 25px;
 background-color: #FFCAD4;
 `
 const Signin = styled.button`
+outline: 0;
 width: 200px;
 height: 60px;
 background-color: #C08497;
