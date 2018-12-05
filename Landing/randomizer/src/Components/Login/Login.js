@@ -62,7 +62,7 @@ transition: .4s;
 @media (max-width: 400px) {
     position: static;
     margin-top: 5px;
-    
+
   }
 :: placeholder {
     color: black;
@@ -114,19 +114,20 @@ class Login extends Component {
     e.preventDefault();
 
     axios
-      .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
+      .post('http://localhost:8000/api/login', this.state)
       .then(res => {
 
         const token = res.data.key;
-
+        console.log("where is my token", token);
         localStorage.setItem('jwt', token);
-        this.props.history.push('/Random');
       })
       .catch(err => {
 
       });
     this.setState({ username: '', password: '' });
+    this.props.history.push('/Random');
   };
+
 
   handleInput = e => {
     const { name, value } = e.target;

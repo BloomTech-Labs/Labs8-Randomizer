@@ -56,7 +56,7 @@ align-items: center;
 flex-direction: column;
 @media (max-width: 400px) {
   height: 370px;
-  
+
 }
 `
 
@@ -66,12 +66,12 @@ color: #72CBD3;
 @media (max-width: 1024px) {
   width: 200px;
   margin-bottom: 25px;
-  
+
 }
 @media (max-width: 400px) {
   margin-bottom: 25px;
   text-align: center;
-  
+
 }
 `
 
@@ -111,12 +111,27 @@ verifNumber = (event) => {
     .then(this.setState({display: false}))
     .catch(err => console.log(err))
   }
+
+submitHandler = (event) => {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  console.log("what is this", data);
+  const token =localStorage.getItem('jwt').toString();
+  console.log("what what", token);
+  axios.post('http://localhost:8000/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
+  .then(res => {
+    console.log("look", res.data)
+    localStorage.setItem('user email', res.data['email'])
+  .catch(err => console.log(err))
+  })
+}
+
   render(){
     return(
       <Homediv>
         <Welcomer>Enter new Email/Password</Welcomer>
 
-        <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
+        <FormStyling className="sign-up" onSubmit={(event) => this.submitHandler(event)}>
 
           <LabelStyling htmlFor='username'> Email </LabelStyling>
           <InputStyling type='email' name='username' id='username' required='true'/>

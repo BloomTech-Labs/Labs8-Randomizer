@@ -6,8 +6,9 @@ import axios from 'axios';
 import Deleteicon from '@material-ui/icons/Delete';
 import AlertDialog from './AlertDialog';
 import ResetDialog from './ResetDialog';
+import EditDialog from './EditDialog';
+import Button from '@material-ui/core/Button';
 const PapaParse = require('papaparse/papaparse.min.js');
-
 
 const Editmain = styled.div`
   font-family:'Raleway', sans-serif;
@@ -144,6 +145,7 @@ const CsvStyling = styled.input`
 	position: absolute;
 	z-index: -1;
   `
+
 const NameGrid = styled.div`
   width: 100%;
   margin-left: auto;
@@ -156,6 +158,7 @@ const NameItem = styled.div`
   display: flex;
   border: solid 1px pink;
   align-items: center;
+  justify-content: space-between;
 `
 class Class extends Component {
     constructor() {
@@ -169,29 +172,33 @@ class Class extends Component {
           alertTitle: '',
           resetOpen: false,
           studentList2: [],
+          editOpen: false,
+          newName: '',
+          newLastName: ''
         }
     }
 
     componentDidMount() {
-      this.loadStudents()      
+      this.loadStudents()
     }
-  
+
 handleChangeFile = event => {
 const filename = event.target.files[0];
 PapaParse.parse(filename,
           {header: false, complete: (results) =>
              {
-               const unnested = []
+               const unnested = [];
+               const token =localStorage.getItem('jwt').toString();
                results.data.map( s => {unnested.push(s[0])})
                 this.setState({studentList: unnested})
                 this.setState({class_name: unnested[0]})
                 console.log("state", this.state.studentList)
                 axios.post('http://localhost:8000/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
-                    "Authorization": "Token 6374f12dc312afc256d2c3f52249ef5211d38913"
+                    'Authorization':'Token '.concat(token)
                   }
                 })
-                .then(res => { 
+                .then(res => {
                   let parsed = JSON.parse(res.data)
                   this.setState({studentList: parsed['studentArray']}, () => {
                     console.log("state in .then", this.state.studentList)
@@ -205,11 +212,12 @@ PapaParse.parse(filename,
          };
 
     createClass = e => {
-        const mail = {"class_name": this.state.class_name}
+        const mail = {"class_name": this.state.class_name};
+        const token =localStorage.getItem('jwt').toString();
         axios
           .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
-            'Authorization': 'Token 6374f12dc312afc256d2c3f52249ef5211d38913'
+            'Authorization':'Token '.concat(token)
 
         }})
           .then(res => {
@@ -233,13 +241,16 @@ PapaParse.parse(filename,
           .then(res => {
             console.log('resdata', res.data['studentID'])
             console.log('studentlist', this.state.studentList)
-            this.setState({studentList: [...this.state.studentList,{'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
+            let fullName = `${this.state.firstName} ${this.state.lastName}`;
+            console.log('fullname', fullName)
+            // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
+            this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
             ()=>{this.secondDisplay()})
           })
           .catch(err => {
           });
           this.setState({class_name:''})
-    
+
       };
       handleInput = e => {
         const {value} = e.target;
@@ -261,11 +272,18 @@ alertDialog = (dialog, title, key) => {
     ind: key
   })
 }
+editDialog = (dialog, title, key) => {
+  this.setState({
+    [dialog]: true,
+    title: title,
+    ind: key
+  })
+}
+
 handleClickOpen = (dialog) => {
   this.setState({ [dialog]: true });
 };
 handleClose = (dialog, ind) => {
-  console.log('YO I"M  RUNNING')
   console.log('i want the key value', ind)
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
@@ -278,35 +296,65 @@ handleClose = (dialog, ind) => {
     this.setState({studentList: this.state.studentList, studentList2: [] },() => {
       this.handleDisplay()
     })
-    
+
   }
   )
   this.setState({ [dialog]: false });
 
 };
-handleDisplay = e => {
-for (let i = 0; i < this.state.studentList.length; i++){
-  let s = this.state.studentList[i]
-  let t = s['fullName']
-console.log('t', t)
-  this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t} </NameItem> )
-  this.setState({studentList2: this.state.studentList2})
+handleEdit = (dialog, ind) => {
+  console.log('index', ind)
+  let student = this.state.studentList[ind]
+  let studentID = student['studentID']
+  if(this.state.newName || this.state.newLastName){
+    axios.post('http://localhost:8000/clss/updatestudent', {
+        "student_name_first": this.state.newName,
+        "student_name_last": this.state.newLastName,
+        "studentID": studentID
+    })
+    .then(res => {
+      this.state.studentList[ind]['fullName'] = `${this.state.newName} ${this.state.newLastName}`
+      this.setState({[dialog]: false, newName: '', newLastName: '', studentList: this.state.studentList, studentList2: []}, () => {this.handleDisplay()})
+    })
+  }
 }
-  console.log('sL2', this.state.studentList2)
+handleNewName = (e) => {
+  this.setState({[e.target.name]: e.target.value})
+}
+handleDisplay = e => {
+  for (let i = 0; i < this.state.studentList.length; i++){
+    let s = this.state.studentList[i]
+    let t = s['fullName']
+  console.log('t', t)
+    this.state.studentList2.push(
+      <NameItem key={i}>
+       <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t}
+         <Button style={{marginTop: 'auto', width: '45%'}} color="primary" onClick={() => this.alertDialog('editOpen', `${t}`, i)}>
+           Edit Name
+         </Button>
+       </NameItem> )
+    this.setState({studentList2: this.state.studentList2})
+  }
+    console.log('sL2', this.state.studentList2)
 }
 
 secondDisplay = e => {
-  
-  let inc = this.state.studentList.length -1 
-for (let i = inc; i < this.state.studentList.length; i++){
-console.log('test', i)
-let s = this.state.studentList[i]
-console.log('s', s)
-// this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
-this.setState({studentList2:[...this.state.studentList2,<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']} </NameItem> ] })
-console.log('loop state', this.state.studentList2)
-}
+  let inc = this.state.studentList.length -1
+  for (let i = inc; i < this.state.studentList.length; i++){
+  console.log('test', i)
+  let s = this.state.studentList[i]
+  console.log('s', s)
+  // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
+  this.setState({studentList2:[...this.state.studentList2,
+    <NameItem key={i}>
+     <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']}
+       <Button style={{marginTop: 'auto', width: '45%'}} color="primary" onClick={() => this.alertDialog('editOpen', `${this.state.studentList[i]}`, i)}>
+         Edit Name
+       </Button>
+     </NameItem> ]})
 
+  console.log('loop state', this.state.studentList2)
+  }
 }
 
 loadStudents = e => {
@@ -321,11 +369,17 @@ loadStudents = e => {
       this.state.studentList.push(name)
     })
     console.log('sanity check', this.state.studentList)
-  this.handleDisplay()}   
+  this.handleDisplay()}
   })
 }
+
+startHandler = e => {
+  this.props.history.push('/Random');
+}
+
+
+
     render() {
-     
         return (
             <Editmain>
               <Headtag>
@@ -352,7 +406,10 @@ loadStudents = e => {
               </NameGrid>
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
+              <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
+              <Dec onClick={this.startHandler}>Start Randomizer</Dec>
             </Editmain>
+
         )
     }
 }

@@ -12,10 +12,11 @@ from rest_framework import permissions
 @csrf_exempt
 def register(request):
     data = json.loads(request.body)
+    email = data['username']
     username = data['username']
     password1 = data['password1']
     password2 = data['password2']
-    user=User(username=username)
+    user=User(email=email, username=username)
     if len(username) < 3:
         response = JsonResponse({"error":"Username must be at least 3 characters."}, safe=True, status=500)
     elif len(password1) < 5:
@@ -36,10 +37,10 @@ def register(request):
 @csrf_exempt
 def login(request):
     data = json.loads(request.body)
-    username = data['username']
+    email = data['username']
     password = data['password']
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(email=email)
     except User.DoesNotExist:
         response = JsonResponse({"error":"User does not exist."}, safe=True, status=500)
     else:
@@ -81,12 +82,13 @@ def updateUser(request):
     password1 = data['password1']
     password2 = data['password2']
     try:
-        user2 = User.objects.get(username=user.username)
+        user2 = User.objects.get(email=user.email)
         # print("are you here",user2)
         user2.email=email
         user2.set_password(password2)
+        user2.username=email
         user2.save()
-        response = JsonResponse({"key":str(user2.email)}, safe=True, status=200)
+        response = JsonResponse({"email":str(user2.email)}, safe=True, status=200)
     except User.DoesNotExist:
         response = JsonResponse({"error": "User not here"}, safe=True, status=500)
     return response
