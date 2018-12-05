@@ -22,6 +22,7 @@ font-size: 26px;
 }
 `
 const Welcomer = styled.h1`
+margin-left: 10px;
 position: absolute
 @media (max-width: 400px) {
     font-size: 48px;
@@ -30,20 +31,15 @@ position: absolute
   }`
 const Userenter = styled.input`
 text-decoration: none;
-width: 175px;
-height: 25px;
+width: 200px;
+height: 30px;
 position: absolute;
-margin-top: 250px;
-background-color: #FFCAD4;
+margin-top: 150px;
+padding-left: 10px;
 border: 1px solid grey;
 transition: .4s;
 color: black;
-:hover {
-    background-color: #bf4068;
-    :: placeholder {
-        color: white;
-    }
-}
+
 @media (max-width: 400px) {
    margin-top: 0px;
     position: static;
@@ -53,20 +49,16 @@ color: black;
 }
 `
 const Passenter = styled.input`
+padding-left: 10px;
 text-decoration: none;
-width: 175px;
-height: 25px;
+width: 200px;
+height: 30px;
 position: absolute;
-margin-top: 300px;
-background-color: #FFCAD4;
+margin-top: 200px;
+
 border: 1px solid grey;
 transition: .4s;
-:hover {
-    background-color: #bf4068;
-    :: placeholder {
-        color: white;
-    }
-}
+
 @media (max-width: 400px) {
     position: static;
     margin-top: 5px;
@@ -78,22 +70,22 @@ transition: .4s;
 `
 
 const Signin = styled.button`
-width: 200px;
-height: 60px;
-background-color: #C08497;
+width: 150px;
+height: 40px;
+background-color: #00E1F5;
 cursor: pointer;
 border: none;
-border-radius: 15px 5px;
+
 text-decoration: none;
-margin-top: 350px;
+margin-top: 250px;
 position: absolute;
 color: black;
 transition: .5s;
 
 :hover {
-    background-color: #bf4068;
+    
     opacity: .9;
-    color: black;
+    color: white;
 }
 @media (max-width: 400px) {
     margin-top: 50px;

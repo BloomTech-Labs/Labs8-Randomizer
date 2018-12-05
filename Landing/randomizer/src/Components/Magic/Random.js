@@ -8,86 +8,36 @@ import styled from 'styled-components';
 import Chart from '../Rechart/Charts';
 import StudentChart from '../Rechart/StudentChart';
 import Chartprop from '../Rechart/ClassChart';
-const Outmostbox = styled.div`
-font-family:'Raleway', sans-serif;
-display: flex;
+import Class from '../Classes/Class';
 
-width: 900px;
-border: 1px solid red;
-height: 600px;
-border: 10px solid #E2E4F6;
-border-radius: 5px;
-background-color: white;
-padding-top: 15px;
+const Maindiv = styled.div`
+display: flex;
+width: 1000px;
+height: 1000px;
 justify-content: start;
-
-flex-direction: column;
-margin-left: 150px;
-@media (max-width: 1024px) {
-  width: 600px;
-
-}
-@media (max-width: 400px) {
-    width: 200px;
-    height: 225px;
-    margin-left: 75px;
-    position: absolute;
-    justify-content: start;
-  }
-
 `
-const Secondbox = styled.div`
+
+const Holderdiv = styled.div`
+height: 500px;
+width: 500px;
 display: flex;
 justify-content: center;
-justify-content: space-evenly;
-width: 900px;
 
-height: 70px;
-@media (max-width: 1024px) {
 
-  width: 600px;
-}
-@media (max-width: 400px) {
-    flex-direction:row;
-    width: 150px;
-    margin-left: 25px;
-
-  }
 
 `
-const Mainbox = styled.div`
-display: flex;
-justify-content: center;
-width: 900px;
-
-height: 160px;
-margin-top: 10px;
-@media (max-width: 1024px) {
-  width: 600px;
-
-}
-@media (max-width: 400px) {
-   width: 200px;
-  }
+const Title = styled.h1`
+font-size: 40px;
+height: 40px;
+margin-left: 50px;
 `
-
-const Graphbox = styled.div`
+const Classdiv = styled.div`
 display: flex;
-text-align: center;
-justify-content: space-around;
-align-items: center;
-width: 900px;
-
-height: 200px;
-@media (max-width: 1024px) {
-  width: 375px;
-  justify-content: start;
-
-
-}
-@media (max-width: 400px) {
-    width: 200px;
-  }
+width: 300px;
+height: 100px;
+justify-content: space-between;
+flex-direction: row;
+margin-top: 100px;
 `
 const Part = styled.button`
 font-size: 20px;
@@ -102,14 +52,14 @@ border: none;
 transition: .5s;
 :hover {
     background-color: #2d8630;
-
+    
 }
 @media (max-width: 400px) {
     width: 75px;
     height: 20px;
     font-size: 12px;
    margin-right: 10px;
-
+   
   }
 `
 
@@ -126,32 +76,33 @@ background-color: #E91E63;
 transition: .5s;
 :hover {
     background-color: #d1084c;
-
-
+    
+    
 }
 @media (max-width: 400px) {
     width: 75px;
     height: 20px;
     font-size: 12px;
-
+    
   }
 `
-const Misc = styled.p`
-margin-left: 425px;
+const Misc = styled.h1`
+
+height: 40px;
 @media (max-width: 1024px) {
   margin-left: 280px;
-
+  
 }
 @media (max-width: 400px) {
     margin-left: 80px;
   }
 `
 const Welcomer = styled.h1`
-margin-left: 390px;
+
 color: #232323;
 @media (max-width: 1024px) {
   margin-left: 235px;
-
+  
 }
 @media (max-width: 400px) {
     font-size: 24px;
@@ -171,12 +122,12 @@ transition: .5s;
 
 :hover {
     background-color: #f0623e;
-
+    
 }
 font-size: 16px;
 @media (max-width: 1024px) {
   margin-left: 135px;
-
+  
 }
 @media (max-width: 400px) {
     width: 75px;
@@ -197,16 +148,16 @@ color: #E6EBE0;
 background-color: #F7947B;
 transition: .5s;
 position: absolute;
-margin-left: 380px;
+
 font-size: 16px;
 
 :hover {
     background-color: #f0623e;
-
+    
 }
 @media (max-width: 1024px) {
-
-
+  
+  
 }
 @media (max-width: 400px) {
     width: 75px;
@@ -235,197 +186,182 @@ z-index: +1;
 `
 
 class Magic extends Component {
-    constructor(props) {
-      super(props);
-      this.child = React.createRef();
-      this.state={
-          studentnamearray: [],
-          classinfo: "Class",
-          Student: 'Student',
-          PartRates: [],
-          Dates: [],
-          P: 0,
-          NP: 0
-      }
+  constructor(props) {
+    super(props);
+    this.child = React.createRef();
+    this.state={
+        studentnamearray: [],
+        classinfo: "Class",
+        Student: 'Student',
+        PartRates: [],
+        Dates: [],
+        P: 0,
+        NP: 0
     }
+  }
 
-    componentDidMount() {
-        this.handleClass()
+  componentDidMount() {
+    this.handleClass()
 
 
-    }
+}
 
-    handleClass = e => {
-        let id= localStorage.getItem('classID')
-        axios
-          .post('http://localhost:8000/clss/list_students', {classID:id})
+handleClass = e => {
+    let id= localStorage.getItem('classID')
+    axios
+      .post('http://localhost:8000/clss/list_students', {classID:id})
 
-          .then(res => {
+      .then(res => {
 
-            var students = JSON.parse(res.data)
-            console.log('res', res.data)
-            console.log('typetest', students)
-            var newarray = students['studentNames']
-            console.log('newarr', newarray)
+        var students = JSON.parse(res.data)
+        console.log('res', res.data)
+        console.log('typetest', students)
+        var newarray = students['studentNames']
+        console.log('newarr', newarray)
 
-            newarray.map(name => {
-            this.state.studentnamearray.push(name)
-               console.log('studentarray',this.state.studentnamearray)
-            })
-            this.setState({classinfo: students['class_name']})
-            console.log('stater', this.state.studentnamearray)
-          })
+        newarray.map(name => {
+        this.state.studentnamearray.push(name)
+           console.log('studentarray',this.state.studentnamearray)
+        })
+        this.setState({classinfo: students['class_name']})
+        console.log('stater', this.state.studentnamearray)
+      })
 
-          .catch(err => {
+      .catch(err => {
 
-          });
+      });
 
-      };
-      handleParticipationGraph = e => {
+  };
+  handleParticipationGraph = e => {
 
-        let valid = localStorage.getItem('studentID')
+    let valid = localStorage.getItem('studentID')
 
-        axios
-          .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+    axios
+      .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
 
-          .then(res => {
-            var myobj2 = JSON.parse(res.data)
-            // console.log('myobj2',myobj2)
+      .then(res => {
+        var myobj2 = JSON.parse(res.data)
+        // console.log('myobj2',myobj2)
 
-            // console.log('Dates', Object.keys(myobj2))
-            // console.log('Ps and NPs',Object.values(myobj2) )
-            this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-            // console.log('PartRates', this.state.PartRates)
-            let P = 0;
-            let NP = 0;
-            this.state.PartRates.map((pnp, index) => {
-              P += pnp['P'];
-              NP +=pnp['NP'];
+        // console.log('Dates', Object.keys(myobj2))
+        // console.log('Ps and NPs',Object.values(myobj2) )
+        this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+        // console.log('PartRates', this.state.PartRates)
+        let P = 0;
+        let NP = 0;
+        this.state.PartRates.map((pnp, index) => {
+          P += pnp['P'];
+          NP +=pnp['NP'];
 
-            })
+        })
 
-            this.setState({P: P, NP: NP})
-            console.log('PARTICIPATION')
-            console.log('p', this.state.P)
+        this.setState({P: P, NP: NP})
+        console.log('PARTICIPATION')
+        console.log('p', this.state.P)
 
-          })
+      })
 
 
-          .catch(err => {
+      .catch(err => {
 
-          });
+      });
 
 
-      };
+  };
 
 
-      Participatehandler = e => {
+  Participatehandler = e => {
 
-        const mail = {"class_name": this.state.class_name}
-        axios
-          .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"),
-          "particpated":'True',
-          } )
+    const mail = {"class_name": this.state.class_name}
+    axios
+      .post('http://localhost:8000/clss/participate',  {
+        "studentID": localStorage.getItem("studentID"),
+      "particpated":'True',
+      } )
 
-          .then(res => {
-            this.handleParticipationGraph();
-          })
+      .then(res => {
+        this.handleParticipationGraph();
+      })
 
-          .catch(err => {
+      .catch(err => {
 
-          });
-          console.log('participated')
-      };
+      });
+      console.log('participated')
+  };
 
 
 
 
 
-      Declinehandler = e => {
+  Declinehandler = e => {
 
-        const mail = {"class_name": this.state.class_name}
-        axios
-          .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"),
-          "particpated":'False',
-          } )
-
-          .then(res => {
-            this.handleParticipationGraph();
-          })
-
-          .catch(err => {
-
-          });
-          console.log('declined')
-      };
-
- Shufflehandler =() => {
-    this.setState({P:0, NP:0})
-    const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
-    this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
-    localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
-     this.handleParticipationGraph();
-     console.log('SHUFFLER')
-
- }
-
-
-
- Edithandler = () => {
-    console.log('Edited')
-    localStorage.removeItem('studentID');
-    this.props.history.push('/Class')
- }
-
- Resethandler = () => {
-    console.log('Reset')
-    localStorage.removeItem('studentID');
-    window.location.reload()
- }
-    render() {
-
-        return (
-
-    <Outmostbox>
-<Misc>{this.state.classinfo}</Misc>
-
-        <Secondbox>
-
-            <Part onClick={this.Participatehandler}>Participated</Part>
-
-
-
-            <Dec onClick={this.Declinehandler}>Declined</Dec>
-
-
-        </Secondbox>
-        <Welcomer>{this.state.Student}</Welcomer>
-        <Mainbox>
-
-
-                <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
-        </Mainbox>
-
-
-
-
-
-        <Graphbox>
-        <Edit onClick={this.Edithandler}>Edit Class</Edit>
-                <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
-
-
-                  <StudentChart  P={this.state.P}  NP={this.state.NP}/>
-
-
-              {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}> </Chartprop> */}
-
-        </Graphbox>
-    </Outmostbox>
-
-        )
-    }
+    const mail = {"class_name": this.state.class_name}
+    axios
+      .post('http://localhost:8000/clss/participate',  {
+        "studentID": localStorage.getItem("studentID"),
+      "particpated":'False',
+      } )
+
+      .then(res => {
+        this.handleParticipationGraph();
+      })
+
+      .catch(err => {
+
+      });
+      console.log('declined')
+  };
+
+Shufflehandler =() => {
+this.setState({P:0, NP:0})
+const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
+this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
+localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
+ this.handleParticipationGraph();
+ console.log('SHUFFLER')
+
+}
+
+
+
+Edithandler = () => {
+console.log('Edited')
+localStorage.removeItem('studentID');
+this.props.history.push('/Class')
+}
+
+Resethandler = () => {
+console.log('Reset')
+localStorage.removeItem('studentID');
+window.location.reload()
+}
+  render() {
+
+      return (
+
+        <Maindiv>
+        <Title>Randomizer</Title>
+                      
+        
+        <Holderdiv>
+          <Classdiv>
+                      <Misc>{this.state.classinfo}</Misc>
+                      <Edit onClick={this.Edithandler}>Edit Class</Edit>
+                      <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
+           </Classdiv>          
+              
+                      <Part onClick={this.Participatehandler}>Participated</Part>
+                      <Dec onClick={this.Declinehandler}>Declined</Dec>
+                      <Welcomer>{this.state.Student}</Welcomer>
+                      <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
+                      <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+                      </Holderdiv>
+        
+                     
+                
+            </Maindiv>
+
+      )
+  }
 }
 export default Magic;

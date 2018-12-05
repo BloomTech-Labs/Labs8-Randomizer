@@ -16,41 +16,45 @@ margin-bottom: 10px;
 text-decoration: none;
 background-color: none;
 border: none;
-width: 175px;
-height: 25px;
-background-color: #FFCAD4;
+width: 200px;
+height: 30px;
+border: 1px solid black;
+:: placeholder {
+  color: black;
+}
+padding-left: 10px;
+
 `
 const Signin = styled.button`
-width: 200px;
-height: 60px;
-background-color: #C08497;
+width: 150px;
+height: 40px;
+background-color: #00E1F5;
 cursor: pointer;
 border: none;
-border-radius: 15px 5px;
+
 text-decoration: none;
+margin-left: 30px;
+position: absolute;
 color: black;
 transition: .5s;
 
 :hover {
-    background-color: #bf4068;
+    
     opacity: .9;
-    color: black;
+    color: white;
 }
 @media (max-width: 400px) {
+    margin-top: 50px;
     width: 100px;
     height: 40px;
-    margin-left: 35px;
-
-
   }
-
 `
 const LabelStyling = styled.label`
     display: block;
 `
 const Homediv = styled.div`
 width: 500px;
-height: 500px;
+height: 300px;
 flex-direction: column;
 display: flex;
 justify-content: center;
@@ -58,8 +62,8 @@ align-items: center;
 
 @media (max-width: 400px) {
     height: 240px;
-
-
+    
+    
   }
 `
 const Welcomer = styled.h1`
@@ -77,7 +81,7 @@ const SignUpSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
-  axios.post('http://localhost:8000/api/registration', {
+  axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
     'username': data.get('username'),
     'password1': data.get('password'),
     'password2': data.get('password-confirm'),
@@ -105,14 +109,14 @@ const SignUp = () => {
             <Homeicon />
             </Link>
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
-                <LabelStyling htmlFor='username'> Email </LabelStyling>
-                <InputStyling type='text' name='username' id='username' required='true'/>
+                <LabelStyling htmlFor='username'>  </LabelStyling>
+                <InputStyling type='text' name='username' id='username' placeholder='Username' required='true'/>
 
-                <LabelStyling htmlFor='password'> Password </LabelStyling>
-                <InputStyling type='password' name='password' id='password' required='true'/>
+                <LabelStyling htmlFor='password'> </LabelStyling>
+                <InputStyling type='password' name='password' id='password' placeholder='Password' required='true'/>
 
-                <LabelStyling htmlFor='password-confirm'> Confirm Password </LabelStyling>
-                <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
+                <LabelStyling htmlFor='password-confirm'> </LabelStyling>
+                <InputStyling type='password' name='password-confirm' id='password-confirm' placeholder='Confirm Password' required='true'/>
 
                 <Signin>Submit</Signin>
             </FormStyling>
