@@ -3,10 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 // Icons
-import Homeicon from '@material-ui/icons/Home';
 
 
 const FormStyling = styled.form`
@@ -56,7 +54,7 @@ align-items: center;
 flex-direction: column;
 @media (max-width: 400px) {
   height: 370px;
-  
+
 }
 `
 
@@ -66,12 +64,12 @@ color: #72CBD3;
 @media (max-width: 1024px) {
   width: 200px;
   margin-bottom: 25px;
-  
+
 }
 @media (max-width: 400px) {
   margin-bottom: 25px;
   text-align: center;
-  
+
 }
 `
 

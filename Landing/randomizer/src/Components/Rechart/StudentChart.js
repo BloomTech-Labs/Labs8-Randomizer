@@ -1,16 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {  PieChart, Pie,  Cell} from 'recharts';
 
 
  const StudentChart= props => {
-     
+
 const data = [{ value: parseInt(props.P) }, { value: parseInt(props.NP)},];
 
 
 const COLORS = [ '#0ee77b','#ec1111', '#FFBB28', '#FF8042'];
 
-const RADIAN = Math.PI / 180;
 
 
 const Homediv = styled.div`
@@ -28,11 +27,11 @@ align-items: center;
         <PieChart width={215} height={400}>
         <Pie
         dataKey={null}
-          data={data} 
-          cx={120} 
-          cy={200} 
+          data={data}
+          cx={120}
+          cy={200}
           innerRadius={60}
-          outerRadius={80} 
+          outerRadius={80}
           fill="#8884d8"
           paddingAngle={5}
         >
@@ -40,7 +39,7 @@ align-items: center;
           	data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
           }
         </Pie>
-   
+
       </PieChart>
       </Homediv>
      )

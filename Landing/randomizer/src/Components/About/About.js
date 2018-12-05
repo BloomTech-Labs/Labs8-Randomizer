@@ -1,8 +1,6 @@
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
 
 //PNGs
 import Mark from '../Img/Mark.png';
@@ -65,86 +63,85 @@ font-size: 14px;
 margin: 0px;
 `
 class Settings extends React.Component {
-  
- 
-    
-    
+
+
+
+
       render(){
         return(
             <div>
                 <H2>Developers</H2>
           <Homediv>
-              
+
 
               <Port>
-                
+
                   <Name>Nickolaus Smith</Name>
                   <Title>Front End Developer</Title>
                   <Face src={Nick}></Face>
                   <Picholder>
-                  <a href="https://github.com/NickolausSmith" target="_blank">
+                  <a href="https://github.com/NickolausSmith" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/nick-smith-9b7254167/" target="_blank">
+                  <a href="https://www.linkedin.com/in/nick-smith-9b7254167/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
 
-                  
-                      
-                  
+
+
+
               </Port>
 
               <Port>
-              
+
                   <Name>Susanna McDonald</Name>
                   <Title> Database Engineer</Title>
                   <Face src={Sus}></Face>
                     <Picholder>
-                  <a href="https://github.com/sulemc" target="_blank">
+                  <a href="https://github.com/sulemc" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/susanna-mcdonald/" target="_blank">
+                  <a href="https://www.linkedin.com/in/susanna-mcdonald/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
               </Port>
 
               <Port>
-              
+
                   <Name>Emmeline Aquino</Name>
                   <Title>Full Stack Developer</Title>
                     <Face src={Emme}></Face>
                   <Picholder>
-                  <a href="https://github.com/emaquino44" target="_blank">
+                  <a href="https://github.com/emaquino44" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/emaquino44/" target="_blank">
+                  <a href="https://www.linkedin.com/in/emaquino44/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
               </Port>
 
               <Port>
-              
+
                   <Name>Raymond Garcia</Name>
                   <Title>Front End Developer</Title>
                   <Face src={Ray}></Face>
                   <Picholder>
-                  <a href="https://github.com/Raymondgrc" target="_blank">
+                  <a href="https://github.com/Raymondgrc" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/raymondgarcia1/" target="_blank">
+                  <a href="https://www.linkedin.com/in/raymondgarcia1/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
               </Port>
-           
+
             </Homediv>
             </div>
           )
         }
       }
-    
+
     export default Settings;
-    

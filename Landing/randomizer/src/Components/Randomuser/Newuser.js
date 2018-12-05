@@ -19,11 +19,9 @@ class Newuser extends Component {
       }
     }
     componentDidMount() {
-    fetch('https://randomuser.me/api')
-    .then(results => {
+    fetch('https://randomuser.me/api').then(results => {
             return results.json();
-
-        }) .then(data => {
+        }).then(data => {
             let pictures = data.results.map((pic) => {
                 return (
                     <div key={pic.results}>
