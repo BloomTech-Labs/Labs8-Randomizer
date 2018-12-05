@@ -37,7 +37,7 @@ def register(request):
 @csrf_exempt
 def login(request):
     data = json.loads(request.body)
-    email = data['email']
+    email = data['username']
     password = data['password']
     try:
         user = User.objects.get(email=email)
