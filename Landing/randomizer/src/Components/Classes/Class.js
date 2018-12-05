@@ -145,6 +145,7 @@ const CsvStyling = styled.input`
 	position: absolute;
 	z-index: -1;
   `
+
 const NameGrid = styled.div`
   width: 100%;
   margin-left: auto;
@@ -186,14 +187,15 @@ const filename = event.target.files[0];
 PapaParse.parse(filename,
           {header: false, complete: (results) =>
              {
-               const unnested = []
+               const unnested = [];
+               const token =localStorage.getItem('jwt').toString();
                results.data.map( s => {unnested.push(s[0])})
                 this.setState({studentList: unnested})
                 this.setState({class_name: unnested[0]})
                 console.log("state", this.state.studentList)
                 axios.post('http://localhost:8000/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
-                    "Authorization": "Token 6374f12dc312afc256d2c3f52249ef5211d38913"
+                    'Authorization':'Token '.concat(token)
                   }
                 })
                 .then(res => {
@@ -210,11 +212,12 @@ PapaParse.parse(filename,
          };
 
     createClass = e => {
-        const mail = {"class_name": this.state.class_name}
+        const mail = {"class_name": this.state.class_name};
+        const token =localStorage.getItem('jwt').toString();
         axios
           .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
-            'Authorization': 'Token 6374f12dc312afc256d2c3f52249ef5211d38913'
+            'Authorization':'Token '.concat(token)
 
         }})
           .then(res => {
@@ -336,7 +339,6 @@ handleDisplay = e => {
 }
 
 secondDisplay = e => {
-
   let inc = this.state.studentList.length -1
   for (let i = inc; i < this.state.studentList.length; i++){
   console.log('test', i)
@@ -370,6 +372,13 @@ loadStudents = e => {
   this.handleDisplay()}
   })
 }
+
+startHandler = e => {
+  this.props.history.push('/Random');
+}
+
+
+
     render() {
         return (
             <Editmain>
@@ -398,7 +407,9 @@ loadStudents = e => {
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
               <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
+              <Dec onClick={this.startHandler}>Start Randomizer</Dec>
             </Editmain>
+
         )
     }
 }

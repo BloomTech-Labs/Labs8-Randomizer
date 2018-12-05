@@ -25,7 +25,7 @@ flex-direction: column;
 margin-left: 150px;
 @media (max-width: 1024px) {
   width: 600px;
-  
+
 }
 @media (max-width: 400px) {
     width: 200px;
@@ -44,14 +44,14 @@ width: 900px;
 
 height: 70px;
 @media (max-width: 1024px) {
-  
+
   width: 600px;
 }
 @media (max-width: 400px) {
     flex-direction:row;
     width: 150px;
     margin-left: 25px;
-    
+
   }
 
 `
@@ -64,7 +64,7 @@ height: 160px;
 margin-top: 10px;
 @media (max-width: 1024px) {
   width: 600px;
-  
+
 }
 @media (max-width: 400px) {
    width: 200px;
@@ -83,7 +83,7 @@ height: 200px;
   width: 375px;
   justify-content: start;
 
-  
+
 }
 @media (max-width: 400px) {
     width: 200px;
@@ -102,14 +102,14 @@ border: none;
 transition: .5s;
 :hover {
     background-color: #2d8630;
-    
+
 }
 @media (max-width: 400px) {
     width: 75px;
     height: 20px;
     font-size: 12px;
    margin-right: 10px;
-   
+
   }
 `
 
@@ -126,21 +126,21 @@ background-color: #E91E63;
 transition: .5s;
 :hover {
     background-color: #d1084c;
-    
-    
+
+
 }
 @media (max-width: 400px) {
     width: 75px;
     height: 20px;
     font-size: 12px;
-    
+
   }
 `
 const Misc = styled.p`
 margin-left: 425px;
 @media (max-width: 1024px) {
   margin-left: 280px;
-  
+
 }
 @media (max-width: 400px) {
     margin-left: 80px;
@@ -151,7 +151,7 @@ margin-left: 390px;
 color: #232323;
 @media (max-width: 1024px) {
   margin-left: 235px;
-  
+
 }
 @media (max-width: 400px) {
     font-size: 24px;
@@ -171,12 +171,12 @@ transition: .5s;
 
 :hover {
     background-color: #f0623e;
-    
+
 }
 font-size: 16px;
 @media (max-width: 1024px) {
   margin-left: 135px;
-  
+
 }
 @media (max-width: 400px) {
     width: 75px;
@@ -202,11 +202,11 @@ font-size: 16px;
 
 :hover {
     background-color: #f0623e;
-    
+
 }
 @media (max-width: 1024px) {
-  
-  
+
+
 }
 @media (max-width: 400px) {
     width: 75px;
@@ -251,19 +251,19 @@ class Magic extends Component {
 
     componentDidMount() {
         this.handleClass()
-        localStorage.clear();
-        
+
+
     }
 
     handleClass = e => {
-            
+        let id= localStorage.getItem('classID')
         axios
-          .post('http://localhost:8000/clss/list_students', {classID:"bab9e1ac-90b8-48ce-b5b9-c08f73f62774"})
+          .post('http://localhost:8000/clss/list_students', {classID:id})
 
           .then(res => {
-            
-            var students = JSON.parse(res.data)  
-            console.log('res', res.data) 
+
+            var students = JSON.parse(res.data)
+            console.log('res', res.data)
             console.log('typetest', students)
             var newarray = students['studentNames']
             console.log('newarr', newarray)
@@ -275,70 +275,65 @@ class Magic extends Component {
             this.setState({classinfo: students['class_name']})
             console.log('stater', this.state.studentnamearray)
           })
-          
+
           .catch(err => {
-            
+
           });
-          
+
       };
       handleParticipationGraph = e => {
-    
+
         let valid = localStorage.getItem('studentID')
-        
+
         axios
           .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
 
           .then(res => {
-            
-            
             var myobj2 = JSON.parse(res.data)
             // console.log('myobj2',myobj2)
-            
+
             // console.log('Dates', Object.keys(myobj2))
             // console.log('Ps and NPs',Object.values(myobj2) )
-
             this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-            
-           
             // console.log('PartRates', this.state.PartRates)
             let P = 0;
             let NP = 0;
             this.state.PartRates.map((pnp, index) => {
-              P += pnp['P']; 
+              P += pnp['P'];
               NP +=pnp['NP'];
-              
+
             })
-            
+
             this.setState({P: P, NP: NP})
             console.log('PARTICIPATION')
             console.log('p', this.state.P)
-            
+
           })
-          
-          
+
+
           .catch(err => {
-            
+
           });
-          
-          
+
+
       };
 
-      
+
       Participatehandler = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"), 
-          "particpated":'True', 
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'True',
           } )
-        
+
           .then(res => {
-            
+            this.handleParticipationGraph();
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('participated')
       };
@@ -348,20 +343,20 @@ class Magic extends Component {
 
 
       Declinehandler = e => {
-        
+
         const mail = {"class_name": this.state.class_name}
         axios
           .post('http://localhost:8000/clss/participate',  {
-            "studentID": localStorage.getItem("studentID"), 
-          "particpated":'False', 
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'False',
           } )
-        
+
           .then(res => {
-            
+            this.handleParticipationGraph();
           })
-          
+
           .catch(err => {
-            
+
           });
           console.log('declined')
       };
@@ -373,61 +368,63 @@ class Magic extends Component {
     localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
      this.handleParticipationGraph();
      console.log('SHUFFLER')
-    
+
  }
- 
- 
+
+
 
  Edithandler = () => {
     console.log('Edited')
+    localStorage.removeItem('studentID');
     this.props.history.push('/Class')
  }
 
  Resethandler = () => {
     console.log('Reset')
+    localStorage.removeItem('studentID');
     window.location.reload()
  }
     render() {
-        
+
         return (
-            
+
     <Outmostbox>
 <Misc>{this.state.classinfo}</Misc>
 
         <Secondbox>
-                
+
             <Part onClick={this.Participatehandler}>Participated</Part>
 
-            
+
 
             <Dec onClick={this.Declinehandler}>Declined</Dec>
 
-            
+
         </Secondbox>
         <Welcomer>{this.state.Student}</Welcomer>
         <Mainbox>
-       
+
 
                 <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
         </Mainbox>
 
 
 
-        
+
 
         <Graphbox>
         <Edit onClick={this.Edithandler}>Edit Class</Edit>
                 <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
-                
-                  
+
+
                   <StudentChart  P={this.state.P}  NP={this.state.NP}/>
-             
+
 
               {/* <Chartprop  Rates={this.state.PartRates} Dates={this.state.Dates}> </Chartprop> */}
 
         </Graphbox>
     </Outmostbox>
-            
+
         )
     }
 }
