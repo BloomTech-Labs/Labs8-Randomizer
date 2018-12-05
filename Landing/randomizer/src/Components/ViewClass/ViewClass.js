@@ -24,7 +24,7 @@ import '../ViewClass/Add.css'
 border: 3px solid cyan;
 border-radius: 5px;
 @media (max-width: 1024px) {
-   
+
     margin-left: 100px;
     width: 700px;
   }
@@ -61,7 +61,7 @@ border-radius: 5px;
 const H1 = styled.h1`
 color: white;
 @media (max-width: 400px) {
-    
+
     font-size: 14px;
   }
 `
@@ -90,28 +90,28 @@ class ViewClass extends Component {
     componentDidMount() {
         this.handleClass()
     }
-   
+
     handleClass = e => {
-            
+      const token =localStorage.getItem('jwt').toString();
         axios
           .get('http://localhost:8000/clss/get_everything',  {
-              headers: { 
-                  'Authorization': 'Token 6374f12dc312afc256d2c3f52249ef5211d38913'
+              headers: {
+                  'Authorization':'Token '.concat(token)
               }
           })
 
           .then(res => {
 
             console.log('resdata',res.data)
-            
-            var classes = JSON.parse(res.data)   
+
+            var classes = JSON.parse(res.data)
             console.log('typetest', typeof classes)
             classes.map(name => {
             this.state.Classarray.push(name)
-               
+
             })
             console.log('stateclass',this.state.Classarray)
-            
+
             this.state.Classarray.map(cl => {
                 this.state.classnames.push(cl['className'])
             })
@@ -125,38 +125,38 @@ class ViewClass extends Component {
             // console.log('handleclass')
             // console.log('classP', this.state.P)
           })
-          
+
           .catch(err => {
-            
+
           });
-          
+
       };
-      
-    
-      
-     
+
+
+
+
     render() {
-        
+
         return (
-            
-            
+
+
            <Classdiv>
-               
-        
+
+
             <Flexchart Dates={this.state.info}></Flexchart>
-               
-               
+
+
                {/* <Chartprop  Data={this.state.info}/> */}
-               
+
                <Link to='/Class'>
               <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
              </Link>
            </Classdiv>
-           
+
         )
-        
+
     }
 }
 export default ViewClass;
