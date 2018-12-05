@@ -11,6 +11,8 @@ urlpatterns = [
     url('participation_list', views.particpationTotal),
     url('get_everything', views.getEverything),
     url('updatestudent', views.updateStudent),
+    url('updateclass', views.updateClass),
     url('deletestudent', views.deleteStudent),
+    url('csv_post', views.csv_post),
 
 ]

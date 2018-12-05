@@ -60,7 +60,27 @@ def getEverything(request):
     response = JsonResponse(json.dumps(clssSummary), safe=False, status=201)
     return response
 
-
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
+def csv_post(request):
+    user = request.user
+    data=json.loads(request.body)
+    studentArray = data['studentArray']
+    print('studentArray', studentArray)
+    newClass = ClssName.manager.create_class(user,data['class_name'])
+    newClass.save()
+    studentNameArray = []
+    #if class name is first entry of array
+    for i, student in enumerate(studentArray[1:len(studentArray)-1]):
+        s = student.split()
+        print(s)
+        newStudent = StudentName.objects.create_student(newClass,s[0],s[1])
+        newStudent.save()
+        studentNameArray.append({"fullName":newStudent.student_name_first+' '+newStudent.student_name_last, "studentID":str(newStudent.id)})
+    obj = {"classID":str(newClass.id), "studentArray": studentNameArray}
+    response = JsonResponse(json.dumps(obj), safe=False, status=201)
+    return response
 
 @csrf_exempt
 @api_view(["POST"])
@@ -82,11 +102,14 @@ def createStudent(request):
 def studentList(request):
     data = json.loads(request.body)
     clssID = data['classID']
+    course = ClssName.manager.get(id=clssID)
+    class_name = course.class_name
     classlist = StudentName.objects.filter(enrolled=clssID) #returns a QuerySet
     studentNames = []
     for x in classlist:
         studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":str(x.id)})
-    response = JsonResponse(json.dumps(studentNames), safe=False, status=201)
+    obj = {"class_name": class_name, "studentNames":studentNames}
+    response = JsonResponse(json.dumps(obj), safe=False, status=201)
     return response
 
 @csrf_exempt
@@ -127,6 +150,20 @@ def particpationTotal(request):
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((permissions.AllowAny,))
+def updateClass(request):
+    data = json.loads(request.body)
+    class_new = data['class_name']
+    classID = data['classID']
+    class_update = ClssName.manager.get(id=classID)
+    class_update.class_name = class_new
+    class_update.save()
+    response = JsonResponse({"key":class_update.id}, safe=False, status=201)
+    return response
+
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((permissions.AllowAny,))
 def updateStudent(request):
     data = json.loads(request.body)
     student_new_first = data['student_name_first']
@@ -152,11 +189,3 @@ def deleteStudent(request):
     student.delete()
     response = JsonResponse({"key": "user has been remove"}, safe=False, status=200)
     return response
-
-
-
-
-
-
-
-
