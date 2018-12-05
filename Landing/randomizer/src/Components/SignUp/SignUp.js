@@ -41,7 +41,7 @@ transition: .5s;
     height: 40px;
     margin-left: 35px;
 
-    
+
   }
 
 `
@@ -58,8 +58,8 @@ align-items: center;
 
 @media (max-width: 400px) {
     height: 240px;
-    
-    
+
+
   }
 `
 const Welcomer = styled.h1`
@@ -77,7 +77,7 @@ const SignUpSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
   console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
-  axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
+  axios.post('http://localhost:8000/api/registration', {
     'username': data.get('username'),
     'password1': data.get('password'),
     'password2': data.get('password-confirm'),
