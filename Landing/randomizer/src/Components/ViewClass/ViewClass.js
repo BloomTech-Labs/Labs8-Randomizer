@@ -89,6 +89,9 @@ class ViewClass extends Component {
 
     componentDidMount() {
         this.handleClass()
+        if (localStorage.getItem("studentID")) {
+            localStorage.removeItem("studentID")
+          }
     }
    
     handleClass = e => {
@@ -117,6 +120,7 @@ class ViewClass extends Component {
               })
               this.state.Classarray.map(item => {
                   this.state.info.push(item)
+                  this.setState({info: this.state.info})
               })
               console.log('info', this.state.info)
               console.log('onename', this.state.info[0][0]['studentName'])
@@ -133,7 +137,7 @@ class ViewClass extends Component {
         };
       
     
-      
+   
      
     render() {
         
@@ -142,9 +146,9 @@ class ViewClass extends Component {
             
            <Classdiv>
                
-        
+            <Link to='/Random' style={{height: '200px', border:'2px solid black'}}>
             <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
-               
+            </Link>
                
                {/* <Chartprop  Data={this.state.info}/> */}
                

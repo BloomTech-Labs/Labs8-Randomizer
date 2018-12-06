@@ -1,6 +1,7 @@
 import React from 'react';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
 import styled from 'styled-components';
+
 const Graphbox = styled.button`
 cursor: pointer;
 text-decoration: none;
@@ -31,33 +32,40 @@ outline: 0;
     
     
     
-    
+
+    let cl = props.Data['className']
+    let number = props.Data['studentsInfo'].length
+    let id = props.Data['classID']
+    let total = 0
+    let part = 0
+    let percentage = 0
     const dataBox = [];
-    console.log('props', props.Data)
     const dataList = () => {
-      if (props.Data === undefined || props.Data.length===0) {
-        console.log('undefined')
+      if (props.Data === undefined || props.Data['studentsInfo'].length===0) {
+        return
       }
       else{
-    props.Data.map( (one, index )=> {
+      let students = props.Data['studentsInfo']
+    students.map( (one, index )=> {
       let obj = {
         name: `${one['studentName']}`,
-        
         Participated: one['participation']['P'],
         Declined: one['participation']['NP'],
-        
       }
       dataBox.push(obj)
-      
-    
+      total = total + one['participation']['P'] + one['participation']['NP']
+      part = part + one['participation']['P']
+      percentage = Math.round((part/total) * 100)
       })
-      return dataBox;
+      return dataBox;}
+
     }
-    }
+    
 
 
     const handleSubmit= () => {
-      console.log('clicked')
+      
+        localStorage.setItem('classID', id)
           }
 
      return  (
@@ -67,7 +75,7 @@ outline: 0;
           <Graphbox onClick={handleSubmit}>
 
         <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={dataList()}  
-  margin={{top: 5, right: 5, left: 5, bottom: 5}} >
+  margin={{top: 5, right: 5, left: 5, bottom: 5}} title={cl}>
   <XAxis dataKey="name"/>
     
   <YAxis style={{cursor: 'pointer'}} />
@@ -77,6 +85,9 @@ outline: 0;
   <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
   <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
 </BarChart>
+<h1>{cl}</h1>
+<h3>Students Enrolled: {number}</h3>
+<h3> Class Participation Percentage: {percentage}% </h3>
 </Graphbox>
         
     </div>

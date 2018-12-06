@@ -93,6 +93,3 @@ def updateUser(request):
         response = JsonResponse({"error": "User not here"}, safe=True, status=500)
     return response
 
-
-
-

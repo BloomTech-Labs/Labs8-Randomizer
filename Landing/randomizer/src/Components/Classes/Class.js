@@ -179,6 +179,9 @@ class Class extends Component {
     }
 
     componentDidMount() {
+      if (localStorage.getItem("studentID")) {
+        localStorage.removeItem("studentID")
+      }
       this.loadStudents()
     }
 
@@ -322,6 +325,7 @@ handleNewName = (e) => {
   this.setState({[e.target.name]: e.target.value})
 }
 handleDisplay = e => {
+  this.setState({studentList2: []})
   for (let i = 0; i < this.state.studentList.length; i++){
     let s = this.state.studentList[i]
     let t = s['fullName']

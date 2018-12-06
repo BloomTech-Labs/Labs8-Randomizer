@@ -250,9 +250,16 @@ class Magic extends Component {
     }
 
     componentDidMount() {
+      if (localStorage.getItem("classID")=== null) {
+        alert('choose a class!')
+        this.props.history.push('/ViewClasses')
+      }
+      else{
+        if (localStorage.getItem("studentID")) {
+          localStorage.removeItem("studentID")
+        }
         this.handleClass()
-
-
+      }
     }
 
     handleClass = e => {
@@ -263,10 +270,11 @@ class Magic extends Component {
           .then(res => {
 
             var students = JSON.parse(res.data)
-            console.log('res', res.data)
-            console.log('typetest', students)
             var newarray = students['studentNames']
-            console.log('newarr', newarray)
+            if (newarray.length === 0){
+              alert('No students in Class, Add a Student')
+              this.props.history.push('/Class')
+            }
 
             newarray.map(name => {
             this.state.studentnamearray.push(name)
@@ -376,6 +384,7 @@ class Magic extends Component {
  Edithandler = () => {
     console.log('Edited')
     localStorage.removeItem('studentID');
+    console.log('what is history', this.props.history)
     this.props.history.push('/Class')
  }
 
