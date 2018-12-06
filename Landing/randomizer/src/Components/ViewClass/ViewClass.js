@@ -135,6 +135,7 @@ class ViewClass extends Component {
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
+        }
 
     render() {
 

@@ -9,13 +9,13 @@ import ResetDialog from './ResetDialog';
 
 import Addbutton from '@material-ui/icons/AddCircle';
 import Pencil from '@material-ui/icons/Edit';
-const PapaParse = require('papaparse/papaparse.min.js');
-
-
-
 import EditDialog from './EditDialog';
 import Button from '@material-ui/core/Button';
 const PapaParse = require('papaparse/papaparse.min.js');
+
+
+
+
 
 const Editmain = styled.div`
   font-family:'Raleway', sans-serif;
@@ -27,7 +27,7 @@ const Editmain = styled.div`
   border: 10px solid #E2E4F6;
   border-radius: 5px;
   background-color: white;
-
+`
 
 const Maindiv = styled.div`
 display: flex;
