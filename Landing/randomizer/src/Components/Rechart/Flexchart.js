@@ -1,14 +1,20 @@
 import React from 'react';
 import Chartprop from '../Rechart/ClassChart';
 
+
 const Flexchart = props => {
+    let classlist = props.Dates
+    console.log(classlist)
     return <div style={{display: 'flex'}}>
-        {props.Dates.map(date => 
+        {classlist.map(clss => 
+
+            <Chartprop Data={clss} />,
+            console.log('HIT')
+            
+            
         
-            
-            <Chartprop key={props.date}  Data={date} />
-            
-        )}</div>
+        )}
+        </div>
     
 }
 export default Flexchart

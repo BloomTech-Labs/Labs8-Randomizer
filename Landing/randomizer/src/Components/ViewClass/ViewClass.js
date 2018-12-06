@@ -93,9 +93,14 @@ class ViewClass extends Component {
 
     componentDidMount() {
         this.handleClass()
+        if (localStorage.getItem("studentID")) {
+            localStorage.removeItem("studentID")
+          }
     }
 
     handleClass = e => {
+
+
       const token =localStorage.getItem('jwt').toString();
         axios
           .get('http://localhost:8000/clss/get_everything',  {
@@ -103,41 +108,33 @@ class ViewClass extends Component {
                   'Authorization':'Token '.concat(token)
               }
           })
-
-          .then(res => {
-
-            console.log('resdata',res.data)
-
-            var classes = JSON.parse(res.data)
-            console.log('typetest', typeof classes)
-            classes.map(name => {
-            this.state.Classarray.push(name)
-
+  
+            .then(res => {
+  
+              console.log('resdata',res.data)
+  
+              var classes = JSON.parse(res.data)
+              console.log('typetest', typeof classes)
+              classes.map(name => {
+              this.state.Classarray.push(name)
+  
+              })
+              console.log('Classarray',this.state.Classarray)
+  
+              this.state.Classarray.map(cl => {
+                  this.state.classnames.push(cl['className'])
+              })
+              this.state.Classarray.map(item => {
+                  this.state.info.push(item)
+                  this.setState({info: this.state.info})
+              })
+              console.log('info', this.state.info)
+              console.log('onename', this.state.info[0][0]['studentName'])
+              this.setState({truenames: Object.values(this.state.classnames)})
+              console.log('names',Object.values(this.state.classnames) )
+              // console.log('handleclass')
+              // console.log('classP', this.state.P)
             })
-            console.log('stateclass',this.state.Classarray)
-
-            this.state.Classarray.map(cl => {
-                this.state.classnames.push(cl['className'])
-            })
-            this.state.Classarray.map(item => {
-                this.state.info.push(item['studentsInfo'])
-            })
-            console.log('info', this.state.info)
-            console.log('onename', this.state.info[0][0]['studentName'])
-            this.setState({truenames: Object.values(this.state.classnames)})
-            console.log('names',Object.values(this.state.classnames) )
-            // console.log('handleclass')
-            // console.log('classP', this.state.P)
-          })
-
-          .catch(err => {
-
-          });
-
-      };
-
-
-
 
     render() {
 
@@ -145,18 +142,19 @@ class ViewClass extends Component {
 
 
            <Classdiv>
-
-
-            <Flexchart Dates={this.state.info}></Flexchart>
-
-
+               
+            <Link to='/Random' style={{height: '200px', border:'2px solid black'}}>
+            <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
+            </Link>
+               
                {/* <Chartprop  Data={this.state.info}/> */}
-
-               <Link to='/Class'>
+               
+               <Link to='/Class' style={{height: '200px'}}>
               <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
              </Link>
+
            </Classdiv>
 
         )

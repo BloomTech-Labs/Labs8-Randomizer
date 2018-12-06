@@ -30,6 +30,7 @@ border-radius: 5px;
 
 `
 const Signup = styled.button`
+outline: 0;
 color: black;
 width: 200px;
 height: 60px;
@@ -53,6 +54,7 @@ font-size: 24px;
   }
 `
 const Signin = styled.button`
+outline: 0;
 color: black;
 width: 200px;
 height: 60px;

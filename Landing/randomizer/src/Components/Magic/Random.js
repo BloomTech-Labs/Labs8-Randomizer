@@ -166,141 +166,160 @@ class Magic extends Component {
     }
   }
 
-  componentDidMount() {
-    this.handleClass()
+    componentDidMount() {
+      if (localStorage.getItem("classID")=== null) {
+        alert('choose a class!')
+        this.props.history.push('/ViewClasses')
+      }
+      else{
+        if (localStorage.getItem("studentID")) {
+          localStorage.removeItem("studentID")
+        }
+        this.handleClass()
+      }
+    }
+
+    handleClass = e => {
+        let id= localStorage.getItem('classID')
+        axios
+          .post('http://localhost:8000/clss/list_students', {classID:id})
+
+          .then(res => {
+
+            var students = JSON.parse(res.data)
+            var newarray = students['studentNames']
+            if (newarray.length === 0){
+              alert('No students in Class, Add a Student')
+              this.props.history.push('/Class')
+            }
+
+            newarray.map(name => {
+            this.state.studentnamearray.push(name)
+            this.setState({studentnamearray :this.state.studentnamearray})
+            })
+            this.setState({classinfo: students['class_name']})
+            console.log('stater', this.state.studentnamearray)
+          })
+
+          .catch(err => {
+
+          });
+
+      };
+      handleParticipationGraph = e => {
+
+        let valid = localStorage.getItem('studentID')
+
+        axios
+          .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+
+          .then(res => {
+            var myobj2 = JSON.parse(res.data)
+            // console.log('myobj2',myobj2)
+
+            // console.log('Dates', Object.keys(myobj2))
+            // console.log('Ps and NPs',Object.values(myobj2) )
+            this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+            // console.log('PartRates', this.state.PartRates)
+            let P = 0;
+            let NP = 0;
+            this.state.PartRates.map((pnp, index) => {
+              P += pnp['P'];
+              NP +=pnp['NP'];
+
+            })
+
+            this.setState({P: P, NP: NP})
+            console.log('PARTICIPATION')
+            console.log('p', this.state.P)
+
+          })
 
 
-}
+          .catch(err => {
 
-handleClass = e => {
-    let id= localStorage.getItem('classID')
-    axios
-      .post('http://localhost:8000/clss/list_students', {classID:id})
-
-      .then(res => {
-
-        var students = JSON.parse(res.data)
-        console.log('res', res.data)
-        console.log('typetest', students)
-        var newarray = students['studentNames']
-        console.log('newarr', newarray)
-
-        newarray.map(name => {
-        this.state.studentnamearray.push(name)
-           console.log('studentarray',this.state.studentnamearray)
-        })
-        this.setState({classinfo: students['class_name']})
-        console.log('stater', this.state.studentnamearray)
-      })
-
-      .catch(err => {
-
-      });
-
-  };
-  handleParticipationGraph = e => {
-
-    let valid = localStorage.getItem('studentID')
-
-    axios
-      .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
-
-      .then(res => {
-        var myobj2 = JSON.parse(res.data)
-        // console.log('myobj2',myobj2)
-
-        // console.log('Dates', Object.keys(myobj2))
-        // console.log('Ps and NPs',Object.values(myobj2) )
-        this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-        // console.log('PartRates', this.state.PartRates)
-        let P = 0;
-        let NP = 0;
-        this.state.PartRates.map((pnp, index) => {
-          P += pnp['P'];
-          NP +=pnp['NP'];
-
-        })
-
-        this.setState({P: P, NP: NP})
-        console.log('PARTICIPATION')
-        console.log('p', this.state.P)
-
-      })
+          });
 
 
-      .catch(err => {
-
-      });
+      };
 
 
-  };
+      Participatehandler = e => {
 
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/participate',  {
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'True',
+          } )
 
-  Participatehandler = e => {
+          .then(res => {
+            this.handleParticipationGraph();
+          }
+            )
+          .catch(err => {
 
-    const mail = {"class_name": this.state.class_name}
-    axios
-      .post('http://localhost:8000/clss/participate',  {
-        "studentID": localStorage.getItem("studentID"),
-      "particpated":'True',
-      } )
-
-      .then(res => {
-        this.handleParticipationGraph();
-      })
-
-      .catch(err => {
-
-      });
-      console.log('participated')
-  };
-
-
-
-
-
-  Declinehandler = e => {
-
-    const mail = {"class_name": this.state.class_name}
-    axios
-      .post('http://localhost:8000/clss/participate',  {
-        "studentID": localStorage.getItem("studentID"),
-      "particpated":'False',
-      } )
-
-      .then(res => {
-        this.handleParticipationGraph();
-      })
-
-      .catch(err => {
-
-      });
-      console.log('declined')
-  };
-
-Shufflehandler =() => {
-this.setState({P:0, NP:0})
-const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
-this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
-localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
- this.handleParticipationGraph();
- console.log('SHUFFLER')
-
-}
+          });
+          console.log('participated')
+      };
 
 
 
-Edithandler = () => {
-console.log('Edited')
-localStorage.removeItem('studentID');
-this.props.history.push('/Class')
-}
 
-Resethandler = () => {
-console.log('Reset')
-localStorage.removeItem('studentID');
-window.location.reload()
-}
+
+      Declinehandler = e => {
+
+        const mail = {"class_name": this.state.class_name}
+        axios
+          .post('http://localhost:8000/clss/participate',  {
+            "studentID": localStorage.getItem("studentID"),
+          "particpated":'False',
+          } )
+
+          .then(res => {
+            this.handleParticipationGraph();
+          })
+
+          .catch(err => {
+
+          });
+          console.log('declined')
+      };
+
+ Shufflehandler =() => {
+  if (this.state.studentnamearray.length === 0){
+    alert("All students have gone, Resetting Class")
+    window.location.reload()
+    if (localStorage.getItem("studentID")) {
+      localStorage.removeItem("studentID")
+  }}
+    this.setState({P:0, NP:0})
+    const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
+    this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
+    localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
+     this.handleParticipationGraph();
+     this.state.studentnamearray.splice(randomnum,1)
+     this.setState({studentnamearray: this.state.studentnamearray}, ()=>{
+       if (this.state.studentnamearray.length === 0){
+         alert("Last Student")
+       }
+     })
+ }
+
+
+
+ Edithandler = () => {
+    console.log('Edited')
+    localStorage.removeItem('studentID');
+    console.log('what is history', this.props.history)
+    this.props.history.push('/Class')
+ }
+
+ Resethandler = () => {
+    console.log('Reset')
+    localStorage.removeItem('studentID');
+    window.location.reload()
+ }
   render() {
 
       return (
