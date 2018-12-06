@@ -21,7 +21,7 @@ import '../ViewClass/Add.css'
  width: 900px;
  
  justify-content: flex-start;
- background-color: rgba(255,255,255,.5);
+ background-color: rgba(255,255,255,.8);
  
 border: 3px solid #dfece6;
 border-radius: 5px;
@@ -103,7 +103,7 @@ class ViewClass extends Component {
 
       const token =localStorage.getItem('jwt').toString();
         axios
-          .get('http://localhost:8000/clss/get_everything',  {
+          .get('https://labs8randomizer.herokuapp.com/clss/get_everything',  {
               headers: {
                   'Authorization':'Token '.concat(token)
               }
@@ -129,13 +129,17 @@ class ViewClass extends Component {
                   this.setState({info: this.state.info})
               })
               console.log('info', this.state.info)
-              console.log('onename', this.state.info[0][0]['studentName'])
               this.setState({truenames: Object.values(this.state.classnames)})
               console.log('names',Object.values(this.state.classnames) )
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
         }
+handleAdd = () => {
+    if (localStorage.getItem("classID")) {
+        localStorage.removeItem("classID")
+      }
+}
 
     render() {
 
@@ -144,13 +148,13 @@ class ViewClass extends Component {
 
            <Classdiv>
                
-            <Link to='/Random' style={{height: '200px', border:'2px solid black'}}>
+            <Link to='/Random' style={{height: '200px'}}>
             <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
             </Link>
                
                {/* <Chartprop  Data={this.state.info}/> */}
                
-               <Link to='/Class' style={{height: '200px'}}>
+               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
               <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>

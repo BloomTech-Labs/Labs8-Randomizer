@@ -14,7 +14,7 @@ const Maindiv = styled.div`
 background-color: rgba(255,255,255,.5);
 display: flex;
 width: 500px;
-height: 515px;
+height: 800px;
 
 border-radius: 7px;
 
@@ -41,13 +41,22 @@ align-content: center;
 const Namediv = styled.div`
 display: flex;
 width: 200px;
-height: 50px;
+height: 150px;
+
 `
 
+const Chartdiv = styled.div`
+display: flex;
+width: 400px;
+height: 400px;
+
+`
 const Buttondiv = styled.div`
 display: flex;
 width: 250px;
 height: 75px;
+
+z-index: +1;
 `
 const Title = styled.h1`
 font-size: 50px;
@@ -77,6 +86,7 @@ height: 40px;
 text-decoration: none;
 cursor: pointer;
 margin-right: 15px;
+
 color:black;
 background-color: #4caf50;
 border: none;
@@ -182,7 +192,7 @@ class Magic extends Component {
     handleClass = e => {
         let id= localStorage.getItem('classID')
         axios
-          .post('http://localhost:8000/clss/list_students', {classID:id})
+          .post('https://labs8randomizer.herokuapp.com/clss/list_students', {classID:id})
 
           .then(res => {
 
@@ -211,7 +221,7 @@ class Magic extends Component {
         let valid = localStorage.getItem('studentID')
 
         axios
-          .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+          .post('https://labs8randomizer.herokuapp.com/clss/participation_list', {'studentID': valid})
 
           .then(res => {
             var myobj2 = JSON.parse(res.data)
@@ -248,7 +258,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://localhost:8000/clss/participate',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'True',
           } )
@@ -271,7 +281,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://localhost:8000/clss/participate',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'False',
           } )
@@ -323,7 +333,7 @@ class Magic extends Component {
   render() {
 
       return (
-
+        <React.Fragment>
         <Maindiv>
         <Title>Randomizer</Title>
                       
@@ -336,8 +346,8 @@ class Magic extends Component {
            </Classdiv>   
 
             <Namediv>
-                  <Misc>{this.state.student} StudentName</Misc>
-                  <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+                  <Misc>{this.state.Student}</Misc>
+                   
             </Namediv>
 
             <Buttondiv>
@@ -346,14 +356,16 @@ class Magic extends Component {
                   </Buttondiv>
                   <Buttondiv>
                   <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
-            </Buttondiv>
+                  
+            </Buttondiv>  
+            <Chartdiv>
+            <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+            </Chartdiv>
 
-                      
-        
-                     
-                
+            
             </Maindiv>
-
+            
+            </React.Fragment>
       )
   }
 }
