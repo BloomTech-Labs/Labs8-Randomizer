@@ -13,6 +13,7 @@ urlpatterns = [
     url('updatestudent', views.updateStudent),
     url('updateclass', views.updateClass),
     url('deletestudent', views.deleteStudent),
+    url('deleteclass', views.deleteClass),
     url('csv_post', views.csv_post),
 
 ]
