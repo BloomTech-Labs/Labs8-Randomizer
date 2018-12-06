@@ -26,6 +26,8 @@ padding-left: 10px;
 
 `
 const Signin = styled.button`
+
+outline: 0;
 width: 150px;
 height: 40px;
 background-color: #00E1F5;

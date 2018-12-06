@@ -1,21 +1,18 @@
 import React from 'react';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
 import styled from 'styled-components';
-const Declined = styled.h1`
-color: #ec1111;
-position: absolute;
 
-z-index: +1;
-margin-bottom: 100px;
-`
-const Participated = styled.h1`
-color: #0ee77b;
-position: absolute;
-margin-top: 115px;
+const Graphbox = styled.button`
+cursor: pointer;
+text-decoration: none;
+background: none;
+z-index: -1;
+display: block;
+outline: 0;
 `
  const Chartprop = props => {
 
-    
+   
     // const dataBox = [];
    
     // const dataList = () => {
@@ -32,50 +29,66 @@ margin-top: 115px;
     //   return dataBox;
     // }
   
-    const nameList= []
     
     
     
+
+    let cl = props.Data['className']
+    let number = props.Data['studentsInfo'].length
+    let id = props.Data['classID']
+    let total = 0
+    let part = 0
+    let percentage = 0
     const dataBox = [];
-    console.log('props', props.Data)
     const dataList = () => {
-      if (props.Data === undefined || props.Data.length===0) {
-        console.log('undefined')
+      if (props.Data === undefined || props.Data['studentsInfo'].length===0) {
+        return
       }
       else{
-    props.Data.map( (one, index )=> {
+      let students = props.Data['studentsInfo']
+    students.map( (one, index )=> {
       let obj = {
         name: `${one['studentName']}`,
-        
         Participated: one['participation']['P'],
         Declined: one['participation']['NP'],
-        
       }
       dataBox.push(obj)
-      
-    
+      total = total + one['participation']['P'] + one['participation']['NP']
+      part = part + one['participation']['P']
+      percentage = Math.round((part/total) * 100)
       })
-      return dataBox;
+      return dataBox;}
+
     }
-    }
-   
+    
+
+
+    const handleSubmit= () => {
+      
+        localStorage.setItem('classID', id)
+          }
+
      return  (
      
         <div>
-          <Declined>% Declined</Declined>
+          {/* <h1>{[key]['className']}</h1> */}
+          <Graphbox onClick={handleSubmit}>
 
-        <BarChart width={400} height={300} data={dataList()}  
-  margin={{top: 5, right: 5, left: 5, bottom: 5}} >
+        <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={dataList()}  
+  margin={{top: 5, right: 5, left: 5, bottom: 5}} title={cl}>
   <XAxis dataKey="name"/>
     
-  <YAxis />
-  <CartesianGrid />
-  <Tooltip/>
-  <Legend />
-  <Bar dataKey="Participated" fill="Green" />
-  <Bar dataKey="Declined" fill="Red" />
+  <YAxis style={{cursor: 'pointer'}} />
+  <CartesianGrid tyle={{cursor: 'pointer'}} />
+  <Tooltip style={{cursor: 'pointer'}}/>
+  <Legend style={{cursor: 'pointer'}} />
+  <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
+  <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
 </BarChart>
-<Participated>% Participated</Participated>
+<h1>{cl}</h1>
+<h3>Students Enrolled: {number}</h3>
+<h3> Class Participation Percentage: {percentage}% </h3>
+</Graphbox>
         
     </div>
      )

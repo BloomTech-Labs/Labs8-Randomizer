@@ -200,8 +200,84 @@ class Magic extends Component {
     }
   }
 
-  componentDidMount() {
-    this.handleClass()
+    componentDidMount() {
+      if (localStorage.getItem("classID")=== null) {
+        alert('choose a class!')
+        this.props.history.push('/ViewClasses')
+      }
+      else{
+        if (localStorage.getItem("studentID")) {
+          localStorage.removeItem("studentID")
+        }
+        this.handleClass()
+      }
+    }
+
+    handleClass = e => {
+        let id= localStorage.getItem('classID')
+        axios
+          .post('http://localhost:8000/clss/list_students', {classID:id})
+
+          .then(res => {
+
+            var students = JSON.parse(res.data)
+            var newarray = students['studentNames']
+            if (newarray.length === 0){
+              alert('No students in Class, Add a Student')
+              this.props.history.push('/Class')
+            }
+
+            newarray.map(name => {
+            this.state.studentnamearray.push(name)
+               console.log('studentarray',this.state.studentnamearray)
+            })
+            this.setState({classinfo: students['class_name']})
+            console.log('stater', this.state.studentnamearray)
+          })
+
+          .catch(err => {
+
+          });
+
+      };
+      handleParticipationGraph = e => {
+
+        let valid = localStorage.getItem('studentID')
+
+        axios
+          .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+
+          .then(res => {
+            var myobj2 = JSON.parse(res.data)
+            // console.log('myobj2',myobj2)
+
+            // console.log('Dates', Object.keys(myobj2))
+            // console.log('Ps and NPs',Object.values(myobj2) )
+            this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+            // console.log('PartRates', this.state.PartRates)
+            let P = 0;
+            let NP = 0;
+            this.state.PartRates.map((pnp, index) => {
+              P += pnp['P'];
+              NP +=pnp['NP'];
+
+            })
+
+            this.setState({P: P, NP: NP})
+            console.log('PARTICIPATION')
+            console.log('p', this.state.P)
+
+          })
+
+
+          .catch(err => {
+
+          });
+
+
+      };
+
+
 
 
 }
@@ -264,7 +340,13 @@ handleClass = e => {
 
       .catch(err => {
 
+
+ Edithandler = () => {
+    localStorage.removeItem('studentID');
+    this.props.history.push('/Class')
+ }
       });
+
 
 
   };

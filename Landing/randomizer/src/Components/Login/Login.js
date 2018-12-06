@@ -70,9 +70,7 @@ transition: .4s;
 `
 
 const Signin = styled.button`
-width: 150px;
-height: 40px;
-background-color: #00E1F5;
+
 cursor: pointer;
 border: none;
 

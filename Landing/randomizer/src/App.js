@@ -93,13 +93,14 @@ z-index: +1;
 `
 
 const Sider = styled.button`
-
+outline: 0;
+width: 30px;
 text-decoration: none;
 background-color: none;
 color: #A84600;
 border: none;
 cursor: pointer;
-height: 25px;
+height: 20px;
 background: none;
 margin-bottom: 50px;
 transition: .3s;
@@ -151,8 +152,6 @@ font-family:'Raleway', sans-serif;
 color: #F7AF9D;
 border: none;
 font-size: 16px;
-
-
 `
 
 const Divv = styled.div`
