@@ -189,3 +189,20 @@ def deleteStudent(request):
     student.delete()
     response = JsonResponse({"key": "user has been remove"}, safe=False, status=200)
     return response
+
+
+@csrf_exempt
+@api_view(["DELETE"])
+@permission_classes((permissions.AllowAny,))
+def deleteClass(request):
+    data = json.loads(request.body)
+    classID = data['classID']
+    clss = ClssName.manager.get(id=classID)
+    clss.delete()
+    response = JsonResponse({"key": "This class has been removed."}, safe=False, status=200)
+    return response
+
+
+
+
+
