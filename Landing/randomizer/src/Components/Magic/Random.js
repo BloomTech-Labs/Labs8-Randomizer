@@ -11,26 +11,23 @@ import Chartprop from '../Rechart/ClassChart';
 import Class from '../Classes/Class';
 
 const Maindiv = styled.div`
+background-color: rgba(255,255,255,.5);
 display: flex;
-width: 1000px;
-height: 1000px;
-justify-content: start;
-`
-
-const Holderdiv = styled.div`
-height: 500px;
 width: 500px;
-display: flex;
-justify-content: center;
+height: 515px;
 
+border-radius: 7px;
 
-
+border: 3px solid #dfece6;
+flex-direction: column;
+@media (max-width: 400px) {
+  margin-left: 120px;
+  border: none;
+  background-color: none;
+  margin-top: 25px;
+}
 `
-const Title = styled.h1`
-font-size: 40px;
-height: 40px;
-margin-left: 50px;
-`
+
 const Classdiv = styled.div`
 display: flex;
 width: 300px;
@@ -38,151 +35,120 @@ height: 100px;
 justify-content: space-between;
 flex-direction: row;
 margin-top: 100px;
+align-content: center;
+`
+
+const Namediv = styled.div`
+display: flex;
+width: 200px;
+height: 50px;
+`
+
+const Buttondiv = styled.div`
+display: flex;
+width: 250px;
+height: 75px;
+`
+const Title = styled.h1`
+font-size: 50px;
+height: 40px;
+@media (max-width: 400px) {
+  margin-bottom: 0px;
+  font-size: 40px;
+  text-decoration: underline;
+  
+}
+
+`
+const Misc = styled.h1`
+margin-top: 0px;
+font-size: 40px;
+margin-right: 25px;
+@media (max-width: 400px) {
+  margin-right: 15px;
+  font-size: 35px;
+}
 `
 const Part = styled.button`
+outline: 0;
 font-size: 20px;
-width: 150px;
+width: 125px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
-border-radius: 15px 5px;
-color: #E6EBE0;
+margin-right: 15px;
+color:black;
 background-color: #4caf50;
 border: none;
 transition: .5s;
 :hover {
-    background-color: #2d8630;
+   color: white;
     
 }
-@media (max-width: 400px) {
-    width: 75px;
-    height: 20px;
-    font-size: 12px;
-   margin-right: 10px;
-   
-  }
 `
 
 const Dec = styled.button`
+outline: 0;
 font-size: 20px;
 border: none;
 width: 150px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
-border-radius: 5px 15px;
-color: #E6EBE0;
+
+color: black;
 background-color: #E91E63;
 transition: .5s;
 :hover {
-    background-color: #d1084c;
-    
+  color: white
     
 }
-@media (max-width: 400px) {
-    width: 75px;
-    height: 20px;
-    font-size: 12px;
-    
-  }
 `
-const Misc = styled.h1`
 
-height: 40px;
-@media (max-width: 1024px) {
-  margin-left: 280px;
-  
-}
-@media (max-width: 400px) {
-    margin-left: 80px;
-  }
-`
-const Welcomer = styled.h1`
-
-color: #232323;
-@media (max-width: 1024px) {
-  margin-left: 235px;
-  
-}
-@media (max-width: 400px) {
-    font-size: 24px;
-    margin-left: 55px;
-  }
-`
 const Edit = styled.button`
+margin-top: 5px;
+margin-right: 10px;
 border: none;
 width: 100px;
-height: 40px;
+height: 36px;
 text-decoration: none;
 cursor: pointer;
-border-radius: 15px 5px;
-color: #E6EBE0;
+color: black;
 background-color: #F7947B;
 transition: .5s;
 
 :hover {
-    background-color: #f0623e;
-    
+  color: white;
 }
-font-size: 16px;
-@media (max-width: 1024px) {
-  margin-left: 135px;
-  
-}
-@media (max-width: 400px) {
-    width: 75px;
-    height: 30px;
-    font-size: 12px;
-    margin-left: 245px;
-  }
 `
 
 const Reset = styled.button`
+margin-top: 5px;
 border: none;
 width: 100px;
-height: 40px;
+height: 36px;
 text-decoration: none;
 cursor: pointer;
-border-radius: 15px 5px;
-color: #E6EBE0;
+color: black;
 background-color: #F7947B;
 transition: .5s;
-position: absolute;
-
-font-size: 16px;
 
 :hover {
-    background-color: #f0623e;
-    
+  color: white
 }
-@media (max-width: 1024px) {
-  
-  
-}
-@media (max-width: 400px) {
-    width: 75px;
-    height: 30px;
-    font-size: 12px;
-    position: static;
-    margin-left: 50px;
-  }
 `
 const Bigbutton = styled.button`
-width: 300px;
-height: 150px;
+width: 250px;
+height: 50px;
 text-decoration: none;
 cursor: pointer;
-border-radius: 5px;
-background-color:#2fd1df;
-color: white;
-font-size: 36px;
 border: none;
-z-index: +1;
-@media (max-width: 400px) {
-    width: 150px;
-    height: 40px;
-    font-size: 12px;
-  }
+background-color:#00E1F5;
+color: black;
+
+:hover {
+  color: white;
+}
 `
 
 class Magic extends Component {
@@ -201,139 +167,139 @@ class Magic extends Component {
   }
 
   componentDidMount() {
-      this.handleClass()
+    this.handleClass()
 
 
-  }
+}
 
-  handleClass = e => {
-      let id= localStorage.getItem('classID')
-      axios
-        .post('http://localhost:8000/clss/list_students', {classID:id})
+handleClass = e => {
+    let id= localStorage.getItem('classID')
+    axios
+      .post('http://localhost:8000/clss/list_students', {classID:id})
 
-        .then(res => {
+      .then(res => {
 
-          var students = JSON.parse(res.data)
-          console.log('res', res.data)
-          console.log('typetest', students)
-          var newarray = students['studentNames']
-          console.log('newarr', newarray)
+        var students = JSON.parse(res.data)
+        console.log('res', res.data)
+        console.log('typetest', students)
+        var newarray = students['studentNames']
+        console.log('newarr', newarray)
 
-          newarray.map(name => {
-          this.state.studentnamearray.push(name)
-             console.log('studentarray',this.state.studentnamearray)
-          })
-          this.setState({classinfo: students['class_name']})
-          console.log('stater', this.state.studentnamearray)
+        newarray.map(name => {
+        this.state.studentnamearray.push(name)
+           console.log('studentarray',this.state.studentnamearray)
         })
+        this.setState({classinfo: students['class_name']})
+        console.log('stater', this.state.studentnamearray)
+      })
 
-        .catch(err => {
+      .catch(err => {
 
-        });
+      });
 
-    };
-    handleParticipationGraph = e => {
+  };
+  handleParticipationGraph = e => {
 
-      let valid = localStorage.getItem('studentID')
+    let valid = localStorage.getItem('studentID')
 
-      axios
-        .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
+    axios
+      .post('http://localhost:8000/clss/participation_list', {'studentID': valid})
 
-        .then(res => {
-          var myobj2 = JSON.parse(res.data)
-          // console.log('myobj2',myobj2)
+      .then(res => {
+        var myobj2 = JSON.parse(res.data)
+        // console.log('myobj2',myobj2)
 
-          // console.log('Dates', Object.keys(myobj2))
-          // console.log('Ps and NPs',Object.values(myobj2) )
-          this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-          // console.log('PartRates', this.state.PartRates)
-          let P = 0;
-          let NP = 0;
-          this.state.PartRates.map((pnp, index) => {
-            P += pnp['P'];
-            NP +=pnp['NP'];
-
-          })
-
-          this.setState({P: P, NP: NP})
-          console.log('PARTICIPATION')
-          console.log('p', this.state.P)
+        // console.log('Dates', Object.keys(myobj2))
+        // console.log('Ps and NPs',Object.values(myobj2) )
+        this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+        // console.log('PartRates', this.state.PartRates)
+        let P = 0;
+        let NP = 0;
+        this.state.PartRates.map((pnp, index) => {
+          P += pnp['P'];
+          NP +=pnp['NP'];
 
         })
 
+        this.setState({P: P, NP: NP})
+        console.log('PARTICIPATION')
+        console.log('p', this.state.P)
 
-        .catch(err => {
-
-        });
-
-
-    };
+      })
 
 
-    Participatehandler = e => {
+      .catch(err => {
 
-      const mail = {"class_name": this.state.class_name}
-      axios
-        .post('http://localhost:8000/clss/participate',  {
-          "studentID": localStorage.getItem("studentID"),
-        "particpated":'True',
-        } )
-
-        .then(res => {
-          this.handleParticipationGraph();
-        })
-
-        .catch(err => {
-
-        });
-        console.log('participated')
-    };
+      });
 
 
+  };
+
+
+  Participatehandler = e => {
+
+    const mail = {"class_name": this.state.class_name}
+    axios
+      .post('http://localhost:8000/clss/participate',  {
+        "studentID": localStorage.getItem("studentID"),
+      "particpated":'True',
+      } )
+
+      .then(res => {
+        this.handleParticipationGraph();
+      })
+
+      .catch(err => {
+
+      });
+      console.log('participated')
+  };
 
 
 
-    Declinehandler = e => {
 
-      const mail = {"class_name": this.state.class_name}
-      axios
-        .post('http://localhost:8000/clss/participate',  {
-          "studentID": localStorage.getItem("studentID"),
-        "particpated":'False',
-        } )
 
-        .then(res => {
-          this.handleParticipationGraph();
-        })
+  Declinehandler = e => {
 
-        .catch(err => {
+    const mail = {"class_name": this.state.class_name}
+    axios
+      .post('http://localhost:8000/clss/participate',  {
+        "studentID": localStorage.getItem("studentID"),
+      "particpated":'False',
+      } )
 
-        });
-        console.log('declined')
-    };
+      .then(res => {
+        this.handleParticipationGraph();
+      })
+
+      .catch(err => {
+
+      });
+      console.log('declined')
+  };
 
 Shufflehandler =() => {
-  this.setState({P:0, NP:0})
-  const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
-  this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
-  localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
-   this.handleParticipationGraph();
-   console.log('SHUFFLER')
+this.setState({P:0, NP:0})
+const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
+this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
+localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
+ this.handleParticipationGraph();
+ console.log('SHUFFLER')
 
 }
 
 
 
 Edithandler = () => {
-  console.log('Edited')
-  localStorage.removeItem('studentID');
-  this.props.history.push('/Class')
+console.log('Edited')
+localStorage.removeItem('studentID');
+this.props.history.push('/Class')
 }
 
 Resethandler = () => {
-  console.log('Reset')
-  localStorage.removeItem('studentID');
-  window.location.reload()
+console.log('Reset')
+localStorage.removeItem('studentID');
+window.location.reload()
 }
   render() {
 
@@ -343,19 +309,27 @@ Resethandler = () => {
         <Title>Randomizer</Title>
                       
         
-        <Holderdiv>
-          <Classdiv>
-                      <Misc>{this.state.classinfo}</Misc>
-                      <Edit onClick={this.Edithandler}>Edit Class</Edit>
-                      <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
-           </Classdiv>          
-              
-                      <Part onClick={this.Participatehandler}>Participated</Part>
-                      <Dec onClick={this.Declinehandler}>Declined</Dec>
-                      <Welcomer>{this.state.Student}</Welcomer>
-                      <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
-                      <StudentChart  P={this.state.P}  NP={this.state.NP}/>
-                      </Holderdiv>
+        
+          <Classdiv id="Classdiv">
+                  <Misc>{this.state.classinfo}</Misc>
+                  <Edit onClick={this.Edithandler}>Edit Class</Edit>
+                  <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
+           </Classdiv>   
+
+            <Namediv>
+                  <Misc>{this.state.student} StudentName</Misc>
+                  <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+            </Namediv>
+
+            <Buttondiv>
+                  <Part onClick={this.Participatehandler}>Participated</Part>
+                  <Dec onClick={this.Declinehandler}>Declined</Dec>
+                  </Buttondiv>
+                  <Buttondiv>
+                  <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
+            </Buttondiv>
+
+                      
         
                      
                 

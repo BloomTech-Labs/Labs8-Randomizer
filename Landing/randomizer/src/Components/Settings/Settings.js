@@ -7,7 +7,8 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 // Icons
 import Homeicon from '@material-ui/icons/Home';
-
+//Components
+import Billing from '../Billing/billing';
 
 const FormStyling = styled.form`
 display: block;
@@ -16,24 +17,25 @@ const VerifyStylingForm = styled.form`
 display: ${(props) => props.display ? "block" : "none"};
 `
 const InputStyling = styled.input`
+padding-left: 10px;
 display: block;
 margin-bottom: 10px;
 text-decoration: none;
-background-color: #FFCAD4;
-border: none;
-width: 175px;
+border: 1px solid grey;
+
+width: 200px;
 height: 25px;
-transition: .4s;
-:hover {
-    background-color: #bf4068;
-    color: white;
+
+
+:: placeholder {
+  color: black;
 }
 `
 const VerifyStyling = styled.input`
 display: block;
 margin-bottom: 10px;
 text-decoration: none;
-background-color: #FFCAD4;
+background-color: white;
 border: none;
 width: 175px;
 height: 25px;
@@ -43,36 +45,38 @@ transition: .4s;
     color: white;
 }
 `
-const LabelStyling = styled.label`
-    display: block;
-`
+
 const Homediv = styled.div`
 width: 500px;
-height: 500px;
+height: 600px;
+border: 1px solid #dfece6;
+background-color: rgba(255,255,255,.5);
 
+border: 3px solid #dfece6;
 display: flex;
-justify-content: center;
+margin-top: 25px;
 align-items: center;
 flex-direction: column;
 @media (max-width: 400px) {
   height: 370px;
+  border: none;
+  background-color: none;
+  margin-left: 100px;
+  
   
 }
 `
 
 const Welcomer = styled.h1`
-margin-bottom: 125px;
-color: #72CBD3;
-@media (max-width: 1024px) {
-  width: 200px;
-  margin-bottom: 25px;
-  
-}
+
+color: black;
+font-size: 36px;
 @media (max-width: 400px) {
-  margin-bottom: 25px;
-  text-align: center;
+  font-size: 30px;
+  
   
 }
+
 `
 
 class Settings extends React.Component {
@@ -118,31 +122,33 @@ verifNumber = (event) => {
 
         <FormStyling className="sign-up" onSubmit={(event) => console.log(event)}>
 
-          <LabelStyling htmlFor='username'> Email </LabelStyling>
-          <InputStyling type='email' name='username' id='username' required='true'/>
+         
+          <InputStyling placeholder="Email" type='email' name='username' id='username' required='true'/>
 
-          <LabelStyling htmlFor='password'> Old Password </LabelStyling>
-          <InputStyling type='password' name='password' id='password' required='true'/>
+          
+          <InputStyling placeholder="Old Password" type='password' name='password' id='password' required='true'/>
 
-          <LabelStyling htmlFor='password-confirm'> New Password </LabelStyling>
-          <InputStyling type='password' name='password-confirm' id='password-confirm' required='true'/>
+          
+          <InputStyling placeholder="New Password" type='password' name='password-confirm' id='password-confirm' required='true'/>
 
-          <InputStyling type="submit" value="Save"/>
+          <InputStyling type="submit" value="Save" style={{backgroundColor:'#00E1F5', marginLeft: '5px', border: 'none'}} />
 
         </FormStyling>
         <VerifyStylingForm display={!this.state.display} onSubmit={event => {
             this.AddNumber(event)}}>
             <div className="telephoneNumber">
-              <LabelStyling htmlFor='telephone'> Telephone </LabelStyling>
-              <InputStyling id='telephone' type="tel" name="telephone" placeholder="Ex: 123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
-              <InputStyling type="submit" value="Save" />
+           
+              <InputStyling id='telephone' type="tel" name="telephone" placeholder="Telephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+              <InputStyling type="submit" value="Save" style={{backgroundColor:'#00E1F5', marginLeft: '5px', border: 'none'}} />
             </div>
           </VerifyStylingForm>
           <VerifyStylingForm display={this.state.display}  onSubmit={event => {
               this.verifNumber(event)}}>
             <VerifyStyling id='verify'  name='verify' placeholder="Verify Number"/>
-            <InputStyling type="submit" value="Save" />
+            <InputStyling type="submit" value="Save" style={{backgroundColor:'#00E1F5', marginLeft: '5px', border:"none"}}  />
           </VerifyStylingForm>
+
+          <Billing></Billing>
         </Homediv>
       )
     }

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Checkout from '../Billing/Checkout';
 
 const Payer = styled.div`
-width: 500px;
+width: 200px;
 height: 40px;
 background-color: none;
 display: flex;
@@ -14,28 +14,26 @@ font-size: 26px;
 `
 const Welcomer = styled.h1`
 position: absolute;
-color: #72CBD3;
-@media (max-width: 1024px) {
-    font-size: 36px;
-    width: 400px;
-    margin-left: 75px;
-    text-align: left;
-  }
+color: #F56600;
+width: 200px;
+font-size: 36px;
+
 @media (max-width: 400px) {
    
     font-size: 36px;
+    width: 150px;
   }
 `
 
 const Checker = styled.div`
 position: absolute;
-margin-top: 100px;
+margin-top: 200px;
 @media (max-width: 1024px) {
    
     margin-top: 200px;
   }
 @media (max-width: 400px) {
-   margin-top: 200px;
+   margin-top: 300px;
   }
 `
 class Billing extends Component {

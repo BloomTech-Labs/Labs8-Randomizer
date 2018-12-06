@@ -14,15 +14,18 @@ const Homediv = styled.div`
 
 width: 500px;
 height: 500px;
-background-color: none;
+background-color: rgba(255,255,255,.5);
+border: 3px solid #dfece6;
 display: flex;
 justify-content: center;
 flex-wrap: wrap;
-border-radius: 4px;
+border-radius: 5px;
 @media (max-width: 400px) {
   height: 350px;
     margin-top: 25px;
     margin-left: 35px;
+    background-color: none;
+    border: none;
   }
 
 `
