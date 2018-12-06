@@ -11,6 +11,7 @@ import Login from '../Login/Login';
 import GoogleApi from '../GoogleApi/GoogleApi';
 // Stylings
 const Homediv = styled.div`
+
 width: 500px;
 height: 500px;
 background-color: none;
@@ -20,7 +21,8 @@ flex-wrap: wrap;
 border-radius: 4px;
 @media (max-width: 400px) {
   height: 350px;
-    
+    margin-top: 25px;
+    margin-left: 35px;
   }
 
 `
@@ -29,7 +31,7 @@ outline: 0;
 color: black;
 width: 200px;
 height: 60px;
-background-color: #FFA5B6;
+background-color: #00E1F5;
 cursor: pointer;
 border: none;
 border-radius: 3px;
@@ -39,9 +41,9 @@ text-decoration: none;
 font-size: 24px;
 
 :hover {
-    background-color: #bf4068;
+    
     opacity: .9;
-    color: black;
+    color: white;
 }
 @media (max-width: 400px) {
     font-size: 18px;
@@ -53,7 +55,7 @@ outline: 0;
 color: black;
 width: 200px;
 height: 60px;
-background-color: #FFA5B6;
+background-color: #00E1F5;
 cursor: pointer;
 border: none;
 border-radius: 3px;
@@ -62,9 +64,9 @@ transition: .5s;
 font-size: 24px;
 
 :hover {
-    background-color: #bf4068;
+   
     opacity: .9;
-    color: black;
+    color: white;
 }
 @media (max-width: 400px) {
     font-size: 18px;
@@ -72,9 +74,10 @@ font-size: 24px;
   }
 `
 const Welcomer = styled.h1`
-font-size: 50px;
 
-color: #72CBD3;
+font-size: 60px;
+font-weight: 800;
+color: black;
 
 text-align: center;
 @media (max-width: 400px) {
@@ -84,9 +87,9 @@ text-align: center;
 const Welcomer2 = styled.h1`
 display: flex;
 text-align: center;
-font-size: 24px;
+font-size: 30px;
 
-color: #72CBD3;
+color: #FF6A00;
 @media (max-width: 400px) {
     font-size: 18px;
     width: 270px;

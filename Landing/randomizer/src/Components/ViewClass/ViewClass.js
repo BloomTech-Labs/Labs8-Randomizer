@@ -24,7 +24,7 @@ import '../ViewClass/Add.css'
 border: 3px solid cyan;
 border-radius: 5px;
 @media (max-width: 1024px) {
-   
+
     margin-left: 100px;
     width: 700px;
   }
@@ -61,7 +61,7 @@ border-radius: 5px;
 const H1 = styled.h1`
 color: white;
 @media (max-width: 400px) {
-    
+
     font-size: 14px;
   }
 `
@@ -93,15 +93,17 @@ class ViewClass extends Component {
             localStorage.removeItem("studentID")
           }
     }
-   
+
     handleClass = e => {
-        const token =localStorage.getItem('jwt').toString();
-          axios
-            .get('http://localhost:8000/clss/get_everything',  {
-                headers: {
-                    'Authorization':'Token '.concat(token)
-                }
-            })
+
+
+      const token =localStorage.getItem('jwt').toString();
+        axios
+          .get('http://localhost:8000/clss/get_everything',  {
+              headers: {
+                  'Authorization':'Token '.concat(token)
+              }
+          })
   
             .then(res => {
   
@@ -129,21 +131,12 @@ class ViewClass extends Component {
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
-  
-            .catch(err => {
-  
-            });
-  
-        };
-      
-    
-   
-     
+
     render() {
-        
+
         return (
-            
-            
+
+
            <Classdiv>
                
             <Link to='/Random' style={{height: '200px', border:'2px solid black'}}>
@@ -159,9 +152,9 @@ class ViewClass extends Component {
              </Link>
 
            </Classdiv>
-           
+
         )
-        
+
     }
 }
 export default ViewClass;
