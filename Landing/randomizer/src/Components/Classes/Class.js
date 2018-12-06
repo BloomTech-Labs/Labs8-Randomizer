@@ -6,9 +6,16 @@ import axios from 'axios';
 import Deleteicon from '@material-ui/icons/Delete';
 import AlertDialog from './AlertDialog';
 import ResetDialog from './ResetDialog';
+
+import Addbutton from '@material-ui/icons/AddCircle';
+import Pencil from '@material-ui/icons/Edit';
 import EditDialog from './EditDialog';
 import Button from '@material-ui/core/Button';
 const PapaParse = require('papaparse/papaparse.min.js');
+
+
+
+
 
 const Editmain = styled.div`
   font-family:'Raleway', sans-serif;
@@ -20,69 +27,159 @@ const Editmain = styled.div`
   border: 10px solid #E2E4F6;
   border-radius: 5px;
   background-color: white;
-
-  justify-content: start;
-
-  flex-direction: column;
-  margin-left: 150px;
 `
-const Welcomer = styled.h1`
-  margin-left: 5px;
+
+const Maindiv = styled.div`
+display: flex;
+width: 500px;
+height: 800px;
+background-color: rgba(255,255,255,.5);
+border: 3px solid #dfece6;
+flex-direction: column;
+border-radius: 7px;
+
+@media (max-width: 400px) {
+  height: 800px;
+  border: none;
+  background-color: none;
+  margin-left: 125px;
+  margin-top: 50px;
+}
 `
-const Headtag = styled.div`
-  display: flex;
-  justify-content: left;
-  width: 400px;
-  height: 60px;
-  color: #72CBD3;
+const Misc = styled.h1`
+
+font-size: 40px;
+margin-bottom: 0px;
+@media (max-width: 400px) {
+  
+  font-size: 35px;
+}
+
+`
+const Classdiv = styled.div`
+display: flex;
+width: 300px;
+height: 400px;
+
+flex-direction: column;
+justify-content: ;
+`
+const Namediv = styled.div`
+display: flex;
+flex-direction: row;
+width: 250px;
+height: 50px;
+`
+
+const Namediv2 = styled.div`
+display: flex;
+flex-direction: row;
+width: 300px;
+
+`
+const Title = styled.h1`
+font-size: 50px;
+height: 40px;
+@media (max-width: 400px) {
+  
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+`
+const Ptag = styled.p`
+margin-top: 25px;
+margin-left: 5px;
+margin-right: 5px;
 `
 const Editname = styled.input`
-  margin-left: 10px;
+ padding-left: 10px;
   text-decoration: none;
-  width: 175px;
+  width: 235px;
   height: 25px;
-  background-color: #FFCAD4;
-  border: 1px solid grey;
-  transition: .4s;
+  border: 1px solid black;
   color: black;
-  margin-top: 15px;
+  margin-top: 50px;
   margin-right: 15px;
-  :hover {
-      background-color: #bf4068;
-      :: placeholder {
-          color: white;
-      }
-  }
+
   :: placeholder {
       color: black;
       font-family: 'Raleway', sans-serif;
   }
-`
-const Part = styled.button`
-  font-size: 16px;
-  width: 150px;
-  height: 40px;
-  text-decoration: none;
 
-  cursor: pointer;
-  border-radius: 15px 5px;
-  color: #E6EBE0;
-
-  background-color: #4caf50;
-  border: none;
-  transition: .5s;
-  :hover {
-      background-color: #2d8630;
+  @media (max-width: 400px) {
+  width: 100px;
+    margin-top: 50px;
+    margin-right: 5px;
   }
 `
-const Firstlevel = styled.div`
-  width: 1000px;
-  height: 80px;
-  justify-content: center;
-  flex-direction: row;
-  justify-content: right;
+const Editname1 = styled.input`
+ padding-left: 10px;
+  text-decoration: none;
+  width: 235px;
+  height: 25px;
+  border: 1px solid black;
+  color: black;
+  margin-top: 50px;
+  margin-right: 15px;
+
+  :: placeholder {
+      color: black;
+      font-family: 'Raleway', sans-serif;
+  }
+
+  @media (max-width: 400px) {
+  
+    margin-top: 50px;
+  }
+`
+const Sider = styled.button`
+text-decoration: none;
+background-color: none;
+border: none;
+cursor: pointer;
+height: 25px;
+background: none;
+width: 40px;
+@media (max-width: 400px) {
+  
+  margin-top: 35px;
+}
+`
+
+const Sider2= styled.button`
+margin-top: 30px;
+text-decoration: none;
+background-color: none;
+border: none;
+cursor: pointer;
+height: 25px;
+background: none;
+width: 40px;
+@media (max-width: 400px) {
+  
+ 
+}
+
+`
+const Bigbutton = styled.button`
+font-family: 'Raleway', sans-serif;
+width: 250px;
+height: 50px;
+text-decoration: none;
+cursor: pointer;
+margin-top: 50px;
+border: none;
+background-color:#00E1F5;
+color: black;
+margin-bottom: 50px;
+
+transition: .4s;
+:hover {
+  color: white;
+}
 `
 const Secondlevel = styled.div`
+font-family:'Raleway', sans-serif;
   width: 1000px;
   height: 80px;
   justify-content: center;
@@ -90,54 +187,62 @@ const Secondlevel = styled.div`
   justify-content: right;
 `
 const Dec = styled.button`
+font-family:'Raleway', sans-serif;
+margin-top: 15px;
   font-size: 16px;
   border: none;
   width: 150px;
   height: 40px;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 5px 15px;
-  color: #E6EBE0;
-  background-color: #E91E63;
-  margin-right: 15px;
-  transition: .5s;
-  :hover {
-      background-color: #d1084c;
-  }
-`
-const Add = styled.button`
-  border: none;
-  width: 100px;
-  height: 40px;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 10px 5px;
   color: black;
-  background-color: cyan;
+  background-color: #F56600;
   transition: .5s;
+
   :hover {
-      background-color: lightblue;
+      color: white
   }
-  margin-right: 10px;
 `
-const Import = styled.label`
-  align-items: flex-start
-  display: inline-block;
-  border: none;
-  width: 150px;
-  height: 40px;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 10px 5px;
+const Edit = styled.button`
+font-family:'Raleway', sans-serif;
+margin-top: 5px;
+margin-right: 10px;
+border: none;
+width: 100px;
+height: 65px;
+text-decoration: none;
+cursor: pointer;
+
+color: black;
+background-color: #F56600;
+transition: .5s;
+
+:hover {
   color: white;
-  background-color: black;
-  transition: .5s;
-  margin-bottom: 75px;
+}
+`
+
+const Import = styled.label`
+padding-top: 10px;
+margin-top: 15px;
+font-family:'Raleway', sans-serif;
+border: none;
+width: 150px;
+height: 30px;
+text-decoration: none;
+cursor: pointer;
+text-align: center;
+color: white;
+background-color: black;
+transition: .5s;
+margin-bottom: 15px;
+
   :hover {
       background-color: grey;
   }
 `
 const CsvStyling = styled.input`
+font-family:'Raleway', sans-serif;
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
@@ -160,6 +265,7 @@ const NameItem = styled.div`
   align-items: center;
   justify-content: space-between;
 `
+
 class Class extends Component {
     constructor() {
         super();
@@ -385,35 +491,67 @@ startHandler = e => {
 
     render() {
         return (
-            <Editmain>
-              <Headtag>
-                  <Welcomer>Create or Edit a Class</Welcomer>
-              </Headtag>
-              <Firstlevel>
-                <Editname type="text" placeholder="Class Name" onChange={this.handleInput}
-                value={this.state.class_name}></Editname>
-                <Dec onClick={this.createClass}>Create a Class</Dec>
-                <Dec>Track Participation</Dec>
-                <Part onClick={() => this.alertDialog('resetOpen')}> Reset Participation</Part>
-              </Firstlevel>
-              <Secondlevel>
+            <Maindiv>
+
+              
+                  <Title>Create or <br></br> Edit a Class</Title>
+              
+
+              <Classdiv>
+                <Editname1 type="text" placeholder="Class Name" onChange={this.handleInput}
+                value={this.state.class_name}></Editname1>
+                
+                <Namediv>
+                <Import htmlFor="file">Import CSV</Import>
+                 <Ptag>Or</Ptag>
+                <Dec onClick={this.createClass}>Create Class</Dec>
+                
+                </Namediv>
+                <Namediv2>
+                <Misc>Class Name {this.state.class_name}</Misc>
+                <Sider2 onClick={this.addStudent}>
+                <Pencil style={{fontSize: '40px'}}></Pencil>
+                </Sider2>
+                </Namediv2>
+                
+                
+                {/* <Part onClick={() => this.alertDialog('resetOpen')}> Reset Participation</Part> */}
+                <Namediv>
+               
                 <Editname type="text" placeholder="First Name" onChange={this.studentInput}
                 value={this.state.firstName}></Editname>
                 <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}
                 value={this.state.lastName}></Editname>
+                <Sider onClick={this.addStudent}>
+                <Addbutton style={{fontSize: '56px'}}></Addbutton>
+                </Sider>
+                
+                </Namediv>
+
+                <Namediv>
+                <Bigbutton>Start Randomizer</Bigbutton>
+                </Namediv>
+                
+              </Classdiv>
+
+              {/* <Secondlevel>
+                
                 <Add onClick={this.addStudent}> Add Student</Add>
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
-                <Import htmlFor="file">Import CSV</Import>
-              </Secondlevel>
+                
+              </Secondlevel> */}
+
               <NameGrid>
                 {this.state.studentList2}
               </NameGrid>
+
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
               <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
-              <Dec onClick={this.startHandler}>Start Randomizer</Dec>
-            </Editmain>
+            </Maindiv>
 
+             
+        
         )
     }
 }

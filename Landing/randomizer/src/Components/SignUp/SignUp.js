@@ -46,7 +46,7 @@ transition: .5s;
     color: white;
 }
 @media (max-width: 400px) {
-    margin-top: 50px;
+    margin-left: 55px;
     width: 100px;
     height: 40px;
   }
@@ -56,25 +56,28 @@ const LabelStyling = styled.label`
 `
 const Homediv = styled.div`
 width: 500px;
-height: 300px;
+height: 500px;
 flex-direction: column;
 display: flex;
 justify-content: center;
 align-items: center;
-
+background-color: rgba(255,255,255,.5);
+border: 3px solid #dfece6;
 @media (max-width: 400px) {
     height: 240px;
-    
-    
+    background-color: none;
+    border: none;
+    margin-left: 75px;
+    margin-top: 50px;
   }
 `
 const Welcomer = styled.h1`
 font-size: 48px;
 margin-bottom: 25px;
 margin-right: 20px;
-
+margin-top: 0px;
 @media (max-width: 400px) {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     margin-left: 20px;
   }
 
@@ -107,12 +110,10 @@ const SignUp = () => {
             <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
             </Link>
             <Welcomer> Sign Up</Welcomer>
-            <Link to="/Classes" style={{color: 'black'}}>
-            <Homeicon />
-            </Link>
+            
             <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
                 <LabelStyling htmlFor='username'>  </LabelStyling>
-                <InputStyling type='text' name='username' id='username' placeholder='Username' required='true'/>
+                <InputStyling type='text' name='username' id='username' placeholder='Email' required='true'/>
 
                 <LabelStyling htmlFor='password'> </LabelStyling>
                 <InputStyling type='password' name='password' id='password' placeholder='Password' required='true'/>

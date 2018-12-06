@@ -8,17 +8,22 @@ import Backarrow from '@material-ui/icons/ArrowBack';
 
 // Stylings
 const Homediv = styled.div`
+border: 3px solid #dfece6;
 width: 500px;
 height: 500px;
-background-color: none;
+background-color: rgba(255,255,255,.5);
 display: flex;
 justify-content: center;
 border-radius: 4px;
 font-size: 26px;
 @media (max-width: 400px) {
     flex-direction: column;
-    width: 768px;
+    width: 500px;
+    justify-content: center;
     height: 20px;
+    background-color: none;
+    border: none;
+    margin-top: 100px;
 }
 `
 const Welcomer = styled.h1`
@@ -43,6 +48,7 @@ color: black;
 @media (max-width: 400px) {
    margin-top: 0px;
     position: static;
+    margin-left: 50px;
   }
 :: placeholder {
     color: black;
@@ -62,7 +68,7 @@ transition: .4s;
 @media (max-width: 400px) {
     position: static;
     margin-top: 5px;
-
+    margin-left: 50px;
   }
 :: placeholder {
     color: black;
@@ -70,7 +76,9 @@ transition: .4s;
 `
 
 const Signin = styled.button`
-
+width: 150px;
+height: 40px;
+background-color: #00E1F5;
 cursor: pointer;
 border: none;
 
@@ -89,6 +97,7 @@ transition: .5s;
     margin-top: 50px;
     width: 100px;
     height: 40px;
+    margin-left: 25px;
   }
 `
 
@@ -97,6 +106,19 @@ display: flex;
 flex-direction: column;
 
 align-items: center;
+`
+
+const Sider = styled.button`
+text-decoration: none;
+background-color: none;
+border: none;
+cursor: pointer;
+height: 25px;
+background: none;
+width: 30px;
+@media (max-width: 400px) {
+    margin-left: 150px;
+}
 `
 class Login extends Component {
     constructor() {
@@ -112,20 +134,19 @@ class Login extends Component {
     e.preventDefault();
 
     axios
-      .post('http://localhost:8000/api/login', this.state)
+      .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
       .then(res => {
 
         const token = res.data.key;
-        console.log("where is my token", token);
+
         localStorage.setItem('jwt', token);
+        this.props.history.push('/Random');
       })
       .catch(err => {
 
       });
     this.setState({ username: '', password: '' });
-    this.props.history.push('/Random');
   };
-
 
   handleInput = e => {
     const { name, value } = e.target;
@@ -138,11 +159,13 @@ class Login extends Component {
             <Homediv>
 
 
-
-                <Link to='/'>
+                
+                <Link to='/' style={{width: '30px'}}>
+                <Sider>
                 <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
+                </Sider>
                 </Link>
-
+                
                 <Welcomer>Sign In</Welcomer>
 
 

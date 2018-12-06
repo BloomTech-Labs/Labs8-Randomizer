@@ -19,13 +19,15 @@ import '../ViewClass/Add.css'
  flex-direction: row;
  flex-wrap: wrap;
  width: 900px;
- height: 600px;
+ 
  justify-content: flex-start;
-border: 3px solid cyan;
+ background-color: rgba(255,255,255,.5);
+ 
+border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
 
-    margin-left: 100px;
+    
     width: 700px;
   }
 @media (max-width: 400px) {
@@ -33,7 +35,9 @@ border-radius: 5px;
     height: 200px;
     justify-content: center;
     position: absolute;
-    margin-left: 100px;
+    border: none;
+    background-color: none;
+    margin-left: 25px;
   }
 
  `
@@ -131,6 +135,7 @@ class ViewClass extends Component {
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
+        }
 
     render() {
 

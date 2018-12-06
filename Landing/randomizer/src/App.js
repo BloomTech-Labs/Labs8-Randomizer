@@ -33,7 +33,7 @@ import Mobilebutton from '@material-ui/icons/Toc';
 // Stylings
 
 //Images
-import Flatclass from '../src/Components/Img/flatclass20.png';
+import Flatclass from '../src/Components/Img/flatclass2.png';
 
 
 const Background = styled.div`
@@ -66,7 +66,7 @@ background-color: white;
   height: 400px;
 }
 @media (max-width: 400px) {
-  
+  background-image: none;
   width: 300px;
 }
 
@@ -104,7 +104,7 @@ height: 20px;
 background: none;
 margin-bottom: 50px;
 transition: .3s;
-width: 100px;
+width: 40px;
 :hover {
   color: #F7AF9D;
 
@@ -126,7 +126,7 @@ const MobileSider = styled.button`
 display: none;
 text-decoration: none;
 background-color: none;
-color: #72CBD3;
+color: #A84600;
 border: none;
 cursor: pointer;
 height: 25px;
@@ -200,7 +200,9 @@ console.log('window', window.innerWidth)
       
        
         <MobileSider onClick={this.mobileHandler}>
+        <Tooltip title="Menu" placement="right">
               <Mobilebutton  style={{fontSize: '48px'}} >  </Mobilebutton> 
+              </Tooltip>
             </MobileSider>
           <Sidebar id="Sidebar">
 
@@ -208,7 +210,7 @@ console.log('window', window.innerWidth)
 
 
             
-            <Link to="/">
+            <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
             <Sider onClick={this.mobileHandler} id="Sider"  >
             <Tooltip title="Home" placement="right">
               <Homeicon  style={{fontSize: '48px'}} >  </Homeicon> 
@@ -216,9 +218,23 @@ console.log('window', window.innerWidth)
             </Sider >
             </Link>
           
+            <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
+              <Sider onClick={this.mobileHandler} id="Sider5" >
+              <Tooltip title="Classes" placement="right">
+                <People style={{fontSize: '48px'}}/>
+              </Tooltip>
+              </Sider >
+            </Link>
           
+            <Link to="/Class" style={{height: '40px', marginBottom: '25px' }}>
+              <Sider onClick={this.mobileHandler} id="Sider4">
+              <Tooltip title="Create or Edit a Class" placement="right">
+                <Book style={{fontSize: '48px'}}/>
+                </Tooltip>
+              </Sider >
+            </Link>
 
-            <Link to="/Random">
+            <Link to="/Random" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider2">
               <Tooltip title="Randomizer" placement="right">
                 <Swap style={{fontSize: '48px'}}/>
@@ -227,31 +243,7 @@ console.log('window', window.innerWidth)
             </Link>
 
 
-            <Link to="/Class">
-              <Sider onClick={this.mobileHandler} id="Sider4">
-              <Tooltip title="Create or Edit a Class" placement="right">
-                <Book style={{fontSize: '48px'}}/>
-                </Tooltip>
-              </Sider >
-            </Link>
-
-            <Link to="/ViewClasses">
-              <Sider onClick={this.mobileHandler} id="Sider5" >
-              <Tooltip title="Classes" placement="right">
-                <People style={{fontSize: '48px'}}/>
-              </Tooltip>
-              </Sider >
-            </Link>
-            
-            <Link to="/Billing">
-              <Sider onClick={this.mobileHandler} id="Sider3" >
-              <Tooltip title="Settings" placement="right">
-                <Money style={{fontSize: '48px'}}/>
-                </Tooltip>
-              </Sider>
-            </Link>
-
-            <Link to="/Settings">
+            <Link to="/Settings" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider2">
                 <Tooltip title="Settings" placement="right">
                 <Gearicon tag='Settings' style={{fontSize: '48px'}}/>
@@ -259,7 +251,7 @@ console.log('window', window.innerWidth)
               </Sider >
             </Link>
             
-            <Link to="/About">
+            <Link to="/About" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider6">
               <Tooltip title="About" placement="right">
                 <Info style={{fontSize: '48px'}}/>
