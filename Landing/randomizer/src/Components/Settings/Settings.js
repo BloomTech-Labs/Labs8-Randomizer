@@ -122,7 +122,7 @@ submitHandler = (event) => {
   console.log("what is this", data);
   const token =localStorage.getItem('jwt').toString();
   console.log("what what", token);
-  axios.post('https://labs8randomizer.herokuapp.com/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
+  axios.post('http://labs8randomizer.herokuapp.com/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
   .then(res => {
     console.log("look", res.data)
     localStorage.setItem('user email', res.data['email'])

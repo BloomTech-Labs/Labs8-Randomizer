@@ -103,7 +103,7 @@ class ViewClass extends Component {
 
       const token =localStorage.getItem('jwt').toString();
         axios
-          .get('https://labs8randomizer.herokuapp.com/clss/get_everything',  {
+          .get('http://labs8randomizer.herokuapp.com/clss/get_everything',  {
               headers: {
                   'Authorization':'Token '.concat(token)
               }
