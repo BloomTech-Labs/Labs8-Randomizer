@@ -85,7 +85,7 @@ margin-top: 0px;
 const SignUpSubmit = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
-  console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
+  console.log(data.get('username'))
   axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
     "username": data.get('username'),
     "password1": data.get('password'),

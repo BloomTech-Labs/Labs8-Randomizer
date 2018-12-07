@@ -19,7 +19,7 @@ def createClass(request):
     user = request.user
     newClass2 = ClssName.manager.create_class(user,name_of_class)
     newClass2.save()
-    response = JsonResponse({"id":str(newClass2.id)}, safe=True, status=201)
+    response = JsonResponse({'id':str(newClass2.id)}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -31,8 +31,8 @@ def listClass(request):
     #now need to iterate through query set passing names into an array
     justnames = []
     for x in classlist:
-        justnames.append({"className":x.class_name,"classID":str(x.id)})
-    response = JsonResponse(json.dumps(justnames), safe=False, status=201)
+        justnames.append({'className':x.class_name,'classID':str(x.id)})
+    response = JsonResponse({'names' : justnames}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -48,16 +48,16 @@ def getEverything(request):
         students = []
         for y in studentlist:
             sParticipations = Participation.manager.filter(student=y.id)
-            pDicT = {"P":0, "NP":0}
+            pDicT = {'P':0, 'NP':0}
             for z in sParticipations:
                 if z.participate == True:
                     pDicT['P'] = pDicT['P'] + 1
                 else:
                     pDicT['NP'] = pDicT['NP'] + 1
-            studentInfo = {"studentName":y.student_name_first+' '+y.student_name_last, "participation": pDicT}
+            studentInfo = {'studentName':y.student_name_first+' '+y.student_name_last, 'participation': pDicT}
             students.append(studentInfo)
-        clssSummary.append({"className":x.class_name,"classID":str(x.id), "studentsInfo": students})
-    response = JsonResponse(json.dumps(clssSummary), safe=False, status=201)
+        clssSummary.append({'className':x.class_name,'classID':str(x.id), 'studentsInfo': students})
+    response = JsonResponse({'clss': clssSummary}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -77,9 +77,9 @@ def csv_post(request):
         print(s)
         newStudent = StudentName.objects.create_student(newClass,s[0],s[1])
         newStudent.save()
-        studentNameArray.append({"fullName":newStudent.student_name_first+' '+newStudent.student_name_last, "studentID":str(newStudent.id)})
-    obj = {"classID":str(newClass.id), "studentArray": studentNameArray}
-    response = JsonResponse(json.dumps(obj), safe=False, status=201)
+        studentNameArray.append({'fullName':newStudent.student_name_first+' '+newStudent.student_name_last, 'studentID':str(newStudent.id)})
+    obj = {'classID':str(newClass.id), 'studentArray': studentNameArray}
+    response = JsonResponse(obj, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -93,7 +93,7 @@ def createStudent(request):
     course = ClssName.manager.get(id=clssID)
     newStudent = StudentName.objects.create_student(course,first,last)
     newStudent.save()
-    response = JsonResponse({"key":str(newStudent.id)}, safe=True, status=201)
+    response = JsonResponse({'key':str(newStudent.id)}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -107,9 +107,10 @@ def studentList(request):
     classlist = StudentName.objects.filter(enrolled=clssID) #returns a QuerySet
     studentNames = []
     for x in classlist:
-        studentNames.append({"fullName":x.student_name_first+' '+x.student_name_last, "studentID":str(x.id)})
-    obj = {"class_name": class_name, "studentNames":studentNames}
-    response = JsonResponse(json.dumps(obj), safe=False, status=201)
+        studentNames.append({'fullName':x.student_name_first+' '+x.student_name_last, 'studentID':str(x.id)})
+    obj = {'class_name': class_name, 'studentNames':studentNames}
+    response = JsonResponse(obj, safe=True, status=201)
+    print(response)
     return response
 
 @csrf_exempt
@@ -137,14 +138,14 @@ def particpationTotal(request):
     for x in allParticipations:
         splitDate = str(x.date).split()
         if splitDate[0] not in participationDictionary:
-            participationDictionary[splitDate[0]] = {"P":0, "NP":0}
+            participationDictionary[splitDate[0]] = {'P':0, 'NP':0}
         if x.participate == True:
             dicT = participationDictionary[splitDate[0]]
             dicT['P'] = dicT['P'] + 1
         else:
             dicT = participationDictionary[splitDate[0]]
             dicT['NP'] = dicT['NP']+ 1
-    response = JsonResponse(json.dumps(participationDictionary), safe=False, status=201)
+    response = JsonResponse(participationDictionary, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -157,7 +158,7 @@ def updateClass(request):
     class_update = ClssName.manager.get(id=classID)
     class_update.class_name = class_new
     class_update.save()
-    response = JsonResponse({"key":class_update.id}, safe=False, status=201)
+    response = JsonResponse({'key':class_update.id}, safe=True, status=201)
     return response
 
 
@@ -173,7 +174,7 @@ def updateStudent(request):
     student.student_name_first = student_new_first
     student.student_name_last = student_new_last
     student.save()
-    response = JsonResponse({"key":student.id}, safe=False, status=201)
+    response = JsonResponse({'key':student.id}, safe=True, status=201)
     return response
 
 @csrf_exempt
@@ -187,7 +188,7 @@ def deleteStudent(request):
     student = StudentName.objects.get(id=studentID)
     print("student", student)
     student.delete()
-    response = JsonResponse({"key": "user has been remove"}, safe=False, status=200)
+    response = JsonResponse({'key': 'user has been remove'}, safe=True, status=200)
     return response
 
 @csrf_exempt
@@ -198,6 +199,6 @@ def deleteClass(request):
     classID = data['classID']
     clss = ClssName.manager.get(id=classID)
     clss.delete()
-    response = JsonResponse({"key": "This class has been removed."}, safe=False, status=200)
+    response = JsonResponse({'key': 'This class has been removed.'}, safe=True, status=200)
     return response
 

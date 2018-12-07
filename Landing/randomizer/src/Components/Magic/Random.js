@@ -192,12 +192,12 @@ class Magic extends Component {
     handleClass = e => {
         let id= localStorage.getItem('classID')
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/list_students', {classID:id})
+          .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID":id})
 
           .then(res => {
-
-            var students = JSON.parse(res.data)
-            var newarray = students['studentNames']
+            let data = res.data
+            console.log('data',res.data)
+            var newarray = data['studentNames']
             if (newarray.length === 0){
               alert('No students in Class, Add a Student')
               this.props.history.push('/Class')
@@ -207,7 +207,7 @@ class Magic extends Component {
             this.state.studentnamearray.push(name)
             this.setState({studentnamearray :this.state.studentnamearray})
             })
-            this.setState({classinfo: students['class_name']})
+            this.setState({classinfo: data['class_name']})
             console.log('stater', this.state.studentnamearray)
           })
 
@@ -221,10 +221,10 @@ class Magic extends Component {
         let valid = localStorage.getItem('studentID')
 
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/participation_list', {'studentID': valid})
+          .post('https://labs8randomizer.herokuapp.com/clss/participation_list', {'studentID': valid})
 
           .then(res => {
-            var myobj2 = JSON.parse(res.data)
+            var myobj2 = res.data
             // console.log('myobj2',myobj2)
 
             // console.log('Dates', Object.keys(myobj2))
@@ -258,7 +258,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/participate',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'True',
           } )
@@ -281,7 +281,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/participate',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'False',
           } )
