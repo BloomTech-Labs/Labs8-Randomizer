@@ -11,8 +11,6 @@ from rest_framework import permissions
 
 
 @csrf_exempt
-@api_view(["POST"])
-@permission_classes((permissions.AllowAny,))
 def createClass(request):
     data = json.loads(request.body)
     name_of_class = data['class_name']
