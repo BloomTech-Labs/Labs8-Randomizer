@@ -40,9 +40,9 @@ const Background = styled.div`
 background-color: #ffffff;
 font-family:'Raleway', sans-serif;
 display: flex;
-width: 1920px;
-height: 1080px;
-
+width: 100%;
+height: 100%;
+justify-content: center;
 
 @media (max-width: 400px) {
   flex-direction: column;

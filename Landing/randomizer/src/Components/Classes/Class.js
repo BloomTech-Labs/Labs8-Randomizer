@@ -31,7 +31,7 @@ const Editmain = styled.div`
 
 const Maindiv = styled.div`
 display: flex;
-width: 500px;
+width: 650px;
 height: 800px;
 background-color: rgba(255,255,255,.5);
 border: 3px solid #dfece6;
@@ -59,7 +59,7 @@ margin-bottom: 0px;
 const Classdiv = styled.div`
 display: flex;
 width: 300px;
-height: 400px;
+height: 350px;
 
 flex-direction: column;
 justify-content: ;
@@ -68,7 +68,7 @@ const Namediv = styled.div`
 display: flex;
 flex-direction: row;
 width: 250px;
-height: 50px;
+height: 30px;
 `
 
 const Namediv2 = styled.div`
@@ -140,6 +140,7 @@ cursor: pointer;
 height: 25px;
 background: none;
 width: 40px;
+margin-top: 35px;
 @media (max-width: 400px) {
   
   margin-top: 35px;
@@ -181,7 +182,7 @@ transition: .4s;
 const Secondlevel = styled.div`
 font-family:'Raleway', sans-serif;
   width: 1000px;
-  height: 80px;
+  height: .1px;
   justify-content: center;
   flex-direction: row;
   justify-content: right;
@@ -302,7 +303,7 @@ PapaParse.parse(filename,
                 this.setState({studentList: unnested})
                 this.setState({class_name: unnested[0]})
                 console.log("state", this.state.studentList)
-                axios.post('http://localhost:8000/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
+                axios.post('https://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
                     'Authorization':'Token '.concat(token)
                   }
@@ -324,7 +325,7 @@ PapaParse.parse(filename,
         const mail = {"class_name": this.state.class_name};
         const token =localStorage.getItem('jwt').toString();
         axios
-          .post('http://localhost:8000/clss/create_class', {"class_name": this.state.class_name}, {
+          .post('https://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
             'Authorization':'Token '.concat(token)
 
@@ -342,7 +343,7 @@ PapaParse.parse(filename,
       addStudent = e => {
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://localhost:8000/clss/add_student',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
             "firstName":this.state.firstName,
             "lastName":this.state.lastName,
@@ -397,7 +398,7 @@ handleClose = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   axios
-  .delete('http://localhost:8000/clss/deletestudent',{
+  .delete('https://labs8randomizer.herokuapp.com/clss/deletestudent',{
   data: {"studentID": studentID.toString()}
   })
   .then( res => {
@@ -416,7 +417,7 @@ handleEdit = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   if(this.state.newName || this.state.newLastName){
-    axios.post('http://localhost:8000/clss/updatestudent', {
+    axios.post('https://labs8randomizer.herokuapp.com/clss/updatestudent', {
         "student_name_first": this.state.newName,
         "student_name_last": this.state.newLastName,
         "studentID": studentID
@@ -469,11 +470,12 @@ secondDisplay = e => {
 
 loadStudents = e => {
   axios
-  .post('http://localhost:8000/clss/list_students', {"classID": localStorage.getItem('classID')} )
+  .post('http://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
   .then(res => {
     console.log('loadres', res.data)
     let son = JSON.parse(res.data)
     console.log('son', son['studentNames'])
+    this.setState({class_name: son['class_name']})
     if (son['studentNames'].length > 0){
     son['studentNames'].map(name => {
       this.state.studentList.push(name)
@@ -508,8 +510,8 @@ startHandler = e => {
                 
                 </Namediv>
                 <Namediv2>
-                <Misc>Class Name {this.state.class_name}</Misc>
-                <Sider2 onClick={this.addStudent}>
+                <Misc>{this.state.class_name}</Misc>
+                <Sider2 onClick={console.log('add edit')}>
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
                 </Namediv2>
@@ -528,22 +530,23 @@ startHandler = e => {
                 
                 </Namediv>
 
-                <Namediv>
-                <Bigbutton>Start Randomizer</Bigbutton>
-                </Namediv>
+               
                 
               </Classdiv>
 
-              {/* <Secondlevel>
+              <Secondlevel>
                 
-                <Add onClick={this.addStudent}> Add Student</Add>
+                
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
                 
-              </Secondlevel> */}
+              </Secondlevel>
 
               <NameGrid>
                 {this.state.studentList2}
               </NameGrid>
+              <Namediv>
+                <Bigbutton onClick={this.startHandler}>Start Randomizer</Bigbutton>
+                </Namediv>
 
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>

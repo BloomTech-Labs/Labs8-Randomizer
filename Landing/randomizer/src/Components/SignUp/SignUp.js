@@ -87,15 +87,15 @@ const SignUpSubmit = (event) => {
   const data = new FormData(event.target);
   console.log(data.get('username'), data.get('password'), data.get('password-confirm'))
   axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
-    'username': data.get('username'),
-    'password1': data.get('password'),
-    'password2': data.get('password-confirm'),
+    "username": data.get('username'),
+    "password1": data.get('password'),
+    "password2": data.get('password-confirm'),
   })
   .then(res => {
     const token = res.data.key;
 
     localStorage.setItem('jwt', token);
-    this.props.history.push('/');
+    this.props.history.push('/ViewClasses');
   })
   .catch(error => {
     console.log(error)
