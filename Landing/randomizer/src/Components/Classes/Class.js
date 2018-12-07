@@ -303,13 +303,13 @@ PapaParse.parse(filename,
                 this.setState({studentList: unnested})
                 this.setState({class_name: unnested[0]})
                 console.log("state", this.state.studentList)
-                axios.post('http://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
+                axios.post('https://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
                     'Authorization':'Token '.concat(token)
                   }
                 })
                 .then(res => {
-                  let parsed = JSON.parse(res.data)
+                  let parsed = res.data
                   this.setState({studentList: parsed['studentArray']}, () => {
                     console.log("state in .then", this.state.studentList)
                     this.handleDisplay()
@@ -321,11 +321,12 @@ PapaParse.parse(filename,
            })
          };
 
-    createClass = e => {
+    createClass = () => {
         const mail = {"class_name": this.state.class_name};
         const token =localStorage.getItem('jwt').toString();
+        console.log('token type', typeof token)
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
+          .post('https://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
             'Authorization':'Token '.concat(token)
 
@@ -343,7 +344,7 @@ PapaParse.parse(filename,
       addStudent = e => {
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('http://labs8randomizer.herokuapp.com/clss/add_student',  {
+          .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
             "firstName":this.state.firstName,
             "lastName":this.state.lastName,
@@ -398,7 +399,7 @@ handleClose = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   axios
-  .delete('http://labs8randomizer.herokuapp.com/clss/deletestudent',{
+  .delete('https://labs8randomizer.herokuapp.com/clss/deletestudent',{
   data: {"studentID": studentID.toString()}
   })
   .then( res => {
@@ -417,7 +418,7 @@ handleEdit = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   if(this.state.newName || this.state.newLastName){
-    axios.post('http://labs8randomizer.herokuapp.com/clss/updatestudent', {
+    axios.post('https://labs8randomizer.herokuapp.com/clss/updatestudent', {
         "student_name_first": this.state.newName,
         "student_name_last": this.state.newLastName,
         "studentID": studentID
@@ -470,10 +471,10 @@ secondDisplay = e => {
 
 loadStudents = e => {
   axios
-  .post('http://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
+  .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
   .then(res => {
     console.log('loadres', res.data)
-    let son = JSON.parse(res.data)
+    let son = res.data
     console.log('son', son['studentNames'])
     this.setState({class_name: son['class_name']})
     if (son['studentNames'].length > 0){

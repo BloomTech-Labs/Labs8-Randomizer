@@ -103,7 +103,7 @@ class ViewClass extends Component {
 
       const token =localStorage.getItem('jwt').toString();
         axios
-          .get('http://labs8randomizer.herokuapp.com/clss/get_everything',  {
+          .get('https://labs8randomizer.herokuapp.com/clss/get_everything',  {
               headers: {
                   'Authorization':'Token '.concat(token)
               }
@@ -113,7 +113,7 @@ class ViewClass extends Component {
   
               console.log('resdata',res.data)
   
-              var classes = JSON.parse(res.data)
+              var classes = res.data['clss']
               console.log('typetest', typeof classes)
               classes.map(name => {
               this.state.Classarray.push(name)
