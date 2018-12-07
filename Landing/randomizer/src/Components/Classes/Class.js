@@ -303,7 +303,7 @@ PapaParse.parse(filename,
                 this.setState({studentList: unnested})
                 this.setState({class_name: unnested[0]})
                 console.log("state", this.state.studentList)
-                axios.post('https://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
+                axios.post('http://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                   headers: {
                     'Authorization':'Token '.concat(token)
                   }
@@ -325,7 +325,7 @@ PapaParse.parse(filename,
         const mail = {"class_name": this.state.class_name};
         const token =localStorage.getItem('jwt').toString();
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
+          .post('http://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
             'Authorization':'Token '.concat(token)
 
@@ -343,7 +343,7 @@ PapaParse.parse(filename,
       addStudent = e => {
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
+          .post('http://labs8randomizer.herokuapp.com/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
             "firstName":this.state.firstName,
             "lastName":this.state.lastName,
@@ -398,7 +398,7 @@ handleClose = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   axios
-  .delete('https://labs8randomizer.herokuapp.com/clss/deletestudent',{
+  .delete('http://labs8randomizer.herokuapp.com/clss/deletestudent',{
   data: {"studentID": studentID.toString()}
   })
   .then( res => {
@@ -417,7 +417,7 @@ handleEdit = (dialog, ind) => {
   let student = this.state.studentList[ind]
   let studentID = student['studentID']
   if(this.state.newName || this.state.newLastName){
-    axios.post('https://labs8randomizer.herokuapp.com/clss/updatestudent', {
+    axios.post('http://labs8randomizer.herokuapp.com/clss/updatestudent', {
         "student_name_first": this.state.newName,
         "student_name_last": this.state.newLastName,
         "studentID": studentID

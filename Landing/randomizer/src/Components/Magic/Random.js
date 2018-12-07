@@ -192,7 +192,7 @@ class Magic extends Component {
     handleClass = e => {
         let id= localStorage.getItem('classID')
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/list_students', {classID:id})
+          .post('http://labs8randomizer.herokuapp.com/clss/list_students', {classID:id})
 
           .then(res => {
 
@@ -221,7 +221,7 @@ class Magic extends Component {
         let valid = localStorage.getItem('studentID')
 
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/participation_list', {'studentID': valid})
+          .post('http://labs8randomizer.herokuapp.com/clss/participation_list', {'studentID': valid})
 
           .then(res => {
             var myobj2 = JSON.parse(res.data)
@@ -258,7 +258,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
+          .post('http://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'True',
           } )
@@ -281,7 +281,7 @@ class Magic extends Component {
 
         const mail = {"class_name": this.state.class_name}
         axios
-          .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
+          .post('http://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
           "particpated":'False',
           } )
