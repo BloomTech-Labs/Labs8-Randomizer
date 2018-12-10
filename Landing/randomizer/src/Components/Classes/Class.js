@@ -25,7 +25,7 @@ background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 flex-direction: column;
 border-radius: 7px;
-
+padding-left: 15px;
 @media (max-width: 400px) {
   height: 800px;
   border: none;
@@ -63,7 +63,7 @@ const Namediv2 = styled.div`
 display: flex;
 flex-direction: row;
 width: 300px;
-
+visibility: hidden;
 `
 const Title = styled.h1`
 font-size: 50px;
@@ -461,7 +461,27 @@ startHandler = e => {
   this.props.history.push('/Random');
 }
 
+showHandler() {
+let a = document.getElementById('First');
+let b = document.getElementById("Bigbutton");
+let c = document.getElementById("Namediv2");
+let d = document.getElementById('Grid')
+console.log('a', a)
 
+if (a.style.visibility==="hidden") {
+  a.style.visibility ="visible"
+}
+
+if (b.style.visibility==="hidden") {
+  b.style.visibility ="visible"
+}
+if (c.style.visibility==="hidden") {
+  c.style.visibility ="visible"
+}
+if (d.style.visibility==="hidden") {
+  d.style.visibility ="visible"
+}
+}
 
     render() {
         return (
@@ -478,11 +498,14 @@ startHandler = e => {
                 <Namediv>
                 <Import htmlFor="file">Import CSV</Import>
                  <Ptag>Or</Ptag>
-                <Dec onClick={this.createClass}>Create Class</Dec>
+                <Dec onClick={() =>{
+                  this.createClass()
+                  this.showHandler() } }>Create Class</Dec>
                 
                 </Namediv>
-                <Namediv2>
+                <Namediv2 id="Namediv2" style={{visibility:'hidden'}}>
                 <Misc>{this.state.class_name}</Misc>
+                
                 <Sider2 onClick={console.log('add edit')}>
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
@@ -490,7 +513,7 @@ startHandler = e => {
                 
                 
                 {/* <Part onClick={() => this.alertDialog('resetOpen')}> Reset Participation</Part> */}
-                <Namediv>
+                <Namediv id="First" style={{visibility:'hidden'}} >
                
                 <Editname type="text" placeholder="First Name" onChange={this.studentInput}
                 value={this.state.firstName}></Editname>
@@ -513,16 +536,17 @@ startHandler = e => {
                 
               </Secondlevel>
 
-              <NameGrid>
+              <NameGrid id="Grid" style={{visibility:'hidden'}}>
                 {this.state.studentList2}
               </NameGrid>
-              <Namediv>
+              <Namediv id="Bigbutton" style={{visibility:'hidden'}}>
                 <Bigbutton onClick={this.startHandler}>Start Randomizer</Bigbutton>
                 </Namediv>
 
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
               <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
+          
             </Maindiv>
 
              
