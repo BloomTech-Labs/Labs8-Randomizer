@@ -490,6 +490,15 @@ startHandler = e => {
   this.props.history.push('/Random');
 }
 
+editClassName = e => {
+  axios.post('https://labs8randomizer.herokuapp.com/clss/updateclass', {
+    "classID": localStorage.getItem("classID"),
+    "class_name": this.state.class_name
+  })
+  .then( res=> {
+    console.log(res.data)
+  })
+}
 
 
     render() {
@@ -512,7 +521,7 @@ startHandler = e => {
                 </Namediv>
                 <Namediv2>
                 <Misc>{this.state.class_name}</Misc>
-                <Sider2 onClick={console.log('add edit')}>
+                <Sider2 onClick={this.editClassName}>
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
                 </Namediv2>
