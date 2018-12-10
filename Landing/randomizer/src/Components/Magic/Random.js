@@ -11,11 +11,11 @@ import Chartprop from '../Rechart/ClassChart';
 import Class from '../Classes/Class';
 
 const Maindiv = styled.div`
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 display: flex;
 width: 500px;
-height: 800px;
-
+height: 600px;
+padding-left: 15px;
 border-radius: 7px;
 
 border: 3px solid #dfece6;
@@ -34,7 +34,7 @@ width: 300px;
 height: 100px;
 justify-content: space-between;
 flex-direction: row;
-margin-top: 100px;
+margin-top: 25px;
 align-content: center;
 `
 
@@ -42,14 +42,16 @@ const Namediv = styled.div`
 display: flex;
 width: 200px;
 height: 150px;
-
+margin-top: 0px;
 `
 
 const Chartdiv = styled.div`
 display: flex;
 width: 400px;
-height: 400px;
-
+height: 200px;
+position: absolute;
+margin-top: 100px;
+margin-left: 150px;
 `
 const Buttondiv = styled.div`
 display: flex;
@@ -61,6 +63,7 @@ z-index: +1;
 const Title = styled.h1`
 font-size: 50px;
 height: 40px;
+margin-bottom: 0px;
 @media (max-width: 400px) {
   margin-bottom: 0px;
   font-size: 40px;
@@ -358,8 +361,8 @@ class Magic extends Component {
                   <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
                   
             </Buttondiv>  
-            <Chartdiv>
-            <StudentChart  P={this.state.P}  NP={this.state.NP}/>
+            <Chartdiv id="Chart" >
+            <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
             </Chartdiv>
 
             

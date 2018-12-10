@@ -50,7 +50,7 @@ const Homediv = styled.div`
 width: 500px;
 height: 600px;
 border: 1px solid #dfece6;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 
 border: 3px solid #dfece6;
 display: flex;
