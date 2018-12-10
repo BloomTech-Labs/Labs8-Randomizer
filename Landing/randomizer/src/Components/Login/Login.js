@@ -11,7 +11,7 @@ const Homediv = styled.div`
 border: 3px solid #dfece6;
 width: 500px;
 height: 500px;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 display: flex;
 justify-content: center;
 border-radius: 4px;

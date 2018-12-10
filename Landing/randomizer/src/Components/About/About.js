@@ -17,7 +17,7 @@ margin-left: 100px;
 border: 3px solid #dfece6;
 display: flex;
 flex-wrap: wrap;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 @media (max-width: 400px) {
    border: none;
    background-color: none;

@@ -33,7 +33,7 @@ const Maindiv = styled.div`
 display: flex;
 width: 650px;
 height: 800px;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 flex-direction: column;
 border-radius: 7px;

@@ -21,7 +21,7 @@ import '../ViewClass/Add.css'
  width: 900px;
  
  justify-content: flex-start;
- background-color: rgba(255,255,255,.8);
+ background-color: rgba(255,255,255,.9);
  
 border: 3px solid #dfece6;
 border-radius: 5px;

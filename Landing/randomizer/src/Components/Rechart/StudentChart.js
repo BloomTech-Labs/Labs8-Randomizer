@@ -25,7 +25,7 @@ align-items: center;
 
      return  (
          <Homediv>
-        <PieChart width={215} height={400}>
+        <PieChart width={215} height={300}>
         <Pie
         dataKey={null}
           data={data} 
