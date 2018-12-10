@@ -1,33 +1,21 @@
 // Libraries
 import React, {Component} from 'react';
-
 import styled from 'styled-components';
 import axios from 'axios';
-import Deleteicon from '@material-ui/icons/Delete';
-import AlertDialog from './AlertDialog';
-import ResetDialog from './ResetDialog';
 
+//Icons
+import Deleteicon from '@material-ui/icons/Delete';
 import Addbutton from '@material-ui/icons/AddCircle';
 import Pencil from '@material-ui/icons/Edit';
-import EditDialog from './EditDialog';
 import Button from '@material-ui/core/Button';
+
+//Components
+import AlertDialog from './AlertDialog';
+import ResetDialog from './ResetDialog';
+import EditDialog from './EditDialog';
+
+//Library
 const PapaParse = require('papaparse/papaparse.min.js');
-
-
-
-
-
-const Editmain = styled.div`
-  font-family:'Raleway', sans-serif;
-  display: flex;
-  justify-content: center;
-  width: 900px;
-  border: 1px solid red;
-  height: 500px;
-  border: 10px solid #E2E4F6;
-  border-radius: 5px;
-  background-color: white;
-`
 
 const Maindiv = styled.div`
 display: flex;
@@ -204,24 +192,7 @@ margin-top: 15px;
       color: white
   }
 `
-const Edit = styled.button`
-font-family:'Raleway', sans-serif;
-margin-top: 5px;
-margin-right: 10px;
-border: none;
-width: 100px;
-height: 65px;
-text-decoration: none;
-cursor: pointer;
 
-color: black;
-background-color: #F56600;
-transition: .5s;
-
-:hover {
-  color: white;
-}
-`
 
 const Import = styled.label`
 padding-top: 10px;

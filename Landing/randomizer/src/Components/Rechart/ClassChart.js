@@ -65,8 +65,9 @@ outline: 0;
       e.preventDefault()
       axios.delete('https://labs8randomizer.herokuapp.com/clss/deleteclass', {data: {'classID': this.state.id}})
       .then (
+        window.location.reload()
       )  
-      window.location.reload()
+    
     }
       
       
@@ -101,3 +102,4 @@ outline: 0;
           }
  }
  export default Chartprop;
+

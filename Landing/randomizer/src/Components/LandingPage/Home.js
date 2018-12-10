@@ -3,16 +3,16 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-// Icons
-// import Gearicon from '@material-ui/icons/Settings';
+
+// Images
 import Random from '../Img/hd.png';
 
-// Imports
+// Components
 import Login from '../Login/Login';
 import GoogleApi from '../GoogleApi/GoogleApi';
+
 // Stylings
 const Homediv = styled.div`
-
 width: 500px;
 height: 600px;
 background-color: rgba(255,255,255,.9);
@@ -101,11 +101,7 @@ color: #FF6A00;
   }
 `
 const Logo = styled.img`
-
-
 `
-
-
 
 class Home extends Component {
     constructor(props) {
