@@ -3,28 +3,32 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
-
+import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
 // Icons
 import Add from '@material-ui/icons/LibraryAdd';
 
 //Components
-import Flexchart from '../Rechart/Flexchart';
 
-// Stylings
+import Flexchart from '../Rechart/Flexchart';
+import Chartprop from '../Rechart/ClassChart';
+
+import '../ViewClass/Add.css'
 
  const Classdiv = styled.div`
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
  width: 900px;
+ 
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
+ 
 border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
+    
     width: 700px;
   }
-
 @media (max-width: 400px) {
     width: 200px;
     height: 200px;
@@ -48,7 +52,6 @@ border-radius: 5px;
  margin-left: 5px;
  :hover {
      background-color: black;
-
  }
  @media (max-width: 400px) {
     width: 110px;
@@ -59,9 +62,17 @@ border-radius: 5px;
 const H1 = styled.h1`
 color: white;
 @media (max-width: 400px) {
-
     font-size: 14px;
   }
+`
+const H2 = styled.h1`
+color: black;
+position: absolute;
+margin-left: 5px;
+`
+
+const Title = styled.div`
+display: flex;
 `
 class ViewClass extends Component {
     constructor(props) {
@@ -75,15 +86,20 @@ class ViewClass extends Component {
        }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.handleClass()
         if (localStorage.getItem("studentID")) {
             localStorage.removeItem("studentID")
           }
+          if (localStorage.getItem("classID")) {
+            localStorage.removeItem("classID")
+          }
+        
     }
 
     handleClass = e => {
-
+        console.log('viewclass props, history', this.props.history)
+        this.setState({ info: [] })
 
       const token =localStorage.getItem('jwt').toString();
         axios
@@ -98,24 +114,17 @@ class ViewClass extends Component {
               console.log('resdata',res.data)
   
               var classes = res.data['clss']
-              console.log('typetest', typeof classes)
-              classes.map(name => {
-              this.state.Classarray.push(name)
-  
-              })
-              console.log('Classarray',this.state.Classarray)
-  
-              this.state.Classarray.map(cl => {
-                  this.state.classnames.push(cl['className'])
-              })
-              this.state.Classarray.map(item => {
-                  this.state.info.push(item)
-                  this.setState({info: this.state.info})
-              })
-              console.log('info', this.state.info)
-              this.setState({truenames: Object.values(this.state.classnames)})
-              console.log('names',Object.values(this.state.classnames) )
+              console.log('0th', classes[0])
+              classes.map(clss => {
             
+                  this.setState({info : [...this.state.info, clss]})
+            
+                  console.log('state after set state', this.state.info)
+              })
+               this.setState({info: this.state.info})
+             
+              // console.log('handleclass')
+              // console.log('classP', this.state.P)
             })
         }
 handleAdd = () => {
@@ -131,15 +140,17 @@ handleAdd = () => {
 
            <Classdiv>
                
-            <Link to='/Random' style={{height: '200px'}}>
-            <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
-            </Link>
-                              
-               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
+            
+            <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
+            
+               
+               {/* <Chartprop  Data={this.state.info}/> */}
+               
+               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}> 
               <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
-             </Link>
+            </Link>
 
            </Classdiv>
 

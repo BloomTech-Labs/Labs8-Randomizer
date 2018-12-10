@@ -461,6 +461,7 @@ startHandler = e => {
   this.props.history.push('/Random');
 }
 
+
 showHandler() {
 let a = document.getElementById('First');
 let b = document.getElementById("Bigbutton");
@@ -482,6 +483,19 @@ if (d.style.visibility==="hidden") {
   d.style.visibility ="visible"
 }
 }
+
+
+editClassName = e => {
+  axios.post('https://labs8randomizer.herokuapp.com/clss/updateclass', {
+    "classID": localStorage.getItem("classID"),
+    "class_name": this.state.class_name
+  })
+  .then( res=> {
+    console.log(res.data)
+  })
+}
+
+
 
     render() {
         return (
@@ -505,8 +519,8 @@ if (d.style.visibility==="hidden") {
                 </Namediv>
                 <Namediv2 id="Namediv2" style={{visibility:'hidden'}}>
                 <Misc>{this.state.class_name}</Misc>
-                
-                <Sider2 onClick={console.log('add edit')}>
+
+                <Sider2 onClick={this.editClassName}>
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
                 </Namediv2>
