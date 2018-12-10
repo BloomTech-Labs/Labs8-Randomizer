@@ -3,13 +3,10 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-
 // Components
-import Chart from '../Rechart/Charts';
 import StudentChart from '../Rechart/StudentChart';
-import Chartprop from '../Rechart/ClassChart';
-import Class from '../Classes/Class';
 
+// Stylings
 const Maindiv = styled.div`
 background-color: rgba(255,255,255,.9);
 display: flex;
@@ -57,7 +54,6 @@ const Buttondiv = styled.div`
 display: flex;
 width: 250px;
 height: 75px;
-
 z-index: +1;
 `
 const Title = styled.h1`
@@ -68,9 +64,7 @@ margin-bottom: 0px;
   margin-bottom: 0px;
   font-size: 40px;
   text-decoration: underline;
-  
 }
-
 `
 const Misc = styled.h1`
 margin-top: 0px;
@@ -89,7 +83,6 @@ height: 40px;
 text-decoration: none;
 cursor: pointer;
 margin-right: 15px;
-
 color:black;
 background-color: #4caf50;
 border: none;
@@ -108,13 +101,11 @@ width: 150px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
-
 color: black;
 background-color: #E91E63;
 transition: .5s;
 :hover {
   color: white
-    
 }
 `
 

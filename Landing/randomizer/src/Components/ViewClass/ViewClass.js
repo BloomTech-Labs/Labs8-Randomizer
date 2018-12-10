@@ -3,33 +3,28 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
-import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
+
 // Icons
 import Add from '@material-ui/icons/LibraryAdd';
 
 //Components
-
 import Flexchart from '../Rechart/Flexchart';
-import Chartprop from '../Rechart/ClassChart';
 
-import '../ViewClass/Add.css'
+// Stylings
 
  const Classdiv = styled.div`
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
  width: 900px;
- 
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
- 
 border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
-
-    
     width: 700px;
   }
+
 @media (max-width: 400px) {
     width: 200px;
     height: 200px;
@@ -39,7 +34,6 @@ border-radius: 5px;
     background-color: none;
     margin-left: 25px;
   }
-
  `
  const Addclass = styled.button`
  width: 200px;
@@ -68,16 +62,6 @@ color: white;
 
     font-size: 14px;
   }
-`
-const H2 = styled.h1`
-color: black;
-position: absolute;
-margin-left: 5px;
-
-`
-
-const Title = styled.div`
-display: flex;
 `
 class ViewClass extends Component {
     constructor(props) {
@@ -131,8 +115,7 @@ class ViewClass extends Component {
               console.log('info', this.state.info)
               this.setState({truenames: Object.values(this.state.classnames)})
               console.log('names',Object.values(this.state.classnames) )
-              // console.log('handleclass')
-              // console.log('classP', this.state.P)
+            
             })
         }
 handleAdd = () => {
@@ -151,9 +134,7 @@ handleAdd = () => {
             <Link to='/Random' style={{height: '200px'}}>
             <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
             </Link>
-               
-               {/* <Chartprop  Data={this.state.info}/> */}
-               
+                              
                <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
               <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>

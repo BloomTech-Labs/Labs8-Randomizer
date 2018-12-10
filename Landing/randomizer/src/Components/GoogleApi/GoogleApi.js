@@ -1,4 +1,7 @@
+// Libraries
 import React from 'react';
+
+// Components
 import {GoogleLogin} from 'react-google-login';
 
 // function onSignIn(googleUser) {

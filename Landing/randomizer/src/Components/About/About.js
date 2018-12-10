@@ -1,8 +1,7 @@
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+
 
 //PNGs
 import Mark from '../Img/Smallmark.png';
@@ -11,6 +10,7 @@ import Nick from '../Img/nicksface.PNG';
 import Sus from '../Img/sus.PNG';
 import Emme from '../Img/emme.PNG';
 import Ray from '../Img/ray.PNG';
+
 const Homediv = styled.div`
 margin-left: 100px;
 
@@ -120,10 +120,10 @@ class Settings extends React.Component {
                   <Title>Front End Developer</Title>
                   <Face src={Nick}></Face>
                   <Picholder>
-                  <a href="https://github.com/NickolausSmith" target="_blank">
+                  <a href="https://github.com/NickolausSmith" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/nick-smith-9b7254167/" target="_blank">
+                  <a href="https://www.linkedin.com/in/nick-smith-9b7254167/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
@@ -139,10 +139,10 @@ class Settings extends React.Component {
                   <Title> Database Engineer</Title>
                   <Face src={Sus}></Face>
                     <Picholder>
-                  <a href="https://github.com/sulemc" target="_blank">
+                  <a href="https://github.com/sulemc" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/susanna-mcdonald/" target="_blank">
+                  <a href="https://www.linkedin.com/in/susanna-mcdonald/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
@@ -154,10 +154,10 @@ class Settings extends React.Component {
                   <Title>Full Stack Developer</Title>
                     <Face src={Emme}></Face>
                   <Picholder>
-                  <a href="https://github.com/emaquino44" target="_blank">
+                  <a href="https://github.com/emaquino44" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/emaquino44/" target="_blank">
+                  <a href="https://www.linkedin.com/in/emaquino44/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>
@@ -169,10 +169,10 @@ class Settings extends React.Component {
                   <Title>Front End Developer</Title>
                   <Face src={Ray}></Face>
                   <Picholder>
-                  <a href="https://github.com/Raymondgrc" target="_blank">
+                  <a href="https://github.com/Raymondgrc" target="_blank" rel="noopener noreferrer">
                   <Git src={Mark}></Git>
                   </a>
-                  <a href="https://www.linkedin.com/in/raymondgarcia1/" target="_blank">
+                  <a href="https://www.linkedin.com/in/raymondgarcia1/" target="_blank" rel="noopener noreferrer">
                   <Linker src={Linked}></Linker>
                   </a>
                   </Picholder>

@@ -1,7 +1,9 @@
+// Libraries
 import React from 'react';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
 import styled from 'styled-components';
 
+// Stylings
 const Graphbox = styled.button`
 cursor: pointer;
 text-decoration: none;
@@ -29,10 +31,6 @@ outline: 0;
     //   return dataBox;
     // }
   
-    
-    
-    
-
     let cl = props.Data['className']
     let number = props.Data['studentsInfo'].length
     let id = props.Data['classID']
@@ -61,8 +59,6 @@ outline: 0;
 
     }
     
-
-
     const handleSubmit= () => {
       
         localStorage.setItem('classID', id)
@@ -71,7 +67,7 @@ outline: 0;
      return  (
      
         <div>
-          {/* <h1>{[key]['className']}</h1> */}
+          
           <Graphbox onClick={handleSubmit}>
 
         <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={dataList()}  

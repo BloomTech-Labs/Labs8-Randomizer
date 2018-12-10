@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axios from  'axios';
+
 // Icons
-import Homeicon from '@material-ui/icons/Home';
 import Backarrow from '@material-ui/icons/ArrowBack';
 
+// Stylings
 const FormStyling = styled.form`
 display: block;
 `
@@ -23,17 +24,14 @@ border: 1px solid black;
   color: black;
 }
 padding-left: 10px;
-
 `
 const Signin = styled.button`
-
 outline: 0;
 width: 150px;
 height: 40px;
 background-color: #00E1F5;
 cursor: pointer;
 border: none;
-
 text-decoration: none;
 margin-left: 30px;
 position: absolute;
@@ -41,7 +39,6 @@ color: black;
 transition: .5s;
 
 :hover {
-    
     opacity: .9;
     color: white;
 }
@@ -80,16 +77,12 @@ margin-top: 0px;
     margin-bottom: 20px;
     margin-left: 20px;
   }
-
 `
 
 
 
 class SignUp extends Component {
-  constructor() {
-    super();
-    
-}
+ 
 
 
   SignUpSubmit = (event) => {
