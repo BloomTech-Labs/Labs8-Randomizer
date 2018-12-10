@@ -18,16 +18,17 @@ import '../ViewClass/Add.css'
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
- width: 900px;
- 
+ width: 100%;
+ height: 100%;
+
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
- 
+
 border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
 
-    
+
     width: 700px;
   }
 @media (max-width: 400px) {
@@ -42,6 +43,7 @@ border-radius: 5px;
 
  `
  const Addclass = styled.button`
+ margin-top: 50px;
  width: 200px;
  height: 200px;
  border: none;
@@ -108,19 +110,19 @@ class ViewClass extends Component {
                   'Authorization':'Token '.concat(token)
               }
           })
-  
+
             .then(res => {
-  
+
               console.log('resdata',res.data)
-  
+
               var classes = res.data['clss']
               console.log('typetest', typeof classes)
               classes.map(name => {
               this.state.Classarray.push(name)
-  
+
               })
               console.log('Classarray',this.state.Classarray)
-  
+
               this.state.Classarray.map(cl => {
                   this.state.classnames.push(cl['className'])
               })
@@ -147,19 +149,18 @@ handleAdd = () => {
 
 
            <Classdiv>
-               
-            <Link to='/Random' style={{height: '200px'}}>
-            <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
-            </Link>
-               
-               {/* <Chartprop  Data={this.state.info}/> */}
-               
-               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
-              <Addclass>
+             <div>
+               <Link to='/Random' style={{height: '200px'}}>
+                 <Flexchart Dates={this.state.info} Classes={this.state.Classarray}></Flexchart>
+               </Link>
+             </div>
+            <div>
+              <Link to='/Class' style={{height: '200px', marginTop: '75px'}} onClick={this.handleAdd}>
+                <Addclass>
                   <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
-             </Addclass>
-             </Link>
-
+                </Addclass>
+              </Link>
+            </div>
            </Classdiv>
 
         )

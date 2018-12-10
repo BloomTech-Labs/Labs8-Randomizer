@@ -31,6 +31,7 @@ import People from '@material-ui/icons/People';
 import Info from '@material-ui/icons/Info';
 import Mobilebutton from '@material-ui/icons/Toc';
 // Stylings
+import './index.css'
 
 //Images
 import Flatclass from '../src/Components/Img/flatclass2.png';
@@ -48,7 +49,7 @@ justify-content: center;
   flex-direction: column;
   width: 400px;
   height: 500px;
-  
+
 }
 `
 const Appmain = styled.div`
@@ -56,12 +57,13 @@ font-family:'Raleway', sans-serif;
 display: flex;
 justify-content: center;
 background-image: url(${Flatclass});
-width: 1100px;
-height: 800px;
+background-repeat: no-repeat;
+background-size: cover;
+width: 70%;
 
 background-color: white;
 @media (max-width: 1024px) {
-  
+
   width: 650px;
   height: 400px;
 }
@@ -74,6 +76,7 @@ background-color: white;
 const Sidebar = styled.div`
 width: 40px;
 height: 400px;
+margin-right: 40px;
 background-color: none;
 display: flex;
 color: white;
@@ -85,10 +88,10 @@ margin-top: 50px;
 z-index: +1;
 @media (max-width: 400px) {
   position: fixed;
- 
+
   display: none;
- 
-  
+
+
 }
 `
 
@@ -111,12 +114,12 @@ width: 40px;
 }
 @media (max-width: 400px) {
   font-size: 10px;
-  
+
   width: 0px;
   margin-bottom: 0px;
-  
- 
-  
+
+
+
 }`
 
 
@@ -136,10 +139,10 @@ transition: .3s;
 
 :hover {
   color: #F7AF9D;
-  
+
 }
 @media (max-width: 400px) {
-  
+
   display: inline-block;
   position: fixed;
   margin-bottom: 50px;
@@ -179,45 +182,45 @@ console.log('window', window.innerWidth)
  {   if (x.style.display==="none") {
      x.style.display="flex"
      y.style.opacity=".5"
-    
-    
+
+
    } else {
      x.style.display ="none"
      y.style.opacity="1"
    }
-    
+
   }
 
 }
   render() {
-   
 
-   
+
+
 
     return (
-      
+
       <Background id="BackgroundID">
-      
-       
+
+
         <MobileSider onClick={this.mobileHandler}>
         <Tooltip title="Menu" placement="right">
-              <Mobilebutton  style={{fontSize: '48px'}} >  </Mobilebutton> 
+              <Mobilebutton  style={{fontSize: '48px'}} >  </Mobilebutton>
               </Tooltip>
             </MobileSider>
           <Sidebar id="Sidebar">
 
-            
 
 
-            
+
+
             <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
             <Sider onClick={this.mobileHandler} id="Sider"  >
             <Tooltip title="Home" placement="right">
-              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon> 
+              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon>
               </Tooltip>
             </Sider >
             </Link>
-          
+
             <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider5" >
               <Tooltip title="Classes" placement="right">
@@ -225,7 +228,7 @@ console.log('window', window.innerWidth)
               </Tooltip>
               </Sider >
             </Link>
-          
+
             <Link to="/Class" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider4">
               <Tooltip title="Create or Edit a Class" placement="right">
@@ -250,7 +253,7 @@ console.log('window', window.innerWidth)
                 </Tooltip>
               </Sider >
             </Link>
-            
+
             <Link to="/About" style={{height: '40px', marginBottom: '25px' }}>
               <Sider onClick={this.mobileHandler} id="Sider6">
               <Tooltip title="About" placement="right">
@@ -258,7 +261,7 @@ console.log('window', window.innerWidth)
               </Tooltip>
               </Sider >
             </Link>
-            
+
           </Sidebar>
           <Appmain id="router">
 
@@ -277,10 +280,10 @@ console.log('window', window.innerWidth)
           <Route exact path = '/Newuser' component={Newuser}/>
           <Route exact path = '/About' component={About}/>
           </Appmain>
-        
-        
+
+
       </Background>
-      
+
     );
   }
 }
