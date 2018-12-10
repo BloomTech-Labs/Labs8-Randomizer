@@ -1,12 +1,8 @@
 // Libraries
 import React from 'react';
 import styled from 'styled-components';
-
-
-import {Link} from 'react-router-dom';
 import axios from 'axios';
-// Icons
-import Homeicon from '@material-ui/icons/Home';
+
 //Components
 import Billing from '../Billing/billing';
 
@@ -22,10 +18,8 @@ display: block;
 margin-bottom: 10px;
 text-decoration: none;
 border: 1px solid grey;
-
 width: 200px;
 height: 25px;
-
 
 :: placeholder {
   color: black;
@@ -50,8 +44,7 @@ const Homediv = styled.div`
 width: 500px;
 height: 600px;
 border: 1px solid #dfece6;
-background-color: rgba(255,255,255,.5);
-
+background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 display: flex;
 margin-top: 25px;
@@ -62,21 +55,15 @@ flex-direction: column;
   border: none;
   background-color: none;
   margin-left: 100px;
-  
-  
 }
 `
 
 const Welcomer = styled.h1`
-
 color: black;
 font-size: 36px;
 @media (max-width: 400px) {
   font-size: 30px;
-  
-  
 }
-
 `
 
 class Settings extends React.Component {

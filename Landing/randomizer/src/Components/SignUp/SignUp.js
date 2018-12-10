@@ -1,12 +1,13 @@
 // Libraries
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axios from  'axios';
+
 // Icons
-import Homeicon from '@material-ui/icons/Home';
 import Backarrow from '@material-ui/icons/ArrowBack';
 
+// Stylings
 const FormStyling = styled.form`
 display: block;
 `
@@ -23,17 +24,14 @@ border: 1px solid black;
   color: black;
 }
 padding-left: 10px;
-
 `
 const Signin = styled.button`
-
 outline: 0;
 width: 150px;
 height: 40px;
 background-color: #00E1F5;
 cursor: pointer;
 border: none;
-
 text-decoration: none;
 margin-left: 30px;
 position: absolute;
@@ -41,7 +39,6 @@ color: black;
 transition: .5s;
 
 :hover {
-    
     opacity: .9;
     color: white;
 }
@@ -56,12 +53,12 @@ const LabelStyling = styled.label`
 `
 const Homediv = styled.div`
 width: 500px;
-height: 500px;
+height: 350px;
 flex-direction: column;
 display: flex;
 justify-content: center;
 align-items: center;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 @media (max-width: 400px) {
     height: 240px;
@@ -80,30 +77,36 @@ margin-top: 0px;
     margin-bottom: 20px;
     margin-left: 20px;
   }
-
 `
-const SignUpSubmit = (event) => {
-  event.preventDefault();
-  const data = new FormData(event.target);
-  console.log(data.get('username'))
-  axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
-    "username": data.get('username'),
-    "password1": data.get('password'),
-    "password2": data.get('password-confirm'),
-  })
-  .then(res => {
-    const token = res.data.key;
-
-    localStorage.setItem('jwt', token);
-    this.props.history.push('/ViewClasses');
-  })
-  .catch(error => {
-    console.log(error)
-  })
-}
 
 
-const SignUp = () => {
+
+class SignUp extends Component {
+ 
+
+
+  SignUpSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    console.log(data.get('username'))
+    axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
+      "username": data.get('username'),
+      "password1": data.get('password'),
+      "password2": data.get('password-confirm'),
+    })
+    .then(res => {
+      const token = res.data.key;
+      
+      localStorage.setItem('jwt', token);
+    
+      this.props.history.push('/ViewClasses');
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  render() {
     return(
         <Homediv>
             <Link to='/'>
@@ -111,7 +114,7 @@ const SignUp = () => {
             </Link>
             <Welcomer> Sign Up</Welcomer>
             
-            <FormStyling className="sign-up" onSubmit={SignUpSubmit}>
+            <FormStyling className="sign-up" onSubmit={this.SignUpSubmit}>
                 <LabelStyling htmlFor='username'>  </LabelStyling>
                 <InputStyling type='text' name='username' id='username' placeholder='Email' required='true'/>
 
@@ -125,6 +128,7 @@ const SignUp = () => {
             </FormStyling>
         </Homediv>
 )
+    }
 }
 
 export default SignUp;

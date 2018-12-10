@@ -3,18 +3,19 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-// Icons
-// import Gearicon from '@material-ui/icons/Settings';
 
-// Imports
+// Images
+import Random from '../Img/hd.png';
+
+// Components
 import Login from '../Login/Login';
 import GoogleApi from '../GoogleApi/GoogleApi';
+
 // Stylings
 const Homediv = styled.div`
-
 width: 500px;
-height: 500px;
-background-color: rgba(255,255,255,.5);
+height: 600px;
+background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 display: flex;
 justify-content: center;
@@ -81,6 +82,7 @@ const Welcomer = styled.h1`
 font-size: 60px;
 font-weight: 800;
 color: black;
+margin-bottom: 0px;
 
 text-align: center;
 @media (max-width: 400px) {
@@ -91,16 +93,15 @@ const Welcomer2 = styled.h1`
 display: flex;
 text-align: center;
 font-size: 30px;
-
+margin-top: 0px;
 color: #FF6A00;
 @media (max-width: 400px) {
     font-size: 18px;
     width: 270px;
   }
 `
-
-
-
+const Logo = styled.img`
+`
 
 class Home extends Component {
     constructor(props) {
@@ -133,6 +134,7 @@ class Home extends Component {
             <Homediv>
 
                 <Welcomer >Welcome to Randomizer </Welcomer>
+                <Logo src={Random}></Logo>
                 <Welcomer2>The modern way to track classroom participation</Welcomer2>
 
                <Link to='/Signup'>

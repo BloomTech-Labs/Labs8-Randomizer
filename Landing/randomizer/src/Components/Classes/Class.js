@@ -1,43 +1,31 @@
 // Libraries
 import React, {Component} from 'react';
-
 import styled from 'styled-components';
 import axios from 'axios';
-import Deleteicon from '@material-ui/icons/Delete';
-import AlertDialog from './AlertDialog';
-import ResetDialog from './ResetDialog';
 
+//Icons
+import Deleteicon from '@material-ui/icons/Delete';
 import Addbutton from '@material-ui/icons/AddCircle';
 import Pencil from '@material-ui/icons/Edit';
-import EditDialog from './EditDialog';
 import Button from '@material-ui/core/Button';
+
+//Components
+import AlertDialog from './AlertDialog';
+import ResetDialog from './ResetDialog';
+import EditDialog from './EditDialog';
+
+//Library
 const PapaParse = require('papaparse/papaparse.min.js');
-
-
-
-
-
-const Editmain = styled.div`
-  font-family:'Raleway', sans-serif;
-  display: flex;
-  justify-content: center;
-  width: 900px;
-  border: 1px solid red;
-  height: 500px;
-  border: 10px solid #E2E4F6;
-  border-radius: 5px;
-  background-color: white;
-`
 
 const Maindiv = styled.div`
 display: flex;
 width: 650px;
 height: 800px;
-background-color: rgba(255,255,255,.5);
+background-color: rgba(255,255,255,.9);
 border: 3px solid #dfece6;
 flex-direction: column;
 border-radius: 7px;
-
+padding-left: 15px;
 @media (max-width: 400px) {
   height: 800px;
   border: none;
@@ -75,7 +63,7 @@ const Namediv2 = styled.div`
 display: flex;
 flex-direction: row;
 width: 300px;
-
+visibility: hidden;
 `
 const Title = styled.h1`
 font-size: 50px;
@@ -204,24 +192,7 @@ margin-top: 15px;
       color: white
   }
 `
-const Edit = styled.button`
-font-family:'Raleway', sans-serif;
-margin-top: 5px;
-margin-right: 10px;
-border: none;
-width: 100px;
-height: 65px;
-text-decoration: none;
-cursor: pointer;
 
-color: black;
-background-color: #F56600;
-transition: .5s;
-
-:hover {
-  color: white;
-}
-`
 
 const Import = styled.label`
 padding-top: 10px;
@@ -490,6 +461,30 @@ startHandler = e => {
   this.props.history.push('/Random');
 }
 
+
+showHandler() {
+let a = document.getElementById('First');
+let b = document.getElementById("Bigbutton");
+let c = document.getElementById("Namediv2");
+let d = document.getElementById('Grid')
+console.log('a', a)
+
+if (a.style.visibility==="hidden") {
+  a.style.visibility ="visible"
+}
+
+if (b.style.visibility==="hidden") {
+  b.style.visibility ="visible"
+}
+if (c.style.visibility==="hidden") {
+  c.style.visibility ="visible"
+}
+if (d.style.visibility==="hidden") {
+  d.style.visibility ="visible"
+}
+}
+
+
 editClassName = e => {
   axios.post('https://labs8randomizer.herokuapp.com/clss/updateclass', {
     "classID": localStorage.getItem("classID"),
@@ -499,6 +494,7 @@ editClassName = e => {
     console.log(res.data)
   })
 }
+
 
 
     render() {
@@ -516,11 +512,14 @@ editClassName = e => {
                 <Namediv>
                 <Import htmlFor="file">Import CSV</Import>
                  <Ptag>Or</Ptag>
-                <Dec onClick={this.createClass}>Create Class</Dec>
+                <Dec onClick={() =>{
+                  this.createClass()
+                  this.showHandler() } }>Create Class</Dec>
                 
                 </Namediv>
-                <Namediv2>
+                <Namediv2 id="Namediv2" style={{visibility:'hidden'}}>
                 <Misc>{this.state.class_name}</Misc>
+
                 <Sider2 onClick={this.editClassName}>
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
@@ -528,7 +527,7 @@ editClassName = e => {
                 
                 
                 {/* <Part onClick={() => this.alertDialog('resetOpen')}> Reset Participation</Part> */}
-                <Namediv>
+                <Namediv id="First" style={{visibility:'hidden'}} >
                
                 <Editname type="text" placeholder="First Name" onChange={this.studentInput}
                 value={this.state.firstName}></Editname>
@@ -551,16 +550,17 @@ editClassName = e => {
                 
               </Secondlevel>
 
-              <NameGrid>
+              <NameGrid id="Grid" style={{visibility:'hidden'}}>
                 {this.state.studentList2}
               </NameGrid>
-              <Namediv>
+              <Namediv id="Bigbutton" style={{visibility:'hidden'}}>
                 <Bigbutton onClick={this.startHandler}>Start Randomizer</Bigbutton>
                 </Namediv>
 
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
               <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
+          
             </Maindiv>
 
              

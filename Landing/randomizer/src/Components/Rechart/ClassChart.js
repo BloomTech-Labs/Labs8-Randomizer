@@ -73,7 +73,7 @@ outline: 0;
       .then (res =>{
         console.log(res.data)
         window.location.reload()}
-      )  
+      )
     
     }
       
@@ -109,3 +109,4 @@ outline: 0;
           }
  }
  export default Chartprop;
+
