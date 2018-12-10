@@ -18,15 +18,15 @@ import '../ViewClass/Add.css'
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
- width: 900px;
- 
+ height: 100%;
+
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
- 
+
 border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
-    
+
     width: 700px;
   }
 @media (max-width: 400px) {
@@ -94,7 +94,7 @@ class ViewClass extends Component {
           if (localStorage.getItem("classID")) {
             localStorage.removeItem("classID")
           }
-        
+
     }
 
     handleClass = e => {
@@ -108,21 +108,21 @@ class ViewClass extends Component {
                   'Authorization':'Token '.concat(token)
               }
           })
-  
+
             .then(res => {
-  
+
               console.log('resdata',res.data)
-  
+
               var classes = res.data['clss']
               console.log('0th', classes[0])
               classes.map(clss => {
-            
+
                   this.setState({info : [...this.state.info, clss]})
-            
+
                   console.log('state after set state', this.state.info)
               })
                this.setState({info: this.state.info})
-             
+
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
@@ -139,17 +139,11 @@ handleAdd = () => {
 
 
            <Classdiv>
-               
-            
-            <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
-            
-               
-               {/* <Chartprop  Data={this.state.info}/> */}
-               
-               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}> 
-              <Addclass>
-                  <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
+             <Addclass>
+               <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
              </Addclass>
+            <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
+               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
             </Link>
 
            </Classdiv>

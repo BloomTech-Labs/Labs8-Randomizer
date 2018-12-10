@@ -39,7 +39,7 @@ const Misc = styled.h1`
 font-size: 40px;
 margin-bottom: 0px;
 @media (max-width: 400px) {
-  
+
   font-size: 35px;
 }
 
@@ -69,7 +69,7 @@ const Title = styled.h1`
 font-size: 50px;
 height: 40px;
 @media (max-width: 400px) {
-  
+
   font-size: 40px;
   margin-bottom: 25px;
 }
@@ -116,7 +116,7 @@ const Editname1 = styled.input`
   }
 
   @media (max-width: 400px) {
-  
+
     margin-top: 50px;
   }
 `
@@ -130,7 +130,7 @@ background: none;
 width: 40px;
 margin-top: 35px;
 @media (max-width: 400px) {
-  
+
   margin-top: 35px;
 }
 `
@@ -145,8 +145,8 @@ height: 25px;
 background: none;
 width: 40px;
 @media (max-width: 400px) {
-  
- 
+
+
 }
 
 `
@@ -361,6 +361,11 @@ editDialog = (dialog, title, key) => {
     ind: key
   })
 }
+closeDialog = (dialog) => {
+  this.setState({
+    [dialog]: false,
+  })
+}
 
 handleClickOpen = (dialog) => {
   this.setState({ [dialog]: true });
@@ -476,19 +481,19 @@ editClassName = e => {
         return (
             <Maindiv>
 
-              
+
                   <Title>Create or <br></br> Edit a Class</Title>
-              
+
 
               <Classdiv>
                 <Editname1 type="text" placeholder="Class Name" onChange={this.handleInput}
                 value={this.state.class_name}></Editname1>
-                
+
                 <Namediv>
                 <Import htmlFor="file">Import CSV</Import>
                  <Ptag>Or</Ptag>
                 <Dec onClick={this.createClass}>Create Class</Dec>
-                
+
                 </Namediv>
                 <Namediv2>
                 <Misc>{this.state.class_name}</Misc>
@@ -496,11 +501,11 @@ editClassName = e => {
                 <Pencil style={{fontSize: '40px'}}></Pencil>
                 </Sider2>
                 </Namediv2>
-                
-                
+
+
                 {/* <Part onClick={() => this.alertDialog('resetOpen')}> Reset Participation</Part> */}
                 <Namediv>
-               
+
                 <Editname type="text" placeholder="First Name" onChange={this.studentInput}
                 value={this.state.firstName}></Editname>
                 <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}
@@ -508,18 +513,18 @@ editClassName = e => {
                 <Sider onClick={this.addStudent}>
                 <Addbutton style={{fontSize: '56px'}}></Addbutton>
                 </Sider>
-                
+
                 </Namediv>
 
-               
-                
+
+
               </Classdiv>
 
               <Secondlevel>
-                
-                
+
+
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
-                
+
               </Secondlevel>
 
               <NameGrid>
@@ -531,11 +536,11 @@ editClassName = e => {
 
               <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
               <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
-              <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName}/>
+              <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName} handleClose={() => this.closeDialog('editOpen')}  />
             </Maindiv>
 
-             
-        
+
+
         )
     }
 }
