@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-
 from rest_framework import routers
 #from clss.api import ClssViewSet
 
@@ -27,5 +26,5 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    re_path(r'^api-token-auth/', views.obtain_auth_token),
-    path('clss/', include('clss.urls')),]
+    path('clss/', include('clss.urls')),
+    re_path(r'^api-token-auth/', views.obtain_auth_token),]

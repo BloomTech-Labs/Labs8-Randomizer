@@ -1,23 +1,38 @@
-// Libraries
-import React from 'react';
-
-// Components
+import React, {Component} from 'react';
 import Chartprop from '../Rechart/ClassChart';
 
 
-const Flexchart = props => {
-    let classlist = props.Dates
-    console.log(classlist)
-    return <div style={{display: 'flex'}}>
-        {classlist.map(clss => 
+class Flexchart extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+      renderclasslist : []
+        }
+      }
 
-            <Chartprop Data={clss} />,
-            console.log('HIT')
-            
-            
-        
-        )}
-        </div>
+      componentWillReceiveProps(nextProps) {
+            console.log('dates',nextProps.Dates)
+            if (nextProps.Dates.length === this.props.Dates.length){
+                return
+            }
+            else{
+            nextProps.Dates.map((clss) => {
+                console.log('clss', clss)
+                this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)
+                console.log('HIT')
+            })
+            this.setState({renderclasslist: this.state.renderclasslist})
+        }}
     
-}
+    render() { 
+
+        
+        return(
+    
+    <div style={{display: 'flex'}}>
+       {this.state.renderclasslist}
+        </div>
+    )
+      }
+        }
 export default Flexchart
