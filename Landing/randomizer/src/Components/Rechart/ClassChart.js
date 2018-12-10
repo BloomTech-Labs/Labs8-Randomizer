@@ -21,7 +21,8 @@ outline: 0;
       percentage: 0,
       cl: this.props.Data['className'],
       number: this.props.Data['studentsInfo'].length,
-      id:this.props.Data['classID']
+      id:this.props.Data['classID'],
+      isHidden: true
     }
   }
     
@@ -37,8 +38,6 @@ outline: 0;
         console.log('checking students',this.props.Data['studentsInfo'])
       let students = this.props.Data['studentsInfo']
     students.map( (one, index )=> {
-      let percentage = this.state.percentage;
-
       let obj = {
         name: `${one['studentName']}`,
         Participated: one['participation']['P'],
@@ -49,8 +48,15 @@ outline: 0;
       this.state.part = this.state.part + one['participation']['P']
       this.state.percentage = Math.round((this.state.part/this.state.total) * 100)
       })
-      return this.state.dataBox;}
-
+      if (this.state.total === 0){
+        this.setState({isHidden: false},()=>{
+          return
+        })
+      }
+      else{ 
+        return this.state.dataBox;
+        } 
+      }
     }
     
 
@@ -61,12 +67,14 @@ outline: 0;
     }
   
     deleteClass = (e) => {
-      console.log('id is here', this.state.id)
       e.preventDefault()
+      console.log('id is here', this.state.id)
       axios.delete('https://labs8randomizer.herokuapp.com/clss/deleteclass', {data: {'classID': this.state.id}})
-      .then (
+      .then (res =>{
+        console.log(res.data)
+        window.location.reload()}
       )  
-      window.location.reload()
+    
     }
       
       
@@ -78,7 +86,7 @@ outline: 0;
           
           <Graphbox onClick={this.handleSubmit}>
 
-        <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}  
+        { this.state.isHidden && <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}  
   margin={{top: 5, right: 5, left: 5, bottom: 5}} title={this.state.cl}>
   <XAxis dataKey="name"/>
     
@@ -88,7 +96,7 @@ outline: 0;
   <Legend style={{cursor: 'pointer'}} />
   <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
   <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
-</BarChart>
+</BarChart>}
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
 <h3> Class Participation Percentage: {this.state.percentage}% </h3>
