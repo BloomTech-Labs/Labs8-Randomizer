@@ -21,8 +21,8 @@ class Flexchart extends Component {
       }
 
       componentDidMount() {
-           
-            
+
+
                 this.setState({renderclasslist: []},() => {
                     this.props.Dates.map((clss) => {
                         console.log('clss', clss)
@@ -31,23 +31,20 @@ class Flexchart extends Component {
                     })
                     this.setState({isLoading:false})
                 })
-            
+
             this.setState({renderclasslist: this.state.renderclasslist})
         }
-    
-    render() { 
-
     render() {
-        return(
-    <div>
-    { this.state.isLoading &&
-    <div>Loading.. please wait!</div>
-    }
-    {!this.state.isLoading && <div style={{display: 'flex'}}>
-       {this.state.renderclasslist} </div>}
-        </div>
-    
-      ) 
-        }
-    }
+      return(
+  <div>
+  { this.state.isLoading &&
+  <div>Loading.. please wait!</div>
+  }
+  {!this.state.isLoading && <div style={{display: 'flex'}}>
+     {this.state.renderclasslist} </div>}
+      </div>
+
+    )
+      }
+  }
 export default Flexchart

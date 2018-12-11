@@ -134,6 +134,9 @@ const Logger = styled.h1`
 position: absolute;
 margin-left: 450px;
 font-size: 24px;
+@media (max-width: 400px){
+  display: none;
+}
 `
 
 class App extends Component {

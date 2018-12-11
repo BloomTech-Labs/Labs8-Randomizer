@@ -18,7 +18,7 @@ import '../ViewClass/Add.css'
  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
- height: 100%;
+ width: 900px;
 
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
@@ -122,8 +122,8 @@ class ViewClass extends Component {
 
                   console.log('state after set state', this.state.info)
               })
-
                this.setState({isLoading: false})
+
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
@@ -142,18 +142,17 @@ handleAdd = () => {
     <div>Loading.. please wait!</div>
     }
     { !this.state.isLoading &&
-    <div>   
-
+    <div>
 
         <Classdiv>
-            
-         
+
+
          <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
-         
-            
+
+
             {/* <Chartprop  Data={this.state.info}/> */}
-            
-            <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}> 
+
+            <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
            <Addclass>
                <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
           </Addclass>
@@ -161,12 +160,12 @@ handleAdd = () => {
 
         </Classdiv>
 
-     )</div>
+     </div>
     }
   </div>
         )
-    
+
     }
-    
+
 }
 export default ViewClass;

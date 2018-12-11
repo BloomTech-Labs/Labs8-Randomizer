@@ -52,9 +52,9 @@ const Graphbox = styled.button`
           return
         })
       }
-      else{ 
+      else{
         return this.state.dataBox;
-        } 
+        }
       }
     }
 
@@ -81,15 +81,17 @@ const Graphbox = styled.button`
         <div>
           <Graphbox onClick={this.handleSubmit}>
             <ResponsiveContainer  width="100%" height={200} >
-              <BarChart style={{cursor: 'pointer'}} data={this.dataList()} margin={{top: 5, right: 5, left: 5, bottom: 5}} title={this.state.cl}>
+              { this.state.isHidden && <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}
+                margin={{top: 5, right: 5, left: 5, bottom: 5}} title={this.state.cl}>
                 <XAxis dataKey="name"/>
+
                 <YAxis style={{cursor: 'pointer'}} />
                 <CartesianGrid tyle={{cursor: 'pointer'}} />
                 <Tooltip style={{cursor: 'pointer'}}/>
                 <Legend style={{cursor: 'pointer'}} />
                 <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
                 <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
-              </BarChart>
+                </BarChart>}
             </ResponsiveContainer>
             <h1>{this.state.cl}</h1>
             <h3>Students Enrolled: {this.state.number}</h3>
