@@ -10,7 +10,7 @@ import Backarrow from '@material-ui/icons/ArrowBack';
 const Homediv = styled.div`
 border: 3px solid #dfece6;
 width: 500px;
-height: 500px;
+height: 100%;
 background-color: rgba(255,255,255,.9);
 display: flex;
 justify-content: center;
@@ -89,7 +89,7 @@ color: black;
 transition: .5s;
 
 :hover {
-    
+
     opacity: .9;
     color: white;
 }
@@ -162,13 +162,13 @@ class Login extends Component {
             <Homediv>
 
 
-                
+
                 <Link to='/' style={{width: '30px'}}>
                 <Sider>
                 <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
                 </Sider>
                 </Link>
-                
+
                 <Welcomer>Sign In</Welcomer>
 
 
