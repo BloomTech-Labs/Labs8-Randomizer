@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import styled from 'styled-components';
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import { withStyles } from '@material-ui/core/styles';
 
 const Graphbox = styled.button`
 cursor: pointer;
@@ -11,6 +15,21 @@ z-index: -1;
 display: block;
 outline: 0;
 `
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+  iconSmall: {
+    fontSize: 60,
+  },
+});
+
  class Chartprop extends Component {
   constructor(props) {
     super(props);
@@ -25,8 +44,6 @@ outline: 0;
       isHidden: true
     }
   }
-
-
 
     dataList = () => {
       console.log('what is in props', this.props)
@@ -104,8 +121,15 @@ outline: 0;
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
 <h4> Class Participation Percentage: {this.state.percentage}% </h4>
-<button onClick={this.routeToRandom}>Start Randomizer</button>
-<button onClick={this.deleteClass}>Delete the Class</button>
+
+<Button variant="contained" color="secondary" onClick={this.deleteClass} style={{width: '200px', marginTop: '10px', marginBottom: '10px'}}>
+  Delete Class
+  <DeleteIcon/>
+</Button>
+  <Button variant="contained" color="primary" onClick={this.routeToRandom} style={{width: '200px', marginBottom: '10px'}}>
+    Start Randomizer
+    <AssignmentInd style={{ marginLeft: '1px'}}/>
+  </Button>
 </Graphbox>
 
     </div>
