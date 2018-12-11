@@ -27,7 +27,7 @@ flex-direction: column;
 border-radius: 7px;
 padding-left: 15px;
 @media (max-width: 400px) {
-  height: 800px;
+  width: 300px;
   border: none;
   background-color: none;
   margin-left: 125px;
