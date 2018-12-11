@@ -62,7 +62,7 @@ class EditDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.editClose} color="primary">
+            <Button onClick={this.props.handleClose} color="primary">
               Nevermind
             </Button>
             <Button onClick={(event) => {
