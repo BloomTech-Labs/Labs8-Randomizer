@@ -305,6 +305,7 @@ PapaParse.parse(filename,
           .then(res => {
             localStorage.setItem('classID',res.data.id)
             console.log(res.data)
+            this.handleCreateButtons()
           })
           .catch(err => {
           });
@@ -328,11 +329,10 @@ PapaParse.parse(filename,
             // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
             this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
             ()=>{this.secondDisplay()})
+
           })
           .catch(err => {
           });
-          this.setState({class_name:''})
-
       };
       handleInput = e => {
         const {value} = e.target;
@@ -416,9 +416,11 @@ handleDisplay = e => {
            Edit Name
          </Button>
        </NameItem> )
-    this.setState({studentList2: this.state.studentList2})
+    this.setState({studentList2: this.state.studentList2}, ()=>{
+      this.showHandler()
+    })
   }
-    console.log('sL2', this.state.studentList2)
+    
 }
 
 secondDisplay = e => {
@@ -437,10 +439,12 @@ secondDisplay = e => {
      </NameItem> ]})
 
   console.log('loop state', this.state.studentList2)
+  this.setState({firstName: 'First Name', lastName: 'Last Name'})
   }
 }
 
 loadStudents = e => {
+  if(localStorage.getItem('classID')){
   axios
   .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
   .then(res => {
@@ -450,11 +454,27 @@ loadStudents = e => {
     this.setState({class_name: son['class_name']})
     if (son['studentNames'].length > 0){
     son['studentNames'].map(name => {
-      this.state.studentList.push(name)
+      this.setState({studentList: [...this.state.studentList, name]})
     })
     console.log('sanity check', this.state.studentList)
-  this.handleDisplay()}
+    this.handleDisplay()
+  }
+
   })
+
+  this.handleCreateButtons()
+
+  
+
+}
+else return
+}
+
+handleCreateButtons = () => {
+  let a = document.getElementById('createButtons')
+  if (a.style.visibility==="visible") {
+    a.style.visibility ="hidden"
+  }
 }
 
 startHandler = e => {
@@ -506,17 +526,17 @@ editClassName = e => {
               
 
               <Classdiv>
-                <Editname1 type="text" placeholder="Class Name" onChange={this.handleInput}
+                <Editname1 type="text" placeholder='Enter Class Name' onChange={this.handleInput}
                 value={this.state.class_name}></Editname1>
                 
-                <Namediv>
+                <Namediv id='createButtons' style={{visibility:'visible'}}>
                 <Import htmlFor="file">Import CSV</Import>
                  <Ptag>Or</Ptag>
                 <Dec onClick={() =>{
                   this.createClass()
                   this.showHandler() } }>Create Class</Dec>
                 
-                </Namediv>
+                </Namediv >
                 <Namediv2 id="Namediv2" style={{visibility:'hidden'}}>
                 <Misc>{this.state.class_name}</Misc>
 

@@ -136,14 +136,17 @@ class Login extends Component {
     axios
       .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
       .then(res => {
-
+        if (!res.data.key){
+            alert('No user exists with those credentials - Sign up?')
+        }
+        else{
         const token = res.data.key;
 
         localStorage.setItem('jwt', token);
-        this.props.history.push('/Random');
-      })
+        this.props.history.push('/ViewClasses');
+      }})
       .catch(err => {
-
+        alert('No user exists with those credentials - Sign up?')
       });
     this.setState({ username: '', password: '' });
   };
@@ -171,7 +174,7 @@ class Login extends Component {
 
 
                 <Former onSubmit={this.handleSubmit}>
-               <Userenter name="username" placeholder="Username"
+               <Userenter name="username" placeholder="Email"
                value={this.state.username} onChange={this.handleInput}></Userenter>
 
                <Passenter name="password" placeholder="Password" type="password"
