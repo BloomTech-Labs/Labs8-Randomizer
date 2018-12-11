@@ -25,7 +25,7 @@ class AlertDialog extends React.Component {
           open={this.props.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={this.props.handleClose}
+          onClose={this.props.closeDialog}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
         >
@@ -38,7 +38,7 @@ class AlertDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.handleClose} color="primary">
+            <Button onClick={this.props.closeDialog} color="primary">
               Nevermind
               {this.props.key}
             </Button>

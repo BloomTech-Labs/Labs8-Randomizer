@@ -19,14 +19,14 @@ import '../ViewClass/Add.css'
  flex-direction: row;
  flex-wrap: wrap;
  width: 900px;
- 
+
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
- 
+
 border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
-    
+
     width: 700px;
   }
 @media (max-width: 400px) {
@@ -40,6 +40,7 @@ border-radius: 5px;
   }
  `
  const Addclass = styled.button`
+ margin-top: 15px;
  width: 200px;
  height: 200px;
  border: none;
@@ -48,7 +49,6 @@ border-radius: 5px;
  transition: .5s;
  background-color: #032323;
  color: white
- margin-top: 5px;
  margin-left: 5px;
  :hover {
      background-color: black;
@@ -95,7 +95,7 @@ class ViewClass extends Component {
           if (localStorage.getItem("classID")) {
             localStorage.removeItem("classID")
           }
-        
+
     }
 
     handleClass = e => {
@@ -109,21 +109,21 @@ class ViewClass extends Component {
                   'Authorization':'Token '.concat(token)
               }
           })
-  
+
             .then(res => {
-  
+
               console.log('resdata',res.data)
-  
+
               var classes = res.data['clss']
               console.log('0th', classes[0])
               classes.map(clss => {
-            
+
                   this.setState({info : [...this.state.info, clss]})
-            
+
                   console.log('state after set state', this.state.info)
               })
                this.setState({isLoading: false})
-             
+
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
@@ -142,30 +142,30 @@ handleAdd = () => {
     <div>Loading.. please wait!</div>
     }
     { !this.state.isLoading &&
-    <div>   
+    <div>
 
-        <Classdiv>
-            
-         
-         <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
-         
-            
+        <Classdiv style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+
+          <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
+            <Addclass>
+              <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
+            </Addclass>
+          </Link>
+
+         <Flexchart Dates={this.state.info} history={this.props.history} ></Flexchart>
+
+
             {/* <Chartprop  Data={this.state.info}/> */}
-            
-            <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}> 
-           <Addclass>
-               <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
-          </Addclass>
-         </Link>
+
 
         </Classdiv>
 
-     )</div>
+     </div>
     }
   </div>
         )
-    
+
     }
-    
+
 }
 export default ViewClass;

@@ -425,7 +425,7 @@ handleDisplay = e => {
       this.showHandler()
     })
   }
-    
+
 }
 
 secondDisplay = e => {
@@ -469,7 +469,7 @@ loadStudents = e => {
 
   this.handleCreateButtons()
 
-  
+
 
 }
 else return
@@ -534,7 +534,7 @@ editClassName = e => {
                 <Editname1 type="text" placeholder='Enter Class Name' onChange={this.handleInput}
                 value={this.state.class_name}></Editname1>
 
-                
+
                 <Namediv id='createButtons' style={{visibility:'visible'}}>
 
 
@@ -544,7 +544,7 @@ editClassName = e => {
                   this.createClass()
                   this.showHandler() } }>Create Class</Dec>
 
-                
+
                 </Namediv >
 
                 <Namediv2 id="Namediv2" style={{visibility:'hidden'}}>
@@ -587,9 +587,8 @@ editClassName = e => {
                 <Bigbutton onClick={this.startHandler}>Start Randomizer</Bigbutton>
                 </Namediv>
 
-              <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')}/>
-              <ResetDialog open={this.state.resetOpen} handleClose={() => this.handleClose('resetOpen')} handleClickOpen={() => this.handleClickOpen('resetOpen')}/>
-              <EditDialog newLastName={this.state.newLastName} ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName} handleClose={() => this.closeDialog('editOpen')}  />
+              <AlertDialog open={this.state.alertOpen} title={this.state.title} ind={this.state.ind} handleClose={() => this.handleClose('alertOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('alertOpen')} closeDialog={() => this.closeDialog('alertOpen')}/>
+              <EditDialog newLastName={this.state.newLastName}  ind={this.state.ind} newName={this.state.newName} open={this.state.editOpen} title={this.state.title} editClose={() => this.handleEdit('editOpen', this.state.ind)} handleClickOpen={() => this.handleClickOpen('editOpen')} handleNewName={this.handleNewName} handleClose={() => this.closeDialog('editOpen')}  />
 
             </Maindiv>
 
