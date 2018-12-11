@@ -33,6 +33,8 @@ import Loggedout from '@material-ui/icons/Clear';
 import Flatclass from '../src/Components/Img/flatclass2.png';
 
 // Stylings
+import './index.css'
+
 const Background = styled.div`
 background-color: #ffffff;
 font-family:'Raleway', sans-serif;
@@ -45,7 +47,7 @@ justify-content: center;
   flex-direction: column;
   width: 400px;
   height: 500px;
-  
+
 }
 `
 const MainAppDiv = styled.div`
@@ -53,8 +55,10 @@ font-family:'Raleway', sans-serif;
 display: flex;
 justify-content: center;
 background-image: url(${Flatclass});
-width: 1100px;
-height: 800px;
+background-repeat: no-repeat;
+background-size: cover;
+width: 100%;
+height: 100%;
 
 background-color: white;
 @media (max-width: 1024px) {
@@ -67,6 +71,7 @@ background-color: white;
 }
  `
 const Sidebar = styled.div`
+margin-right: 50px;
 width: 40px;
 height: 400px;
 background-color: none;
@@ -156,13 +161,13 @@ console.log('window', window.innerWidth)
  {   if (x.style.display==="none") {
      x.style.display="flex"
      y.style.opacity=".5"
-    
-    
+
+
    } else {
      x.style.display ="none"
      y.style.opacity="1"
    }
-    
+
   }
 
 }
@@ -171,21 +176,21 @@ logoutHandler = e => {
   localStorage.clear()
 }
   render() {
-   
 
-   
+
+
 
     return (
-      
+
       <Background id="BackgroundID">
       <Logger>Logged in:
         <Loggedin id="IN" style={{fontSize:'36px', display: 'none'}}></Loggedin>
         <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
       </Logger>
-       
+
         <Mobilebtn onClick={this.mobileHandler}>
               <Tooltip title="Menu" placement="right">
-                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
+                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide>
               </Tooltip>
         </Mobilebtn>
 
@@ -194,11 +199,11 @@ logoutHandler = e => {
             <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
             <Sidebutton onClick={this.mobileHandler} id="Sider"  >
             <Tooltip title="Home" placement="right">
-              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon> 
+              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon>
               </Tooltip>
             </Sidebutton >
             </Link>
-          
+
             <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider5" >
               <Tooltip title="Classes" placement="right">
@@ -206,7 +211,7 @@ logoutHandler = e => {
               </Tooltip>
               </Sidebutton >
             </Link>
-          
+
             <Link to="/Class" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider4">
               <Tooltip title="Create or Edit a Class" placement="right">
@@ -231,7 +236,7 @@ logoutHandler = e => {
                 </Tooltip>
               </Sidebutton >
             </Link>
-            
+
             <Link to="/About" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider6">
               <Tooltip title="About" placement="right">
@@ -247,7 +252,7 @@ logoutHandler = e => {
               </Tooltip>
               </Sidebutton >
             </Link>
-            
+
           </Sidebar>
 
           <MainAppDiv id="router">
@@ -263,10 +268,10 @@ logoutHandler = e => {
           <Route exact path = '/About' component={About}/>
 
           </MainAppDiv>
-        
-        
+
+
       </Background>
-      
+
     );
   }
 }

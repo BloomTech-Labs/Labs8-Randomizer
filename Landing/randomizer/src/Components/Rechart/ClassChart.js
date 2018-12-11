@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
+import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, ResponsiveContainer} from 'recharts';
 import styled from 'styled-components';
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ outline: 0;
     this.state={
       dataBox: [],
       part: 0,
-      total: 0, 
+      total: 0,
       percentage: 0,
       cl: this.props.Data['className'],
       number: this.props.Data['studentsInfo'].length,
@@ -25,9 +25,9 @@ outline: 0;
       isHidden: true
     }
   }
-    
 
-    
+
+
     dataList = () => {
       console.log('what is in props', this.props)
 
@@ -53,19 +53,19 @@ outline: 0;
           return
         })
       }
-      else{ 
+      else{
         return this.state.dataBox;
-        } 
+        }
       }
     }
-    
+
 
     routeToRandom = (e) => {
       e.preventDefault()
       localStorage.setItem('classID', this.state.id)
       this.props.history.push('/Random')
     }
-  
+
     deleteClass = (e) => {
       e.preventDefault()
       console.log('id is here', this.state.id)
@@ -74,39 +74,42 @@ outline: 0;
         console.log(res.data)
         window.location.reload()}
       )
-    
+
     }
-      
-      
+
+
 
           render() {
      return  (
-     
+
         <div>
-          
+
           <Graphbox onClick={this.handleSubmit}>
 
-        { this.state.isHidden && <BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}  
+        { this.state.isHidden &&
+<ResponsiveContainer>
+<BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}
   margin={{top: 5, right: 5, left: 5, bottom: 5}} title={this.state.cl}>
   <XAxis dataKey="name"/>
-    
+
   <YAxis style={{cursor: 'pointer'}} />
   <CartesianGrid tyle={{cursor: 'pointer'}} />
   <Tooltip style={{cursor: 'pointer'}}/>
   <Legend style={{cursor: 'pointer'}} />
   <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
   <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
-</BarChart>}
+</BarChart>
+</ResponsiveContainer>
+}
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
 <h3> Class Participation Percentage: {this.state.percentage}% </h3>
 <button onClick={this.routeToRandom}>Start Randomizer</button>
 <button onClick={this.deleteClass}>Delete the Class</button>
 </Graphbox>
-        
+
     </div>
      )
           }
  }
  export default Chartprop;
-
