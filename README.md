@@ -52,13 +52,18 @@ https://labs8randomizer.herokuapp.com/admin/login/?next=/admin/
    --Backend: Heroku
 
 #Why Used these Technologies:
--FRONTEND **React:** This was a simple choice to make, both due to the team's familiarity with React, and because its component-based structure allows rapid implementation of a functional user interface with a minimum of effort.
 
--BACKEND **Django:** Using Django allows us to access and save to a SQL-based database without needing to write cumbersone SQL queries, thanks to its simple MVC approach. Django also makes it trivial to serve the client directly, rather than needing to deploy client and server separately.
 
--DATABASE **PostgreSQL / SQLite:** As our application makes use of relational data, e.g. which quiz is assigned to what class, it made sense early on to use a relational database, which are traditionally SQL based. Fortunately, Django integrates quickly with both SQLite, which it uses by default for development purposes, and PostgreSQL, which Heroku uses by default.
+-FRONTEND:  **REACT**  - We used React as our frontend framework, One for our familiarity as a team, and because its component-based structure allows rapid implementation of a functional user interface with a minimum of effort.
 
--FRAMEWORKS **ReCharts.js:** The idea of sending and receiving ONLY data relevant to any function of the app, e.g. sending and receiving JUST the name of the classroom when updating the classroom's name, was appealing from the very beginning, as traditional REST will typically give you the entire box instead of the one item you actually want.
+-BACKEND: **DJANGO**  -
+We decided to use Django for our backend server.  With it's built in packages, it was a good choice for our team to use as it is quick to implement a backend server and a client server.  Django has a built in SQL-based database (SQLite) without needing to create SQL queries to its simple MVC approach. It also comes with built -in client side server, This allows us to access to a built out UI and start testing immediately.
+
+-DATABASE:  **POSTGRES SQL / SQLITE**  -
+As our application makes use of relational data, e.g. user/teacher --> class --> student list --> student --> student participation is assigned to what class, it made sense early on to use a relational database, which are traditionally SQL based. Fortunately, Django integrates quickly with both SQLite, which is the default for development and can be converted to PostgreSQL,  which is used by Heroku.
+
+-FRAMEWORKS **ReCharts.js:**
+We used ReCharts for our choice to output graphs.  We felt that our app needed graphs to track/record a students participation progress by using a circle chart and show a bar graph of the overall class participation.  ReCharts gave us good graph options.
 
 
 ##Developer Tools Used for this Project
@@ -150,6 +155,7 @@ CLSS Model - Class, Student, Student Participation
 ##USER Model - User Information
 
 This Schema is registers a new user.
+POST -- `/api/registration`  --POST
 
 | Field        | Input                     | Required |
 | ------------ | ------------------------- | -------- |
@@ -159,7 +165,7 @@ This Schema is registers a new user.
 | password2    | String matching password  | Yes      |
 
 
-#GET -- `/api/login` -- GET
+GET -- `/api/login` -- GET
 | Field        | Input                  | Required |
 | ------------ | ---------------------- | -------- |
 | email        | String, 30 chars max   | Yes      |
@@ -167,7 +173,7 @@ This Schema is registers a new user.
 
 
 
-# POST -- `/api/updateuser/` -- POST
+POST -- `/api/updateuser/` -- POST
 
 | Property | Type   | Required |
 | -------- | ------ | -------- |
@@ -178,7 +184,7 @@ This Schema is registers a new user.
 
 
 ## Project Team Members
-| [<img src=".../Img/ray.PNG" align="center" width=100><br><b>Raymond Garcia</b> ](https://github.com/Raymondgrc) | [<img src=".../Img/sus.PNG" align="center" width=100><br><b>Susanna</b>  ](https://github.com/sulemc) | [<img src=".../Img/emme.PNG" align="center" width=100><br><b>Emmeline Aquino</b>  ](https://github.com/emaquino44) | [<img src=".../Img/nicksface.PNG" align="center" width=100><br><b>Daniel Abbott</b>  ](https://github.com/NickolausSmith) |
+| [<img src=".../Img/ray.PNG" align="center" width=100><br><b>Raymond Garcia</b> ](https://github.com/Raymondgrc) | [<img src=".../Img/sus.PNG" align="center" width=100><br><b>Susanna</b>  ](https://github.com/sulemc) | [<img src=".../Img/emme.PNG" align="center" width=100><br><b>Emmeline Aquino</b>  ](https://github.com/emaquino44) | [<img src=".../Img/nicksface.PNG" align="center" width=100><br><b>Nick Smith</b>  ](https://github.com/NickolausSmith) |
 |---|---|---|---|
 
 
