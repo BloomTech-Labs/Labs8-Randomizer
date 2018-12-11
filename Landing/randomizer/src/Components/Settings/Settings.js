@@ -51,6 +51,7 @@ margin-top: 25px;
 align-items: center;
 flex-direction: column;
 @media (max-width: 400px) {
+  width: 300px;
   height: 370px;
   border: none;
   background-color: none;

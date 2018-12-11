@@ -23,7 +23,7 @@ flex-wrap: wrap;
 border-radius: 5px;
 @media (max-width: 400px) {
   height: 350px;
-    margin-top: 25px;
+    
     margin-left: 35px;
     background-color: none;
     border: none;

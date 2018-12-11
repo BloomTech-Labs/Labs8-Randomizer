@@ -81,6 +81,7 @@ z-index: +1;
 @media (max-width: 400px) {
   position: fixed;
   display: none;
+  margin-top: 0px;
 }
 `
 const Sidebutton = styled.button`
@@ -106,6 +107,7 @@ width: 40px;
 }`
 
 const Mobilebtn = styled.button`
+outline: 0;
 display: none;
 text-decoration: none;
 background-color: none;
@@ -120,14 +122,21 @@ transition: .3s;
   color: #F7AF9D;
 }
 @media (max-width: 400px) {
-  display: inline-block;
+  display: flex;
   position: fixed;
-  margin-bottom: 50px;
+  
+  z-index: +1;
+  position: absolute;
+  position: fixed;
 }`
 const Logger = styled.h1`
 position: absolute;
 margin-left: 450px;
 font-size: 24px;
+@media (max-width: 400px) {
+  display: none;
+  visibility: hidden;
+}
 `
 
 class App extends Component {
@@ -139,7 +148,7 @@ class App extends Component {
     if (localStorage.getItem("jwt")) {
       x.style.display="flex"
       y.style.display="none"
-      z.style.display="block"
+      z.style.display="flex"
     } else {
       y.style.display="block"
       x.style.display="none"
@@ -176,6 +185,12 @@ logoutHandler = e => {
    
 
     return (
+      <React.Fragment>
+           <Mobilebtn onClick={this.mobileHandler}>
+              <Tooltip title="Menu" placement="right">
+                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
+              </Tooltip>
+        </Mobilebtn>
       
       <Background id="BackgroundID">
       <Logger>Logged in:
@@ -183,21 +198,17 @@ logoutHandler = e => {
         <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
       </Logger>
        
-        <Mobilebtn onClick={this.mobileHandler}>
-              <Tooltip title="Menu" placement="right">
-                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
-              </Tooltip>
-        </Mobilebtn>
+     
 
           <Sidebar id="Sidebar">
 
-            <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
+            {/* <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
             <Sidebutton onClick={this.mobileHandler} id="Sider"  >
             <Tooltip title="Home" placement="right">
               <Homeicon  style={{fontSize: '48px'}} >  </Homeicon> 
               </Tooltip>
             </Sidebutton >
-            </Link>
+            </Link> */}
           
             <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider5" >
@@ -266,7 +277,7 @@ logoutHandler = e => {
         
         
       </Background>
-      
+      </React.Fragment>
     );
   }
 }

@@ -18,27 +18,35 @@ border-radius: 7px;
 border: 3px solid #dfece6;
 flex-direction: column;
 @media (max-width: 400px) {
+  width: 300px;
   margin-left: 120px;
   border: none;
   background-color: none;
-  margin-top: 25px;
+  margin-top: 0px;
 }
 `
 
 const Classdiv = styled.div`
 display: flex;
-width: 300px;
+width: 500px;
 height: 100px;
 justify-content: space-between;
 flex-direction: row;
-margin-top: 25px;
+
 align-content: center;
 `
 
 const Namediv = styled.div`
 display: flex;
-width: 200px;
+width: 500px;
 height: 150px;
+margin-top: 0px;
+`
+
+const Orangediv = styled.div`
+display: flex;
+width: 500px;
+height: 80px;
 margin-top: 0px;
 `
 
@@ -47,14 +55,21 @@ display: flex;
 width: 400px;
 height: 200px;
 position: absolute;
-margin-top: 100px;
-margin-left: 150px;
+margin-top: 80px;
+margin-left: 250px;
+@media (max-width: 400px) {
+ margin-top: 225px;
+ margin-left: 0px;
+}
 `
 const Buttondiv = styled.div`
 display: flex;
 width: 250px;
 height: 75px;
 z-index: +1;
+@media (max-width: 400px) {
+  
+ 
 `
 const Title = styled.h1`
 font-size: 50px;
@@ -73,6 +88,7 @@ margin-right: 25px;
 @media (max-width: 400px) {
   margin-right: 15px;
   font-size: 35px;
+  
 }
 `
 const Part = styled.button`
@@ -91,6 +107,9 @@ transition: .5s;
    color: white;
     
 }
+@media (max-width: 400px) {
+  margin-top: 80px;
+}
 `
 
 const Dec = styled.button`
@@ -104,14 +123,19 @@ cursor: pointer;
 color: black;
 background-color: #E91E63;
 transition: .5s;
+
+
 :hover {
   color: white
+}
+@media (max-width: 400px) {
+  margin-top: 80px;
 }
 `
 
 const Edit = styled.button`
 margin-top: 5px;
-margin-right: 10px;
+
 border: none;
 width: 100px;
 height: 36px;
@@ -120,7 +144,9 @@ cursor: pointer;
 color: black;
 background-color: #F7947B;
 transition: .5s;
-
+z-index: +1;
+margin-right: 10px;
+margin-top: 25px;
 :hover {
   color: white;
 }
@@ -136,7 +162,8 @@ cursor: pointer;
 color: black;
 background-color: #F7947B;
 transition: .5s;
-
+z-index: +1;
+margin-top: 25px;
 :hover {
   color: white
 }
@@ -152,6 +179,9 @@ color: black;
 
 :hover {
   color: white;
+}
+@media (max-width: 400px) {
+  margin-top: 75px;
 }
 `
 
@@ -330,13 +360,14 @@ class Magic extends Component {
         <React.Fragment>
         <Maindiv>
         <Title>Randomizer</Title>
-                      
-        
+        <Orangediv>
+        <Edit onClick={this.Edithandler}>Edit Class</Edit>
+                  <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>  
+                  </Orangediv>
         
           <Classdiv id="Classdiv">
                   <Misc>{this.state.classinfo}</Misc>
-                  <Edit onClick={this.Edithandler}>Edit Class</Edit>
-                  <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>
+                  
            </Classdiv>   
 
             <Namediv>
