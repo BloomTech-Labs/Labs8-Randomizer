@@ -73,8 +73,8 @@ outline: 0;
       .then (res =>{
         console.log(res.data)
         window.location.reload()}
-      )
 
+      )  
     }
 
 

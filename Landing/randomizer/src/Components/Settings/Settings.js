@@ -108,14 +108,16 @@ submitHandler = (event) => {
   const data = new FormData(event.target);
   console.log("what is this", data);
   const token =localStorage.getItem('jwt').toString();
-  console.log("what what", token);
+  console.log("what what", data.get('username'));
   axios.post('https://labs8randomizer.herokuapp.com/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
   .then(res => {
-    console.log("look", res.data)
-    localStorage.setItem('user email', res.data['email'])
-  .catch(err => console.log(err))
+    alert('User information has changed! YAY!')
+    
   })
-}
+
+  .catch(err => console.log(err))
+  }
+
 
   render(){
     return(
@@ -125,7 +127,7 @@ submitHandler = (event) => {
         <FormStyling className="sign-up" onSubmit={(event) => this.submitHandler(event)}>
 
          
-          <InputStyling placeholder="Email" type='email' name='username' id='username' required='true'/>
+          <InputStyling placeholder="New Email" type='email' name='username' id='username' required='true'/>
 
           
           <InputStyling placeholder="Old Password" type='password' name='password' id='password' required='true'/>
