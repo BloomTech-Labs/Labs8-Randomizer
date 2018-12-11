@@ -10,7 +10,7 @@ import Backarrow from '@material-ui/icons/ArrowBack';
 const Homediv = styled.div`
 border: 3px solid #dfece6;
 width: 500px;
-height: 500px;
+height: 100%;
 background-color: rgba(255,255,255,.9);
 display: flex;
 justify-content: center;
@@ -89,7 +89,7 @@ color: black;
 transition: .5s;
 
 :hover {
-    
+
     opacity: .9;
     color: white;
 }
@@ -136,14 +136,17 @@ class Login extends Component {
     axios
       .post('https://labs8randomizer.herokuapp.com/api/login', this.state)
       .then(res => {
-
+        if (!res.data.key){
+            alert('No user exists with those credentials - Sign up?')
+        }
+        else{
         const token = res.data.key;
 
         localStorage.setItem('jwt', token);
-        this.props.history.push('/Random');
-      })
+        this.props.history.push('/ViewClasses');
+      }})
       .catch(err => {
-
+        alert('No user exists with those credentials - Sign up?')
       });
     this.setState({ username: '', password: '' });
   };
@@ -159,19 +162,19 @@ class Login extends Component {
             <Homediv>
 
 
-                
+
                 <Link to='/' style={{width: '30px'}}>
                 <Sider>
                 <Backarrow style={{fontSize:'24px', color:'black'}}></Backarrow>
                 </Sider>
                 </Link>
-                
+
                 <Welcomer>Sign In</Welcomer>
 
 
 
                 <Former onSubmit={this.handleSubmit}>
-               <Userenter name="username" placeholder="Username"
+               <Userenter name="username" placeholder="Email"
                value={this.state.username} onChange={this.handleInput}></Userenter>
 
                <Passenter name="password" placeholder="Password" type="password"
