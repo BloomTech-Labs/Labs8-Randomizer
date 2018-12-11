@@ -74,7 +74,7 @@ outline: 0;
         console.log(res.data)
         window.location.reload()}
 
-      )  
+      )
     }
 
 
@@ -103,7 +103,7 @@ outline: 0;
 }
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
-<h3> Class Participation Percentage: {this.state.percentage}% </h3>
+<h4> Class Participation Percentage: {this.state.percentage}% </h4>
 <button onClick={this.routeToRandom}>Start Randomizer</button>
 <button onClick={this.deleteClass}>Delete the Class</button>
 </Graphbox>

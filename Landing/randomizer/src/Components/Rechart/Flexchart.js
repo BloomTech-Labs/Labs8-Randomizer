@@ -9,6 +9,14 @@ const ChartGrid = styled.div`
   grid-gap: 17px;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(1, auto);
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(1, auto);
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, auto);
+    grid-template-rows: repeat(1, auto);
+  }
 `
 class Flexchart extends Component {
     constructor(props) {
@@ -39,7 +47,7 @@ class Flexchart extends Component {
 
 
         return(
-    <div>
+    <div style={{marginTop: '20px'}}>
     { this.state.isLoading &&
     <div>Loading.. please wait!</div>
     }
