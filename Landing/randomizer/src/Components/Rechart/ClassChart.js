@@ -21,7 +21,8 @@ const Graphbox = styled.button`
       percentage: 0,
       cl: this.props.Data['className'],
       number: this.props.Data['studentsInfo'].length,
-      id:this.props.Data['classID']
+      id:this.props.Data['classID'],
+      isHidden: true
     }
   }
 
@@ -33,20 +34,27 @@ const Graphbox = styled.button`
       }
       else{
         console.log('checking students',this.props.Data['studentsInfo'])
-        let students = this.props.Data['studentsInfo']
-        students.map((one, index ) => {
-          let percentage = this.state.percentage;
-          let obj = {
-            name: `${one['studentName']}`,
-            Participated: one['participation']['P'],
-            Declined: one['participation']['NP']
-            }
-          this.state.dataBox.push(obj)
-          this.state.total = this.state.total + one['participation']['P'] + one['participation']['NP']
-          this.state.part = this.state.part + one['participation']['P']
-          this.state.percentage = Math.round((this.state.part/this.state.total) * 100)
+
+      let students = this.props.Data['studentsInfo']
+    students.map( (one, index )=> {
+      let obj = {
+        name: `${one['studentName']}`,
+        Participated: one['participation']['P'],
+        Declined: one['participation']['NP'],
+      }
+      this.state.dataBox.push(obj)
+      this.state.total = this.state.total + one['participation']['P'] + one['participation']['NP']
+      this.state.part = this.state.part + one['participation']['P']
+      this.state.percentage = Math.round((this.state.part/this.state.total) * 100)
+      })
+      if (this.state.total === 0){
+        this.setState({isHidden: false},()=>{
+          return
         })
+      }
+      else{ 
         return this.state.dataBox;
+        } 
       }
     }
 
@@ -57,12 +65,13 @@ const Graphbox = styled.button`
     }
 
     deleteClass = (e) => {
-      console.log('id is here', this.state.id)
       e.preventDefault()
+      console.log('id is here', this.state.id)
       axios.delete('https://labs8randomizer.herokuapp.com/clss/deleteclass', {data: {'classID': this.state.id}})
       .then (
         window.location.reload()
       )
+
     }
 
 
@@ -89,6 +98,7 @@ const Graphbox = styled.button`
             <button onClick={this.deleteClass}>Delete the Class</button>
           </Graphbox>
         </div>
+
      )
    }
  }

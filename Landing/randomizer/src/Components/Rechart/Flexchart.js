@@ -14,30 +14,40 @@ class Flexchart extends Component {
     constructor(props) {
         super(props);
         this.state={
-      renderclasslist : []
+      renderclasslist : [],
+      isLoading: true
+
         }
       }
 
-      componentWillReceiveProps(nextProps) {
-            console.log('dates',nextProps.Dates)
-            if (nextProps.Dates.length === this.props.Dates.length){
-                return
-            }
-            else{
-            nextProps.Dates.map((clss) => {
-                console.log('clss', clss)
-                this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)
-                console.log('HIT')
-            })
+      componentDidMount() {
+           
+            
+                this.setState({renderclasslist: []},() => {
+                    this.props.Dates.map((clss) => {
+                        console.log('clss', clss)
+                        this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)
+                        console.log('HIT')
+                    })
+                    this.setState({isLoading:false})
+                })
+            
             this.setState({renderclasslist: this.state.renderclasslist})
-        }}
+        }
+    
+    render() { 
 
     render() {
         return(
-        <ChartGrid>
-          {this.state.renderclasslist}
-        </ChartGrid>
-    )
-      }
+    <div>
+    { this.state.isLoading &&
+    <div>Loading.. please wait!</div>
+    }
+    {!this.state.isLoading && <div style={{display: 'flex'}}>
+       {this.state.renderclasslist} </div>}
+        </div>
+    
+      ) 
         }
+    }
 export default Flexchart

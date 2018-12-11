@@ -26,6 +26,8 @@ import People from '@material-ui/icons/People';
 import Info from '@material-ui/icons/Info';
 import Mobileguide from '@material-ui/icons/Toc';
 import LogOut from '@material-ui/icons/ExitToApp';
+import Loggedin from '@material-ui/icons/DoneOutline';
+import Loggedout from '@material-ui/icons/Clear';
 
 //Images
 import Flatclass from '../src/Components/Img/flatclass2.png';
@@ -128,8 +130,28 @@ transition: .3s;
   position: fixed;
   margin-bottom: 50px;
 }`
+const Logger = styled.h1`
+position: absolute;
+margin-left: 450px;
+font-size: 24px;
+`
 
 class App extends Component {
+
+  componentDidUpdate() {
+    let x= document.getElementById("IN")
+    let y= document.getElementById("OUT")
+    let z = document.getElementById('Sidebar')
+    if (localStorage.getItem("jwt")) {
+      x.style.display="flex"
+      y.style.display="none"
+      z.style.display="block"
+    } else {
+      y.style.display="block"
+      x.style.display="none"
+      z.style.display="none"
+    }
+  }
 
   mobileHandler= e => {
 console.log('window', window.innerWidth)
@@ -163,6 +185,10 @@ logoutHandler = e => {
 
       <Background id="BackgroundID">
 
+      <Logger>Logged in:
+        <Loggedin id="IN" style={{fontSize:'36px', display: 'none'}}></Loggedin>
+        <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
+      </Logger>
 
         <Mobilebtn onClick={this.mobileHandler}>
               <Tooltip title="Menu" placement="right">

@@ -82,7 +82,8 @@ class ViewClass extends Component {
            classnames: [],
            placehold: [1, 2, 3, 4],
            truenames: [],
-           info: []
+           info: [],
+           isLoading: true
        }
     }
 
@@ -121,11 +122,12 @@ class ViewClass extends Component {
 
                   console.log('state after set state', this.state.info)
               })
-               this.setState({info: this.state.info})
 
+               this.setState({isLoading: false})
               // console.log('handleclass')
               // console.log('classP', this.state.P)
             })
+            return
         }
 handleAdd = () => {
     if (localStorage.getItem("classID")) {
@@ -134,22 +136,37 @@ handleAdd = () => {
 }
 
     render() {
-
         return (
-
-
-           <Classdiv>
-             <Addclass>
-               <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
-             </Addclass>
-            <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
-               <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
-            </Link>
-
-           </Classdiv>
-
-        )
-
+    <div>
+    { this.state.isLoading &&
+    <div>Loading.. please wait!</div>
     }
+    { !this.state.isLoading &&
+    <div>   
+
+
+        <Classdiv>
+            
+         
+         <Flexchart Dates={this.state.info} history={this.props.history}></Flexchart>
+         
+            
+            {/* <Chartprop  Data={this.state.info}/> */}
+            
+            <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}> 
+           <Addclass>
+               <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
+          </Addclass>
+         </Link>
+
+        </Classdiv>
+
+     )</div>
+    }
+  </div>
+        )
+    
+    }
+    
 }
 export default ViewClass;
