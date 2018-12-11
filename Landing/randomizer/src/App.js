@@ -71,6 +71,7 @@ background-color: white;
 }
  `
 const Sidebar = styled.div`
+font-family:'Raleway', sans-serif;
 margin-right: 50px;
 width: 40px;
 height: 400px;
@@ -147,16 +148,16 @@ font-size: 24px;
 class App extends Component {
 
   componentDidUpdate() {
-    let x= document.getElementById("IN")
-    let y= document.getElementById("OUT")
+    
+   
     let z = document.getElementById('Sidebar')
     if (localStorage.getItem("jwt")) {
-      x.style.display="flex"
-      y.style.display="none"
+     
+     
       z.style.display="flex"
     } else {
-      y.style.display="block"
-      x.style.display="none"
+     
+      
       z.style.display="none"
     }
   }
@@ -202,10 +203,10 @@ logoutHandler = e => {
 
 
       <Background id="BackgroundID">
-      <Logger>Logged in:
+      {/* <Logger>Logged in:
         <Loggedin id="IN" style={{fontSize:'36px', display: 'none'}}></Loggedin>
         <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
-      </Logger>
+      </Logger> */}
 
        
   

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 //PNGs
 import Mark from '../Img/Smallmark.png';
 import Linked from '../Img/linkedin32.png';
-import Nick from '../Img/nicksface.PNG';
+import Nick from '../Img/nicksface2.png';
 import Sus from '../Img/sus.PNG';
 import Emme from '../Img/emme.PNG';
 import Ray from '../Img/ray.PNG';

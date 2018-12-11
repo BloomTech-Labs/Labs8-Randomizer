@@ -10,6 +10,26 @@ background: none;
 z-index: -1;
 display: block;
 outline: 0;
+font-family:'Raleway', sans-serif;
+margin-bottom: 10px;
+`
+
+const Graphbutton = styled.button`
+text-decoration: none;
+background-color: #72CBD3;
+
+font-family:'Raleway', sans-serif;
+border: 1px solid grey;
+margin-left: 5px;
+margin-right: 5px;
+margin-bottom: 5px;
+cursor: pointer;
+transition: .3s;
+color: black;
+padding: 5px 5px;
+:hover {
+  color: white;
+}
 `
  class Chartprop extends Component {
   constructor(props) {
@@ -104,8 +124,8 @@ outline: 0;
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
 <h4> Class Participation Percentage: {this.state.percentage}% </h4>
-<button onClick={this.routeToRandom}>Start Randomizer</button>
-<button onClick={this.deleteClass}>Delete the Class</button>
+<Graphbutton onClick={this.routeToRandom}>Start Randomizer</Graphbutton>
+<Graphbutton onClick={this.deleteClass}>Delete Class</Graphbutton>
 </Graphbox>
 
     </div>

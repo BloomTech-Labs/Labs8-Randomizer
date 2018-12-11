@@ -42,9 +42,9 @@ border-radius: 5px;
  const Addclass = styled.button`
  margin-top: 15px;
  width: 200px;
- height: 200px;
+ height: 75px;
  border: none;
- border-radius: 8px;
+ font-family:'Raleway', sans-serif;
  cursor: pointer;
  transition: .5s;
  background-color: #032323;
@@ -146,9 +146,9 @@ handleAdd = () => {
 
         <Classdiv style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 
-          <Link to='/Class' style={{height: '200px'}} onClick={this.handleAdd}>
+          <Link to='/Class' style={{height: '75px'}} onClick={this.handleAdd}>
             <Addclass>
-              <Add className='plus' style={{fontSize: '100px'}}> </Add> <H1>Add a Class</H1>
+               <H1>Add a Class</H1>
             </Addclass>
           </Link>
 
