@@ -27,13 +27,13 @@ border: 3px solid #dfece6;
 border-radius: 5px;
 @media (max-width: 1024px) {
 
-    width: 700px;
+    width: 100%;
   }
 @media (max-width: 400px) {
-    width: 200px;
+    width: 100%;
     height: 200px;
     justify-content: center;
-    position: absolute;
+   
     border: none;
     background-color: none;
     margin-left: 25px;
@@ -61,6 +61,7 @@ top: 0;
     width: 110px;
     height: 130px;
     font-size: 12px;
+    margin-left: 40%;
   }
   @media (max-width: 768px) {
     width: 100px;
@@ -74,15 +75,7 @@ color: white;
     font-size: 14px;
   }
 `
-const H2 = styled.h1`
-color: black;
-position: absolute;
-margin-left: 5px;
-`
 
-const Title = styled.div`
-display: flex;
-`
 class ViewClass extends Component {
     constructor(props) {
         super(props);

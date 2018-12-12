@@ -45,8 +45,8 @@ justify-content: center;
 
 @media (max-width: 400px) {
   flex-direction: column;
-  width: 400px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
 
 }
 `

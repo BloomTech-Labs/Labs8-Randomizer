@@ -9,14 +9,16 @@ const ChartGrid = styled.div`
   grid-gap: 17px;
   grid-template-columns: repeat(1, auto);
   grid-template-rows: repeat(1, auto);
+  margin-top: 75px;
   @media (max-width: 850px) {
     grid-template-columns: repeat(1, auto);
     grid-template-rows: repeat(1, auto);
   }
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
     grid-template-columns: repeat(1, auto);
     grid-template-rows: repeat(1, auto);
-    margin-top: 500px;
+    margin-top: 1350px;
+    width: 100%;
 
   }
 

@@ -23,7 +23,8 @@ width: 500px;
 }
 
 @media (max-width: 400px) {
-  width: 300px;
+  width: 75%;
+  margin-left: 14%;
   
   }
 `
@@ -33,7 +34,8 @@ height: 125px;
 flex-direction: row;
 margin-left: 75px;
 @media (max-width: 600px) {
- 
+ width:  250px;
+ margin-left: 50px;
   }
 `
 
@@ -60,7 +62,7 @@ padding: 5px 5px;
 
 @media (max-width: 600px) {
   font-size: 10px;
-  width: 50px;
+  width: 75px;
   height: 40px;
   }
 `

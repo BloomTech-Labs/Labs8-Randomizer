@@ -169,7 +169,7 @@ transition: .4s;
 `
 const Secondlevel = styled.div`
 font-family:'Raleway', sans-serif;
-  width: 1000px;
+  width: 100%;
   height: .1px;
   justify-content: center;
   flex-direction: row;
@@ -573,7 +573,7 @@ editClassName = e => {
 
               </Classdiv>
 
-              <Secondlevel>
+              <Secondlevel id="SecondLevel">
 
 
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
