@@ -65,7 +65,7 @@ top: 0;
   }
   @media (max-width: 768px) {
     width: 100px;
-    height: 60px;
+    height: 90px;
     font-size: 12px;
   }
  `

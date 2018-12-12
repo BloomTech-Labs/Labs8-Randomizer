@@ -17,7 +17,7 @@ const ChartGrid = styled.div`
   @media (max-width: 400px) {
     grid-template-columns: repeat(1, auto);
     grid-template-rows: repeat(1, auto);
-    margin-top: 1350px;
+    margin-top: 1650px;
     width: 100%;
 
   }

@@ -140,17 +140,7 @@ class Settings extends React.Component {
             <div style={{backgroundColor: 'rgba(255,255,255,.5)'}}>
                 <H2>Developers</H2>
                 
-                <Alert>
-        {alert => (
-          <Addclass
-            onClick={() => {
-              alert.show('Oh look, an alert!')
-              this.alertHandler()
-            }}>
-            Show Alert
-          </Addclass>
-        )}
-      </Alert>
+               
 
           <Homediv>
               

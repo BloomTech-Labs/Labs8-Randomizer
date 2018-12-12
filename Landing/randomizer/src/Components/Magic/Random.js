@@ -19,10 +19,9 @@ border: 3px solid #dfece6;
 flex-direction: column;
 
 @media (max-width: 400px) {
-  width: 300px;
-  margin-left: 120px;
-  border: none;
-  background-color: none;
+  width: 100%;
+  margin-left: 20%;
+  height: 510px;
   margin-top: 0px;
 }
 `
@@ -34,6 +33,10 @@ width: 600px;
 height: 150px;
 margin-top: 15px;
 justify-content: center;
+@media (max-width: 400px) {
+  width: 100%;
+  margin-top: 35px;
+}
 `
 
 const Orangediv = styled.div`
@@ -42,11 +45,18 @@ width: 580px;
 height: 80px;
 margin-top: 0px;
 justify-content: space-between;
+@media (max-width: 400px) {
+  width: 100%;
+  flex-wrap: wrap;
+}
 `
 const Buttonholder = styled.div`
 width: 200px;
 display: flex;
 height: 75px;
+@media (max-width: 400px) {
+  width: 100%;
+}
 
 `
 const Chartdiv = styled.div`
@@ -55,10 +65,11 @@ width: 400px;
 height: 200px;
 position: absolute;
 margin-top: 115px;
-margin-left: 165px;
+margin-left: 75px;
 @media (max-width: 400px) {
- margin-top: 225px;
- margin-left: 0px;
+margin-left: 0px;
+
+width: 200px;
 }
 `
 const Buttondiv = styled.div`
@@ -68,17 +79,25 @@ height: 75px;
 z-index: +1;
 align-items: center;
 justify-content: space-between;
-margin-top: 25px;
+margin-top: 125px;
+@media (max-width: 400px) {
+  width: 100%;
+  flex-wrap: wrap;
+margin-top: 95px;
+}
 `
 
 const Misc = styled.h1`
 
 font-size: 40px;
 margin-right: 25px;
+margin-top: 20px;
 @media (max-width: 400px) {
-  margin-right: 15px;
-  font-size: 35px;
-  
+
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 10px;
+  font-size: 24px;
 }
 `
 const Part = styled.button`
@@ -98,7 +117,9 @@ transition: .5s;
     
 }
 @media (max-width: 400px) {
-  margin-top: 80px;
+  font-size: 14px;
+  margin-left: 25px;
+  margin-bottom: 5px;
 }
 `
 
@@ -119,7 +140,10 @@ margin-right: 15px;
   color: white
 }
 @media (max-width: 400px) {
-  margin-top: 80px;
+ font-size: 14px;
+ margin-left: 25px;
+ margin-top: 5px;
+ 
 }
 `
 
@@ -140,6 +164,13 @@ margin-top: 25px;
 :hover {
   color: white;
 }
+@media (max-width: 400px) {
+  
+  margin-top: 10px;
+  width: 75px;
+  margin-right: 50px;
+  
+ }
 `
 
 const Reset = styled.button`
@@ -157,6 +188,11 @@ margin-top: 25px;
 :hover {
   color: white
 }
+@media (max-width: 400px) {
+  width: 75px;
+  margin-top: 10px;
+  
+ }
 `
 const Bigbutton = styled.button`
 width: 250px;
@@ -171,7 +207,9 @@ font-size: 36px;
   color: white;
 }
 @media (max-width: 400px) {
-  margin-top: 75px;
+  width: 200px;
+  font-size: 18px;
+  height: 50px;
 }
 `
 
@@ -355,8 +393,8 @@ class Magic extends Component {
           <Buttonholder>
         <Edit onClick={this.Edithandler}>Edit Class</Edit>
                   <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>  
-                  </Buttonholder>
-                  </Orangediv>
+          </Buttonholder>
+          </Orangediv>
         
          
 
@@ -365,22 +403,20 @@ class Magic extends Component {
                    
             </Namediv>
 
-            <Buttondiv>
-                
-                  </Buttondiv>
+            
                   <Buttondiv>
                   <Part onClick={this.Participatehandler}>Participated</Part>
                   <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
                   
                   <Dec onClick={this.Declinehandler}>Declined</Dec>
             </Buttondiv>  
-            <Chartdiv id="Chart" >
-            <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
-            </Chartdiv>
+            
 
             
             </Maindiv>
-            
+            <Chartdiv id="Chart" >
+            <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
+            </Chartdiv>
             </React.Fragment>
       )
   }
