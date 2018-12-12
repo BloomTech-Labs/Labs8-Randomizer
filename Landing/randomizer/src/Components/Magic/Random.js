@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { withAlert } from "react-alert";
 
 // Components
 import StudentChart from '../Rechart/StudentChart';
@@ -202,8 +203,9 @@ class Magic extends Component {
 
     componentDidMount() {
       if (localStorage.getItem("classID")=== null) {
-        alert('choose a class!')
+        this.props.alert.error('choose a class!')
         this.props.history.push('/ViewClasses')
+        
       }
       else{
         if (localStorage.getItem("studentID")) {
@@ -223,8 +225,8 @@ class Magic extends Component {
             console.log('data',res.data)
             var newarray = data['studentNames']
             if (newarray.length === 0){
-              alert('No students in Class, Add a Student')
-              this.props.history.push('/Class')
+              this.props.alert.error('No students in Class, Add a Student')
+              setTimeout(this.props.history.push('/Class'),2000)
             }
 
             newarray.map(name => {
@@ -322,11 +324,14 @@ class Magic extends Component {
 
  Shufflehandler =() => {
   if (this.state.studentnamearray.length === 0){
-    alert("All students have gone, Resetting Class")
-    window.location.reload()
+    this.props.alert.show("All students have gone, Resetting Class")
+    this.handleClass()
+    setTimeout( this.props.history.push('/Random'), 3000)
+    return
+  }
     if (localStorage.getItem("studentID")) {
       localStorage.removeItem("studentID")
-  }}
+  }
     this.setState({P:0, NP:0})
     const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
     this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
@@ -335,7 +340,7 @@ class Magic extends Component {
      this.state.studentnamearray.splice(randomnum,1)
      this.setState({studentnamearray: this.state.studentnamearray}, ()=>{
        if (this.state.studentnamearray.length === 0){
-         alert("Last Student")
+         this.props.alert.show("Last Student")
        }
      })
  }
@@ -394,4 +399,4 @@ class Magic extends Component {
       )
   }
 }
-export default Magic;
+export default withAlert(Magic);

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axios from  'axios';
+import { withAlert } from "react-alert";
 
 // Icons
 import Backarrow from '@material-ui/icons/ArrowBack';
@@ -88,10 +89,7 @@ class SignUp extends Component {
   SignUpSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    if (data.get('password').length < 5){
-      alert('Passwords must be longer than 5 characters, thank you for your understanding')
-    }
-    else{
+   
     axios.post('https://labs8randomizer.herokuapp.com/api/registration', {
       "username": data.get('username'),
       "password1": data.get('password'),
@@ -105,8 +103,8 @@ class SignUp extends Component {
       this.props.history.push('/ViewClasses');
     })
     .catch(error => {
-      console.log(error)
-    })}
+      this.props.alert.error(error.response.data['error'])
+    })
   }
 
   render() {
@@ -134,4 +132,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withAlert(SignUp);

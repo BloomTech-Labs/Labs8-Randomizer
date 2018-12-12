@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { withAlert } from "react-alert";
 
 //Icons
 import Deleteicon from '@material-ui/icons/Delete';
@@ -293,6 +294,12 @@ PapaParse.parse(filename,
          };
 
     createClass = () => {
+        if (this.state.class_name === ''){
+          this.props.alert.error("Please enter a class name")
+          return
+        }
+        else{
+          this.showHandler()
         const mail = {"class_name": this.state.class_name};
         const token =localStorage.getItem('jwt').toString();
         console.log('token type', typeof token)
@@ -311,9 +318,14 @@ PapaParse.parse(filename,
           });
           console.log('Create')
           console.log('class',)
-      };
+      }};
 
       addStudent = e => {
+        if (this.state.firstName === ''|| this.state.lastName === ''){
+          this.props.alert.error('Please enter first and last name')
+          return
+        }
+        else {
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
@@ -322,18 +334,19 @@ PapaParse.parse(filename,
             "lastName":this.state.lastName,
           })
           .then(res => {
-            console.log('resdata', res.data['studentID'])
+            console.log('resdata', res.data['key'])
             console.log('studentlist', this.state.studentList)
             let fullName = `${this.state.firstName} ${this.state.lastName}`;
             console.log('fullname', fullName)
             // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
-            this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
+            this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
             ()=>{this.secondDisplay()})
 
           })
           .catch(err => {
+            console.log(err)
           });
-      };
+      }};
       handleInput = e => {
         const {value} = e.target;
         this.setState({ class_name: value });
@@ -464,7 +477,7 @@ loadStudents = e => {
     console.log('sanity check', this.state.studentList)
     this.handleDisplay()
   }
-
+  this.showHandler()
   })
 
   this.handleCreateButtons()
@@ -542,7 +555,7 @@ editClassName = e => {
                  <Ptag>Or</Ptag>
                 <Dec onClick={() =>{
                   this.createClass()
-                  this.showHandler() } }>Create Class</Dec>
+                   } }>Create Class</Dec>
 
 
                 </Namediv >
@@ -597,4 +610,4 @@ editClassName = e => {
         )
     }
 }
-export default Class;
+export default withAlert(Class);
