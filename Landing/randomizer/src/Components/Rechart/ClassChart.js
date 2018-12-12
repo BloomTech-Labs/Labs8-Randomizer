@@ -3,11 +3,13 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, Responsiv
 import styled from 'styled-components';
 import axios from 'axios'
 
-const Graphbox = styled.button`
+const Graphbox = styled.div`
 cursor: pointer;
 text-decoration: none;
 background: none;
-z-index: -1;
+margin: 15px 15px 15px 15px;
+width: 300px;
+height: 300px;
 display: block;
 outline: 0;
 font-family:'Raleway', sans-serif;
@@ -97,6 +99,12 @@ padding: 5px 5px;
       )
     }
 
+    routeToEdit = (e) => {
+      e.preventDefault()
+      localStorage.setItem('classID', this.state.id)
+      this.props.history.push('/Class')
+    }
+
 
 
           render() {
@@ -104,29 +112,30 @@ padding: 5px 5px;
 
         <div>
 
-          <Graphbox onClick={this.handleSubmit}>
+      <Graphbox>  
 
         { this.state.isHidden &&
-<ResponsiveContainer>
-<BarChart style={{cursor: 'pointer'}} width={400} height={300} data={this.dataList()}
+
+<BarChart style={{cursor: 'pointer'}} width={500} height={200} data={this.dataList()}
   margin={{top: 5, right: 5, left: 5, bottom: 5}} title={this.state.cl}>
   <XAxis dataKey="name"/>
 
   <YAxis style={{cursor: 'pointer'}} />
-  <CartesianGrid tyle={{cursor: 'pointer'}} />
+  <CartesianGrid style={{cursor: 'pointer'}} minTickGap={20}/>
   <Tooltip style={{cursor: 'pointer'}}/>
-  <Legend style={{cursor: 'pointer'}} />
-  <Bar dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
-  <Bar dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
+ 
+  <Bar stackId="a"dataKey="Participated" fill="Green"  style={{cursor: 'pointer'}} />
+  <Bar stackId="a"dataKey="Declined" fill="Red" style={{cursor: 'pointer'}} />
 </BarChart>
-</ResponsiveContainer>
+
 }
 <h1>{this.state.cl}</h1>
 <h3>Students Enrolled: {this.state.number}</h3>
 <h4> Class Participation Percentage: {this.state.percentage}% </h4>
 <Graphbutton onClick={this.routeToRandom}>Start Randomizer</Graphbutton>
 <Graphbutton onClick={this.deleteClass}>Delete Class</Graphbutton>
-</Graphbox>
+<Graphbutton onClick={this.routeToEdit}>Edit Class </Graphbutton>
+</Graphbox> 
 
     </div>
      )
