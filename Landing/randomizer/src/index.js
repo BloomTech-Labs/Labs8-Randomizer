@@ -7,7 +7,7 @@ import AlertTemplate from "react-alert-template-basic";
 
 const options = {
   timeout: 5000,
-  position: "bottom center"
+  position: "top center"
 };
 
 ReactDOM.render(

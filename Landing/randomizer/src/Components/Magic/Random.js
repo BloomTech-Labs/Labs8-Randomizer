@@ -11,95 +11,104 @@ import StudentChart from '../Rechart/StudentChart';
 const Maindiv = styled.div`
 background-color: rgba(255,255,255,.9);
 display: flex;
-width: 500px;
-height: 600px;
+width: 600px;
+height: 500px;
 padding-left: 15px;
 border-radius: 7px;
 
 border: 3px solid #dfece6;
 flex-direction: column;
+
 @media (max-width: 400px) {
-  width: 300px;
-  margin-left: 120px;
-  border: none;
-  background-color: none;
+  width: 100%;
+  margin-left: 20%;
+  height: 510px;
   margin-top: 0px;
 }
 `
 
-const Classdiv = styled.div`
-display: flex;
-width: 500px;
-height: 100px;
-justify-content: space-between;
-flex-direction: row;
-
-align-content: center;
-`
 
 const Namediv = styled.div`
 display: flex;
-width: 500px;
+width: 600px;
 height: 150px;
-margin-top: 0px;
+margin-top: 15px;
+justify-content: center;
+@media (max-width: 400px) {
+  width: 100%;
+  margin-top: 35px;
+}
 `
 
 const Orangediv = styled.div`
 display: flex;
-width: 500px;
+width: 580px;
 height: 80px;
 margin-top: 0px;
+justify-content: space-between;
+@media (max-width: 400px) {
+  width: 100%;
+  flex-wrap: wrap;
+}
 `
+const Buttonholder = styled.div`
+width: 200px;
+display: flex;
+height: 75px;
+@media (max-width: 400px) {
+  width: 100%;
+}
 
+`
 const Chartdiv = styled.div`
 display: flex;
 width: 400px;
 height: 200px;
 position: absolute;
-margin-top: 80px;
-margin-left: 250px;
+margin-top: 115px;
+margin-left: 75px;
 @media (max-width: 400px) {
- margin-top: 225px;
- margin-left: 0px;
+margin-left: 0px;
+
+width: 200px;
 }
 `
 const Buttondiv = styled.div`
 display: flex;
-width: 250px;
+width: 600px;
 height: 75px;
 z-index: +1;
+align-items: center;
+justify-content: space-between;
+margin-top: 125px;
 @media (max-width: 400px) {
-  
- 
-`
-const Title = styled.h1`
-font-size: 50px;
-height: 40px;
-margin-bottom: 0px;
-@media (max-width: 400px) {
-  margin-bottom: 0px;
-  font-size: 40px;
-  text-decoration: underline;
+  width: 100%;
+  flex-wrap: wrap;
+margin-top: 95px;
 }
 `
+
 const Misc = styled.h1`
-margin-top: 0px;
+
 font-size: 40px;
 margin-right: 25px;
+margin-top: 20px;
 @media (max-width: 400px) {
-  margin-right: 15px;
-  font-size: 35px;
-  
+
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-top: 10px;
+  font-size: 24px;
 }
 `
 const Part = styled.button`
 outline: 0;
 font-size: 20px;
-width: 125px;
+width: 150px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
-margin-right: 15px;
+
 color:black;
 background-color: #4caf50;
 border: none;
@@ -109,7 +118,9 @@ transition: .5s;
     
 }
 @media (max-width: 400px) {
-  margin-top: 80px;
+  font-size: 14px;
+  margin-left: 25px;
+  margin-bottom: 5px;
 }
 `
 
@@ -124,21 +135,24 @@ cursor: pointer;
 color: black;
 background-color: #E91E63;
 transition: .5s;
-
+margin-right: 15px;
 
 :hover {
   color: white
 }
 @media (max-width: 400px) {
-  margin-top: 80px;
+ font-size: 14px;
+ margin-left: 25px;
+ margin-top: 5px;
+ 
 }
 `
 
 const Edit = styled.button`
-margin-top: 5px;
+
 
 border: none;
-width: 100px;
+width: 120px;
 height: 36px;
 text-decoration: none;
 cursor: pointer;
@@ -151,12 +165,19 @@ margin-top: 25px;
 :hover {
   color: white;
 }
+@media (max-width: 400px) {
+  
+  margin-top: 10px;
+  width: 75px;
+  margin-right: 50px;
+  
+ }
 `
 
 const Reset = styled.button`
 margin-top: 5px;
 border: none;
-width: 100px;
+width: 120px;
 height: 36px;
 text-decoration: none;
 cursor: pointer;
@@ -168,21 +189,28 @@ margin-top: 25px;
 :hover {
   color: white
 }
+@media (max-width: 400px) {
+  width: 75px;
+  margin-top: 10px;
+  
+ }
 `
 const Bigbutton = styled.button`
 width: 250px;
-height: 50px;
+height: 75px;
 text-decoration: none;
 cursor: pointer;
 border: none;
 background-color:#00E1F5;
 color: black;
-
+font-size: 36px;
 :hover {
   color: white;
 }
 @media (max-width: 400px) {
-  margin-top: 75px;
+  width: 200px;
+  font-size: 18px;
+  height: 50px;
 }
 `
 
@@ -364,37 +392,36 @@ class Magic extends Component {
       return (
         <React.Fragment>
         <Maindiv>
-        <Title>Randomizer</Title>
+        
         <Orangediv>
+        <Misc>{this.state.classinfo}</Misc>
+          <Buttonholder>
         <Edit onClick={this.Edithandler}>Edit Class</Edit>
                   <Reset onClick={this.Resethandler}>Reset 'All Go'</Reset>  
-                  </Orangediv>
+          </Buttonholder>
+          </Orangediv>
         
-          <Classdiv id="Classdiv">
-                  <Misc>{this.state.classinfo}</Misc>
-                  
-           </Classdiv>   
+         
 
             <Namediv>
                   <Misc>{this.state.Student}</Misc>
                    
             </Namediv>
 
-            <Buttondiv>
-                  <Part onClick={this.Participatehandler}>Participated</Part>
-                  <Dec onClick={this.Declinehandler}>Declined</Dec>
-                  </Buttondiv>
+            
                   <Buttondiv>
+                  <Part onClick={this.Participatehandler}>Participated</Part>
                   <Bigbutton onClick={this.Shufflehandler}>Randomize!</Bigbutton>
                   
+                  <Dec onClick={this.Declinehandler}>Declined</Dec>
             </Buttondiv>  
-            <Chartdiv id="Chart" >
-            <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
-            </Chartdiv>
+            
 
             
             </Maindiv>
-            
+            <Chartdiv id="Chart" >
+            <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
+            </Chartdiv>
             </React.Fragment>
       )
   }

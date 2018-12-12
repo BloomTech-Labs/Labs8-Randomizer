@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Alert } from "react-alert";
 
 // Components
 import Home from './Components/LandingPage/Home';
@@ -45,8 +46,9 @@ justify-content: center;
 
 @media (max-width: 400px) {
   flex-direction: column;
-  width: 400px;
-  height: 500px;
+  width: 100%;
+  height: 80%;
+  justify-content: start;
 
 }
 `
@@ -87,7 +89,7 @@ z-index: +1;
 @media (max-width: 400px) {
   position: fixed;
   display: none;
-  margin-top: 0px;
+  margin-top: 50px;
 }
 `
 const Sidebutton = styled.button`
@@ -124,9 +126,7 @@ height: 25px;
 background: none;
 transition: .3s;
 
-:hover {
-  color: #F7AF9D;
-}
+
 @media (max-width: 400px) {
   display: flex;
   position: fixed;
@@ -149,15 +149,15 @@ class App extends Component {
 
   componentDidUpdate() {
     
-   
+   let y = document.getElementById('Mobileguide')
     let z = document.getElementById('Sidebar')
     if (localStorage.getItem("jwt")) {
      
-     
+      y.style.display="flex"
       z.style.display="flex"
     } else {
      
-      
+      y.style.display="none"
       z.style.display="none"
     }
   }
@@ -193,7 +193,7 @@ logoutHandler = e => {
     return (
 
       <React.Fragment>
-           <Mobilebtn onClick={this.mobileHandler}>
+           <Mobilebtn id="Mobileguide" onClick={this.mobileHandler}>
               <Tooltip title="Menu" placement="right">
                 <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
               </Tooltip>
@@ -240,14 +240,18 @@ logoutHandler = e => {
               </Sidebutton >
             </Link>
 
+        
             <Link to="/Random" style={{height: '40px', marginBottom: '25px' }}>
+           
+
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
               <Tooltip title="Randomizer" placement="right">
                 <Swap style={{fontSize: '48px'}}/>
                </Tooltip>
               </Sidebutton >
+              
             </Link>
-
+            
 
             <Link to="/Settings" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
@@ -266,7 +270,10 @@ logoutHandler = e => {
             </Link>
 
               <Link to="/" style={{height: '40px', marginBottom: '25px' }}>
-              <Sidebutton onClick={this.logoutHandler} id="Sider6">
+              <Sidebutton onClick={() => {
+              this.logoutHandler()
+              this.mobileHandler()
+            }} id="Sider6">
               <Tooltip title="Log Out" placement="right">
                 <LogOut style={{fontSize: '48px'}}/>
               </Tooltip>

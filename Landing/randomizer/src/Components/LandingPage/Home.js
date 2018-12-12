@@ -23,7 +23,7 @@ flex-wrap: wrap;
 border-radius: 5px;
 @media (max-width: 400px) {
   height: 350px;
-    
+
     margin-left: 35px;
     background-color: none;
     border: none;
@@ -45,7 +45,7 @@ text-decoration: none;
 font-size: 24px;
 
 :hover {
-    
+
     opacity: .9;
     color: white;
 }
@@ -68,13 +68,14 @@ transition: .5s;
 font-size: 24px;
 
 :hover {
-   
+
     opacity: .9;
     color: white;
 }
 @media (max-width: 400px) {
     font-size: 18px;
     width: 100px;
+    margin-bottom: 25px;
   }
 `
 const Welcomer = styled.h1`
@@ -128,6 +129,12 @@ class Home extends Component {
            })
      }
 
+      componentWillMount(){
+          if (localStorage.getItem('jwt')){
+            this.props.history.push('/ViewClasses')
+          }
+      }
+
     render() {
         const {isCool} = this.state;
         return (
@@ -153,11 +160,12 @@ class Home extends Component {
                 </Signin>
                 </Link>
                 <div>
-                  <GoogleApi responseGoogle={this.responseGoogle} theme='dark'/>
+                  <GoogleApi  responseGoogle={this.responseGoogle} theme='dark'/>
                 </div>
 
             </Homediv>
         )
     }
 }
+
 export default Home;
