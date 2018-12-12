@@ -321,12 +321,12 @@ class Class extends Component {
             "lastName":this.state.lastName,
           })
           .then(res => {
-            console.log('resdata', res.data['studentID'])
+            console.log('resdata', res.data['key'])
             console.log('studentlist', this.state.studentList)
             let fullName = `${this.state.firstName} ${this.state.lastName}`;
             console.log('fullname', fullName)
             // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
-            this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['studentID']}]},
+            this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
             ()=>{this.secondDisplay()})
 
           })
@@ -519,7 +519,10 @@ class Class extends Component {
                                               style={{marginLeft: '25px', marginTop: '13px'}}
                                               endAdornment={
                                                 <InputAdornment position="end">
-                                                  <Save onClick={this.editClassName}/>
+                                                  <Save onClick={() => {
+                                                      this.editClassName()
+                                                      this.setState({editClassName: !this.state.editClassName})
+                                                    }}/>
                                                 </InputAdornment>
                                               }
                                               /> : ''}
@@ -548,7 +551,7 @@ class Class extends Component {
 
 
 
-             
+
 
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
               </Secondlevel>
