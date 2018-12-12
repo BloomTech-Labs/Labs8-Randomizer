@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Alert } from "react-alert";
 
 // Components
 import Home from './Components/LandingPage/Home';
@@ -240,14 +241,18 @@ logoutHandler = e => {
               </Sidebutton >
             </Link>
 
+        
             <Link to="/Random" style={{height: '40px', marginBottom: '25px' }}>
+           
+
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
               <Tooltip title="Randomizer" placement="right">
                 <Swap style={{fontSize: '48px'}}/>
                </Tooltip>
               </Sidebutton >
+              
             </Link>
-
+            
 
             <Link to="/Settings" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
