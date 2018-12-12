@@ -546,7 +546,10 @@ else return
                                               style={{marginLeft: '25px', marginTop: '13px'}}
                                               endAdornment={
                                                 <InputAdornment position="end">
-                                                  <Save onClick={this.editClassName}/>
+                                                  <Save onClick={() => {
+                                                      this.editClassName()
+                                                      this.setState({editClassName: !this.state.editClassName})
+                                                    }}/>
                                                 </InputAdornment>
                                               }
                                               /> : ''}
@@ -579,7 +582,7 @@ else return
 
 
 
-             
+
 
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
               </Secondlevel>
