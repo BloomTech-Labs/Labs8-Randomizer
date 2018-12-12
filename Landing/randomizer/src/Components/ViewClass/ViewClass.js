@@ -44,18 +44,27 @@ border-radius: 5px;
  width: 200px;
  height: 75px;
  border: none;
+ display: block;
  font-family:'Raleway', sans-serif;
  cursor: pointer;
  transition: .5s;
  background-color: #032323;
  color: white
  margin-left: 5px;
+ z-index: +1;
+position: absolute;
+top: 0;
  :hover {
      background-color: black;
  }
  @media (max-width: 400px) {
     width: 110px;
     height: 130px;
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 60px;
     font-size: 12px;
   }
  `
@@ -143,14 +152,15 @@ handleAdd = () => {
     }
     { !this.state.isLoading &&
     <div>
-
-        <Classdiv style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-
-          <Link to='/Class' style={{height: '75px'}} onClick={this.handleAdd}>
+<React.Fragment>
+<Link to='/Class' style={{height: '75px'}} onClick={this.handleAdd}>
             <Addclass>
                <H1>Add a Class</H1>
             </Addclass>
           </Link>
+        <Classdiv style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+       
+         
 
          <Flexchart Dates={this.state.info} history={this.props.history} ></Flexchart>
 
@@ -159,6 +169,7 @@ handleAdd = () => {
 
 
         </Classdiv>
+        </React.Fragment>
 
      </div>
     }

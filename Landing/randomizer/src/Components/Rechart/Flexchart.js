@@ -7,16 +7,20 @@ const ChartGrid = styled.div`
   height: 100%;
   display: grid;
   grid-gap: 17px;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(1, auto);
   grid-template-rows: repeat(1, auto);
   @media (max-width: 850px) {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(1, auto);
     grid-template-rows: repeat(1, auto);
   }
   @media (max-width: 600px) {
     grid-template-columns: repeat(1, auto);
     grid-template-rows: repeat(1, auto);
+    margin-top: 500px;
+
   }
+
+
 `
 class Flexchart extends Component {
     constructor(props) {
