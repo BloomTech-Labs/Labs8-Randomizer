@@ -23,7 +23,7 @@ flex-wrap: wrap;
 border-radius: 5px;
 @media (max-width: 400px) {
   height: 350px;
-    
+
     margin-left: 35px;
     background-color: none;
     border: none;
@@ -45,7 +45,7 @@ text-decoration: none;
 font-size: 24px;
 
 :hover {
-    
+
     opacity: .9;
     color: white;
 }
@@ -68,7 +68,7 @@ transition: .5s;
 font-size: 24px;
 
 :hover {
-   
+
     opacity: .9;
     color: white;
 }
@@ -129,6 +129,12 @@ class Home extends Component {
            })
      }
 
+      componentWillMount(){
+          if (localStorage.getItem('jwt')){
+            this.props.history.push('/ViewClasses')
+          }
+      }
+
     render() {
         const {isCool} = this.state;
         return (
@@ -161,4 +167,5 @@ class Home extends Component {
         )
     }
 }
+
 export default Home;
