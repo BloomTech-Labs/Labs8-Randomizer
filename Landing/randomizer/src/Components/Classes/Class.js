@@ -475,16 +475,9 @@ class Class extends Component {
     else return
   }
 
-  this.showHandler()
-  })
-
-  this.handleCreateButtons()
 
 
 
-}
-else return
-}
 
 
   handleCreateButtons = () => {
