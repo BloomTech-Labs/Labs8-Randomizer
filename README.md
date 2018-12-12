@@ -2,15 +2,15 @@
 <h1>Welcome to Randomizer</h1>
 </div>
 
-<h1>User Stories</h1>
-<p>Randomizer is an app that will help educators or group facilitators track and record a student or participants class participation.  For educators/facilitators, class engagement is very important to the a students learning process.  Data has shown, that students who are actively engaged in class conversations have resulted to better learning environment, helps with public speaking and makes learning enjoyable.  A Main Feature of the app, gives a user the ability to click the Magic Randomizer Button to enable a randomized choosing of an enrolled student name giving the teacher/facilitator at a glance informatoin if that student status of when the last time they have participated or how many times they have declined.  This may be useful to educators to gage who well their class is engaged and maybe use this information to taylor their delivery of information.  A very cool feature is a the overall classroom participation percentage data.  This app will archive the data and show their class and individual student participation progress through graphs.  </p>
-
-
 Web App Deployed at:
 https://labs8randomizer2.netlify.com/
 
 API Deployed at:
 https://labs8randomizer.herokuapp.com/admin/login/?next=/admin/
+
+
+<h1>User Stories</h1>
+<p>Randomizer is an app that will help educators or group facilitators track and record their class or group participation.  For educators/facilitators, class engagement is very important to a student's learning process.  Research has shown, that students who are actively engaged in the learning process increases their attention and focus, motivates them to higher critical thinking skills and promotes meaningful learning experiences, basically makes learning fun.  Randomizer has a Main Feature, click the Magic Randomizer Button and it will randomly choose one of their enrolled students.  This feature can help a user by not always calling on the same students, but gives opportunity to all students to engage in the conversation.  After a name has been chosen, the user can either click "participate" or "decline" to record if that student participated or not.  This information will be stored in our database that will then give a particiation progress chart to the class participation and individual students.  This may be useful to educators to gauge how well their class is engaged and maybe use this information to taylor their delivery of information.  A very cool feature is a the overall classroom participation percentage data.  This app will archive the data and show their class and individual student participation progress through graphs.</p>
 
 
 ## TABLE of Contents
@@ -126,30 +126,31 @@ https://labs8randomizer2.netlify.com/
 
 #Two Models:
 USER Model - User Information
+
+| Endpoints    | API Routes               | Routes To
+| ------------ | -------------------------|---------------------------------
+| POST         | /api/registration        | User Sign Up
+| GET          | /api/login               | User Login
+| GET          | /api/tokenregister       | Register Token from Google API
+| POST         | /api/updateuser          | Update User Info
+
+
 CLSS Model - Class, Student, Student Participation
 
-# Endpoints
-
-# POST -- `/api/registration` -- POST
-# GET -- `/api/login` -- GET
-# GET -- `/api/tokenregister` -- GET
-# POST -- `/api/updateuser` -- POST
-
-
-# POST -- `/clss/create_class` -- POST
-# GET -- `/clss/class_list` -- GET
-# POST -- `/clss/add_student` -- POST
-# GET -- `/clss/list_student` -- GET
-# POST -- `/clss/participate` -- POST
-# POST -- `/clss/participation_list` -- POST
-# GET -- `/clss/get_everything` -- GET
-# PUT -- `/clss/updatestudent` -- POST
-# PUT -- `/clss/updateclass` -- POST
-# DELETE -- `/clss/deletestudent` -- POST
-# DELETE -- `/clss/deleteclass` -- POST
-# POST -- `/clss/csv_post` -- POST
-
-
+| Endpoints    | API Routes                | Routes To
+| ------------ | --------------------------|---------------------------------
+| POST         | /clss/create_class        | Add a New Class
+| GET          | /clss/class_list          | List Classes
+| POST         | /clss/add_student         | Add New Student
+| GET          | /clss/list_student        | List Students 
+| POST         | /clss/participate         | Single Student Participate
+| POST         | /clss/participation_list  | Class Participation
+| GET          | /clss/get_everything      | Class/Student/Participate Info
+| PUT          | /clss/updatestudent       | Update Student Name
+| PUT          | /clss/updateclass         | Update Class Name
+| DELETE       | /clss/deletestudent       | Delete Student
+| DELETE       | /clss/deleteclass         | Delete Class
+| POST         | /clss/csv_post            | Store CSV class/student info
 
 
 ##USER Model - User Information
@@ -166,10 +167,11 @@ POST -- `/api/registration`  --POST
 
 
 GET -- `/api/login` -- GET
-| Field        | Input                  | Required |
-| ------------ | ---------------------- | -------- |
-| email        | String, 30 chars max   | Yes      |
-| password1    | String 6+ characters   | Yes      |
+
+| Field       | Input                  | Required |
+| ------------| ---------------------- |----------|
+| email       | String, 30 chars max   | Yes      |
+| password1   | String 6+ characters   | Yes      |
 
 
 
