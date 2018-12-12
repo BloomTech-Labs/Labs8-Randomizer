@@ -167,8 +167,8 @@ const Bigbutton = styled.button`
   }
 `
 const Secondlevel = styled.div`
-  font-family:'Raleway', sans-serif;
-  width: 1000px;
+font-family:'Raleway', sans-serif;
+  width: 100%;
   height: .1px;
   justify-content: center;
   flex-direction: row;
@@ -542,7 +542,14 @@ class Class extends Component {
                   </Sider>
                 </Namediv>
               </Classdiv>
-              <Secondlevel>
+
+
+              <Secondlevel id="SecondLevel">
+
+
+
+             
+
                 <CsvStyling type='file' id="file" accept="text/csv" onChange={e => this.handleChangeFile(e)}/>
               </Secondlevel>
               <NameGrid id="Grid" style={{visibility:'hidden'}}>

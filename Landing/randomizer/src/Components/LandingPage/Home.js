@@ -75,6 +75,7 @@ font-size: 24px;
 @media (max-width: 400px) {
     font-size: 18px;
     width: 100px;
+    margin-bottom: 25px;
   }
 `
 const Welcomer = styled.h1`
@@ -159,7 +160,7 @@ class Home extends Component {
                 </Signin>
                 </Link>
                 <div>
-                  <GoogleApi responseGoogle={this.responseGoogle} theme='dark'/>
+                  <GoogleApi  responseGoogle={this.responseGoogle} theme='dark'/>
                 </div>
 
             </Homediv>
