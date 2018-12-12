@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { withAlert } from "react-alert";
 //Icons
 import Backarrow from '@material-ui/icons/ArrowBack';
 
@@ -146,7 +147,7 @@ class Login extends Component {
         this.props.history.push('/ViewClasses');
       }})
       .catch(err => {
-        alert('No user exists with those credentials - Sign up?')
+        this.props.alert.error("No user exists with those credentials, sign up?")
       });
     this.setState({ username: '', password: '' });
   };
@@ -179,8 +180,10 @@ class Login extends Component {
 
                <Passenter name="password" placeholder="Password" type="password"
                value={this.state.password} onChange={this.handleInput}></Passenter>
-               <Signin onSubmit={this.handleSubmit}> Login </Signin>
-
+           
+            
+          <Signin onSubmit={this.handleSubmit}> Login </Signin>      
+          
                </Former>
 
 
@@ -188,4 +191,4 @@ class Login extends Component {
         )
     }
 }
-export default Login;
+export default withAlert(Login);

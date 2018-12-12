@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-
+import {withAlert} from 'react-alert'
 //Components
 import Billing from '../Billing/billing';
 
@@ -112,20 +112,21 @@ submitHandler = (event) => {
   console.log("what what", data.get('username'));
   axios.post('https://labs8randomizer.herokuapp.com/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
   .then(res => {
-    alert('User information has changed! YAY!')
-    
+    this.props.alert.success('User information has changed! YAY!')
+    document.getElementById("userSettings").reset();
   })
 
-  .catch(err => console.log(err))
-  }
-
+  .catch(err => 
+    {console.log(err)
+  })
+}
 
   render(){
     return(
       <Homediv>
         <Welcomer>Enter new Email/Password</Welcomer>
 
-        <FormStyling className="sign-up" onSubmit={(event) => this.submitHandler(event)}>
+        <FormStyling id="userSettings" className="sign-up" onSubmit={(event) => this.submitHandler(event)}>
 
          
           <InputStyling placeholder="New Email" type='email' name='username' id='username' required='true'/>
@@ -159,4 +160,4 @@ submitHandler = (event) => {
     }
   }
 
-export default Settings;
+export default withAlert(Settings);

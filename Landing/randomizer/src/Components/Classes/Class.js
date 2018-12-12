@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { withAlert } from "react-alert";
 
 //Icons
 import Deleteicon from '@material-ui/icons/Delete';
@@ -292,6 +293,12 @@ class Class extends Component {
            };
 
     createClass = () => {
+        if (this.state.class_name === ''){
+          this.props.alert.error("Please enter a class name")
+          return
+        }
+        else{
+          this.showHandler()
         const mail = {"class_name": this.state.class_name};
         const token =localStorage.getItem('jwt').toString();
         console.log('token type', typeof token)
@@ -310,9 +317,14 @@ class Class extends Component {
           });
           console.log('Create')
           console.log('class',)
-      };
+      }};
 
       addStudent = e => {
+        if (this.state.firstName === ''|| this.state.lastName === ''){
+          this.props.alert.error('Please enter first and last name')
+          return
+        }
+        else {
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
@@ -331,8 +343,9 @@ class Class extends Component {
 
           })
           .catch(err => {
+            console.log(err)
           });
-      };
+      }};
       handleInput = e => {
         const {value} = e.target;
         this.setState({ class_name: value });
@@ -461,6 +474,19 @@ class Class extends Component {
     }
     else return
   }
+
+  this.showHandler()
+  })
+
+  this.handleCreateButtons()
+
+
+
+}
+else return
+}
+
+
   handleCreateButtons = () => {
     let a = document.getElementById('createButtons')
     if (a.style.visibility==="visible") {
@@ -479,6 +505,7 @@ class Class extends Component {
 
   if (a.style.visibility==="hidden") {
     a.style.visibility ="visible"
+
   }
 
   if (b.style.visibility==="hidden") {
@@ -529,13 +556,17 @@ class Class extends Component {
               </Namediv2>
               <Classdiv>
                 <Namediv id='createButtons' style={{visibility:'visible'}}>
-                  <Import htmlFor="file">Import CSV</Import>
-                  <Ptag>Or</Ptag>
-                  <Dec onClick={
-                      () =>{this.createClass()
-                      this.showHandler() }}>
-                    Create Class
-                  </Dec>
+
+
+
+                <Import htmlFor="file">Import CSV</Import>
+                 <Ptag>Or</Ptag>
+                <Dec onClick={() =>{
+                  this.createClass()
+                   } }>Create Class</Dec>
+
+
+
                 </Namediv >
                 <Namediv id="First" style={{visibility:'hidden'}}>
                   <Editname type="text" placeholder="First Name" onChange={this.studentInput} value={this.state.firstName}></Editname>
@@ -567,4 +598,4 @@ class Class extends Component {
         )
     }
 }
-export default Class;
+export default withAlert(Class);
