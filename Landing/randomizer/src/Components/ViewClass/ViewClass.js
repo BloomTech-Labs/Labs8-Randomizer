@@ -19,7 +19,7 @@ import '../ViewClass/Add.css'
  flex-direction: row;
  flex-wrap: wrap;
  width: 900px;
-
+margin-top: 25px;
  justify-content: flex-start;
  background-color: rgba(255,255,255,.9);
 
@@ -151,7 +151,7 @@ handleAdd = () => {
                <H1>Add a Class</H1>
             </Addclass>
           </Link>
-        <Classdiv style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <Classdiv style={{display: 'flex', justifyContent: 'center'}}>
        
          
 

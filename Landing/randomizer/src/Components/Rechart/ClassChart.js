@@ -3,6 +3,13 @@ import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, Responsiv
 import styled from 'styled-components';
 import axios from 'axios'
 
+const Outerdiv = styled.div`
+
+display: flex;
+height: 100%;
+width: 100%;`
+
+
 const Graphbox = styled.div`
 
 text-decoration: none;
@@ -12,7 +19,7 @@ width: 800px;
 height: 390px;
 display: flex;
 flex-direction: column;
-
+margin-bottom: 20px;
 outline: 0;
 font-family:'Raleway', sans-serif;
 border: 3px solid grey;
@@ -177,7 +184,7 @@ padding-left: 75px;
           render() {
      return  (
 
-        <div>
+        <Outerdiv>
 
       <Graphbox>  
 
@@ -206,7 +213,7 @@ padding-left: 75px;
 </Buttonholder>
 </Graphbox> 
 
-    </div>
+    </Outerdiv>
      )
           }
  }

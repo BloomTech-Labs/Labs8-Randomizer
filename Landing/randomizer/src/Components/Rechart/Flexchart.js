@@ -4,20 +4,17 @@ import Chartprop from '../Rechart/ClassChart';
 import styled from 'styled-components';
 const ChartGrid = styled.div`
   width: 100%;
-  height: 100%;
-  display: grid;
-  grid-gap: 17px;
-  grid-template-columns: repeat(1, auto);
-  grid-template-rows: repeat(1, auto);
+  
+ 
+  
   margin-top: 75px;
+  margin-bottom: 20px;
   @media (max-width: 850px) {
-    grid-template-columns: repeat(1, auto);
-    grid-template-rows: repeat(1, auto);
+    
   }
   @media (max-width: 400px) {
-    grid-template-columns: repeat(1, auto);
-    grid-template-rows: repeat(1, auto);
-    margin-top: 1650px;
+    
+ 
     width: 100%;
 
   }
