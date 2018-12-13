@@ -150,6 +150,25 @@ class App extends Component {
       y.style.display="none"
     }
   }
+  componentDidMount() {
+
+    let y = document.getElementById('Mobileguide')
+    let z = document.getElementById('Sidebar')
+    if (localStorage.getItem("jwt")) {
+
+      y.style.display="flex"
+      z.style.display="flex"
+    } else {
+
+      y.style.display="none"
+      z.style.display="none"
+    }
+
+    if (window.innerWidth > 500) {
+      y.style.display="none"
+    }
+    
+  }
 
   mobileHandler= e => {
 
