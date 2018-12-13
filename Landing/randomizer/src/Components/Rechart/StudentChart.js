@@ -4,16 +4,13 @@ import styled from 'styled-components';
 import {  PieChart, Pie,  Cell} from 'recharts';
 
 
- const StudentChart= props => {
-     
+
+const StudentChart= props => {  
 const data = [{ value: parseInt(props.P) }, { value: parseInt(props.NP)},];
-
-
 const COLORS = [ '#0ee77b','#ec1111', '#FFBB28', '#FF8042'];
 
-// const RADIAN = Math.PI / 180;
-
 // Stylings
+
 const Homediv = styled.div`
 margin-right: 30px;
 background-color: none;

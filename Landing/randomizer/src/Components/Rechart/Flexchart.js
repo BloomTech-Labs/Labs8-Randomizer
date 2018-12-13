@@ -4,22 +4,15 @@ import Chartprop from '../Rechart/ClassChart';
 import styled from 'styled-components';
 const ChartGrid = styled.div`
   width: 100%;
-  
- 
-  
-  margin-top: 75px;
+  margin-top: 100px;
   margin-bottom: 20px;
+
   @media (max-width: 850px) {
-    
   }
+
   @media (max-width: 400px) {
-    
- 
     width: 100%;
-
   }
-
-
 `
 class Flexchart extends Component {
     constructor(props) {

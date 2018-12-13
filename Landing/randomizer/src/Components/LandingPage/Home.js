@@ -21,14 +21,13 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 border-radius: 5px;
+
 @media (max-width: 400px) {
   height: 350px;
-
     margin-left: 35px;
     background-color: none;
     border: none;
   }
-
 `
 const Signup = styled.button`
 outline: 0;
@@ -45,7 +44,6 @@ text-decoration: none;
 font-size: 24px;
 
 :hover {
-
     opacity: .9;
     color: white;
 }
@@ -68,10 +66,10 @@ transition: .5s;
 font-size: 24px;
 
 :hover {
-
     opacity: .9;
     color: white;
 }
+
 @media (max-width: 400px) {
     font-size: 18px;
     width: 100px;
@@ -79,13 +77,12 @@ font-size: 24px;
   }
 `
 const Welcomer = styled.h1`
-
 font-size: 60px;
 font-weight: 800;
 color: black;
 margin-bottom: 0px;
-
 text-align: center;
+
 @media (max-width: 400px) {
     font-size: 36px;
   }
@@ -96,6 +93,7 @@ text-align: center;
 font-size: 30px;
 margin-top: 0px;
 color: #FF6A00;
+
 @media (max-width: 400px) {
     font-size: 18px;
     width: 270px;

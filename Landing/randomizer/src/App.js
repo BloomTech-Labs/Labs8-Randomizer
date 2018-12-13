@@ -133,17 +133,9 @@ transition: .3s;
   
   z-index: +1;
   position: absolute;
-  position: fixed;
+  
 }`
-const Logger = styled.h1`
-position: absolute;
-margin-left: 450px;
-font-size: 24px;
-@media (max-width: 400px) {
-  display: none;
-  visibility: hidden;
-}
-`
+
 
 class App extends Component {
 
@@ -160,6 +152,10 @@ class App extends Component {
       y.style.display="none"
       z.style.display="none"
     }
+
+    if (window.innerWidth > 500) {
+      y.style.display="none"
+    }
   }
 
   mobileHandler= e => {
@@ -167,6 +163,7 @@ console.log('window', window.innerWidth)
     let w = window.innerWidth
    let x = document.getElementById('Sidebar')
    let y = document.getElementById('router')
+  
    if (w < 500)
  {   if (x.style.display==="none") {
      x.style.display="flex"
@@ -176,6 +173,7 @@ console.log('window', window.innerWidth)
    } else {
      x.style.display ="none"
      y.style.opacity="1"
+     
    }
 
   }
@@ -193,7 +191,7 @@ logoutHandler = e => {
     return (
 
       <React.Fragment>
-           <Mobilebtn id="Mobileguide" onClick={this.mobileHandler}>
+           <Mobilebtn style={{display: 'none'}} id="Mobileguide" onClick={this.mobileHandler}>
               <Tooltip title="Menu" placement="right">
                 <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
               </Tooltip>

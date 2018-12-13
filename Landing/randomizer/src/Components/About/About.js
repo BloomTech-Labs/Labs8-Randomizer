@@ -1,9 +1,9 @@
 // Libraries
-import React, {Fragment} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Alert } from "react-alert";
 
-//PNGs
+
+// PNGs
 import Mark from '../Img/Smallmark.png';
 import Linked from '../Img/linkedin32.png';
 import Nick from '../Img/nicksface2.png';
@@ -25,63 +25,36 @@ background-color: rgba(255,255,255,.9);
     
   }
 `
-const Addclass = styled.button`
-margin-top: 15px;
-width: 200px;
-height: 75px;
-border: none;
-font-family:'Raleway', sans-serif;
-cursor: pointer;
-transition: .5s;
-background-color: #032323;
-color: white
-margin-left: 5px;
-:hover {
-    background-color: black;
-}
-@media (max-width: 400px) {
-   width: 110px;
-   height: 130px;
-   font-size: 12px;
- }
-`
+
 const Port = styled.div`
 display: flex;
 width: 300px;
 height: 300px;
 border: none;
 border-radius: 50px;
-
 flex-wrap: wrap;
 margin-right: 100px;
 margin-bottom: 50px;
 padding: 5px 5px 5px 5px;
+
 @media (max-width: 400px) {
-    
     width: 145px;
     height: 275px;
     border: 3px solid #dfece6;
-    
   }
-
 `
 
 const Name = styled.h1`
 color: #F56600;
 @media (max-width: 400px) {
     font-size: 24px;
-    
-    
   }
 `
 const Git = styled.img`
-
 cursor: pointer;
 margin-bottom: 15px;
 `
 const Linker = styled.img`
-
-
 cursor: pointer;
 `
 const Face = styled.img`
@@ -92,18 +65,13 @@ border-radius: 50%;
 @media (max-width: 400px) {
    width: 100px;
    height: 100px;
-    
-    
   }
 `
 const Picholder = styled.div`
 display: flex;
-
 flex-direction: column;
 @media (max-width: 400px) {
     flex-direction: row;
-     
-     
    }
 `
 const H2 = styled.h1`
@@ -112,29 +80,17 @@ font-size: 44px;
 @media (max-width: 400px) {
     font-size: 35px;
      margin-left: 115px;
-     
    }
-
 `
 
 const Title = styled.p`
-
 font-size: 14px;
 margin: 0px;
 `
 
-
 class Settings extends React.Component {
 
 
-  alertHandler() {
-  console.log('alerted')
-
-    
-    
-  }
-    
-    
       render(){
         return(
             <div style={{backgroundColor: 'rgba(255,255,255,.5)'}}>
@@ -159,9 +115,6 @@ class Settings extends React.Component {
                   </a>
                   </Picholder>
 
-                  
-                      
-                  
               </Port>
 
               <Port>
