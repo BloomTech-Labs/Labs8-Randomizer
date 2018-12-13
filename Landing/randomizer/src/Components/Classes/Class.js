@@ -57,6 +57,10 @@ const Classdiv = styled.div`
   @media (max-width: 400px) {
     height: 500px;
   }
+
+  @media (max-width: 800px) {
+    height: 100%;
+  }
 `
 const Namediv = styled.div`
   display: flex;
@@ -65,6 +69,21 @@ const Namediv = styled.div`
     flex-direction: column;
     width: 100%
     height: 400px;
+  }
+
+  @media (max-width: 400px) {
+    height: 500px;
+    align-items: center;
+  }
+`
+
+const Namediv5 = styled.div`
+  display: flex;
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+    height: 600px;
   }
 
   @media (max-width: 400px) {
@@ -153,6 +172,9 @@ const Dec = styled.button`
   color: black;
   background-color: #F56600;
   transition: .5s;
+@media(max-width: 800) {
+  height: 40px;
+}
 
   :hover {
       color: white
@@ -243,7 +265,7 @@ class Class extends Component {
           editOpen: false,
           newName: '',
           newLastName: '',
-          editClassName: false
+          editClassName: true
         }
     }
 
@@ -527,7 +549,7 @@ class Class extends Component {
                                               placeholder='Enter Class Name'
                                               onChange={this.handleInput}
                                               value={this.state.class_name}
-                                              style={{marginLeft: '25px', marginTop: '13px'}}
+                                              style={{marginLeft: '25px', marginTop: '13px', marginBottom:'15px'}}
                                               endAdornment={
                                                 <InputAdornment position="end">
                                                   <Save onClick={() => {
@@ -539,7 +561,7 @@ class Class extends Component {
                                               /> : ''}
               </Namediv2>
               <Classdiv>
-                <Namediv id='createButtons' style={{display: 'flex'}}>
+                <Namediv5 id='createButtons' style={{display: 'flex'}}>
 
 
 
@@ -553,7 +575,7 @@ class Class extends Component {
 
 
 
-                </Namediv >
+                </Namediv5>
                 <Namediv id="First" style={{visibility:'hidden'}}>
                   <Editname id='name1' type="text" placeholder="First Name" onChange={this.studentInput} value={this.state.firstName} maxlength="8"></Editname>
                   <Editname id='name2' type="text" placeholder="Last Name" onChange={this.studentInput2}value={this.state.lastName} maxlength="8"></Editname>
