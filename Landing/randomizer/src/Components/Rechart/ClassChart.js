@@ -1,17 +1,16 @@
+// Libraries
 import React, {Component} from 'react';
-import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend, ResponsiveContainer, Text} from 'recharts';
+import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, ResponsiveContainer, Text} from 'recharts';
 import styled from 'styled-components';
 import axios from 'axios'
 
+// Stylings
 const Outerdiv = styled.div`
-
 display: flex;
 height: 100%;
 width: 100%;`
 
-
 const Graphbox = styled.div`
-
 text-decoration: none;
 background: none;
 padding-top: 10px;
@@ -53,7 +52,6 @@ height: 40px;
 width: 100px;
 font-family:'Raleway', sans-serif;
 font-size: 12px;
-
 border: 1px solid grey;
 margin-left: 5px;
 margin-right: 5px;
@@ -125,13 +123,13 @@ padding-left: 75px;
 
 
     dataList = () => {
-      console.log('what is in props', this.props)
+      
 
       if (this.props.Data === undefined || this.props.Data['studentsInfo'].length===0) {
         return
       }
       else{
-        console.log('checking students',this.props.Data['studentsInfo'])
+        
       let students = this.props.Data['studentsInfo']
     students.map( (one, index )=> {
       let obj = {
@@ -164,10 +162,10 @@ padding-left: 75px;
 
     deleteClass = (e) => {
       e.preventDefault()
-      console.log('id is here', this.state.id)
+     
       axios.delete('https://labs8randomizer.herokuapp.com/clss/deleteclass', {data: {'classID': this.state.id}})
       .then (res =>{
-        console.log(res.data)
+       
         window.location.reload()}
 
       )

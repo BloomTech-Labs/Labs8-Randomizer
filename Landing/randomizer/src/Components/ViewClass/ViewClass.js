@@ -78,8 +78,6 @@ class ViewClass extends Component {
        this.state={
            Classarray: [],
            classnames: [],
-           placehold: [1, 2, 3, 4],
-           truenames: [],
            info: [],
            isLoading: true
        }
@@ -97,7 +95,7 @@ class ViewClass extends Component {
     }
 
     handleClass = e => {
-        console.log('viewclass props, history', this.props.history)
+        
         this.setState({ info: [] })
 
       const token =localStorage.getItem('jwt').toString();
@@ -110,15 +108,15 @@ class ViewClass extends Component {
 
             .then(res => {
 
-              console.log('resdata',res.data)
+              
 
               var classes = res.data['clss']
-              console.log('0th', classes[0])
+              
               classes.map(clss => {
 
                   this.setState({info : [...this.state.info, clss]})
 
-                  console.log('state after set state', this.state.info)
+                  
               })
                this.setState({isLoading: false})
 
@@ -152,8 +150,6 @@ handleAdd = () => {
 
          <Flexchart Dates={this.state.info} history={this.props.history} ></Flexchart>
 
-
-            {/* <Chartprop  Data={this.state.info}/> */}
 
 
         </Classdiv>

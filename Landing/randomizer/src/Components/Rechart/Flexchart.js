@@ -1,7 +1,10 @@
+// Libraries
 import React, {Component} from 'react';
+import styled from 'styled-components';
+// Components
 import Chartprop from '../Rechart/ClassChart';
 
-import styled from 'styled-components';
+// Stylings
 const ChartGrid = styled.div`
   width: 100%;
   margin-top: 100px;
@@ -29,9 +32,8 @@ class Flexchart extends Component {
 
                 this.setState({renderclasslist: []},() => {
                     this.props.Dates.map((clss) => {
-                        console.log('clss', clss)
                         this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)
-                        console.log('HIT')
+                        
                     })
                     this.setState({isLoading:false})
                 })

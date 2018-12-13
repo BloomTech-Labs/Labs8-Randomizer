@@ -25,8 +25,6 @@ flex-direction: column;
   margin-top: 0px;
 }
 `
-
-
 const Namediv = styled.div`
 display: flex;
 width: 600px;
@@ -39,7 +37,6 @@ justify-content: center;
   margin-top: 35px;
 }
 `
-
 const Orangediv = styled.div`
 display: flex;
 width: 580px;
@@ -124,7 +121,6 @@ transition: .5s;
   margin-bottom: 5px;
 }
 `
-
 const Dec = styled.button`
 outline: 0;
 font-size: 20px;
@@ -147,7 +143,6 @@ margin-right: 15px;
  margin-top: 5px;
 }
 `
-
 const Edit = styled.button`
 border: none;
 width: 120px;
@@ -214,6 +209,16 @@ font-size: 36px;
 const Ptag = styled.p`
 font-size: 16px;
 color: #737373;
+position: absolute;
+margin-top: 150px;
+margin-left: 75px;
+`
+const Ptag2 = styled.p`
+font-size: 16px;
+color: #737373;
+position: absolute;
+margin-top: 50px;
+margin-left: 15px;
 `
 class Magic extends Component {
   constructor(props) {
@@ -224,7 +229,6 @@ class Magic extends Component {
         classinfo: "Class",
         Student: 'Student',
         PartRates: [],
-        Dates: [],
         P: 0,
         NP: 0
     }
@@ -254,7 +258,7 @@ class Magic extends Component {
 
           .then(res => {
             let data = res.data
-            console.log('data',res.data)
+            
             var newarray = data['studentNames']
             if (newarray.length === 0){
               this.props.alert.error('No students in Class, Add a Student')
@@ -266,13 +270,13 @@ class Magic extends Component {
             this.setState({studentnamearray :this.state.studentnamearray})
             })
             this.setState({classinfo: data['class_name']})
-            console.log('stater', this.state.studentnamearray)
+            
           })
           .catch(err => {
           });
       };
       handleParticipationGraph = e => {
-        this.setState({P:0, NP:0}, ()=> {console.log ('setting part state to zero')})
+        this.setState({P:0, NP:0})
         let valid = localStorage.getItem('studentID')
 
         axios
@@ -281,7 +285,7 @@ class Magic extends Component {
           .then(res => {
             var myobj2 = res.data
            
-            this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
+            this.setState({ PartRates: Object.values(myobj2)})
      
             let P = 0;
             let NP = 0;
@@ -291,17 +295,15 @@ class Magic extends Component {
 
             })
             if (P === 0 && NP === 0){
-              console.log("hit")
               let p =  document.getElementById('ptag')
-              console.log('p', p)
+              
               p.style.visibility = "visible"
             }
             else {
-            this.setState({P: P, NP: NP}, ()=>{console.log ('setting part state')})
+            this.setState({P: P, NP: NP})
             
           }
-            console.log('PARTICIPATION')
-            console.log('p', this.state.P)
+            
           })
 
           .catch(err => {
@@ -310,7 +312,7 @@ class Magic extends Component {
       };
 
       Participatehandler = e => {
-        const mail = {"class_name": this.state.class_name}
+       
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
@@ -328,11 +330,11 @@ class Magic extends Component {
           .catch(err => {
 
           });
-          console.log('participated')
+          
       };
 
       Declinehandler = e => {
-        const mail = {"class_name": this.state.class_name}
+        
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
             "studentID": localStorage.getItem("studentID"),
@@ -351,7 +353,7 @@ class Magic extends Component {
           .catch(err => {
 
           });
-          console.log('declined')
+          
       };
 
  Shufflehandler =() => {
@@ -386,14 +388,11 @@ class Magic extends Component {
 
 
  Edithandler = () => {
-    console.log('Edited')
     localStorage.removeItem('studentID');
-    console.log('what is history', this.props.history)
     this.props.history.push('/Class')
  }
 
  Resethandler = () => {
-    console.log('Reset')
     localStorage.removeItem('studentID');
     window.location.reload()
  }
@@ -430,7 +429,7 @@ class Magic extends Component {
             </Maindiv>
             <Chartdiv id="Chart" >
             <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
-            <Ptag id="ptag" style={{visibility:'hidden'}}>No student participation data</Ptag>
+            <Ptag2 id="ptag" style={{visibility:'hidden'}}>No student participation data</Ptag2>
             <Ptag id="ptag2" style={{visibility:'hidden'}}>Last Student</Ptag>
             </Chartdiv>
             </React.Fragment>
