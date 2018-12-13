@@ -53,6 +53,9 @@ const Classdiv = styled.div`
 
   flex-direction: column;
   justify-content: ;
+  @media (max-width: 400px) {
+    height: 500px;
+  }
 `
 const Namediv = styled.div`
   display: flex;
@@ -61,6 +64,11 @@ const Namediv = styled.div`
     flex-direction: column;
     width: 100%
     height: 400px;
+  }
+
+  @media (max-width: 400px) {
+    height: 500px;
+    align-items: center;
   }
 `
 
@@ -73,6 +81,7 @@ const Ptag = styled.p`
   margin-right: 5px;
 `
 const Editname = styled.input`
+margin-bottom: 15px;
   padding-left: 10px;
   text-decoration: none;
   width: 235px;
@@ -84,6 +93,10 @@ const Editname = styled.input`
   :: placeholder {
       color: black;
       font-family: 'Raleway', sans-serif;
+  }
+  @media (max-width: 400) {
+    height: 50px;
+    margin-bottom: 25px;
   }
 `
 
@@ -413,15 +426,21 @@ class Class extends Component {
 
   }
   secondDisplay = e => {
+   
     let inc = this.state.studentList.length -1
     for (let i = inc; i < this.state.studentList.length; i++){
+      let s = this.state.studentList[i]
+      let t = s['fullName']
     this.setState({studentList2:[...this.state.studentList2,
       <NameItem key={i}>
-       <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']}
-         <Button style={{marginTop: 'auto', width: '45%'}} color="primary" onClick={() => this.alertDialog('editOpen', `${this.state.studentList[i]}`, i)}>
-           Edit Name
-         </Button>
-       </NameItem> ]})
+         <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/>
+         <NameWrap>
+           {t.substr(0,t.indexOf(' '))}
+           <br/>
+          {t.substr(t.indexOf(' ')+1)}
+         </NameWrap>
+           <Pencil style={{fontSize: '40px'}} onClick={() => this.alertDialog('editOpen', `${t}`, i)} />
+         </NameItem> ]})
 
     
     this.setState({firstName: 'First Name', lastName: 'Last Name'})
@@ -454,8 +473,8 @@ class Class extends Component {
 
   handleCreateButtons = () => {
     let a = document.getElementById('createButtons')
-    if (a.style.visibility==="visible") {
-      a.style.visibility ="hidden"
+    if (a.style.display==="flex") {
+      a.style.display ="none"
     }
   }
   startHandler = e => {
@@ -518,7 +537,7 @@ class Class extends Component {
                                               /> : ''}
               </Namediv2>
               <Classdiv>
-                <Namediv id='createButtons' style={{visibility:'visible'}}>
+                <Namediv id='createButtons' style={{display: 'flex'}}>
 
 
 

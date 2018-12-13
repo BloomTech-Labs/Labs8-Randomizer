@@ -209,6 +209,16 @@ font-size: 36px;
 const Ptag = styled.p`
 font-size: 16px;
 color: #737373;
+position: absolute;
+margin-top: 150px;
+margin-left: 75px;
+`
+const Ptag2 = styled.p`
+font-size: 16px;
+color: #737373;
+position: absolute;
+margin-top: 50px;
+margin-left: 15px;
 `
 class Magic extends Component {
   constructor(props) {
@@ -419,7 +429,7 @@ class Magic extends Component {
             </Maindiv>
             <Chartdiv id="Chart" >
             <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
-            <Ptag id="ptag" style={{visibility:'hidden'}}>No student participation data</Ptag>
+            <Ptag2 id="ptag" style={{visibility:'hidden'}}>No student participation data</Ptag2>
             <Ptag id="ptag2" style={{visibility:'hidden'}}>Last Student</Ptag>
             </Chartdiv>
             </React.Fragment>
