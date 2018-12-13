@@ -331,6 +331,9 @@ class Magic extends Component {
           } )
 
           .then(res => {
+            let p2 =  document.getElementById('ptag')
+            if (p2.style.visibility === "visible"){
+            p2.style.visibility = "hidden"}
             let p = this.state.P +1
         this.setState({P:p})
           }
@@ -355,6 +358,9 @@ class Magic extends Component {
           } )
 
           .then(res => {
+            let p =  document.getElementById('ptag')
+            if (p.style.visibility === "visible"){
+            p.style.visibility = "hidden"}
             let np = this.state.NP +1
             this.setState({NP:np})
 
