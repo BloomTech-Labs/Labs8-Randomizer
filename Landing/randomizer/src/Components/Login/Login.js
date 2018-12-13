@@ -17,6 +17,7 @@ display: flex;
 justify-content: center;
 border-radius: 4px;
 font-size: 26px;
+
 @media (max-width: 400px) {
     flex-direction: column;
     width: 500px;
@@ -30,6 +31,7 @@ font-size: 26px;
 const Welcomer = styled.h1`
 margin-left: 10px;
 position: absolute
+
 @media (max-width: 400px) {
     font-size: 48px;
     position: static;
@@ -62,7 +64,6 @@ width: 200px;
 height: 30px;
 position: absolute;
 margin-top: 200px;
-
 border: 1px solid grey;
 transition: .4s;
 
@@ -82,7 +83,6 @@ height: 40px;
 background-color: #00E1F5;
 cursor: pointer;
 border: none;
-
 text-decoration: none;
 margin-top: 250px;
 position: absolute;
@@ -90,10 +90,10 @@ color: black;
 transition: .5s;
 
 :hover {
-
     opacity: .9;
     color: white;
 }
+
 @media (max-width: 400px) {
     margin-top: 50px;
     width: 100px;
@@ -105,7 +105,6 @@ transition: .5s;
 const Former = styled.form`
 display: flex;
 flex-direction: column;
-
 align-items: center;
 `
 
@@ -117,6 +116,7 @@ cursor: pointer;
 height: 25px;
 background: none;
 width: 30px;
+
 @media (max-width: 400px) {
     margin-left: 150px;
 }

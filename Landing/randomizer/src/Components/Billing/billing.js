@@ -19,7 +19,6 @@ width: 200px;
 font-size: 36px;
 
 @media (max-width: 400px) {
-   
     font-size: 36px;
     width: 150px;
   }
@@ -29,9 +28,9 @@ const Checker = styled.div`
 position: absolute;
 margin-top: 200px;
 @media (max-width: 1024px) {
-   
     margin-top: 200px;
   }
+  
 @media (max-width: 400px) {
    margin-top: 300px;
   }

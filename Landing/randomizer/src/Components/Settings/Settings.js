@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import {withAlert} from 'react-alert'
+
 //Components
 import Billing from '../Billing/billing';
 
@@ -50,6 +51,7 @@ display: flex;
 margin-top: 25px;
 align-items: center;
 flex-direction: column;
+
 @media (max-width: 400px) {
   width: 300px;
   height: 370px;
@@ -62,6 +64,7 @@ flex-direction: column;
 const Welcomer = styled.h1`
 color: black;
 font-size: 36px;
+
 @media (max-width: 400px) {
   font-size: 30px;
 }

@@ -3,15 +3,11 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
 import {Link} from 'react-router-dom';
-import { YAxis, XAxis, CartesianGrid, BarChart,  Bar, Tooltip, Legend} from 'recharts';
-// Icons
-import Add from '@material-ui/icons/LibraryAdd';
 
 //Components
-
 import Flexchart from '../Rechart/Flexchart';
-import Chartprop from '../Rechart/ClassChart';
 
+// Stylings
 import '../ViewClass/Add.css'
 
  const Classdiv = styled.div`
@@ -40,7 +36,7 @@ border-radius: 5px;
   }
  `
  const Addclass = styled.button`
- margin-top: 15px;
+ margin-top: 45px;
  width: 200px;
  height: 75px;
  border: none;
@@ -50,7 +46,7 @@ border-radius: 5px;
  transition: .5s;
  background-color: #032323;
  color: white
- margin-left: 5px;
+ margin-left: 10px;
  z-index: +1;
 position: absolute;
 top: 0;
@@ -126,8 +122,7 @@ class ViewClass extends Component {
               })
                this.setState({isLoading: false})
 
-              // console.log('handleclass')
-              // console.log('classP', this.state.P)
+              
             })
             return
         }

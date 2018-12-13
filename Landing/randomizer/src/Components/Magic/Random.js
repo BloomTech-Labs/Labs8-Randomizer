@@ -15,7 +15,6 @@ width: 600px;
 height: 500px;
 padding-left: 15px;
 border-radius: 7px;
-
 border: 3px solid #dfece6;
 flex-direction: column;
 
@@ -34,6 +33,7 @@ width: 600px;
 height: 150px;
 margin-top: 15px;
 justify-content: center;
+
 @media (max-width: 400px) {
   width: 100%;
   margin-top: 35px;
@@ -46,6 +46,7 @@ width: 580px;
 height: 80px;
 margin-top: 0px;
 justify-content: space-between;
+
 @media (max-width: 400px) {
   width: 100%;
   flex-wrap: wrap;
@@ -55,10 +56,10 @@ const Buttonholder = styled.div`
 width: 200px;
 display: flex;
 height: 75px;
+
 @media (max-width: 400px) {
   width: 100%;
 }
-
 `
 const Chartdiv = styled.div`
 display: flex;
@@ -67,9 +68,9 @@ height: 200px;
 position: absolute;
 margin-top: 115px;
 margin-left: 75px;
+
 @media (max-width: 400px) {
 margin-left: 0px;
-
 width: 200px;
 }
 `
@@ -81,10 +82,11 @@ z-index: +1;
 align-items: center;
 justify-content: space-between;
 margin-top: 125px;
+
 @media (max-width: 400px) {
   width: 100%;
   flex-wrap: wrap;
-margin-top: 95px;
+  margin-top: 95px;
 }
 `
 
@@ -93,8 +95,8 @@ const Misc = styled.h1`
 font-size: 40px;
 margin-right: 25px;
 margin-top: 20px;
-@media (max-width: 400px) {
 
+@media (max-width: 400px) {
   margin-bottom: 0px;
   margin-top: 0px;
   padding-top: 10px;
@@ -108,15 +110,14 @@ width: 150px;
 height: 40px;
 text-decoration: none;
 cursor: pointer;
-
 color:black;
 background-color: #4caf50;
 border: none;
 transition: .5s;
 :hover {
    color: white;
-    
 }
+
 @media (max-width: 400px) {
   font-size: 14px;
   margin-left: 25px;
@@ -136,21 +137,18 @@ color: black;
 background-color: #E91E63;
 transition: .5s;
 margin-right: 15px;
-
 :hover {
   color: white
 }
+
 @media (max-width: 400px) {
  font-size: 14px;
  margin-left: 25px;
  margin-top: 5px;
- 
 }
 `
 
 const Edit = styled.button`
-
-
 border: none;
 width: 120px;
 height: 36px;
@@ -165,12 +163,11 @@ margin-top: 25px;
 :hover {
   color: white;
 }
+
 @media (max-width: 400px) {
-  
   margin-top: 10px;
   width: 75px;
   margin-right: 50px;
-  
  }
 `
 
@@ -189,10 +186,10 @@ margin-top: 25px;
 :hover {
   color: white
 }
+
 @media (max-width: 400px) {
   width: 75px;
   margin-top: 10px;
-  
  }
 `
 const Bigbutton = styled.button`
@@ -207,6 +204,7 @@ font-size: 36px;
 :hover {
   color: white;
 }
+
 @media (max-width: 400px) {
   width: 200px;
   font-size: 18px;
@@ -270,11 +268,8 @@ class Magic extends Component {
             this.setState({classinfo: data['class_name']})
             console.log('stater', this.state.studentnamearray)
           })
-
           .catch(err => {
-
           });
-
       };
       handleParticipationGraph = e => {
         this.setState({P:0, NP:0}, ()=> {console.log ('setting part state to zero')})
@@ -285,12 +280,9 @@ class Magic extends Component {
 
           .then(res => {
             var myobj2 = res.data
-            // console.log('myobj2',myobj2)
-
-            // console.log('Dates', Object.keys(myobj2))
-            // console.log('Ps and NPs',Object.values(myobj2) )
+           
             this.setState({Dates: Object.keys(myobj2), PartRates: Object.values(myobj2)})
-            // console.log('PartRates', this.state.PartRates)
+     
             let P = 0;
             let NP = 0;
             this.state.PartRates.map((pnp, index) => {
@@ -312,17 +304,12 @@ class Magic extends Component {
             console.log('p', this.state.P)
           })
 
-
           .catch(err => {
 
           });
-
-
       };
 
-
       Participatehandler = e => {
-       
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
@@ -344,12 +331,7 @@ class Magic extends Component {
           console.log('participated')
       };
 
-
-
-
-
       Declinehandler = e => {
-     
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {

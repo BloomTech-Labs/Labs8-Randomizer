@@ -9,6 +9,7 @@ import { withAlert } from "react-alert";
 import Backarrow from '@material-ui/icons/ArrowBack';
 
 // Stylings
+
 const FormStyling = styled.form`
 display: block;
 `
