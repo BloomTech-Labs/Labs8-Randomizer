@@ -113,7 +113,6 @@ class Home extends Component {
    responseGoogle = response => {
        const username = response.profileObj.name
        const email = response.profileObj.email
-       console.log('here', username, email)
        axios.post('https://labs8randomizer.herokuapp.com/api/tokenregister', {username:username, email:email})
 
        .then (res => {
@@ -123,7 +122,7 @@ class Home extends Component {
              this.props.history.push('/ViewClasses');
            })
        .catch(err => {
-             console.log('error')
+            
            })
      }
 

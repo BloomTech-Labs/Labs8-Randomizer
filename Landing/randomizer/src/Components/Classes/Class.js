@@ -13,15 +13,14 @@ import Save from '@material-ui/icons/Save';
 
 //Components
 import AlertDialog from './AlertDialog';
-import ResetDialog from './ResetDialog';
 import EditDialog from './EditDialog';
-import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-//Library
+// Library
 const PapaParse = require('papaparse/papaparse.min.js');
 
+// Stylings
 const Maindiv = styled.div`
   display: flex;
   width: 75%;
@@ -67,15 +66,7 @@ const Namediv = styled.div`
 
 const Namediv2 = styled.div`
 `
-const Title = styled.h1`
-  font-size: 50px;
-  height: 40px;
-  @media (max-width: 400px) {
 
-    font-size: 40px;
-    margin-bottom: 25px;
-  }
-`
 const Ptag = styled.p`
   margin-top: 25px;
   margin-left: 5px;
@@ -93,34 +84,6 @@ const Editname = styled.input`
   :: placeholder {
       color: black;
       font-family: 'Raleway', sans-serif;
-  }
-`
-const Editname1 = styled.input`
-    display: block;
-    padding-left: 10px;
-    text-decoration: none;
-    width: 235px;
-    height: 25px;
-    border: 1px solid black;
-    color: black;
-    margin-top: 15px;
-    margin-left: 25px;
-
-    :: placeholder {
-        color: black;
-        font-family: 'Raleway', sans-serif;
-    }
-`
-const Sider = styled.button`
-  text-decoration: none;
-  background-color: none;
-  border: none;
-  cursor: pointer;
-
-  background: none;
-  @media (max-width: 400px) {
-
-    margin-top: 35px;
   }
 `
 
@@ -287,7 +250,7 @@ class Class extends Component {
                  results.data.map( s => {unnested.push(s[0])})
                   this.setState({studentList: unnested})
                   this.setState({class_name: unnested[0]})
-                  console.log("state", this.state.studentList)
+                 
                   axios.post('https://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                     headers: {
                       'Authorization':'Token '.concat(token)
@@ -296,12 +259,14 @@ class Class extends Component {
                   .then(res => {
                     let parsed = res.data
                     this.setState({studentList: parsed['studentArray']}, () => {
-                      console.log("state in .then", this.state.studentList)
+                      
                       this.handleDisplay()
                     })
                     localStorage.setItem('classID', parsed['classID'])
                     })
-                  .catch(err => {console.log(err)})
+                  .catch(err =>{
+
+                  } )
                }
              })
            };
@@ -313,9 +278,9 @@ class Class extends Component {
         }
         else{
           this.showHandler()
-        const mail = {"class_name": this.state.class_name};
+        
         const token =localStorage.getItem('jwt').toString();
-        console.log('token type', typeof token)
+        
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
@@ -324,13 +289,12 @@ class Class extends Component {
         }})
           .then(res => {
             localStorage.setItem('classID',res.data.id)
-            console.log(res.data)
+           
             this.handleCreateButtons()
           })
           .catch(err => {
           });
-          console.log('Create')
-          console.log('class',)
+          
       }};
 
       addStudent = e => {
@@ -339,7 +303,7 @@ class Class extends Component {
           return
         }
         else {
-        const mail = {"class_name": this.state.class_name}
+        
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
@@ -347,17 +311,13 @@ class Class extends Component {
             "lastName":this.state.lastName,
           })
           .then(res => {
-            console.log('resdata', res.data['key'])
-            console.log('studentlist', this.state.studentList)
-            let fullName = `${this.state.firstName} ${this.state.lastName}`;
-            console.log('fullname', fullName)
-            // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
+           
             this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
             ()=>{this.secondDisplay()})
 
           })
           .catch(err => {
-            console.log(err)
+            
           });
       }};
       handleInput = e => {
@@ -396,7 +356,7 @@ class Class extends Component {
     this.setState({ [dialog]: true });
   };
   handleClose = (dialog, ind) => {
-    console.log('i want the key value', ind)
+    
     let student = this.state.studentList[ind]
     let studentID = student['studentID']
     axios
@@ -412,7 +372,7 @@ class Class extends Component {
     })
   };
   handleEdit = (dialog, ind) => {
-    console.log('index', ind)
+   
     let student = this.state.studentList[ind]
     let studentID = student['studentID']
     if(this.state.newName || this.state.newLastName){
@@ -435,7 +395,7 @@ class Class extends Component {
     for (let i = 0; i < this.state.studentList.length; i++){
       let s = this.state.studentList[i]
       let t = s['fullName']
-    console.log('t', t)
+   
       this.state.studentList2.push(
         <NameItem key={i}>
          <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/>
@@ -455,10 +415,6 @@ class Class extends Component {
   secondDisplay = e => {
     let inc = this.state.studentList.length -1
     for (let i = inc; i < this.state.studentList.length; i++){
-    console.log('test', i)
-    let s = this.state.studentList[i]
-    console.log('s', s)
-    // this.state.studentList2.push(<NameItem key={i}> <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`)}/> {this.state.studentList[i]['fullName']} </NameItem>)
     this.setState({studentList2:[...this.state.studentList2,
       <NameItem key={i}>
        <Deleteicon onClick={() => this.alertDialog('alertOpen', `${this.state.studentList[i]['fullName']}`, i)}/> {this.state.studentList[i]['fullName']}
@@ -467,7 +423,7 @@ class Class extends Component {
          </Button>
        </NameItem> ]})
 
-    console.log('loop state', this.state.studentList2)
+    
     this.setState({firstName: 'First Name', lastName: 'Last Name'})
     }
   }
@@ -476,15 +432,14 @@ class Class extends Component {
       axios
       .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
       .then(res => {
-        console.log('loadres', res.data)
+        
         let son = res.data
-        console.log('son', son['studentNames'])
         this.setState({class_name: son['class_name']})
         if (son['studentNames'].length > 0){
         son['studentNames'].map(name => {
           this.setState({studentList: [...this.state.studentList, name]})
         })
-        console.log('sanity check', this.state.studentList)
+        
         this.handleDisplay()
       }})
     this.handleCreateButtons()
@@ -511,10 +466,9 @@ class Class extends Component {
     let b = document.getElementById("Bigbutton");
     let c = document.getElementById("Namediv2");
     let d = document.getElementById('Grid')
-    console.log('a', a)
+ 
     if (a.style.visibility==="hidden") {
       a.style.visibility ="visible"
-
     }
 
     if (b.style.visibility==="hidden") {
@@ -533,7 +487,7 @@ class Class extends Component {
       "class_name": this.state.class_name
     })
     .then( res=> {
-      console.log(res.data)
+      
     })
   }
     render() {

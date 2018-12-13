@@ -1,8 +1,11 @@
+// Libraries
 import React, {Component} from 'react';
 import styled from 'styled-components';
 
+// Components
 import Checkout from '../Billing/Checkout';
 
+// Stylings
 const Payer = styled.div`
 width: 200px;
 height: 40px;

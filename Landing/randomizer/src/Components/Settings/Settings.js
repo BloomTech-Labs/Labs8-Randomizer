@@ -7,6 +7,7 @@ import {withAlert} from 'react-alert'
 //Components
 import Billing from '../Billing/billing';
 
+// Stylings
 const FormStyling = styled.form`
 display: block;
 `
@@ -81,8 +82,6 @@ constructor(){
 AddNumber = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
-  console.log(data.get('telephone'))
-  //Need eventual work around to this solution https://github.com/axios/axios/issues/853#issuecomment-412922608
   axios.post(`${'https://cors-anywhere.herokuapp.com/'}https://api.authy.com/protected/json/phones/verification/start`, {
     "api_key":"IkZeWLzSDR7fxTh3JYLX3xv7T62G51nN",
     "via":"sms",
@@ -95,8 +94,6 @@ AddNumber = (event) => {
 verifNumber = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    console.log(data.get('telephone'))
-    //Need eventual work around to this solution https://github.com/axios/axios/issues/853#issuecomment-412922608
     axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.authy.com/protected/json/phones/verification/check`, {
       "api_key":"IkZeWLzSDR7fxTh3JYLX3xv7T62G51nN",
       "verification_code": data.get('verify'),
@@ -104,23 +101,21 @@ verifNumber = (event) => {
       "country_code":"1"
     })
     .then(this.setState({display: false}))
-    .catch(err => console.log(err))
+    .catch(err => {})
   }
 
 submitHandler = (event) => {
   event.preventDefault();
   const data = new FormData(event.target);
-  console.log("what is this", data);
   const token =localStorage.getItem('jwt').toString();
-  console.log("what what", data.get('username'));
   axios.post('https://labs8randomizer.herokuapp.com/api/updateuser',{"email": data.get('username'), "password1": data.get('password'), "password2": data.get('password-confirm')},{headers:{'Authorization':'Token '.concat(token)}})
   .then(res => {
     this.props.alert.success('User information has changed! YAY!')
     document.getElementById("userSettings").reset();
   })
 
-  .catch(err => 
-    console.log(err)
+  .catch(err => {}
+    
   )
 }
 
