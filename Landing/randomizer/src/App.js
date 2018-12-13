@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Alert } from "react-alert";
 
 // Components
 import Home from './Components/LandingPage/Home';
@@ -12,23 +11,18 @@ import Login from './Components/Login/Login';
 import Settings from './Components/Settings/Settings';
 import Magic from './Components/Magic/Random';
 import Billing from './Components/Billing/billing';
-
 import Class from './Components/Classes/Class';
-
 import ViewClass from './Components/ViewClass/ViewClass';
 import About from './Components/About/About';
 
 // Icons
 import Gearicon from '@material-ui/icons/Settings';
-import Homeicon from '@material-ui/icons/Home';
 import Swap from '@material-ui/icons/Shuffle';
 import Book from '@material-ui/icons/Class';
 import People from '@material-ui/icons/People';
 import Info from '@material-ui/icons/Info';
 import Mobileguide from '@material-ui/icons/Toc';
 import LogOut from '@material-ui/icons/ExitToApp';
-import Loggedin from '@material-ui/icons/DoneOutline';
-import Loggedout from '@material-ui/icons/Clear';
 
 //Images
 import Flatclass from '../src/Components/Img/flatclass2.png';
@@ -158,7 +152,7 @@ class App extends Component {
   }
 
   mobileHandler= e => {
-console.log('window', window.innerWidth)
+
     let w = window.innerWidth
    let x = document.getElementById('Sidebar')
    let y = document.getElementById('router')
@@ -200,26 +194,8 @@ logoutHandler = e => {
 
 
       <Background id="BackgroundID">
-      {/* <Logger>Logged in:
-        <Loggedin id="IN" style={{fontSize:'36px', display: 'none'}}></Loggedin>
-        <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
-      </Logger> */}
-
-
-
-
+ 
           <Sidebar id="Sidebar">
-
-            {/* <Link to="/" style={{height: '40px', marginBottom: '25px'}}>
-            <Sidebutton onClick={this.mobileHandler} id="Sider"  >
-            <Tooltip title="Home" placement="right">
-              <Homeicon  style={{fontSize: '48px'}} >  </Homeicon>
-              </Tooltip>
-            </Sidebutton >
-           </Link> */}
-
-
-
 
             <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider5" >

@@ -9,7 +9,6 @@ import { withAlert } from "react-alert";
 import Backarrow from '@material-ui/icons/ArrowBack';
 
 // Stylings
-
 const FormStyling = styled.form`
 display: block;
 `
@@ -80,8 +79,6 @@ margin-top: 0px;
     margin-left: 20px;
   }
 `
-
-
 
 class SignUp extends Component {
  
