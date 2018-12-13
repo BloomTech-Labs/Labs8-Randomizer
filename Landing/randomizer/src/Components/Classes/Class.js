@@ -353,8 +353,8 @@ class Class extends Component {
             console.log('fullname', fullName)
             // this.state.studentList.push({'fullName': fullName, 'studentID': res.data['studentID']})
             this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
-            ()=>{this.secondDisplay()})
-
+            ()=>{this.secondDisplay()
+              this.setState({firstName:'', lastName:''})})
           })
           .catch(err => {
             console.log(err)
@@ -533,7 +533,7 @@ class Class extends Component {
       "class_name": this.state.class_name
     })
     .then( res=> {
-      console.log(res.data)
+      this.props.alert.success(`Class name is ${this.state.class_name}`)
     })
   }
     render() {
