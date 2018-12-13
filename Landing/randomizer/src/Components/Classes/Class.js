@@ -326,8 +326,8 @@ class Class extends Component {
           .then(res => {
            
             this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
-            ()=>{this.secondDisplay()})
-
+            ()=>{this.secondDisplay()
+              this.setState({firstName:'', lastName:''})})
           })
           .catch(err => {
             
@@ -506,7 +506,8 @@ class Class extends Component {
       "class_name": this.state.class_name
     })
     .then( res=> {
-      
+      this.props.alert.success(`Class name is ${this.state.class_name}`)
+
     })
   }
     render() {
