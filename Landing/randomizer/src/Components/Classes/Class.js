@@ -16,6 +16,7 @@ import AlertDialog from './AlertDialog';
 import EditDialog from './EditDialog';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Library
 const PapaParse = require('papaparse/papaparse.min.js');
@@ -263,7 +264,7 @@ class Class extends Component {
                  results.data.map( s => {unnested.push(s[0])})
                   this.setState({studentList: unnested})
                   this.setState({class_name: unnested[0]})
-                 
+
                   axios.post('https://labs8randomizer.herokuapp.com/clss/csv_post', {"class_name" : this.state.class_name, "studentArray": this.state.studentList}, {
                     headers: {
                       'Authorization':'Token '.concat(token)
@@ -272,7 +273,7 @@ class Class extends Component {
                   .then(res => {
                     let parsed = res.data
                     this.setState({studentList: parsed['studentArray']}, () => {
-                      
+
                       this.handleDisplay()
                     })
                     localStorage.setItem('classID', parsed['classID'])
@@ -291,9 +292,9 @@ class Class extends Component {
         }
         else{
           this.showHandler()
-        
+
         const token =localStorage.getItem('jwt').toString();
-        
+
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/create_class', {"class_name": this.state.class_name}, {
               headers: {
@@ -302,12 +303,12 @@ class Class extends Component {
         }})
           .then(res => {
             localStorage.setItem('classID',res.data.id)
-           
+
             this.handleCreateButtons()
           })
           .catch(err => {
           });
-          
+
       }};
 
       addStudent = e => {
@@ -316,7 +317,7 @@ class Class extends Component {
           return
         }
         else {
-        
+
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/add_student',  {
             "classID": localStorage.getItem("classID"),
@@ -324,13 +325,13 @@ class Class extends Component {
             "lastName":this.state.lastName,
           })
           .then(res => {
-           
+
             this.setState({studentList: [...this.state.studentList, {'fullName': `${this.state.firstName} ${this.state.lastName}`, 'studentID': res.data['key']}]},
             ()=>{this.secondDisplay()
               this.setState({firstName:'', lastName:''})})
           })
           .catch(err => {
-            
+
           });
       }};
       handleInput = e => {
@@ -369,7 +370,7 @@ class Class extends Component {
     this.setState({ [dialog]: true });
   };
   handleClose = (dialog, ind) => {
-    
+
     let student = this.state.studentList[ind]
     let studentID = student['studentID']
     axios
@@ -385,7 +386,7 @@ class Class extends Component {
     })
   };
   handleEdit = (dialog, ind) => {
-   
+
     let student = this.state.studentList[ind]
     let studentID = student['studentID']
     if(this.state.newName || this.state.newLastName){
@@ -408,7 +409,7 @@ class Class extends Component {
     for (let i = 0; i < this.state.studentList.length; i++){
       let s = this.state.studentList[i]
       let t = s['fullName']
-   
+
       this.state.studentList2.push(
         <NameItem key={i}>
          <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/>
@@ -426,7 +427,7 @@ class Class extends Component {
 
   }
   secondDisplay = e => {
-   
+
     let inc = this.state.studentList.length -1
     for (let i = inc; i < this.state.studentList.length; i++){
       let s = this.state.studentList[i]
@@ -442,7 +443,7 @@ class Class extends Component {
            <Pencil style={{fontSize: '40px'}} onClick={() => this.alertDialog('editOpen', `${t}`, i)} />
          </NameItem> ]})
 
-    
+
     this.setState({firstName: 'First Name', lastName: 'Last Name'})
     }
   }
@@ -451,14 +452,14 @@ class Class extends Component {
       axios
       .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID": localStorage.getItem('classID')} )
       .then(res => {
-        
+
         let son = res.data
         this.setState({class_name: son['class_name']})
         if (son['studentNames'].length > 0){
         son['studentNames'].map(name => {
           this.setState({studentList: [...this.state.studentList, name]})
         })
-        
+
         this.handleDisplay()
       }})
     this.handleCreateButtons()
@@ -485,7 +486,7 @@ class Class extends Component {
     let b = document.getElementById("Bigbutton");
     let c = document.getElementById("Namediv2");
     let d = document.getElementById('Grid')
- 
+
     if (a.style.visibility==="hidden") {
       a.style.visibility ="visible"
     }
@@ -542,7 +543,9 @@ class Class extends Component {
 
 
 
-                <Import htmlFor="file">Import CSV</Import>
+                  <Tooltip title="Class name on first row. students one per row, full name in first column">
+                    <Import htmlFor="file">Import CSV</Import>
+                  </Tooltip>
                  <Ptag>Or</Ptag>
                 <Dec onClick={() =>{
                   this.createClass()
