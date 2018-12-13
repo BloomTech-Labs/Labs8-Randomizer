@@ -129,7 +129,7 @@ class Home extends Component {
            })
      }
 
-      componentWillMount(){
+      componentDidMount(){
           if (localStorage.getItem('jwt')){
             this.props.history.push('/ViewClasses')
           }
