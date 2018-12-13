@@ -7,7 +7,7 @@ import {  PieChart, Pie,  Cell} from 'recharts';
  const StudentChart= props => {
      
 const data = [{ value: parseInt(props.P) }, { value: parseInt(props.NP)},];
-
+console.log('data', data)
 
 const COLORS = [ '#0ee77b','#ec1111', '#FFBB28', '#FF8042'];
 

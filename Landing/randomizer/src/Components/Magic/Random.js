@@ -213,7 +213,10 @@ font-size: 36px;
   height: 50px;
 }
 `
-
+const Ptag = styled.p`
+font-size: 16px;
+color: #737373;
+`
 class Magic extends Component {
   constructor(props) {
     super(props);
@@ -244,6 +247,9 @@ class Magic extends Component {
     }
 
     handleClass = e => {
+      if (localStorage.getItem("studentID")) {
+        localStorage.removeItem("studentID")
+      }
         let id= localStorage.getItem('classID')
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/list_students', {"classID":id})
@@ -271,7 +277,7 @@ class Magic extends Component {
 
       };
       handleParticipationGraph = e => {
-
+        this.setState({P:0, NP:0}, ()=> {console.log ('setting part state to zero')})
         let valid = localStorage.getItem('studentID')
 
         axios
@@ -292,11 +298,18 @@ class Magic extends Component {
               NP +=pnp['NP'];
 
             })
-
-            this.setState({P: P, NP: NP})
+            if (P === 0 && NP === 0){
+              console.log("hit")
+              let p =  document.getElementById('ptag')
+              console.log('p', p)
+              p.style.visibility = "visible"
+            }
+            else {
+            this.setState({P: P, NP: NP}, ()=>{console.log ('setting part state')})
+            
+          }
             console.log('PARTICIPATION')
             console.log('p', this.state.P)
-
           })
 
 
@@ -309,7 +322,7 @@ class Magic extends Component {
 
 
       Participatehandler = e => {
-
+       
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
@@ -318,7 +331,8 @@ class Magic extends Component {
           } )
 
           .then(res => {
-            this.handleParticipationGraph();
+            let p = this.state.P +1
+        this.setState({P:p})
           }
             )
           .catch(err => {
@@ -332,7 +346,7 @@ class Magic extends Component {
 
 
       Declinehandler = e => {
-
+     
         const mail = {"class_name": this.state.class_name}
         axios
           .post('https://labs8randomizer.herokuapp.com/clss/participate',  {
@@ -341,7 +355,9 @@ class Magic extends Component {
           } )
 
           .then(res => {
-            this.handleParticipationGraph();
+            let np = this.state.NP +1
+            this.setState({NP:np})
+
           })
 
           .catch(err => {
@@ -353,6 +369,8 @@ class Magic extends Component {
  Shufflehandler =() => {
   if (this.state.studentnamearray.length === 0){
     this.props.alert.show("All students have gone, Resetting Class")
+    let a = document.getElementById('ptag2')
+    a.style.visibility = 'hidden'
     this.handleClass()
     setTimeout( this.props.history.push('/Random'), 3000)
     return
@@ -360,7 +378,10 @@ class Magic extends Component {
     if (localStorage.getItem("studentID")) {
       localStorage.removeItem("studentID")
   }
-    this.setState({P:0, NP:0})
+    
+
+    let p =  document.getElementById('ptag')
+    p.style.visibility = "hidden"
     const randomnum = Math.floor(Math.random() * this.state.studentnamearray.length);
     this.setState({Student: this.state.studentnamearray[randomnum]['fullName']})
     localStorage.setItem('studentID', this.state.studentnamearray[randomnum]['studentID'].toString());
@@ -368,7 +389,8 @@ class Magic extends Component {
      this.state.studentnamearray.splice(randomnum,1)
      this.setState({studentnamearray: this.state.studentnamearray}, ()=>{
        if (this.state.studentnamearray.length === 0){
-         this.props.alert.show("Last Student")
+         let a = document.getElementById('ptag2')
+         a.style.visibility = 'visible'
        }
      })
  }
@@ -402,10 +424,9 @@ class Magic extends Component {
           </Orangediv>
         
          
-
+          
             <Namediv>
-                  <Misc>{this.state.Student}</Misc>
-                   
+                  <Misc>{this.state.Student}</Misc>   
             </Namediv>
 
             
@@ -421,6 +442,8 @@ class Magic extends Component {
             </Maindiv>
             <Chartdiv id="Chart" >
             <StudentChart style={{marginTop:'0px'}}  P={this.state.P}  NP={this.state.NP}/>
+            <Ptag id="ptag" style={{visibility:'hidden'}}>No student participation data</Ptag>
+            <Ptag id="ptag2" style={{visibility:'hidden'}}>Last Student</Ptag>
             </Chartdiv>
             </React.Fragment>
       )

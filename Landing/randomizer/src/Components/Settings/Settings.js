@@ -117,8 +117,8 @@ submitHandler = (event) => {
   })
 
   .catch(err => 
-    {console.log(err)
-  })
+    console.log(err)
+  )
 }
 
   render(){
