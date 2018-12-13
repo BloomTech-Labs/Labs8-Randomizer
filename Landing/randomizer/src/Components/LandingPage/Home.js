@@ -122,7 +122,7 @@ class Home extends Component {
          const token = res.data.key;
 
              localStorage.setItem('jwt', token);
-             this.props.history.push('/Class');
+             this.props.history.push('/ViewClasses');
            })
        .catch(err => {
              console.log('error')
