@@ -24,19 +24,18 @@ const PapaParse = require('papaparse/papaparse.min.js');
 
 const Maindiv = styled.div`
   display: flex;
-  width: 60%;
-  height: 800px;
+  width: 75%;
+  height: 100%;
   background-color: rgba(255,255,255,.9);
   border: 3px solid #dfece6;
   flex-direction: column;
   border-radius: 7px;
-  padding-left: 15px;
-  padding-right: 55px;
+  padding-left: 5%;
+  padding-right: 5%;
   @media (max-width: 400px) {
-    width: 300px;
     border: none;
     background-color: none;
-    margin-left: 125px;
+    margin-left: 5%;
     margin-top: 50px;
   }
 `
@@ -50,18 +49,20 @@ const Misc = styled.h1`
 const Classdiv = styled.div`
   display: flex;
   width: 100%;
-  height: 25px;
-  margin-left: 25px;
-  margin-bottom: 70px;
+  height: 150px;
+  margin-bottom: 50px;
 
   flex-direction: column;
   justify-content: ;
 `
 const Namediv = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 250px;
-  height: 30px;
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+    height: 400px;
+  }
 `
 
 const Namediv2 = styled.div`
@@ -84,21 +85,14 @@ const Editname = styled.input`
   padding-left: 10px;
   text-decoration: none;
   width: 235px;
-  height: 25px;
+  height: 40px;
   border: 1px solid black;
   color: black;
-  margin-top: 15px;
-  margin-right: 15px;
+  margin-right: 2%;
 
   :: placeholder {
       color: black;
       font-family: 'Raleway', sans-serif;
-  }
-
-  @media (max-width: 400px) {
-  width: 100px;
-    margin-top: 50px;
-    margin-right: 5px;
   }
 `
 const Editname1 = styled.input`
@@ -116,20 +110,14 @@ const Editname1 = styled.input`
         color: black;
         font-family: 'Raleway', sans-serif;
     }
-
-    @media (max-width: 400px) {
-
-      margin-top: 50px;
-    }
 `
 const Sider = styled.button`
   text-decoration: none;
   background-color: none;
   border: none;
   cursor: pointer;
-  height: 25px;
+
   background: none;
-  width: 40px;
   @media (max-width: 400px) {
 
     margin-top: 35px;
@@ -152,14 +140,15 @@ const Sider2= styled.button`
 `
 const Bigbutton = styled.button`
   font-family: 'Raleway', sans-serif;
-  width: 250px;
+  width: 255px;
   height: 50px;
+  font-size: 20px;
+  color: white;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 50px;
+  margin-top: 30px;
   border: none;
   background-color:#00E1F5;
-  color: black;
   margin-bottom: 50px;
 
   transition: .4s;
@@ -168,7 +157,7 @@ const Bigbutton = styled.button`
   }
 `
 const Secondlevel = styled.div`
-font-family:'Raleway', sans-serif;
+  font-family:'Raleway', sans-serif;
   width: 100%;
   height: .1px;
   justify-content: center;
@@ -223,18 +212,43 @@ const CsvStyling = styled.input`
 
 const NameGrid = styled.div`
   width: 100%;
-  padding-left: 25px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 20%);
+  grid-column-gap: 2%;
+  grid-row-gap: 12px;
   grid-template-rows: repeat(1, auto);
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 29%);
+  }
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 30%);
+    grid-column-gap: 4%;
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 90%);
+  }
+
 `
 const NameItem = styled.div`
-  display: flex;
   border: solid 1px pink;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding-left: 4%;
+  position: relative;
+  height: 45px;
+  & ${NameItem}:nth-child(1) {
+    margin-right: 10%;
+  }
+  & ${NameItem}:nth-child(3) {
+    position: absolute;
+    right: 10px;
+  }
+`
+const NameWrap = styled.div`
+  	display: flex;
+    flex-direction: column;
 `
 
 class Class extends Component {
@@ -424,10 +438,13 @@ class Class extends Component {
     console.log('t', t)
       this.state.studentList2.push(
         <NameItem key={i}>
-         <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/> {t}
-           <Button style={{width: '45%'}} color="primary" onClick={() => this.alertDialog('editOpen', `${t}`, i)}>
-             Edit Name
-           </Button>
+         <Deleteicon onClick={() => this.alertDialog('alertOpen', `${t}`, i)}/>
+         <NameWrap>
+           {t.substr(0,t.indexOf(' '))}
+           <br/>
+          {t.substr(t.indexOf(' ')+1)}
+         </NameWrap>
+           <Pencil style={{fontSize: '40px'}} onClick={() => this.alertDialog('editOpen', `${t}`, i)} />
          </NameItem> )
       this.setState({studentList2: this.state.studentList2}, ()=>{
         this.showHandler()
@@ -490,27 +507,26 @@ class Class extends Component {
     this.props.history.push('/Random');
   }
   showHandler() {
-  let a = document.getElementById('First');
-  let b = document.getElementById("Bigbutton");
-  let c = document.getElementById("Namediv2");
-  let d = document.getElementById('Grid')
-  console.log('a', a)
+    let a = document.getElementById('First');
+    let b = document.getElementById("Bigbutton");
+    let c = document.getElementById("Namediv2");
+    let d = document.getElementById('Grid')
+    console.log('a', a)
+    if (a.style.visibility==="hidden") {
+      a.style.visibility ="visible"
 
-  if (a.style.visibility==="hidden") {
-    a.style.visibility ="visible"
+    }
 
+    if (b.style.visibility==="hidden") {
+      b.style.visibility ="visible"
+    }
+    if (c.style.visibility==="hidden") {
+      c.style.visibility ="visible"
+    }
+    if (d.style.visibility==="hidden") {
+      d.style.visibility ="visible"
+    }
   }
-
-  if (b.style.visibility==="hidden") {
-    b.style.visibility ="visible"
-  }
-  if (c.style.visibility==="hidden") {
-    c.style.visibility ="visible"
-  }
-  if (d.style.visibility==="hidden") {
-    d.style.visibility ="visible"
-  }
-}
   editClassName = e => {
     axios.post('https://labs8randomizer.herokuapp.com/clss/updateclass', {
       "classID": localStorage.getItem("classID"),
@@ -562,11 +578,9 @@ class Class extends Component {
 
                 </Namediv >
                 <Namediv id="First" style={{visibility:'hidden'}}>
-                  <Editname type="text" placeholder="First Name" onChange={this.studentInput} value={this.state.firstName}></Editname>
-                  <Editname type="text" placeholder="Last Name" onChange={this.studentInput2}value={this.state.lastName}></Editname>
-                  <Sider onClick={this.addStudent}>
-                    <Addbutton style={{fontSize: '56px'}}></Addbutton>
-                  </Sider>
+                  <Editname id='name1' type="text" placeholder="First Name" onChange={this.studentInput} value={this.state.firstName} maxlength="8"></Editname>
+                  <Editname id='name2' type="text" placeholder="Last Name" onChange={this.studentInput2}value={this.state.lastName} maxlength="8"></Editname>
+                  <Addbutton onClick={this.addStudent} style={{fontSize: '50px', marginBottom: '15px'}}></Addbutton>
                 </Namediv>
               </Classdiv>
 

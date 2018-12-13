@@ -64,8 +64,7 @@ height: 100%;
 
 background-color: white;
 @media (max-width: 1024px) {
-  width: 650px;
-  height: 400px;
+  width: 100%;
 }
 @media (max-width: 400px) {
   background-image: none;
@@ -130,7 +129,7 @@ transition: .3s;
 @media (max-width: 400px) {
   display: flex;
   position: fixed;
-  
+
   z-index: +1;
   position: absolute;
   
@@ -140,15 +139,15 @@ transition: .3s;
 class App extends Component {
 
   componentDidUpdate() {
-    
+
    let y = document.getElementById('Mobileguide')
     let z = document.getElementById('Sidebar')
     if (localStorage.getItem("jwt")) {
-     
+
       y.style.display="flex"
       z.style.display="flex"
     } else {
-     
+
       y.style.display="none"
       z.style.display="none"
     }
@@ -193,10 +192,10 @@ logoutHandler = e => {
       <React.Fragment>
            <Mobilebtn style={{display: 'none'}} id="Mobileguide" onClick={this.mobileHandler}>
               <Tooltip title="Menu" placement="right">
-                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide> 
+                <Mobileguide  style={{fontSize: '48px'}} >  </Mobileguide>
               </Tooltip>
         </Mobilebtn>
-      
+
 
 
 
@@ -206,8 +205,8 @@ logoutHandler = e => {
         <Loggedout id="OUT" style={{fontSize:'40px', display: 'none'}}></Loggedout>
       </Logger> */}
 
-       
-  
+
+
 
           <Sidebar id="Sidebar">
 
@@ -218,9 +217,9 @@ logoutHandler = e => {
               </Tooltip>
             </Sidebutton >
            </Link> */}
-          
 
-      
+
+
 
             <Link to="/ViewClasses" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider5" >
@@ -238,18 +237,18 @@ logoutHandler = e => {
               </Sidebutton >
             </Link>
 
-        
+
             <Link to="/Random" style={{height: '40px', marginBottom: '25px' }}>
-           
+
 
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
               <Tooltip title="Randomizer" placement="right">
                 <Swap style={{fontSize: '48px'}}/>
                </Tooltip>
               </Sidebutton >
-              
+
             </Link>
-            
+
 
             <Link to="/Settings" style={{height: '40px', marginBottom: '25px' }}>
               <Sidebutton onClick={this.mobileHandler} id="Sider2">
