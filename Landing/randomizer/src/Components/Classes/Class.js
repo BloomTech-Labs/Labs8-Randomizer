@@ -485,6 +485,7 @@ class Class extends Component {
         this.handleDisplay()
       }})
     this.handleCreateButtons()
+    this.showHandler()
     }
     else return
   }

@@ -263,6 +263,7 @@ class Magic extends Component {
             if (newarray.length === 0){
               this.props.alert.error('No students in Class, Add a Student')
               setTimeout(this.props.history.push('/Class'),2000)
+              return
             }
 
             newarray.map(name => {
@@ -361,8 +362,18 @@ class Magic extends Component {
     this.props.alert.show("All students have gone, Resetting Class")
     let a = document.getElementById('ptag2')
     a.style.visibility = 'hidden'
-    this.handleClass()
-    setTimeout( this.props.history.push('/Random'), 3000)
+    this.setState({
+      studentnamearray: [],
+        Student: 'Student',
+        PartRates: [],
+        P: 0,
+        NP: 0
+    },()=>{
+      this.handleClass()
+      let a = document.getElementById('ptag')
+         a.style.visibility = 'hidden'
+    })
+     setTimeout(this.props.history.push('/Random'), 1000)
     return
   }
     if (localStorage.getItem("studentID")) {
