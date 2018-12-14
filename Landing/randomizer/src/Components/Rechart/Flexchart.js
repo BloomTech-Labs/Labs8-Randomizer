@@ -1,6 +1,7 @@
 // Libraries
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 // Components
 import Chartprop from '../Rechart/ClassChart';
 
@@ -23,24 +24,26 @@ class Flexchart extends Component {
         this.state={
       renderclasslist : [],
       isLoading: true
-
         }
       }
 
       componentDidMount() {
-
-
                 this.setState({renderclasslist: []},() => {
                     this.props.Dates.map((clss) => {
-                        this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)
-                        
+                        if (clss['studentsInfo'].length === 0){
+                            let id = clss['classID']
+                            axios.delete('https://labs8randomizer.herokuapp.com/clss/deleteclass', {data: {'classID': id}})
+                            .then (res =>{ })
+                            }
+                            else{
+                            this.state.renderclasslist.push(<Chartprop Data={clss} history={this.props.history} />)}
+                            }
+                        )
+                        this.setState({isLoading:false}, ()=> {
+                            this.setState({renderclasslist: this.state.renderclasslist})
+                        })
                     })
-                    this.setState({isLoading:false})
-                })
-
-            this.setState({renderclasslist: this.state.renderclasslist})
         }
-
     render() {
 
 
